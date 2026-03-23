@@ -8,6 +8,12 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
+	<style>
+	* {
+		font-family: 'Manrope';
+	}
+	</style>
+
 </head>
 <body>
 	<div class="title-container">
@@ -46,7 +52,7 @@
 			</div>		
 		</div>
 			
-		<p>Go Back</p>
+		<p class = "back-but"><a href="#">Go Back</a></p>
 		
 		<div class = "short-footer" style="text-transform: uppercase;">
 			<p>©2026 SerieMeter</p>
