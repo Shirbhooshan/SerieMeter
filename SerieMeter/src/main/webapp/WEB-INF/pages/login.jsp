@@ -3,13 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>=======
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -34,11 +27,13 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-image: url('assets/images/login-background.jpg');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	overflow: hidden; /* Prevents scrollbars if the image is large */
+    background-image: url('assets/images/login-background.jpg'); 
+    
+    background-size: cover;      /* Scales the image to fill the screen */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from tiling/repeating */
+    
+    overflow: hidden; /* Prevents scrollbars if the image is large */
 }
 
 .login-card {
@@ -211,10 +206,8 @@ body {
 				<div class="input-wrapper">
 					<img src="assets/icon/lock.svg" alt="" class="icon-svg"> <input
 						type="password" name="password" id="passInput"
-						class="rounded-input" placeholder="••••••••" required
-						autocomplete="off"> <img src="assets/icon/eye.svg"
-						alt="Show" id="eyeIcon" class="icon-svg eye-icon"
-						onclick="togglePassword()">
+						class="rounded-input" placeholder="••••••••" required autocomplete="off"> 
+						<img src="assets/icon/eye.svg" alt="Show" id = "eyeIcon" class="icon-svg eye-icon" onclick="togglePassword()">
 				</div>
 				<a href="#" class="forgot-password">Forgot password?</a>
 			</div>
@@ -234,9 +227,6 @@ body {
 	<div class="footer-text">©2026 SERIEMETER</div>
 
 	<script>
-	
-		// To make the eye icon functional in the password section
-
 		function togglePassword() {
 			var passwordField = document.getElementById("passInput");
 			var eyeIcon = document.getElementById("eyeIcon");

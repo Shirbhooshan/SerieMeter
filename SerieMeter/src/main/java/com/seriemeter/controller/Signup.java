@@ -29,7 +29,6 @@ public class Signup extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.getRequestDispatcher("/WEB-INF/pages/signup.jsp").forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
