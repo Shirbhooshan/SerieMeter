@@ -23,7 +23,6 @@ public class UserDAO {
                 if (rs.next()) {
                     String storedHash = rs.getString("password_hash");
                     
-                    // Simple check: In a real app, use BCrypt.checkpw(password, storedHash)
                     if (password.equals(storedHash)) {
                         isValid = true;
                     }
@@ -54,6 +53,9 @@ public class UserDAO {
                     user.setEmail(rs.getString("email"));
                     user.setUserName(rs.getString("username"));
                     user.setRole(rs.getString("role"));
+                    
+                    user.setPassword(rs.getString("password_hash")); // Important step to setting the hash'ed password
+                    
                     user.setUserProfile(rs.getString("user_profile"));
                 }
             }
