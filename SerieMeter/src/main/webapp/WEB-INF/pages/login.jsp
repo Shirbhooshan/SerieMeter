@@ -27,13 +27,12 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-    background-image: url('assets/images/login-background.jpg'); 
-    
-    background-size: cover;      /* Scales the image to fill the screen */
-    background-position: center;  /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from tiling/repeating */
-    
-    overflow: hidden; /* Prevents scrollbars if the image is large */
+	background-image: url('assets/images/login-background.jpg');
+	background-size: cover; /* Scales the image to fill the screen */
+	background-position: center; /* Centers the image */
+	background-repeat: no-repeat;
+	/* Prevents the image from tiling/repeating */
+	overflow: hidden; /* Prevents scrollbars if the image is large */
 }
 
 .login-card {
@@ -191,13 +190,17 @@ body {
 			<p class="tagline">Your Digital Archive</p>
 		</div>
 
-		<form action="${pageContext.request.contextPath}/Home" method="POST">
+		<form action="${pageContext.request.contextPath}/Login" method="POST">
 			<div class="input-group">
+				<c:if test="${not empty error}">
+					<p style="color: red; font-size: 12px; margin-bottom: 10px;">${error}</p>
+				</c:if>
 				<label>Username / Email</label>
 				<div class="input-wrapper">
-					<img src="assets/icon/user.svg" alt="" class="icon-svg"> <input
+					<img src="assets/icon/user.svg" alt="" class="icon-svg"> 
+					<input
 						type="text" name="username" class="rounded-input"
-						placeholder="Enter your email" required autocomplete="off">
+						placeholder="Enter your email" value="${typedUse}" required autocomplete="off">
 				</div>
 			</div>
 
@@ -206,8 +209,10 @@ body {
 				<div class="input-wrapper">
 					<img src="assets/icon/lock.svg" alt="" class="icon-svg"> <input
 						type="password" name="password" id="passInput"
-						class="rounded-input" placeholder="••••••••" required autocomplete="off"> 
-						<img src="assets/icon/eye.svg" alt="Show" id = "eyeIcon" class="icon-svg eye-icon" onclick="togglePassword()">
+						class="rounded-input" placeholder="••••••••" required
+						autocomplete="off"> <img src="assets/icon/eye.svg"
+						alt="Show" id="eyeIcon" class="icon-svg eye-icon"
+						onclick="togglePassword()">
 				</div>
 				<a href="#" class="forgot-password">Forgot password?</a>
 			</div>
