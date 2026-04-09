@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import com.java_web_app.dao.StudentDAO;
-import com.java_web_app.service.LoginService;
+import com.seriemeter.dao.UserDAO;
+import com.seriemeter.service.LoginService;
 
 /**
  * Servlet implementation class Login
@@ -51,14 +51,14 @@ public class Login extends HttpServlet {
 		String status = loginService.authenticate(username, password);
 
 		if (status.equals("Success")) {
-			StudentDAO student = new StudentDAO();
+			UserDAO user = new UserDAO();
 			HttpSession session = request.getSession();
 			try {
-				session.setAttribute("user", student.getStudentByUsername(username));
+				session.setAttribute("user", user.getUserByUsername(username));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			response.sendRedirect(request.getContextPath() + "/dashboard"); // sendRedirect changes URL, client- >
+			response.sendRedirect(request.getContextPath() + "/About"); // sendRedirect changes URL, client- >
 																			// server - > (3 way communication)
 		} else {
 			request.setAttribute("error", status);
