@@ -10,10 +10,7 @@
 
 <title>User Profile - Logged Out</title>
 
-</head>
-
-<body>
-    <style>
+<style>
     /* Global Container Styles */
     .seriemeter-profile-body {
         font-family: 'Segoe UI', Arial, sans-serif;
@@ -185,6 +182,10 @@
     }
 </style>
 
+</head>
+
+<body>
+
 <div class="seriemeter-profile-body">
     <div class="page-container">
         
@@ -239,9 +240,6 @@
 
     </div>
 </div>
-
-</body>
-</html>
 
 </body>
 </html>
