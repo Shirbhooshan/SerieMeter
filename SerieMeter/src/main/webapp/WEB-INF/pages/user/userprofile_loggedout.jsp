@@ -112,8 +112,9 @@
     }
 
     .stat-lock {
-        width: 20px;
+        width: 15px;
         height: auto;
+        margin-top: 8px
     }
 
     .stat-title {
@@ -159,16 +160,15 @@
     .overlay-box {
         position: relative;
         z-index: 2;
-        background: #ffffff;
         padding: 40px;
         text-align: center;
-        max-width: 350px;
+        max-width: 300px;
     }
 
     /* Paragraph inside the overlay box */
     .overlay-box p {
         font-size: 16px;
-        color: #666;
+        color: #2b2b2b;
         margin-bottom: 20px;
     }
 
@@ -189,7 +189,7 @@
     }
 
     .lock-black-large {
-        width: 65px;
+        width: 38px;
         height: auto;
     }
     </style>
@@ -197,7 +197,7 @@
 
 <body>
 
-<%@ include file="navbar.jsp" %>
+<%-- <%@ include file="navbar.jsp" %> --%>
 
 <div class="seriemeter-profile-body">
     <div class="page-container">
@@ -206,7 +206,7 @@
          
         <header class="hero-layout">
             <div class="hero-main-info">
-                <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_images/blurred_userprofile.jpg" alt="Profile" class="hero-image">
+                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_userprofile.jpg" alt="Profile" class="hero-image">
                 <div class="hero-copy">
                     <h1>Join the <span class="green-text">Circle</span></h1>
                     <p>Unlock your personal cinematic vault. Rate films, curate watchlists, and share your perspective.</p>
@@ -220,14 +220,14 @@
                 <div class="stat-item">
                     <div class="stat-row">
                         <span class="stat-count">0</span>
-                        <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_icons/brown_colored_lock_icon.svg" class="stat-lock" alt="Locked">
+                        <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/brown_colored_lock_icon.svg" class="stat-lock" alt="Locked">
                     </div>
                     <div class="stat-title">BOOKMARKS</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-row">
                         <span class="stat-count">0</span>
-                        <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_icons/brown_colored_lock_icon.svg" class="stat-lock" alt="Locked">
+                        <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/brown_colored_lock_icon.svg" class="stat-lock" alt="Locked">
                     </div>
                     <div class="stat-title">REVIEWS</div>
                 </div>
@@ -238,9 +238,9 @@
 
         <h2 class="section-label">Bookmarked</h2>
         <div class="blur-wrapper">
-            <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_images/blurred_movies_background.jpg" class="blur-background" alt="Preview">
+            <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_movies_background.jpg" class="blur-background" alt="Preview">
             <div class="overlay-box">
-                <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_icons/black_colored_bookmark_icon.svg" class="svg-icon-large" alt="Library">
+                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/black_colored_bookmark_icon.svg" class="svg-icon-large" alt="Library">
                 <h2>Build Your Library</h2>
                 <p>Create an account to keep track of every film you love and those you're yet to discover.</p>
                 <a href="register.jsp" class="btn btn-black">Join the community</a>
@@ -251,10 +251,10 @@
 
         <h2 class="section-label">Reviews</h2>
         <div class="blur-wrapper blur-wrapper-reviews">
-            <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_images/blurred_reviews.jpg" class="blur-background" alt="Preview">
+            <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_reviews.jpg" class="blur-background" alt="Preview">
             <!-- Lock icon and login button stacked using flexbox -->
             <div class="clear-overlay">
-                <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_icons/blacked_colored_lock_icon.svg" class="lock-black-large" alt="Locked">
+                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/blacked_colored_lock_icon.svg" class="lock-black-large" alt="Locked">
                 <a href="login.jsp" class="btn btn-black">Login to view reviews</a>
             </div>
         </div>
@@ -262,7 +262,7 @@
     </div>
 </div>
 
-<%@ include file="footer.jsp" %>
+<%-- <%@ include file="footer.jsp" %> --%> 
 
 </body>
 </html>
