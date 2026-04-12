@@ -10,7 +10,7 @@
 
 <title>User Profile - Logged Out</title>
 
-<style>
+    <style>
     /* Global Container Styles */
     .seriemeter-profile-body {
         font-family: 'Segoe UI', Arial, sans-serif;
@@ -156,10 +156,8 @@
         z-index: 2;
         background: #ffffff;
         padding: 40px;
-        border-radius: 20px;
         text-align: center;
         max-width: 350px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
     .svg-icon-large {
@@ -180,12 +178,11 @@
         height: auto;
         margin-bottom: 15px;
     }
-</style>
-
+	</style>
 </head>
 
 <body>
-
+    
 <div class="seriemeter-profile-body">
     <div class="page-container">
         
