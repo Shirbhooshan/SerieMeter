@@ -18,10 +18,11 @@
         margin: 0;
     }
 
+    /* Wide container with small side padding */
     .page-container {
-        max-width: 1100px;
-        margin: 50px auto;
-        padding: 0 25px;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 30px;
     }
 
     /* Top Hero Header */
@@ -29,7 +30,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 70px;
+        margin-bottom: 100px;
     }
 
     .hero-main-info {
@@ -71,6 +72,12 @@
         font-size: 15px;
         text-decoration: none;
         border-radius: 25px;
+        transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:hover {
+        opacity: 0.82;
+        transform: translateY(-2px);
     }
 
     .btn-green {
@@ -114,21 +121,24 @@
     .stat-lock {
         width: 15px;
         height: auto;
-        margin-top: 8px
+        margin-top: 8px;
     }
 
     .stat-title {
         font-size: 13px;
         font-weight: 700;
         color: #a67c52;
-        letter-spacing: 1px;
         margin-top: 5px;
     }
 
-    /* Section Area Styling */
+    /* Section spacing — consistent gap between all sections */
+    .section-block {
+        margin-bottom: 100px;
+    }
+
     .section-label {
         font-size: 26px;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
         font-weight: 600;
     }
 
@@ -140,7 +150,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 50px;
     }
 
     /* Smaller height variant for the reviews blur wrapper */
@@ -197,13 +206,12 @@
 
 <body>
 
-<%-- <%@ include file="navbar.jsp" %> --%>
+
 
 <div class="seriemeter-profile-body">
     <div class="page-container">
 
         <!-- Hero Section -->
-         
         <header class="hero-layout">
             <div class="hero-main-info">
                 <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_userprofile.jpg" alt="Profile" class="hero-image">
@@ -215,7 +223,6 @@
             </div>
 
             <!-- Locked stats shown to guests -->
-
             <div class="stats-group">
                 <div class="stat-item">
                     <div class="stat-row">
@@ -235,27 +242,29 @@
         </header>
 
         <!-- Bookmarked Section -->
-
-        <h2 class="section-label">Bookmarked</h2>
-        <div class="blur-wrapper">
-            <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_movies_background.jpg" class="blur-background" alt="Preview">
-            <div class="overlay-box">
-                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/black_colored_bookmark_icon.svg" class="svg-icon-large" alt="Library">
-                <h2>Build Your Library</h2>
-                <p>Create an account to keep track of every film you love and those you're yet to discover.</p>
-                <a href="register.jsp" class="btn btn-black">Join the community</a>
+        <div class="section-block">
+            <h2 class="section-label">Bookmarked</h2>
+            <div class="blur-wrapper">
+                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_movies_background.jpg" class="blur-background" alt="Preview">
+                <div class="overlay-box">
+                    <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/black_colored_bookmark_icon.svg" class="svg-icon-large" alt="Library">
+                    <h2>Build Your Library</h2>
+                    <p>Create an account to keep track of every film you love and those you're yet to discover.</p>
+                    <a href="register.jsp" class="btn btn-black">Join the community</a>
+                </div>
             </div>
         </div>
 
         <!-- Reviews Section -->
-
-        <h2 class="section-label">Reviews</h2>
-        <div class="blur-wrapper blur-wrapper-reviews">
-            <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_reviews.jpg" class="blur-background" alt="Preview">
-            <!-- Lock icon and login button stacked using flexbox -->
-            <div class="clear-overlay">
-                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/blacked_colored_lock_icon.svg" class="lock-black-large" alt="Locked">
-                <a href="login.jsp" class="btn btn-black">Login to view reviews</a>
+        <div class="section-block">
+            <h2 class="section-label">Reviews</h2>
+            <div class="blur-wrapper blur-wrapper-reviews">
+                <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_images/blurred_reviews.png" class="blur-background" alt="Preview">
+                <!-- Lock icon and login button stacked using flexbox -->
+                <div class="clear-overlay">
+                    <img src="<%= request.getContextPath() %>/assets/userprofile_loggedout_icons/blacked_colored_lock_icon.svg" class="lock-black-large" alt="Locked">
+                    <a href="login.jsp" class="btn btn-black">Login to view reviews</a>
+                </div>
             </div>
         </div>
 
