@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +68,7 @@
         display: inline-block;
         padding: 12px 28px;
         font-weight: 600;
+        font-size: 15px;
         text-decoration: none;
         border-radius: 25px;
     }
@@ -90,7 +90,7 @@
     }
 
     .stat-item {
-        background-color: #fdf6f0; 
+        background-color: #fdf6f0;
         border: 1px solid #e8ddd3;
         border-radius: 30px;
         padding: 30px;
@@ -142,6 +142,11 @@
         margin-bottom: 50px;
     }
 
+    /* Smaller height variant for the reviews blur wrapper */
+    .blur-wrapper-reviews {
+        min-height: 280px;
+    }
+
     .blur-background {
         position: absolute;
         width: 100%;
@@ -160,32 +165,45 @@
         max-width: 350px;
     }
 
+    /* Paragraph inside the overlay box */
+    .overlay-box p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
     .svg-icon-large {
         width: 50px;
         height: auto;
         margin-bottom: 15px;
     }
 
-    /* For the reviews section which has no white box */
+    /* For the reviews section */
     .clear-overlay {
         position: relative;
         z-index: 2;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
 
     .lock-black-large {
         width: 65px;
         height: auto;
-        margin-bottom: 15px;
     }
-	</style>
+    </style>
 </head>
 
 <body>
-    
+
+<%@ include file="navbar.jsp" %>
+
 <div class="seriemeter-profile-body">
     <div class="page-container">
-        
+
+        <!-- Hero Section -->
+         
         <header class="hero-layout">
             <div class="hero-main-info">
                 <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_images/blurred_userprofile.jpg" alt="Profile" class="hero-image">
@@ -195,6 +213,8 @@
                     <a href="register.jsp" class="btn btn-green">Get Started</a>
                 </div>
             </div>
+
+            <!-- Locked stats shown to guests -->
 
             <div class="stats-group">
                 <div class="stat-item">
@@ -214,29 +234,35 @@
             </div>
         </header>
 
+        <!-- Bookmarked Section -->
+
         <h2 class="section-label">Bookmarked</h2>
         <div class="blur-wrapper">
             <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_images/blurred_movies_background.jpg" class="blur-background" alt="Preview">
             <div class="overlay-box">
                 <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_icons/black_colored_bookmark_icon.svg" class="svg-icon-large" alt="Library">
                 <h2>Build Your Library</h2>
-                <p style="font-size: 16px; color: #666;">Create an account to keep track of every film you love and those you're yet to discover.</p>
+                <p>Create an account to keep track of every film you love and those you're yet to discover.</p>
                 <a href="register.jsp" class="btn btn-black">Join the community</a>
             </div>
         </div>
 
+        <!-- Reviews Section -->
+
         <h2 class="section-label">Reviews</h2>
-        <div class="blur-wrapper" style="min-height: 280px;">
+        <div class="blur-wrapper blur-wrapper-reviews">
             <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_images/blurred_reviews.jpg" class="blur-background" alt="Preview">
+            <!-- Lock icon and login button stacked using flexbox -->
             <div class="clear-overlay">
                 <img src="${pageContext.request.contextPath}/assets/userprofile_loggedout_icons/blacked_colored_lock_icon.svg" class="lock-black-large" alt="Locked">
-                <br>
                 <a href="login.jsp" class="btn btn-black">Login to view reviews</a>
             </div>
         </div>
 
     </div>
 </div>
+
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>
