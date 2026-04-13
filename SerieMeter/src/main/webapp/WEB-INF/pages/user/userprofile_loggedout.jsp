@@ -9,10 +9,14 @@
 
 <title>User Profile - Logged Out</title>
 
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
+
     <style>
     /* Global Container Styles */
     .seriemeter-profile-body {
-        font-family: 'Segoe UI', Arial, sans-serif;
+        font-family: 'Manrope', sans-serif;
         background-color: #ffffff;
         color: #1a1a1a;
         margin: 0;
@@ -102,7 +106,7 @@
         border-radius: 30px;
         padding: 30px;
         min-width: 140px;
-        text-align: center;
+        
     }
 
     .stat-row {
@@ -113,22 +117,27 @@
     }
 
     .stat-count {
-        font-size: 48px;
+        font-size: 58px;
         font-weight: 700;
         color: #a67c52;
+        margin-left: 0;
     }
 
     .stat-lock {
-        width: 15px;
+        width: 20px;
         height: auto;
-        margin-top: 8px;
+        margin-top: 5px;
+        margin-right: auto;
+        margin-left: 0;
     }
 
     .stat-title {
-        font-size: 13px;
+        font-size: 18px;
         font-weight: 700;
         color: #a67c52;
         margin-top: 5px;
+        margin-right: auto;
+        margin-left: 0;
     }
 
     /* Section spacing — consistent gap between all sections */
