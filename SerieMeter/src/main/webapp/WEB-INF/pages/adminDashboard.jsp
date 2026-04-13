@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal - Add Media</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <style>
     /* Base Reset */
@@ -15,31 +14,35 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
-body{
-    background-color: black;
-    color: #1a1a1a;
+html,body{
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Disables browser-level scrolling */
+    background-color: #000000;
 }
 /* Layout Wrapper */
 .dashboard-wrapper{
     display: flex;
-    min-height: 100vh;
-    width: 100%;
+    height: 100vh; /* Exactly 100% of the screen height */
+    width: 100vw;
     background-color: #000000;
 }
 /* Sidebar */
 .sidebar{
     width: 250px;
-    flex-shrink: 0; /* Prevents the sidebar from shrinking */
+    height: 100%; /* Fills the 100vh of the wrapper */
+    flex-shrink: 0; /*It prevents the sidebar from shrinking */
     display: flex;
     flex-direction: column;
-    padding: 30px 20px;
+    padding: 25px 20px;
     background-color: #000000;
+    border-right: 1px solid #222; /* Subtle separation */
 }
 .brand{
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .admin-profile-icon{
@@ -52,7 +55,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.05);
+    margin-left: 5px;
 }
 .brand h2{
     font-size: 13px;
@@ -60,17 +63,18 @@ body{
     color: white;
 }
 .navigation{
-    flex-grow: 1;
+    flex-grow: 1; /*It allows the navigation to take up the remaining space */
 }
 .nav-item{
     display: block;
     text-decoration: none;
     color: #356D38;
     padding: 12px 20px;
-    border-radius: 20px;
+    border-radius: 30px;
     font-size: 14px;
     font-weight: 500;
     text-align: center;
+    margin-top: 60px;
 }
 .nav-item.active{
     background-color: #8DE586;
@@ -78,11 +82,11 @@ body{
 .user-profile{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
     background-color: #F09C6B;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 30px;
 }
 .user-profile .username{
     font-size: 13px;
@@ -92,14 +96,20 @@ body{
 
 /* Main Content */
 .main-content{
-    flex-grow: 1; /*It promotes the main content to fill the available space.*/
-    padding: 30px 50px;
+    flex-grow: 1; 
+    height: 100vh;
     background-color: #ffffff;
-    /* width: 1100px; */
-    min-height: 100vh; /*Ensures it goes from top to bottom */
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    
+    /* 2. ENABLE INTERNAL SCROLL: 
+       This allows the form to scroll if it's too long, 
+       while keeping the sidebar and header fixed. */
+    overflow: hidden;
 }
 .page-header{
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .page-header h3{
     font-size: 18px;
@@ -107,7 +117,7 @@ body{
 }
 .content-grid{
     display: flex;
-    gap: 60px;
+    gap: 40px;
 }
 /* Form column left side */
 .form-column{
@@ -115,10 +125,10 @@ body{
     max-width: 600px;
 }
 .titles{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .titles h1{
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     color: #111827;
     margin-bottom: 5px;
@@ -128,14 +138,14 @@ body{
     color: #6b7280;
 }
 .input-group{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .input-group label{
     display: block;
     font-size: 12px;
     font-weight: 600;
     color: #4b5563;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
 }
 .form-control{
@@ -157,8 +167,13 @@ body{
     flex: 1; /*It takes up 1 part of the available space */
 }
 .synopsis-box{
-    resize: vertical;
+    resize: none; 
     min-height: 180px;
+    width: 100%;
+    padding: 12px;
+    background-color: #f3f6f9;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
 }
 .button-container{
     display: flex;
@@ -174,7 +189,7 @@ body{
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(9, 255, 0, 0.5);
+    margin-top: 30px;
 }
 .publish-btn:hover{
     background-color: #008000da;
@@ -182,7 +197,7 @@ body{
 /* Media column right side */
 .media-column{
     flex: 1;
-    max-width: 320px;
+    max-width: 300px;
 }
 .media-header h4{
     font-size: 16px;
@@ -192,23 +207,17 @@ body{
     font-size: 13px;
     color: #6b7280;
     line-height: 1.5;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .poster-upload-area img{
-    background-size: cover;
-    background-position: center;
-    height: 450px;
+    width: 100%;
+    height: 380px; /* Reduced from 450px to ensure it fits without scrolling */
+    object-fit: cover;
     border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border: 2px dashed #ccc;
 }
 .genre-group{
     width: 100%;
+    margin-top: 10px;
 }
 </style>
 <body>
@@ -217,7 +226,7 @@ body{
         
         <aside class="sidebar">
             <div class="brand">
-                <i class="fa-solid fa-user-tie admin-profile-icon"></i>
+                <img class="admin-profile-icon" src="assets/icon/admin-logo.svg" alt="Logo" >
                 <h2>Admin Portal</h2>
             </div>
             
@@ -226,7 +235,7 @@ body{
             </nav>
             
             <div class="user-profile">
-                <i class="fa-solid fa-user-tie admin-profile-icon"></i>
+                <img class="admin-profile-icon" src="assets/icon/admin-logo.svg" alt="Logo" >
                 <span class="username">@Adminuser</span>
             </div>
         </aside>

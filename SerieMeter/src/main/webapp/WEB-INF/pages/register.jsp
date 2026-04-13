@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up - Seriemeter</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <style>
 	/* Reset default browser margins */
@@ -41,6 +40,20 @@ body {
 .logo {
     height: 35px; 
     margin-bottom: 8px;
+}
+.logos {
+    height: 14px;
+    width: 14px;
+    margin-right: 5px;
+}
+.right-arrow {
+    height: 14px;
+    width: 14px;
+    /* color: white;  */
+}
+.left-arrow {
+    height: 14px;
+    width: 14px;
 }
 
 .subtitle {
@@ -208,7 +221,7 @@ footer p {
                 <div class="form-group">
                     <label for="fullName">FULL NAME</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-user"></i>
+                        <img src="assets/icon/user.svg" alt="user-logo" class="logos">
                         <input type="text" id="fullName" name="fullName" placeholder="Random Name" required>
                     </div>
                 </div>
@@ -216,7 +229,7 @@ footer p {
                 <div class="form-group">
                     <label for="email">EMAIL ADDRESS</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-envelope"></i>
+                        <img src="assets/icon/envelope.svg" alt="email-logo" class="logos">
                         <input type="email" id="email" name="email" placeholder="random@gmail.com" required>
                     </div>
                 </div>
@@ -224,21 +237,22 @@ footer p {
                 <div class="form-group">
                     <label for="username">USERNAME</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-envelope"></i> <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <img src="assets/icon/envelope.svg" alt="user-logo" class="logos">
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="password">PASSWORD</label>
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-lock"></i>
+                        <img src="assets/icon/lock.svg" alt="lock-logo" class="logos">
                         <input type="password" id="password" name="password" placeholder="*****" required>
-                        <i class="fa-solid fa-eye toggle-password"></i>
+                        <img src="assets/icon/eye-logo.svg" alt="toggle-password" class="logos" class="toggle-password">
                     </div>
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    Create Account <i class="fa-solid fa-arrow-right"></i>
+                    Create Account <img src="assets/icon/arrow-right.svg" alt="arrow-logo" class="right-arrow">
                 </button>
             </form>
 
@@ -249,7 +263,7 @@ footer p {
         </div>
 
         <div class="back-link">
-            <a href="index.jsp"><i class="fa-solid fa-arrow-left"></i> Go Back</a>
+            <a href="index.jsp"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="left-arrow"> Go Back</a>
         </div>
 
         <footer>
