@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Error Page</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
    
@@ -24,7 +25,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-bottom: 60px;
+            padding-bottom: 150px;
         }
 
         .error-container {
@@ -41,7 +42,7 @@
         .left-side {
             display: flex;
             flex-direction: column;
-            margin-top: 40px; /* Shifting slightly down to create that vertical offset look */
+            margin-top: 110px; /* Shifting slightly down to create that vertical offset look */
         }
 
         .error-code {
@@ -124,11 +125,9 @@
         footer {
             text-align: center;
             padding: 30px 20px;
-            margin-top: 80px;
             color: #b0b0b0;
             font-size: 14px;
             font-weight: 500;
-            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
