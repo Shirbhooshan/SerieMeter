@@ -66,29 +66,44 @@
     }
 
     /* Stats card */
-    .user-stats-group{
+   .stats-group {
         display: flex;
-        gap: 15px;
+        gap: 20px;
     }
-    .stat-card{
-        background-color: #f4f6f8;
-        padding: 20px 30px;
-        border-radius: 20px;
+
+    .stat-item {
+        background-color: #fdf6f0;
+        border: 1px solid #e8ddd3;
+        border-radius: 30px;
+        padding: 30px;
+        min-width: 140px;
+        text-align: center;
+    }
+
+    .stat-row {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-width: 120px;
+        gap: 10px;
     }
-    .stat-number{
-        font-size: 11px;
+
+    .stat-count {
+        font-size: 48px;
         font-weight: 700;
-        margin-bottom: 5px;
+        color: #a67c52;
     }
-    .stat-label{
-        font-size: 11px;
-        color: #666;
-        letter-spacing: 1px;
+
+    .stat-lock {
+        width: 15px;
+        height: auto;
+        margin-top: 8px;
+    }
+
+    .stat-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #a67c52;
+        margin-top: 5px;
     }
     .profile-section{
         margin-bottom: 50px;
@@ -257,14 +272,20 @@
                 </div>
             </div>
 
-            <div class="user-stats-group">
-                <div class="stat-card">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">BOOKMARKS</span>
+            <div class="stats-group">
+                <div class="stat-item">
+                    <div class="stat-row">
+                        <span class="stat-count">3</span>
+                        <img src="<%= request.getContextPath() %>/assets/icon/lock.png" class="stat-lock" alt="Locked">
+                    </div>
+                    <div class="stat-title">BOOKMARKS</div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Reviews</span>
+                <div class="stat-item">
+                    <div class="stat-row">
+                        <span class="stat-count">3</span>
+                        <img src="<%= request.getContextPath() %>/assets/icon/lock.png" class="stat-lock" alt="Locked">
+                    </div>
+                    <div class="stat-title">REVIEWS</div>
                 </div>
             </div>
         </header>
