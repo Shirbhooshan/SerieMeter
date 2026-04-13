@@ -9,10 +9,14 @@
 
 <title>Bookmark - Logged Out</title>
 
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
+	
 	<style>
     /* Global Styles */
     .bookmarks-body {
-        font-family: 'Segoe UI', Arial, sans-serif;
+        font-family: 'Manrope', sans-serif;
         background-color: #ffffff;
         color: #1a1a1a;
         margin: 0;
@@ -117,11 +121,10 @@
         color: #777;
     }
 
-    /* Right Side Card  */
+    /* Right Side Cardrgb(255, 255, 255), 255, 255) */
     .right-card {
     width: 380px;
     flex-shrink: 0;
-    background-color: #f5f0e8;
     border-radius: 20px;
     padding: 55px 40px;
     display: flex;
@@ -133,7 +136,6 @@
     }
 
     /* Black circle with bookmark icon inside */
-
     .card-title {
         font-size: 26px;
         font-weight: 700;
@@ -160,6 +162,8 @@
 
     .explore-link:hover {
         color: #2eab4a;
+        opacity: 0.82;
+        transform: translateY(-2px);
     }
     </style>
 
