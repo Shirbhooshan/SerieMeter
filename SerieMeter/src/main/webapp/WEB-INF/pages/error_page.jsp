@@ -6,12 +6,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Error Page</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-   
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
+	
 	<style>
        
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Manrope', sans-serif;
             background-color: #ffffff;
             color: #111111;
             display: flex;
@@ -24,8 +27,7 @@
             flex: 1; 
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding-bottom: 150px;
+            align-items: flex-start;
         }
 
         .error-container {
@@ -55,7 +57,7 @@
         }
 
         .error-number {
-            font-size: 350px; /* Increased size significantly */
+            font-size: 350px; 
             font-weight: 500; 
             line-height: 0.75; /* Keeps the text block tight vertically */
             letter-spacing: -18px;
@@ -66,6 +68,7 @@
         /* --- Right Side Styles --- */
         .right-side {
             max-width: 440px; /* Controls the line breaks of the paragraph */
+            margin-right: 75px;
         }
 
         h1 {
@@ -81,6 +84,7 @@
             line-height: 1.6;
             margin-bottom: 35px;
             font-weight: 400;
+            text-align: justify
         }
 
         /* --- Button Styles --- */
@@ -108,6 +112,8 @@
         .btn-green:hover {
             background-color: #2b8b45; 
             border-color: #2b8b45;
+            opacity: 0.82;
+        	transform: translateY(-2px);
         }
 
         .btn-outline {
@@ -119,6 +125,8 @@
         .btn-outline:hover {
             background-color: #e5e5e5; /* New slightly darker grey hover effect */
             color: #111111;
+            opacity: 0.82;
+        	transform: translateY(-2px);
         }
 
         /* --- Footer Styles --- */
@@ -127,7 +135,6 @@
             padding: 30px 20px;
             color: #b0b0b0;
             font-size: 14px;
-            font-weight: 500;
             text-transform: uppercase;
         }
 
