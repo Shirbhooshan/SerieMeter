@@ -6,14 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: sans-serif, Arial, Helvetica, ;
+        font-family: 'Manrope', sans-serif;
     }
     body{
         background-color: #ffffff;
@@ -53,8 +52,11 @@
     }
     .btn-secondary{
         background-color: #f0f2f5;
-        color: #333;
+        height: 36px;
+        width: 100px;
+        color: black;
         border: none;
+        margin-left: 5px;
         padding: 8px 16px;
         border-radius: 20px;
         font-size: 13px;
@@ -89,19 +91,11 @@
 
     .stat-count {
         font-size: 48px;
-        font-weight: 700;
+        font-weight: bold;
         color: #a67c52;
     }
-
-    .stat-lock {
-        width: 15px;
-        height: auto;
-        margin-top: 8px;
-    }
-
     .stat-title {
         font-size: 13px;
-        font-weight: 700;
         color: #a67c52;
         margin-top: 5px;
     }
@@ -110,7 +104,7 @@
     }
     .section-title{
         font-size: 20px;
-        font-weight: 500;
+        font-weight: 600;
         margin-bottom: 25px;
     }
 
@@ -141,14 +135,19 @@
         background: white;
         color: #FA2626;
         border: none;
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .heart-shape{
+        display: flex;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
     }
     .title-row{
         display: flex;
@@ -179,7 +178,7 @@
     }
     .discover-section h3{
         font-size: 18px;
-        font-weight: 500;
+        font-weight: bold;
         margin-bottom: 20px;
         line-height: 1.4;
     }
@@ -191,6 +190,7 @@
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
+        border: none;
     }
     .btn-primary:hover{
         background-color: #006b00;
@@ -200,13 +200,22 @@
         display: grid;
         grid-template-columns: 1fr 1fr; 
         /* Two equal columns */
-        gap: 20px;
         margin-bottom: 20px;
     }
     .review-card{
         background-color: #f6f6f6;
         padding: 30px;
-        border-radius: 16px;
+        border-top-left-radius: 16px;
+        border-bottom-left-radius: 16px;
+        border-right: 1px solid #C9C9C9;
+        display: flex;
+        flex-direction: column;
+    }
+    .review-card1{
+        background-color: #f6f6f6;
+        padding: 30px;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
         display: flex;
         flex-direction: column;
     }
@@ -215,9 +224,11 @@
         font-size: 14px;
         margin-bottom: 15px;
         text-align: center;
+
     }
-    .stars .fa-regular{
-        color: #e0e0e0;
+    .star{
+        width: 20px;
+        height: 20px;
     }
     .review-text{
         font-size: 13px;
@@ -238,30 +249,53 @@
     .pagination{
         display: flex;
         justify-content: center;
-        gap: 10px;
     }
     .page-btn{
         background-color: #f0f2f5;
         border: none;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
+        width: 50px;
+        height: 40px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-right: 1px solid #C9C9C9;
         color: #666;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
     }
+    .page-btn1{
+        background-color: #f0f2f5;
+        border: none;
+        width: 50px;
+        height: 40px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-left: 1px solid #C9C9C9;
+        color: #666;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .arrow{
+        width: 16px;
+        height: 16px;
+    }
     .page-btn:hover{
         background-color: #e4e6e9;
     }
+    .page-btn1:hover{
+        background-color: #e4e6e9;
+    }
+
 
 </style>
 <body>
     <main class="profile-container">
 
         <header class="profile-header">
-            <div class="user-info-group">
+            <div class="user-group-info">
                 <img src="assets/images/profile_image.png" alt="Profile Picture" class="profile-img">
                 <div class="user-details">
                     <h1>Alex Gol. Berg</h1>
@@ -276,14 +310,12 @@
                 <div class="stat-item">
                     <div class="stat-row">
                         <span class="stat-count">3</span>
-                        <img src="<%= request.getContextPath() %>/assets/icon/lock.png" class="stat-lock" alt="Locked">
                     </div>
                     <div class="stat-title">BOOKMARKS</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-row">
                         <span class="stat-count">3</span>
-                        <img src="<%= request.getContextPath() %>/assets/icon/lock.png" class="stat-lock" alt="Locked">
                     </div>
                     <div class="stat-title">REVIEWS</div>
                 </div>
@@ -296,7 +328,11 @@
                 <div class="movie-card">
                     <div class="poster-wrapper">
                         <img src="assets/images/islandofsecrets.jpg" alt="Island of Secrets">
-                        <button class="icon-btn heart-btn"><i class="fa-solid fa-heart"></i></button>
+                        <button class="icon-btn heart-btn">
+                            <div class="heart-shape">
+                                <img src="assets/icon/heart.svg" alt="Heart Icon">
+                            </div>
+                        </button>
                     </div>
                     <div class="movie-info">
                         <div class="title-row">
@@ -310,7 +346,11 @@
                 <div class="movie-card">
                     <div class="poster-wrapper">
                         <img src="assets/images/The_silent_forest.jpg" alt="The Silent Forest">
-                        <button class="icon-btn heart-btn"><i class="fa-solid fa-heart"></i></button>
+                        <button class="icon-btn heart-btn">
+                            <div class="heart-shape">
+                                <img src="assets/icon/heart.svg" alt="Heart Icon">
+                            </div>
+                        </button>
                     </div>
                     <div class="movie-info">
                         <div class="title-row">
@@ -324,7 +364,11 @@
                 <div class="movie-card">
                     <div class="poster-wrapper">
                         <img src="assets/images/galaxyQuest.jpg" alt="Galactic Quest">
-                        <button class="icon-btn heart-btn"><i class="fa-solid fa-heart"></i></button>
+                        <button class="icon-btn heart-btn">
+                            <div class="heart-shape">
+                                <img src="assets/icon/heart.svg" alt="Heart Icon">
+                            </div>
+                        </button>
                     </div>
                     <div class="movie-info">
                         <div class="title-row">
@@ -347,11 +391,11 @@
             <div class="review-grid">
                 <div class="review-card">
                     <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
+                        <img src="assets/icon/star-none.svg" alt="Empty Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                     </div>
                     <p class="review-text">I was captivated by the breathtaking visuals and innovative storytelling of 'Echoes of the Nebula.' The d...</p>
                     <div class="review-meta">
@@ -360,13 +404,13 @@
                     </div>
                 </div>
 
-                <div class="review-card">
+                <div class="review-card1">
                     <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
+                        <img src="assets/icon/star-none.svg" alt="Empty Star" class="star">
                     </div>
                     <p class="review-text">From the opening scene to the final credits, 'Whispers of Yesterday' takes you on an emotional rollercoaster...</p>
                     <div class="review-meta">
@@ -377,8 +421,8 @@
             </div>
 
             <div class="pagination">
-                <button class="icon-btn page-btn"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="icon-btn page-btn"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="page-btn"><img src="assets/icon/arrow-left.svg" alt="Previous Page" class="arrow"></button>
+                <button class="page-btn1"><img src="assets/icon/arrow-right-black.svg" alt="Next Page" class="arrow"></button>
             </div>
         </section>
         
