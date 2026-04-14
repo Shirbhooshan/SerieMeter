@@ -156,7 +156,18 @@ html,body{
     border-radius: 8px;
     outline: none; /*It removes the default focus outline */
 }
+.form-control-genre{
+    width: 40%;
+    padding: 14px;
+    background-color: #f3f6f9;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: none; /*It removes the default focus outline */
+}
 .form-control:focus{
+    border: 1px solid #00a3ff;
+}
+.form-control-genre:focus{
     border: 1px solid #00a3ff;
 }
 .row-3-cols{
@@ -308,7 +319,7 @@ html,body{
 
                     <div class="input-group genre-group">
                         <label>GENRE</label>
-                        <select name="genre" class="form-control" required>
+                        <select name="genre" class="form-control-genre" required>
                             <option value=""></option>
                             <option value="action">Action</option>
                             <option value="thriller">Thriller</option>
