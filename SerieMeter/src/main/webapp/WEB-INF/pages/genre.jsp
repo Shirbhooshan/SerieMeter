@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored = "false"%>
-<!DOCTYPE html>
+    
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SerieMeter – Genre</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
 
   <style>
-    /* reset and base  */
+  
+    /* Base */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -25,7 +27,7 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       background: var(--white);        /* WHITE background like screenshot */
       color: var(--text);
       min-height: 100vh;
@@ -109,7 +111,7 @@
       outline: none;
       color: #aaa;
       font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       width: 100%;
     }
     .search-bar input::placeholder { color: #555; }
@@ -133,14 +135,14 @@
       border-radius: 20px;
       padding: 8px 20px;
       font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       cursor: pointer;
       transition: background .2s;
     }
     .signup-btn:hover { background: #c06030; }
 
-    /* page body */
+    /* Body */
     .page-body {
       display: flex;
       flex: 1;
@@ -150,7 +152,7 @@
       background: var(--white);
     }
 
-    /* side bar */
+    /* Sidebar */
     .sidebar {
       width: 260px;
       min-width: 260px;
@@ -178,14 +180,14 @@
       margin-bottom: 10px;
     }
 
-    /* Movie/Series */
+    /* Movie/ Serie */
     .pill-row { display: flex; gap: 10px; }
 
     .pill {
       padding: 7px 18px;
       border-radius: 20px;
       font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       cursor: pointer;
       border: none;
@@ -195,7 +197,7 @@
     .pill.inactive { background: var(--gray-200); color: var(--gray-600); }
     .pill:hover    { background: #444; color: var(--white); }
 
-    /* Genre grid*/
+    /* ---- Genre 2-col grid ---- */
     .genre-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -224,7 +226,7 @@
       color: var(--text);
       padding: 9px 12px;
       font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
@@ -234,7 +236,7 @@
     }
     .year-select:focus { outline: none; border-color: var(--orange); }
 
-    /* Rating */
+    /* Rating  */
     .rating-row { display: flex; gap: 8px; }
 
     .rating-pill {
@@ -245,7 +247,7 @@
       border-radius: 6px;
       color: var(--gray-600);
       font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       cursor: pointer;
       text-align: center;
@@ -254,7 +256,7 @@
     .rating-pill:hover,
     .rating-pill.on { background: var(--orange); color: var(--white); border-color: var(--orange); }
 
-    /* Reset button */
+    /* Reset Button */
     .reset-btn {
       width: 100%;
       margin-top: 22px;
@@ -264,14 +266,14 @@
       border: none;
       border-radius: 24px;
       font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       cursor: pointer;
       transition: background .2s;
     }
     .reset-btn:hover { background: #333; }
 
-    /* Genre content */
+    /* Content Area */
     .content { flex: 1; }
 
     .content__heading {
@@ -310,7 +312,7 @@
       color: var(--text);
       padding: 7px 28px 7px 12px;
       font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
@@ -320,7 +322,7 @@
     }
     .sort-select:focus { outline: none; }
 
-    /* Cards */
+    /* Card Grids */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -369,7 +371,7 @@
       margin-top: 3px;
     }
 
-    /* Load more button */
+    /* Load More Button */
     .load-more-wrap {
       display: flex;
       justify-content: center;
@@ -382,7 +384,7 @@
       border-radius: 30px;
       padding: 15px 60px;
       font-size: 15px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       cursor: pointer;
       transition: background .2s;
@@ -484,7 +486,7 @@
 <!-- Body -->
 <div class="page-body">
 
-  <!-- Side bar -->
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar__title">Filters</div>
 
@@ -526,7 +528,7 @@
   </aside>
 
 
-  <!-- Genre Content -->
+  <!--Content -->
   <main class="content">
 
     <h1 class="content__heading">[Genre]</h1>
@@ -627,7 +629,7 @@
 </div><!-- /page-body -->
 
 
-<!-- Footer -->
+<!-- Footer  -->
 <footer>
   <div class="footer">
     <div class="footer__brand">

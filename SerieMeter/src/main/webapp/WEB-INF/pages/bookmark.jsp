@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored = "false"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Seriemeter – Bookmarks</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
 
   <style>
     /* ── RESET & BASE ── */
@@ -26,7 +27,7 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       color: var(--text);
       background: var(--white);
       min-height: 100vh;
@@ -84,7 +85,6 @@
     }
     .navbar__nav a:hover { opacity: 1; }
 
-    /* right side: bookmark icon (green filled) + avatar circle */
     .navbar__right {
       margin-left: auto;
       display: flex;
@@ -117,8 +117,6 @@
       justify-content: space-between;
     }
 
-    .page-header__left {}
-
     .page-header__label {
       font-size: 11px;
       font-weight: 700;
@@ -149,7 +147,7 @@
       border: none;
       border-radius: 8px;
       padding: 16px 32px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 1px;
@@ -170,9 +168,7 @@
     }
 
     /* ── BOOKMARK CARD ── */
-    .bcard {
-      cursor: pointer;
-    }
+    .bcard { cursor: pointer; }
 
     .bcard__poster {
       position: relative;
@@ -184,7 +180,6 @@
       margin-bottom: 12px;
     }
 
-    /* heart button on poster */
     .bcard__heart {
       position: absolute;
       top: 10px;
@@ -289,9 +284,6 @@
 
 <body>
 
-<!-- ═══════════════════════════════════════════════
-     NAVBAR
-════════════════════════════════════════════════ -->
 <nav class="navbar">
   <div class="navbar__logo">
     <div class="logo-icon">
@@ -310,19 +302,15 @@
   </ul>
 
   <div class="navbar__right">
-    <!-- bookmark icon (filled green = active state) -->
     <div class="navbar__bookmark-icon">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
       </svg>
     </div>
-    <!-- user avatar circle -->
     <div class="navbar__avatar"></div>
   </div>
 </nav>
 
-
-<!--PAGE HEADER-->
 <div class="page-header">
   <div class="page-header__left">
     <p class="page-header__label">Personal Archive</p>
@@ -335,161 +323,108 @@
   <button class="btn-clear">CLEAR ALL</button>
 </div>
 
-
-<!--BOOKMARKS GRID-->
 <div class="bookmarks-grid">
 
-  <!-- Card 1 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">Mamma Mia!</div>
-        <div class="bcard__genre">Adventure</div>
-      </div>
+      <div><div class="bcard__title">Mamma Mia!</div><div class="bcard__genre">Adventure</div></div>
       <div class="bcard__year">2020</div>
     </div>
   </div>
 
-  <!-- Card 2 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">The Good Place</div>
-        <div class="bcard__genre">Biography</div>
-      </div>
+      <div><div class="bcard__title">The Good Place</div><div class="bcard__genre">Biography</div></div>
       <div class="bcard__year">2021</div>
     </div>
   </div>
 
-  <!-- Card 3 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">Star Wars</div>
-        <div class="bcard__genre">Biography</div>
-      </div>
+      <div><div class="bcard__title">Star Wars</div><div class="bcard__genre">Biography</div></div>
       <div class="bcard__year">2021</div>
     </div>
   </div>
 
-  <!-- Card 4 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">Interstellar</div>
-        <div class="bcard__genre">Biography</div>
-      </div>
+      <div><div class="bcard__title">Interstellar</div><div class="bcard__genre">Biography</div></div>
       <div class="bcard__year">2021</div>
     </div>
   </div>
 
-  <!-- Card 5 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">The Trueman Show</div>
-        <div class="bcard__genre">Biography</div>
-      </div>
+      <div><div class="bcard__title">The Trueman Show</div><div class="bcard__genre">Biography</div></div>
       <div class="bcard__year">2021</div>
     </div>
   </div>
 
-  <!-- Card 6 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">Grey's Anatomy</div>
-        <div class="bcard__genre">Fantasy</div>
-      </div>
+      <div><div class="bcard__title">Grey's Anatomy</div><div class="bcard__genre">Fantasy</div></div>
       <div class="bcard__year">2022</div>
     </div>
   </div>
 
-  <!-- Card 7 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">Forrest Grump</div>
-        <div class="bcard__genre">Action</div>
-      </div>
+      <div><div class="bcard__title">Forrest Grump</div><div class="bcard__genre">Action</div></div>
       <div class="bcard__year">2023</div>
     </div>
   </div>
 
-  <!-- Card 8 -->
   <div class="bcard">
     <div class="bcard__poster">
       <div class="bcard__heart">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </div>
     </div>
     <div class="bcard__info">
-      <div>
-        <div class="bcard__title">Young Sheldon</div>
-        <div class="bcard__genre">Biography</div>
-      </div>
+      <div><div class="bcard__title">Young Sheldon</div><div class="bcard__genre">Biography</div></div>
       <div class="bcard__year">2021</div>
     </div>
   </div>
 
-</div><!-- /bookmarks-grid -->
+</div>
 
-
-<!--FOOTER-->
 <footer>
   <div class="footer">
-
     <div class="footer__brand">
       <div class="footer-logo">
         <div class="logo-icon">
@@ -501,7 +436,6 @@
       </div>
       <p>Elevating cinematic conversation through expert ratings and curated insights. Your premium guide to the silver screen.</p>
     </div>
-
     <div class="footer__col">
       <h4>Explore</h4>
       <ul>
@@ -510,16 +444,13 @@
         <li><a href="#">Global Search</a></li>
       </ul>
     </div>
-
     <div class="footer__col">
       <h4>Dev</h4>
       <ul>
         <li><a href="#">Documentation</a></li>
       </ul>
     </div>
-
   </div>
-
   <div class="footer__bottom">
     <span>© 2026 SerieMeter. All rights Reserved.</span>
     <span>ENGLISH (US)</span>
