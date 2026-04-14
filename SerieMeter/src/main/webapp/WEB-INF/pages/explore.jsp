@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored = "false"%>
     
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
 
   <style>
-    /* ── RESET & BASE ── */
+    /* Base */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -138,46 +139,13 @@
       border-radius: 16px;
       overflow: hidden;
       height: 240px;
-      background: linear-gradient(135deg, #1a0533 0%, #2d1060 40%, #4a1a80 60%, #7b3fbf 100%);
+      background: #2a1060;
     }
 
-    .hero__bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 70% 50%, rgba(100,60,160,0.6) 0%, transparent 60%),
-        radial-gradient(ellipse at 30% 80%, rgba(30,10,60,0.8) 0%, transparent 50%),
-        linear-gradient(135deg, #110322 0%, #3d1a70 50%, #5a2a90 100%);
-    }
-
-    .hero__figures {
-      position: absolute;
-      right: 140px;
-      bottom: 0;
-      width: 280px;
-      height: 220px;
-      background:
-        radial-gradient(ellipse 60px 80px at 55% 40%, rgba(230,185,60,0.35) 0%, transparent 70%),
-        radial-gradient(ellipse 50px 90px at 42% 38%, rgba(200,160,40,0.25) 0%, transparent 70%);
-    }
-
-    .hero__city {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 80px;
-      background: linear-gradient(to top, rgba(80,40,120,0.4) 0%, transparent 100%);
-    }
-
-    .hero__mountains {
-      position: absolute;
-      bottom: 30px;
-      left: 0;
-      right: 0;
-      height: 100px;
-      background: linear-gradient(to top, rgba(60,20,100,0.5) 0%, transparent 60%);
-    }
+    .hero__bg { display: none; }
+    .hero__figures { display: none; }
+    .hero__city { display: none; }
+    .hero__mountains { display: none; }
 
     .hero__overlay {
       position: absolute;
@@ -264,7 +232,7 @@
     .sidebar__title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .sidebar__sortby { font-size: 12px; color: var(--gray-400); margin-bottom: 20px; }
     .sidebar__list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .sidebar__list li a { font-size: 14px; color: var(--text); font-weight: 400; transition: color .15s; }
+    .sidebar__list li a { font-size: 14px; color: #555555; font-weight: 400; transition: color .15s; }
     .sidebar__list li a:hover { color: var(--orange); }
 
     .content { flex: 1; min-width: 0; }
@@ -284,8 +252,7 @@
 
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, 260px);
-      justify-content: center;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
@@ -328,7 +295,7 @@
     }
     .btn-load-more:hover { background: #333; }
 
-    /* CTA Banner */
+    /* ── Banner */
     .cta-banner {
       background: var(--orange);
       border-radius: 20px;
@@ -369,14 +336,14 @@
     }
     .btn-start:hover { background: rgba(255,255,255,0.4); }
 
-    /* Movie & Series Section */
+    /* Movie & Serie Section */
     .section { padding: 0 40px; margin-bottom: 60px; }
     .section .section-header { margin-bottom: 4px; }
     .section .section-header h2 { font-size: 28px; }
 
     .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
 
-    /* Footer  */
+    /* Footer */
     .footer {
       background: var(--black);
       color: var(--white);
