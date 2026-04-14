@@ -186,8 +186,8 @@ html,body{
     border: none;
     padding: 14px 60px;
     border-radius: 30px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
     margin-top: 30px;
 }
