@@ -20,8 +20,9 @@
     }
     .profile-container{
         max-width: 1000px;
-        margin: 0 auto;
+        margin-left: 40px;
         padding: 40px 20px;
+        /* margin: 0 auto; */
     }
     /* Section 1: Profile Header */
     .profile-header{
@@ -42,9 +43,10 @@
         object-fit: cover;
     }
     .user-details h1{
-        font-size: 32px;
+        font-size: 73px;
         font-weight: 600;
         margin-bottom: 15px;
+        white-space: nowrap; /*Prevents the name from breaking into multiple lines*/
     }
     .user-action{
         display: flex;
@@ -53,14 +55,14 @@
     .btn-secondary{
         background-color: #f0f2f5;
         height: 36px;
-        width: 100px;
+        width: 130px;
         color: black;
         border: none;
         margin-left: 5px;
         padding: 8px 16px;
         border-radius: 20px;
-        font-size: 13px;
-        font-weight: 500;
+        font-size: 18px;
+        font-weight: bold;
         cursor: pointer;
     }
     .btn-secondary:hover{
@@ -71,6 +73,8 @@
    .stats-group {
         display: flex;
         gap: 20px;
+        height: 150px;
+        margin-left: 400px;
     }
 
     .stat-item {
@@ -103,7 +107,7 @@
         margin-bottom: 50px;
     }
     .section-title{
-        font-size: 20px;
+        font-size: 32px;
         font-weight: 600;
         margin-bottom: 25px;
     }
@@ -111,7 +115,7 @@
     /* Section 2: Bookmarked movies */
     .movie-grid{
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 30px;
         margin-bottom: 25px;
     }
@@ -119,7 +123,7 @@
         position: relative; 
         border-radius: 16px;
         overflow: hidden;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
     }
     .poster-wrapper img{
         width: 100%;
@@ -156,18 +160,20 @@
         margin-bottom: 4px;
     }
     .title-row h4{
-        font-size: 14px;
-        font-weight: 600;
-        white-space: nowrap; /*It forces the title to stay on one line*/
+        font-size: 26px;
+        font-weight: bold;
         overflow: hidden; /*It hides the text that extends beyond the container*/
-        text-overflow: ellipsis; /*It displays an ellipsis (...) when the text overflows*/
-    }
-    .title-row .year{
-        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap; 
+    }   
+    .year{
+        font-size: 20px;
+        font-weight: 400;
         color: #888;
     }
     .genre{
-        font-size: 10px;
+        font-size: 15px;
+        font-weight: 400;
         color: #888;
         letter-spacing: 0.5px;
     }
@@ -177,8 +183,8 @@
         margin: 60px 0;
     }
     .discover-section h3{
-        font-size: 18px;
-        font-weight: bold;
+        font-size: 32px;
+        font-weight: 600;
         margin-bottom: 20px;
         line-height: 1.4;
     }
@@ -187,8 +193,8 @@
         color: white;
         padding: 12px 28px;
         border-radius: 25px;
-        font-size: 14px;
-        font-weight: 500;
+        font-size: 20px;
+        font-weight: 700;
         cursor: pointer;
         border: none;
     }
@@ -196,64 +202,86 @@
         background-color: #006b00;
     }
     /* Section 4: Reviews */
-    .review-grid{
-        display: grid;
-        grid-template-columns: 1fr 1fr; 
-        /* Two equal columns */
-        margin-bottom: 20px;
-    }
-    .review-card{
+    .review-grid {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
         background-color: #f6f6f6;
-        padding: 30px;
+        border-radius: 20px;
+        overflow: hidden; /* important for clean rounded look */
+        margin: 0 auto; /* centers the review section */
+        max-width: 1000px;
+    }
+    .review-card, .review-card1 {
+        flex: 1;
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        min-height: 260px;
+    }
+
+    .review-card {
         border-top-left-radius: 16px;
         border-bottom-left-radius: 16px;
         border-right: 1px solid #C9C9C9;
-        display: flex;
-        flex-direction: column;
     }
-    .review-card1{
-        background-color: #f6f6f6;
-        padding: 30px;
+
+    .review-card1 {
         border-top-right-radius: 16px;
         border-bottom-right-radius: 16px;
-        display: flex;
-        flex-direction: column;
+        width: 100%;
     }
-    .stars{
-        color: #FFD700;
-        font-size: 14px;
-        margin-bottom: 15px;
-        text-align: center;
+    .star-left{
+        margin-bottom: 20px;
+        display: flex;
+        gap: 2px;
+        justify-content: flex-end;
+
+    }
+    .star-right{
+        margin-bottom: 20px;
+        display: flex;
+        gap: 2px;
+        justify-content: flex-start;
 
     }
     .star{
-        width: 20px;
-        height: 20px;
+        width: 44px;
+        height: 44px;
     }
-    .review-text{
-        font-size: 13px;
+    .review-text-left, .review-text-right{
+        font-size: 19px;
         color: #555;
         line-height: 1.6;
-        text-align: center;
         margin-bottom: 30px;
-        flex-grow: 1; /*It provides space for the review text to expand */
-        /* Pushes meta data to the bottom */
+        max-height: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
-    .review-meta{
+    .review-meta-left{
         display: flex;
         justify-content: space-between;
         font-size: 12px;
+        font-weight: 400;
+        color: #888;
+    }
+    .review-meta-right{
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        font-weight: 400;
         color: #888;
     }
     /* Pagination */
     .pagination{
         display: flex;
         justify-content: center;
+        margin-top: 20px;
     }
     .page-btn{
         background-color: #f0f2f5;
         border: none;
-        width: 50px;
+        width: 60px;
         height: 40px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
@@ -267,7 +295,7 @@
     .page-btn1{
         background-color: #f0f2f5;
         border: none;
-        width: 50px;
+        width: 60px;
         height: 40px;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
@@ -288,6 +316,21 @@
     .page-btn1:hover{
         background-color: #e4e6e9;
     }
+    .movie-title-right{
+        font-size: 19px;
+        font-weight: 400;
+        color: #333;
+        text-align: right;
+        padding-top: 50px;
+    }
+    .movie-title-left{
+        font-weight: 400;
+        font-size: 19px;
+        color: #333;
+        text-align: left;
+        padding-top: 50px
+    }
+
 
 
 </style>
@@ -390,32 +433,32 @@
             <h2 class="section-title">Reviews</h2>
             <div class="review-grid">
                 <div class="review-card">
-                    <div class="stars">
+                    <div class="star-left">
                         <img src="assets/icon/star-none.svg" alt="Empty Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                     </div>
-                    <p class="review-text">I was captivated by the breathtaking visuals and innovative storytelling of 'Echoes of the Nebula.' The d...</p>
-                    <div class="review-meta">
-                        <span class="date">2 days ago</span>
-                        <span class="movie-title">Echoes of the Nebula</span>
+                    <p class="review-text-left">I was captivated by the breathtaking visuals and <br> innovative storytelling of 'Echoes of the Nebula.' The director masterfully crafted a universe teeming with vibrant characters and thought-provoking themes. While the plot had a few slow moments, the overall experience was truly unforgettable. A must-see for any sci-fi enthusiast!</p>
+                    <div class="review-meta-left">
+                        <span class="date-left" style="font-size: 19px; font-weight: 400; padding-top: 50px;">2 days ago</span>
+                        <span class="movie-title-left">Echoes of the Nebula</span>
                     </div>
                 </div>
 
                 <div class="review-card1">
-                    <div class="stars">
+                    <div class="star-right">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-full.svg" alt="Filled Star" class="star">
                         <img src="assets/icon/star-none.svg" alt="Empty Star" class="star">
                     </div>
-                    <p class="review-text">From the opening scene to the final credits, 'Whispers of Yesterday' takes you on an emotional rollercoaster...</p>
-                    <div class="review-meta">
-                        <span class="date">2 days ago</span>
-                        <span class="movie-title">Whispers of Yesterday</span>
+                    <p class="review-text-right">From the opening scene to the final credits, 'Whispers of Yesterday' takes you on an emotional rollercoaster.<br>The stellar performances by the cast, especially Anya Petrova, breathe life into characters grappling with love, loss, and redemption. Director Leo Maxwell weaves a narrative that's both heart-wrenching and uplifting, exploring the complexities of human relationships with nuance and grace. The film's haunting score and breathtaking cinematography only amplify its emotional impact. A must-see for those who appreciate stories that resonate long after the screen fades to black.</p>
+                    <div class="review-meta-right">
+                        <span class="movie-title-right">Whispers of Yesterday</span>
+                        <span class="date-right" style="font-size: 19px; font-weight: 400; padding-top: 50px;">2 days ago</span>
                     </div>
                 </div>
             </div>

@@ -15,8 +15,8 @@
     font-family: 'Manrope', sans-serif;
 }
 html,body{
-    height: 100%;
-    width: 100%;
+    height: 100%; /* Set a fixed height to prevent scrolling */
+    width: 100%; /* Set a fixed width to prevent horizontal scrolling */
     overflow: hidden; /* Disables browser-level scrolling */
     background-color: #000000;
 }
@@ -58,8 +58,8 @@ html,body{
     margin-left: 5px;
 }
 .brand h2{
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: bold;
     color: white;
 }
 .navigation{
@@ -71,8 +71,8 @@ html,body{
     color: #356D38;
     padding: 12px 20px;
     border-radius: 30px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: bold;
     text-align: center;
     margin-top: 60px;
 }
@@ -88,9 +88,9 @@ html,body{
     padding: 10px;
     border-radius: 30px;
 }
-.user-profile .username{
-    font-size: 13px;
-    font-weight: 500;
+.username{
+    font-size: 15px;
+    font-weight: bold;
     color: white;
 }
 
@@ -102,22 +102,18 @@ html,body{
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
-    
-    /* 2. ENABLE INTERNAL SCROLL: 
-       This allows the form to scroll if it's too long, 
-       while keeping the sidebar and header fixed. */
     overflow: hidden;
 }
 .page-header{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .page-header h3{
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: bold;
 }
 .content-grid{
     display: flex;
-    gap: 40px;
+    gap: 120px;
 }
 /* Form column left side */
 .form-column{
@@ -125,16 +121,17 @@ html,body{
     max-width: 600px;
 }
 .titles{
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 .titles h1{
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 48px;
+    font-weight: bold;
     color: #111827;
     margin-bottom: 5px;
 }
 .titles .subtitle{
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 400;
     color: #6b7280;
 }
 .input-group{
@@ -142,19 +139,34 @@ html,body{
 }
 .input-group label{
     display: block;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
     color: #4b5563;
     margin-bottom: 10px;
     letter-spacing: 0.5px;
 }
 .form-control{
     width: 100%;
+    margin-bottom: 10px;
     padding: 14px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
     border-radius: 8px;
     outline: none; /*It removes the default focus outline */
+}
+.form-control-category{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 14px;
+    background-color: #f3f6f9;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: none; /*It removes the default focus outline */
+    appearance: none; /*It removes the default dropdown arrow */
+    background-image: url(assets/icon/drop-down.svg);
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
 }
 .form-control-genre{
     width: 40%;
@@ -163,6 +175,11 @@ html,body{
     border: 1px solid transparent;
     border-radius: 8px;
     outline: none; /*It removes the default focus outline */
+    appearance: none; /*It removes the default dropdown arrow */
+    background-image: url(assets/icon/drop-down.svg);
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
 }
 .form-control:focus{
     border: 1px solid #00a3ff;
@@ -179,7 +196,7 @@ html,body{
 }
 .synopsis-box{
     resize: none; 
-    min-height: 180px;
+    min-height: 70px; /* Reduced from 250px to fit on laptop screens */
     width: 100%;
     padding: 12px;
     background-color: #f3f6f9;
@@ -189,7 +206,7 @@ html,body{
 .button-container{
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 .publish-btn{
     background-color: #008000;
@@ -197,10 +214,9 @@ html,body{
     border: none;
     padding: 14px 60px;
     border-radius: 30px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer; 
 }
 .publish-btn:hover{
     background-color: #008000da;
@@ -211,11 +227,13 @@ html,body{
     max-width: 300px;
 }
 .media-header h4{
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 400;
     margin-bottom: 4px;
 }
 .media-header p{
-    font-size: 13px;
+    font-size: 16px;
+    font-weight: 400;
     color: #6b7280;
     line-height: 1.5;
     margin-bottom: 15px;
@@ -242,7 +260,7 @@ html,body{
             </div>
             
             <nav class="navigation">
-                <a href="#" class="nav-item active">Content Management</a>
+                <a href="#" class="nav-item active">Content<br>Management</a>
             </nav>
             
             <div class="user-profile">
@@ -284,10 +302,10 @@ html,body{
                             </div>
                             <div class="input-group">
                                 <label>CATEGORY</label>
-                                <select name="category" class="form-control" required>
+                                <select name="category" class="form-control-category" required>
                                     <option value=""></option>
-                                    <option value="scifi">Sci-Fi</option>
-                                    <option value="drama">Drama</option>
+                                    <option value="movie">Movies</option>
+                                    <option value="series">Series</option>
                                 </select>
                             </div>
                             <div class="input-group">
