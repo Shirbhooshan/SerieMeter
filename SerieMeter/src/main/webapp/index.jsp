@@ -19,6 +19,50 @@
 	font-family: 'Manrope', sans-serif;
 }
 
+/* ── RESPONSIVE MOBILE VIEW ── */
+@media ( max-width : 768px) {
+	/* Allow scrolling on mobile if content exceeds height */
+	html, body {
+		overflow: auto;
+	}
+	.page {
+		height: auto;
+		min-height: 100vh;
+	}
+
+	/* Scaling the Hero Section */
+	.hero-title {
+		font-size: 42px; /* Much better for vertical screens */
+		letter-spacing: -1.5px;
+		line-height: 1;
+	}
+	.hero-sub {
+		font-size: 14px;
+		max-width: 90%; 
+	}
+	.badge {
+		margin-bottom: 20px;
+		padding: 5px 14px;
+	}
+
+	.footer {
+		flex-direction: column;
+		gap: 30px;
+		padding: 40px 20px;
+		text-align: center;
+	}
+	.footer-links {
+		flex-direction: column; /* Stack links for easier tapping */
+		gap: 15px;
+	}
+	.footer-copy {
+		text-align: center;
+	}
+	.hero-wrapper {
+		padding: 100px 20px; /* Ensures space from the fixed navbar */
+	}
+}
+
 html, body {
 	height: 100%;
 	overflow: hidden;
@@ -39,11 +83,10 @@ html, body {
 	justify-content: center;
 	background-color: #fff;
 	position: relative;
-	
 	/* Modify this part for background image */
 	background-image: url('assets/images/home-background.jpg');
-	background-size: cover; 
-	background-position: center; 
+	background-size: cover;
+	background-position: center;
 	background-repeat: no-repeat;
 }
 
@@ -128,7 +171,7 @@ html, body {
 	flex-shrink: 0;
 	background-color: #fff; /* Changed to white */
 	border-top: 1px solid #E5E7EB; /* Light grey top border */
-	padding: 30px 80px; 
+	padding: 30px 80px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -165,6 +208,8 @@ html, body {
 </style>
 </head>
 <body>
+
+	<%@ include file="components/home_nav.jsp"%>
 
 	<div class="page">
 
