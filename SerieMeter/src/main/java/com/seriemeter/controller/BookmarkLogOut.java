@@ -10,14 +10,14 @@ import java.io.IOException;
 /**
  * Servlet implementation class Bookmark_logout
  */
-@WebServlet("/bookmark")
-public class Bookmark_logout extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/Bookmarks" })
+public class BookmarkLogOut extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Bookmark_logout() {
+    public BookmarkLogOut() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class Bookmark_logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/user/bookmark_loggedout.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/bookmarkLogOut.jsp").forward(request, response);
 	}
 
 	/**

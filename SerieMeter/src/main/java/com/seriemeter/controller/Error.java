@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Genre
+ * Servlet implementation class ErrorPage
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/genre" })
-public class Genre extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/Error" })
+public class Error extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Genre() {
+    public Error() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class Genre extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/genre.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(request, response);
 	}
 
 	/**
