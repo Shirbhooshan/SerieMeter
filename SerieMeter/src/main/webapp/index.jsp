@@ -180,7 +180,7 @@ html, body {
 					and reviews. Discover hidden gems and cinematic masterpieces
 					through a lens of true expertise.</p>
 
-				<a href="#" class="cta-btn">Start Exploring</a>
+				<a href="${pageContext.request.contextPath}/Explore" class="cta-btn">Start Exploring</a>
 
 				<div class="sql-badge">
 					<img src="assets/icon/sql.svg" alt="SQL" class="sql-icon-svg">
@@ -195,7 +195,8 @@ html, body {
 			</div>
 
 			<nav class="footer-links">
-				<a href="#">About</a> <a href="#">Contact</a> <a href="#">Privacy</a>
+				<a href="${pageContext.request.contextPath}/About">About</a> 
+				<a href="#">Contact</a> <a href="#">Privacy</a>
 				<a href="#">Documentation</a>
 			</nav>
 
