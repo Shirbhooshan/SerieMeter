@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class ErrorPage
+ * Servlet implementation class ErrorCode
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/Error" })
-public class Error extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/404" })
+public class ErrorCode extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Error() {
+    public ErrorCode() {
         super();
         // TODO Auto-generated constructor stub
     }
