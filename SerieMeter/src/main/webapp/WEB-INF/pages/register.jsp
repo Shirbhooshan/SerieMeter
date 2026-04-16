@@ -16,15 +16,22 @@
 }
 
 body {
-    background-color: #FAF9F6; /* Light gray background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	background-image: url('assets/images/registerBackground.png');
+	background-size: cover; /* Scales the image to fill the screen */
+	background-position: center; /* Centers the image */
+	background-repeat: no-repeat;
+	/* Prevents the image from tiling/repeating */
+	padding-top: 60px;
 }
 
 .container {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +41,7 @@ body {
 /* --- Logo & Header --- */
 .logo-section {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
 }
 
 .logo {
@@ -42,30 +49,30 @@ body {
     margin-bottom: 8px;
 }
 .logos {
-    height: 14px;
-    width: 14px;
+    height: 24px;
+    width: 24px;
     margin-right: 5px;
 }
 .right-arrow {
-    height: 14px;
-    width: 14px;
+    height: 24px;
+    width: 24px;
     /* color: white;  */
 }
 .left-arrow {
-    height: 14px;
-    width: 14px;
+    height: 24px;
+    width: 24px;
 }
 
 .subtitle {
-    font-size: 11px;
-    letter-spacing: 1.2px;
-    color: #555;
-    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    color: #000000;
 }
 
 /* --- Main Dark Card --- */
 .card {
-    background-color: #2b2b2b; /* Dark gray/black card */
+    background-color: #28282B;
     width: 100%;
     border-radius: 16px;
     padding: 35px;
@@ -79,13 +86,14 @@ body {
 }
 
 .card-header h2 {
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 26px;
+    font-weight: bold;
     margin-bottom: 4px;
 }
 
 .card-header p {
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 400;
     color: #b0b0b0;
 }
 
@@ -96,7 +104,8 @@ body {
 
 .form-group label {
     display: block;
-    font-size: 11px;
+    font-size: 15px;
+    font-weight: 600;
     margin-bottom: 6px;
     color: #ffffff;
     text-transform: uppercase;
@@ -108,14 +117,8 @@ body {
     display: flex;
     align-items: center;
     background-color: white;
-    border-radius: 25px; /* Pill shape */
-    padding: 4px 15px;
-}
-
-.input-wrapper i {
-    color: #000000;
-    font-size: 14px;
-    margin-right: 12px;
+    border-radius: 30px; /* Pill shape */
+    padding: 6px 16px;
 }
 
 .input-wrapper .toggle-password {
@@ -129,7 +132,8 @@ body {
     outline: none;
     width: 100%;
     padding: 10px 0;
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 400;
     color: #333;
     background: transparent;
 }
@@ -142,8 +146,8 @@ body {
     border: none;
     border-radius: 25px; /* Pill shape */
     padding: 14px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 400;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -165,7 +169,9 @@ body {
 
 .terms {
     color: #a0a0a0;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
+    font-size: 15px;
+    font-weight: 400;
 }
 
 .terms a, .login-link a {
@@ -175,18 +181,21 @@ body {
 
 .login-link {
     color: #d0d0d0;
-    font-size: 12px;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 /* --- Bottom Page Links --- */
 .back-link {
-    margin-bottom: 30px;
+	margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 .back-link a {
     color: #777;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 20px;
+    font-weight: 400;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -199,7 +208,8 @@ body {
 
 footer p {
     color: #999;
-    font-size: 11px;
+    font-size: 20px;
+    font-weight: 400;
     letter-spacing: 0.5px;
 }
 </style>
@@ -263,7 +273,7 @@ footer p {
         </div>
 
         <div class="back-link">
-            <a href="index.jsp"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="left-arrow"> Go Back</a>
+            <a href="#"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="left-arrow"> Go Back</a>
         </div>
 
         <footer>
