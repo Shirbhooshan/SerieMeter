@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
 
 <style>
     /* --- Global Styles --- */
@@ -216,18 +216,17 @@
 	/* Adjust the padding in the search box */
 	.ad-search-box {
 	    border: 1px solid #dcdcdc;
-	    border-radius: 20px;
-	    padding: 9px 32px 9px 15px;   /* Padding: Top: 6px, Right: 32px (Room for icon!), Bottom: 6px, Left: 15px */
+	    border-radius: 17px;
+	    padding: 9px 32px 9px 15px;   /* Padding Right: 32px (Room for icon!) */
 	    font-size: 12px;
-	    color: #555;
 	    outline: none;
-	    width: 200px;
+	    width: 220px;
 	}
 
     .ad-sort-dropdown{
         border: 1px solid #dcdcdc;
-        border-radius: 20px;
-        padding: 9px 20px;
+        border-radius: 17px;
+        padding: 8px 20px;
         font-size: 12px;
         color: #555;
         outline: none;
@@ -312,24 +311,24 @@
         <aside class="ad-sidebar">
             <div>
                 <div class="ad-logo-container">
-                    <img src="${pageContext.request.contextPath}/assets/admin/logo-white.png" alt="Logo">
+                    <img src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg" alt="Logo">
                 </div>
                 <nav class="ad-nav-menu">
                     <a href="#" class="ad-nav-item active">
-                        <img src="icon-dash.svg" class="ad-nav-icon"> Dashboard
+                        <img src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg" class="ad-nav-icon"> Dashboard
                     </a>
                     <a href="#" class="ad-nav-item">
-                        <img src="icon-cont.svg" class="ad-nav-icon"> Content Management
+                        <img src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg" class="ad-nav-icon"> Content Management
                     </a>
                     <a href="#" class="ad-nav-item">
-                        <img src="icon-user.svg" class="ad-nav-icon"> Users
+                        <img src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg" class="ad-nav-icon"> Users
                     </a>
                 </nav>
             </div>
 
             <div class="ad-logout-container">
                 <a href="${pageContext.request.contextPath}/Logout" class="ad-logout-btn">
-                    <img src="logout.svg" class="ad-nav-icon"> Logout
+                    <img src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg" class="ad-nav-icon"> Logout
                 </a>
             </div>
         </aside>
@@ -357,8 +356,8 @@
 				    </select>
 				    
 				    <div class="ad-search-wrapper">
-				        <img src="${pageContext.request.contextPath}/assets/admin/icon-search.svg" class="ad-search-icon" alt="Search">
-				        <input type="text" class="ad-search-box" placeholder="Search...">
+				        <img src="${pageContext.request.contextPath}/assets/icon/search-ad-icon.svg" class="ad-search-icon" alt="Search">
+				        <input type="text" class="ad-search-box" placeholder="Search for medias">
 				    </div>
 				</div>
 
@@ -382,8 +381,8 @@
                         <td>Movie</td>
                         <td>Romance</td>
                         <td>2026-4-15</td>
-                        <td><div class="ad-rating">8.5 <img src="star.svg" class="ad-star-icon"></div></td>
-                        <td><button style="background:none; border:none; cursor:pointer"><img src="del.svg" class="ad-delete-icon"></button></td>
+                        <td><div class="ad-rating">8.5 <img src="${pageContext.request.contextPath}/assets/icon/star-ad-icon.svg" class="ad-star-icon"></div></td>
+                        <td><button style="background:none; border:none; cursor:pointer"><img src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg" class="ad-delete-icon"></button></td>
                     </tr>
                     <% } %>
                 </tbody>
