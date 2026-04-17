@@ -26,47 +26,47 @@ body {
 	background-position: center; /* Centers the image */
 	background-repeat: no-repeat;
 	/* Prevents the image from tiling/repeating */
-	padding-top: 60px;
+	padding-top: 30px;
 }
 
 .container {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px 15px;
 }
 
 /* --- Logo & Header --- */
 .logo-section {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .logo {
-    height: 35px; 
-    margin-bottom: 8px;
+    height: 30px; 
+    margin-bottom: 6px;
 }
 .logos {
-    height: 24px;
-    width: 24px;
+    height: 14px;
+    width: 14px;
     margin-right: 5px;
 }
 .right-arrow {
-    height: 24px;
-    width: 24px;
+    height: 14px;
+    width: 14px;
     /* color: white;  */
 }
 .left-arrow {
-    height: 24px;
-    width: 24px;
+    height: 14px;
+    width: 14px;
 }
 
 .subtitle {
-    font-size: 20px;
+    font-size: 10px;
     font-weight: 400;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     color: #000000;
 }
 
@@ -75,38 +75,38 @@ body {
     background-color: #28282B;
     width: 100%;
     border-radius: 16px;
-    padding: 35px;
+    padding: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     color: white;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .card-header {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .card-header h2 {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .card-header p {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: #b0b0b0;
 }
 
 /* --- Form Fields --- */
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .form-group label {
     display: block;
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 4px;
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -118,7 +118,7 @@ body {
     align-items: center;
     background-color: white;
     border-radius: 30px; /* Pill shape */
-    padding: 6px 16px;
+    padding: 5px 14px;
 }
 
 .input-wrapper .toggle-password {
@@ -131,8 +131,8 @@ body {
     border: none;
     outline: none;
     width: 100%;
-    padding: 10px 0;
-    font-size: 15px;
+    padding: 8px 0;
+    font-size: 14px;
     font-weight: 400;
     color: #333;
     background: transparent;
@@ -145,15 +145,15 @@ body {
     color: white;
     border: none;
     border-radius: 25px; /* Pill shape */
-    padding: 14px;
-    font-size: 20px;
-    font-weight: 400;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-top: 15px;
+    gap: 6px;
+    margin-top: 10px;
 }
 
 .btn-submit:hover {
@@ -163,14 +163,14 @@ body {
 /* --- Card Footer Links --- */
 .card-footer {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 11px;
 }
 
 .terms {
     color: #a0a0a0;
-    margin-bottom: 60px;
-    font-size: 15px;
+    margin-bottom: 20px;
+    font-size: 12px;
     font-weight: 400;
 }
 
@@ -181,25 +181,24 @@ body {
 
 .login-link {
     color: #d0d0d0;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 400;
 }
 
 /* --- Bottom Page Links --- */
 .back-link {
-	margin-top: 30px;
-    margin-bottom: 60px;
+	margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 .back-link a {
     color: #777;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 400;
     display: flex;
     align-items: center;
     gap: 6px;
-    transition: color 0.3s;
 }
 
 .back-link a:hover {
@@ -208,7 +207,7 @@ body {
 
 footer p {
     color: #999;
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.5px;
 }
