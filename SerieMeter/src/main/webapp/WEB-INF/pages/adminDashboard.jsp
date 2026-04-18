@@ -18,7 +18,7 @@
         background-color: #010101;
         color: #ffffff;
         margin: 0;
-        padding: 10px; /* Brought white box closer to edges */
+        padding: 10px; 
         height: 100vh;
         box-sizing: border-box;
         overflow: hidden; /* Prevent body scroll */
@@ -49,7 +49,7 @@
     }
 
     .ad-logo-container img {
-        max-width: 130px;
+        max-width: 190px;
         height: auto;
     }
 
@@ -86,7 +86,7 @@
         transition: filter 0.2s ease;
     }
 
-    /* Logout Button with specific hover design */
+    /* Logout Button with hover design */
     .ad-logout-container {
         padding: 0 5px;
     }
@@ -203,17 +203,17 @@
 	    align-items: center;
 	}
 	
-	/* Position the icon on the right */
+	/* Position the search icon on the right */
 	.ad-search-icon {
 	    position: absolute;
-	    right: 15px; /* Changed from left to right */
+	    right: 15px; 
 	    width: 14px;
 	    height: 14px;
 	    opacity: 0.6; 
 	    pointer-events: none; 
 	}
 	
-	/* Adjust the padding in the search box */
+	/* padding in the search box */
 	.ad-search-box {
 	    border: 1px solid #dcdcdc;
 	    border-radius: 17px;
