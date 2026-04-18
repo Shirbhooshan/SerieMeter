@@ -126,6 +126,13 @@ body {
     margin-left: auto;
     cursor: pointer;
 }
+.eye-icon {
+	position: absolute;
+    right: 14px;
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
 
 .input-wrapper input {
     border: none;
@@ -256,7 +263,11 @@ footer p {
                     <div class="input-wrapper">
                         <img src="assets/icon/lock.svg" alt="lock-logo" class="logos">
                         <input type="password" id="password" name="password" placeholder="*****" required>
-                        <img src="assets/icon/eye-logo.svg" alt="toggle-password" class="logos" class="toggle-password">
+                       <img src="assets/icon/eye-black.svg" 
+     						alt="toggle-password" 
+     						id="eyeIcon"
+    	 					class="eye-icon toggle-password" 
+     						onclick="togglePassword()">
                     </div>
                 </div>
 
@@ -272,12 +283,26 @@ footer p {
         </div>
 
         <div class="back-link">
-            <a href="#"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="left-arrow"> Go Back</a>
+            <a href="login.jsp"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="left-arrow"> Go Back</a>
         </div>
 
         <footer>
             <p>&copy;2026 SERIEMETER</p>
         </footer>
     </div>
+    <script>
+		function togglePassword() {
+			var passwordField = document.getElementById("password");
+			var eyeIcon = document.getElementById("eyeIcon");
+
+			if (passwordField.type === "password") {
+				passwordField.type = "text";
+				eyeIcon.src = "assets/icon/eye.svg";
+			} else {
+				passwordField.type = "password";
+				eyeIcon.src = "assets/icon/eye-black.svg";
+			}
+		}
+	</script>
 </body>
 </html>
