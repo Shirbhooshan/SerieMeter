@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored = "false"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -171,6 +171,9 @@
 
 <body>
 
+	<%@ include file="/components/navbar.jsp"%>
+
+
 	<div class="bookmarks-body">
 		<div class="page-container">
 
@@ -181,8 +184,7 @@
 				<div class="left-side">
 
 					<h1>
-						Your Personal<br>
-						<span class="green-text">Archive</span>
+						Your Personal<br> <span class="green-text">Archive</span>
 					</h1>
 
 					<p class="subtitle">Keep track of every cinematic journey. Sign
@@ -190,18 +192,17 @@
 
 					<!-- Login and Sign up buttons -->
 					<div class="btn-row">
-						<a href="${pageContext.request.contextPath}/Login" class="btn btn-black"> <img
-							src="assets/icon/login_icon.svg"
+						<a href="${pageContext.request.contextPath}/Login"
+							class="btn btn-black"> <img src="assets/icon/login_icon.svg"
 							alt="login logo" style="width: 18px; height: 18px;"> Login
 							to View Bookmarks
-						</a> <a href="${pageContext.request.contextPath}/Register" class="btn btn-green">Sign up</a>
+						</a> <a href="${pageContext.request.contextPath}/Register"
+							class="btn btn-green">Sign up</a>
 					</div>
 
 					<!-- Cloud Sync note -->
 					<div class="feature-note">
-						<img
-							src="assets/icon/cloud_icon.svg"
-							alt="Cloud Sync"
+						<img src="assets/icon/cloud_icon.svg" alt="Cloud Sync"
 							style="width: 26px; height: 26px; margin-bottom: 4px;"> <span
 							class="note-title">Cloud Sync</span> <span class="note-desc">Access
 							your lists from anywhere.</span>
@@ -214,16 +215,15 @@
 
 					<!-- Black circle with bookmark icon -->
 					<div class="card-icon-circle">
-						<img
-							src="assets/icon/bookmark_icon.svg"
-							alt="Bookmark">
+						<img src="assets/icon/bookmark_icon.svg" alt="Bookmark">
 					</div>
 
 					<h2 class="card-title">Empty Library</h2>
 					<p class="card-desc">Your collection is waiting for its first
 						masterpiece. Discover films to start your archive.</p>
 
-					<a href="${pageContext.request.contextPath}/Explore" class="explore-link">Explore Trending</a>
+					<a href="${pageContext.request.contextPath}/Explore"
+						class="explore-link">Explore Trending</a>
 
 				</div>
 
@@ -231,6 +231,8 @@
 
 		</div>
 	</div>
+
+	<%@ include file="/components/footer.jsp"%>
 
 </body>
 </html>

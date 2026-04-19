@@ -335,6 +335,9 @@
 
 </style>
 <body>
+
+<%@ include file="/components/navbar.jsp"%>
+
     <main class="profile-container">
 
         <header class="profile-header">
@@ -470,5 +473,8 @@
         </section>
         
     </main>
+    
+    <%@ include file="/components/footer.jsp"%>
+    
 </body>
 </html>

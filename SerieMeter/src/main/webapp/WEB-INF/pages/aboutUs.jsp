@@ -156,6 +156,9 @@
 </head>
 <body>
 
+<%@ include file="/components/navbar.jsp"%>
+
+
     <div class="page-content">
 
         <!-- HERO -->
@@ -231,6 +234,8 @@
         </div>
 
     </div>
+    
+    <%@ include file="/components/footer.jsp"%>
 
 </body>
 </html>
