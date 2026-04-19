@@ -74,6 +74,8 @@
 
     .ad-nav-item.active {
         background-color: #4ebc57;
+        color: #1a1a1a;
+        opacity: 0.82;
     }
 
     .ad-nav-item:not(.active):hover {
