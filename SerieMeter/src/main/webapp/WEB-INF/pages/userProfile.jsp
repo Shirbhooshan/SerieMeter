@@ -24,7 +24,7 @@
     }
     .seriemeter-container{
         width: 100%;
-        max-width: 960px;
+        max-width: 100%;
         margin: 0 auto;
         padding: 0 20px; /* Keeps content from touching edges on small screens */
     }
@@ -32,17 +32,19 @@
     .header{
         width: 100%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         padding: 20px 0;
         background-color: white;
+        position: relative;
     }
     .welcome-text{
         font-size: 64px;
         font-weight: bold;
         color: #599453;
+        transform: translate(150%, 70%);
     }
     .logout-btn{
+        margin-left: auto;
         padding: 10px 35px;
         background-color: #A54A44;
         color: white;
