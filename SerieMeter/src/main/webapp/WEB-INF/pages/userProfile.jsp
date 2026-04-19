@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored = "false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 </head>
 <style>
     *{
@@ -13,7 +14,7 @@
         box-sizing: border-box;
     }
     body{
-        font-family: 'manrope', sans-serif;
+        font-family: 'Manrope', sans-serif;
         background-color: #F3F3F3;
         color: #333;
         min-height: 100vh; /*It ensures the container takes at least the full viewport height */
@@ -77,7 +78,7 @@
     }
     .user-name{
         font-size: 24px;
-        font-family: bold;
+        font-family: 'Manrope';
         color: #000000;
     }
     .user-email{
@@ -198,7 +199,7 @@
         <div class="seriemeter-container">
             <header class="header">
                 <h1 class="welcome-text">Welcome,</h1>
-                <a href="login.jsp" class="logout-btn">Logout</a>
+                <a href="${pageContext.request.contextPath}/Login" class="logout-btn">Logout</a>
             </header>
 
             <section class="profile-summary">
