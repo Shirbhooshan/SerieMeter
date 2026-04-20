@@ -285,7 +285,7 @@ footer p {
              <!-- Footer inside card -->
             <div class="rg-card-footer">
                 <p class="rg-terms">By creating an account, you agree to our <a href="#">Terms</a>.</p>
-                <p class="rg-login-link">Already have a profile? <a href="login.jsp">Sign in</a></p>
+                <p class="rg-login-link">Already have a profile? <a href="${pageContext.request.contextPath}/Login">Sign in</a></p>
             </div>
         </div>
 
