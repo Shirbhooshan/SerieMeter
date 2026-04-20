@@ -35,7 +35,7 @@
         gap: 10px;
     }
 
-    /* --- Sidebar Styles --- */
+    /* --- Sidebar Styles --- */ 
     .ad-sidebar {
         width: 260px;
         display: flex;
@@ -86,6 +86,11 @@
         width: 18px;
         height: 18px;
         transition: filter 0.2s ease;
+    }
+    
+    /* Turns the icon black when the navigation item is active */
+    .ad-nav-item.active .ad-nav-icon {
+        filter: brightness(0) saturate(100%); 
     }
 
     /* Logout Button with hover design */
