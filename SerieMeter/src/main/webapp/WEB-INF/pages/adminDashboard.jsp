@@ -1,10 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored = "false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Portal - Add Media</title>
+    <title>Content Management</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
+
 </head>
 <style>
     /* Base Reset */
@@ -14,153 +18,203 @@
     box-sizing: border-box;
     font-family: 'Manrope', sans-serif;
 }
-html,body{
+.adm-body{
     height: 100%; /* Set a fixed height to prevent scrolling */
     width: 100%; /* Set a fixed width to prevent horizontal scrolling */
     overflow: hidden; /* Disables browser-level scrolling */
     background-color: #000000;
 }
-/* Layout Wrapper */
-.dashboard-wrapper{
+.adm-layout-container {
     display: flex;
-    height: 100vh; /* Exactly 100% of the screen height */
-    width: 100vw;
-    background-color: #000000;
+    height: 100%;
+    gap: 10px;
 }
-/* Sidebar */
-.sidebar{
-    width: 250px;
-    height: 100%; /* Fills the 100vh of the wrapper */
-    flex-shrink: 0; /*It prevents the sidebar from shrinking */
+/* --- Sidebar Styles --- */ 
+.adm-sidebar {
+    width: 260px;
     display: flex;
     flex-direction: column;
-    padding: 25px 20px;
-    background-color: #000000;
-    border-right: 1px solid #222; /* Subtle separation */
+    justify-content: space-between;
+    padding: 15px 5px;
 }
-.brand{
+
+.adm-logo-container {
+    padding: 0 10px 50px 10px;
+}
+
+.adm-logo-container img {
+    max-width: 190px;
+    height: auto;
+}
+
+.adm-nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.adm-nav-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 40px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 13px; 
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+.adm-nav-item.active {
+    background-color: #4ebc57;
+    color: #1a1a1a;
+    opacity: 0.82;
 }
 
-.admin-profile-icon{
-    font-size: 18px;
-    color: #4b5563;
-    background-color: #ffffff;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+.adm-nav-item:not(.active):hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.adm-nav-icon {
+    width: 18px;
+    height: 18px;
+    transition: filter 0.2s ease;
+}
+    
+/* Turns the icon black when the navigation item is active */
+.adm-nav-item.active .adm-nav-icon {
+    filter: brightness(0) saturate(100%); 
+}
+
+/* Logout Button with hover design */
+.adm-logout-container {
+    padding: 0 5px;
+}
+
+.adm-logout-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-}
-.brand h2{
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-}
-.navigation{
-    flex-grow: 1; /*It allows the navigation to take up the remaining space */
-}
-.nav-item{
-    display: block;
+    gap: 12px;
     text-decoration: none;
-    color: #356D38;
-    padding: 12px 20px;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 60px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
 }
-.nav-item.active{
-    background-color: #8DE586;
+
+.adm-logout-btn:hover {
+    background-color: #e75a55; 
+    color: #1a1a1a;
+    opacity: 0.82;
+	transform: translateY(-2px);
 }
-.user-profile{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    background-color: #F09C6B;
-    padding: 10px;
-    border-radius: 30px;
-}
-.username{
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
+
+.adm-logout-btn:hover .adm-nav-icon {
+    filter: brightness(0) saturate(100%); 
 }
 
 /* Main Content */
-.main-content{
-    flex-grow: 1; 
+.adm-main-content{
+    flex-grow: 0; /*Stops full-width expansion */
+    width: 84%;
     height: 100vh;
+    border-radius: 16px;
     background-color: #ffffff;
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
-.page-header{
-    margin-bottom: 20px;
+.adm-page-header{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.page-header h3{
+.adm-page-header h3{
     font-size: 24px;
     font-weight: bold;
 }
-.content-grid{
+.adm-header-profile{
     display: flex;
-    gap: 120px;
+    align-items: center;
+    gap: 15px;
 }
-/* Form column left side */
-.form-column{
-    flex: 2; /*It takes up 2 parts of the available space */
-    max-width: 600px;
+.adm-header-profile-text{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
 }
-.titles{
-    margin-bottom: 50px;
-}
-.titles h1{
-    font-size: 48px;
+.adm-profile-name{
+    font-size: 16px;
     font-weight: bold;
-    color: #111827;
-    margin-bottom: 5px;
+    color: #0F172A;
 }
-.titles .subtitle{
+.adm-profile-email{
+    font-size: 16px;
+    color: #0F172A;
+}
+.adm-profile-avatar{
+    width: 50px;
+    height: 50px;
+    background-color: #f3f6f9;
+    border-radius: 50%;
+}
+
+.adm-content-grid{
+    display: flex;
+    gap: 60px;
+}
+/* Form Controls */
+.adm-form-column{
+    flex: 2;
+    max-width: 650px;
+}
+.adm-titles{
+    margin-bottom: 30px;
+}
+.adm-titles h1{
+    font-size: 48px;
+    font-weight: 700;
+    color: #0F172A;
+    line-height: 1.2;
+}
+.adm-titles .adm-subtitle{
     font-size: 20px;
-    font-weight: 400;
-    color: #6b7280;
+    font-weight:400;
+    color: #0F172A;
 }
-.input-group{
-    margin-bottom: 5px;
+.adm-input-group{
+    margin-bottom: 20px;
 }
-.input-group label{
+.adm-input-group label{
     display: block;
     font-size: 16px;
     font-weight: bold;
     color: #4b5563;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
 }
-.form-control{
+
+/* Input fields */
+.adm-form-control{
     width: 100%;
-    margin-bottom: 10px;
-    padding: 14px;
+    margin-bottom: 4px;
+    padding: 16px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
-    border-radius: 8px;
-    outline: none; /*It removes the default focus outline */
+    border-radius: 12px;
+    outline: none;
 }
-.form-control-category{
+.adm-form-control-category{
     width: 100%;
-    margin-bottom: 10px;
-    padding: 14px;
+    margin-bottom: 4px;
+    padding: 16px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
-    border-radius: 8px;
+    border-radius: 12px;
     outline: none; /*It removes the default focus outline */
     appearance: none; /*It removes the default dropdown arrow */
     background-image: url(assets/icon/drop-down.svg);
@@ -168,12 +222,12 @@ html,body{
     background-position: right 12px center;
     background-size: 12px;
 }
-.form-control-genre{
+.adm-form-control-genre{
     width: 40%;
-    padding: 14px;
+    padding: 16px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
-    border-radius: 8px;
+    border-radius: 12px;
     outline: none; /*It removes the default focus outline */
     appearance: none; /*It removes the default dropdown arrow */
     background-image: url(assets/icon/drop-down.svg);
@@ -181,173 +235,195 @@ html,body{
     background-position: right 12px center;
     background-size: 12px;
 }
-.form-control:focus{
-    border: 1px solid #00a3ff;
+.adm-form-control:focus, 
+.adm-form-control-category:focus, 
+.adm-form-control-genre:focus {
+    border: 1px solid #4ebc57;
+    background-color: #ffffff;
 }
-.form-control-genre:focus{
-    border: 1px solid #00a3ff;
-}
-.row-3-cols{
+/* Layout for 3 side by side input fields */
+.adm-row-3-cols{
     display: flex;
     gap: 15px;
 }
-.row-3-cols .input-group{
-    flex: 1; /*It takes up 1 part of the available space */
+.adm-row-3-cols .adm-input-group{
+    flex: 1; /*It allows each input group to take up an equal amount of space */
 }
-.synopsis-box{
+/* Textarea */
+.adm-synopsis-box{
     resize: none; 
-    min-height: 70px; /* Reduced from 250px to fit on laptop screens */
+    min-height: 200px; /* Reduced from 250px to fit on laptop screens */
     width: 100%;
     padding: 12px;
     background-color: #f3f6f9;
     border-radius: 12px;
     border: 1px solid #e0e0e0;
 }
-.button-container{
+
+/* Media column right side */
+.adm-media-column{
+    flex: 2;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 400px;
+
+}
+.adm-media-header h4{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: #0F172A;
+}
+.adm-media-header p{
+    font-size: 14px;
+    font-weight: 400;
+    color: #0F172A;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+.adm-poster-upload-area img{
+    position: relative; /*It prevents the image from overflowing its container */
+    width: 105%;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+.adm-genre-group{
+    width: 100%;
+    margin-top: 10px;
+}
+/* Publish Button */
+.adm-publish-button-container{
     display: flex;
     justify-content: flex-end;
-    margin-top: 15px;
+    padding-top: 10px;
 }
-.publish-btn{
+.adm-publish-btn{
     background-color: #008000;
     color: white;
     border: none;
-    padding: 14px 60px;
+    padding: 14px 50px;
     border-radius: 30px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer; 
 }
-.publish-btn:hover{
+.adm-publish-btn:hover{
     background-color: #008000da;
 }
-/* Media column right side */
-.media-column{
-    flex: 1;
-    max-width: 300px;
-}
-.media-header h4{
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 4px;
-}
-.media-header p{
-    font-size: 16px;
-    font-weight: 400;
-    color: #6b7280;
-    line-height: 1.5;
-    margin-bottom: 15px;
-}
-.poster-upload-area img{
-    width: 100%;
-    height: 380px; /* Reduced from 450px to ensure it fits without scrolling */
-    object-fit: cover;
-    border-radius: 16px;
-}
-.genre-group{
-    width: 100%;
-    margin-top: 10px;
-}
 </style>
-<body>
-<!-- Dashboard -->
-    <div class="dashboard-wrapper">
-        
-        <aside class="sidebar">
-            <div class="brand">
-                <img class="admin-profile-icon" src="assets/icon/admin-logo.svg" alt="Logo" >
-                <h2>Admin Portal</h2>
+<body class="adm-body">
+    <!-- Layout Container -->
+    <div class="adm-layout-container">
+        <!-- Sidebar -->
+         <aside class="adm-sidebar">
+            <div>
+                <div class="adm-logo-container">
+                    <img src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg" alt="Logo">
+                </div>
+                <nav class="adm-nav-menu">
+                    <a href="#" class="adm-nav-item">
+                        <img src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg" class="adm-nav-icon"> Dashboard
+                    </a>
+                    <a href="#" class="adm-nav-item active">
+                        <img src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg" class="adm-nav-icon"> Content Management
+                    </a>
+                    <a href="#" class="adm-nav-item">
+                        <img src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg" class="adm-nav-icon"> Users
+                    </a>
+                </nav>
             </div>
-            
-            <nav class="navigation">
-                <a href="#" class="nav-item active">Content<br>Management</a>
-            </nav>
-            
-            <div class="user-profile">
-                <img class="admin-profile-icon" src="assets/icon/admin-logo.svg" alt="Logo" >
-                <span class="username">@Adminuser</span>
+
+            <div class="adm-logout-container">
+                <a href="${pageContext.request.contextPath}/Logout" class="adm-logout-btn">
+                    <img src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg" class="adm-nav-icon"> Logout
+                </a>
             </div>
         </aside>
 
-<!-- Main Content -->
-        <main class="main-content">
-            
-            <header class="page-header">
+        <!-- Main Content -->
+        <main class="adm-main-content">
+            <header class="adm-page-header">
                 <h3>Add new media</h3>
-            </header>
-
-            <div class="content-grid">
-                
-                <div class="form-column">
-                    <div class="titles">
-                        <h1>Create a cinematic masterpiece</h1>
-                        <p class="subtitle">Fill in the technical details below</p>
+                <div class="adm-header-profile">
+                    <div class="adm-header-profile-text">
+                        <span class="adm-profile-name">Adams</span>
+                        <span class="adm-profile-email">adams234@gmail.com</span>
                     </div>
+                    <div class="adm-profile-avatar"></div>
+                </div>
+            </header>    
+        
 
-                    <form action="index.jsp" method="POST">
-                        <div class="input-group">
-                            <label>MOVIE TITLE</label>
-                            <input type="text" name="movieTitle" class="form-control" required>
-                        </div>
-
-                        <div class="input-group">
-                            <label>DIRECTOR'S NAME</label>
-                            <input type="text" name="directorName" class="form-control" required>
-                        </div>
-
-                        <div class="row-3-cols">
-                            <div class="input-group">
-                                <label>RELEASE DATE</label>
-                                <input type="date" name="releaseDate" class="form-control" required>
-                            </div>
-                            <div class="input-group">
-                                <label>CATEGORY</label>
-                                <select name="category" class="form-control-category" required>
-                                    <option value=""></option>
-                                    <option value="movie">Movies</option>
-                                    <option value="series">Series</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>TOTAL TIME</label>
-                                <input type="text" name="totalTime" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>SYNOPSIS</label>
-                            <textarea name="synopsis" class="form-control synopsis-box"></textarea>
-                        </div>
-
-                        <div class="button-container">
-                            <button type="submit" class="publish-btn">Publish</button>
-                        </div>
-                    </form>
+    <!-- Form Section -->
+        <form action="index.jsp" method="POST" class="adm-content-grid">
+            <div class="adm-form-column">
+                <div class="adm-titles">
+                    <h1>Create a cinematic<br>masterpiece</h1>
+                    <p class="adm-subtitle">Fill in the technical details below</p>
                 </div>
 
-                <div class="media-column">
-                    <div class="media-header">
-                        <h4>Visual identity</h4>
-                        <p>Upload high quality poster.<br>Recommended ratio 2:3</p>
-                    </div>
-                    
-                    <div class="poster-upload-area">
-                        <img src="assets/images/intersteller.jpg" alt="Upload Icon" >
-                    </div>
+                <div class="adm-input-group">
+                    <label>Movie Title</label>
+                    <input type="text" name="movieTitle" class="adm-form-control" required>
+                </div>
 
-                    <div class="input-group genre-group">
-                        <label>GENRE</label>
-                        <select name="genre" class="form-control-genre" required>
+                <div class="adm-input-group">
+                    <label>Director's Name</label>
+                    <input type="text" name="directorName" class="adm-form-control" required>
+                </div>
+
+                <div class="adm-row-3-cols">
+                    <div class="adm-input-group">
+                        <label>Release Date</label>
+                        <input type="date" name="releaseDate" class="adm-form-control" required>
+                    </div>
+                    <div class="adm-input-group">
+                        <label>Category</label>
+                        <select name="category" class="adm-form-control-category" required>
                             <option value=""></option>
-                            <option value="action">Action</option>
-                            <option value="thriller">Thriller</option>
+                            <option value="scifi">Sci-Fi</option>
+                            <option value="drama">Drama</option>
                         </select>
                     </div>
+                    <div class="adm-input-group">
+                        <label>Total Time</label>
+                        <input type="text" name="totalTime" class="adm-form-control" required>
+                    </div>
+                </div>
+                <div class="adm-input-group">
+                    <label>Synopsis</label>
+                    <textarea name="synopsis" class="adm-form-control adm-synopsis-box"></textarea>
+                </div>
+            </div>
+
+            <div class="adm-media-column">
+                <div class="adm-media-header">
+                    <h4>Visual identity</h4>
+                    <p>Upload high quality poster.<br>Recommended ratio 2:3</p>
                 </div>
 
-            </div>
-        </main>
-    </div>
+                <div class="adm-poster-upload-area">
+                    <img src="assets/images/intersteller.jpg" alt="Poster Upload Placeholder">
+                </div>
+            
+                <div class="adm-input-group adm-genre-group">
+                    <label>Genre</label>
+                    <select name="genre" class="adm-form-control-genre" required>
+                        <option value=""></option>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="horror">Horror</option>
+                    </select>
+                </div>
 
+                <div class="adm-publish-button-container">
+                    <button type="submit" class="adm-publish-btn">Publish</button>
+                </div>
+            </div>
+        </form>
+    	</main>
+    </div>
 </body>
 </html>
