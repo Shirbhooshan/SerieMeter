@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class AdminDashboard
+ * Servlet implementation class ContentManagement
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/AdminBoard" })
-public class AdminDashboard extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/ContentManagement" })
+public class ContentManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDashboard() {
+    public ContentManagement() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class AdminDashboard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/adminDashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp").forward(request, response);
 	}
 
 	/**

@@ -19,8 +19,7 @@
     font-family: 'Manrope', sans-serif;
 }
 .adm-body{
-    height: 100%; /* Set a fixed height to prevent scrolling */
-    width: 100%; /* Set a fixed width to prevent horizontal scrolling */
+	min-height: 100vh;
     overflow: hidden; /* Disables browser-level scrolling */
     background-color: #000000;
 }
@@ -31,11 +30,11 @@
 }
 /* --- Sidebar Styles --- */ 
 .adm-sidebar {
-    width: 260px;
+    width: 220px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px 5px;
+    padding: 10px 5px;
 }
 
 .adm-logo-container {
@@ -57,11 +56,11 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 15px;
+    padding: 10px 12px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 500;
-    font-size: 13px; 
+    font-size: 12px; 
     border-radius: 10px;
     transition: all 0.2s ease;
 }
@@ -122,19 +121,19 @@
     height: 100vh;
     border-radius: 16px;
     background-color: #ffffff;
-    padding: 30px 50px;
+    padding: 20px 30px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 .adm-page-header{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .adm-page-header h3{
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 .adm-header-profile{
@@ -148,24 +147,26 @@
     text-align: right;
 }
 .adm-profile-name{
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #0F172A;
 }
 .adm-profile-email{
-    font-size: 16px;
+    font-size: 14px;
     color: #0F172A;
 }
 .adm-profile-avatar{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: #f3f6f9;
     border-radius: 50%;
 }
 
 .adm-content-grid{
     display: flex;
-    gap: 60px;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 /* Form Controls */
 .adm-form-column{
@@ -173,25 +174,25 @@
     max-width: 650px;
 }
 .adm-titles{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .adm-titles h1{
-    font-size: 48px;
+    font-size: 34px;
     font-weight: 700;
     color: #0F172A;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 .adm-titles .adm-subtitle{
-    font-size: 20px;
+    font-size: 16px;
     font-weight:400;
     color: #0F172A;
 }
 .adm-input-group{
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 .adm-input-group label{
     display: block;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: bold;
     color: #4b5563;
     margin-bottom: 4px;
@@ -202,16 +203,18 @@
 .adm-form-control{
     width: 100%;
     margin-bottom: 4px;
-    padding: 16px;
+    padding: 10px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
     border-radius: 12px;
     outline: none;
+    font-size: 14px;
 }
 .adm-form-control-category{
     width: 100%;
     margin-bottom: 4px;
-    padding: 16px;
+    padding: 10px;
+    font-size: 14px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
     border-radius: 12px;
@@ -224,7 +227,8 @@
 }
 .adm-form-control-genre{
     width: 40%;
-    padding: 16px;
+    padding: 10px;
+    font-size: 14px;
     background-color: #f3f6f9;
     border: 1px solid transparent;
     border-radius: 12px;
@@ -252,7 +256,7 @@
 /* Textarea */
 .adm-synopsis-box{
     resize: none; 
-    min-height: 200px; /* Reduced from 250px to fit on laptop screens */
+    min-height: 250px;
     width: 100%;
     padding: 12px;
     background-color: #f3f6f9;
@@ -262,29 +266,33 @@
 
 /* Media column right side */
 .adm-media-column{
-    flex: 2;
-    max-width: 350px;
+    flex: 1;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
-    margin-left: 400px;
-
 }
 .adm-media-header h4{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     margin-bottom: 4px;
     color: #0F172A;
 }
 .adm-media-header p{
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     color: #0F172A;
     line-height: 1.5;
     margin-bottom: 15px;
 }
+.adm-poster-upload-area{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
 .adm-poster-upload-area img{
     position: relative; /*It prevents the image from overflowing its container */
-    width: 105%;
+    width: 100%;
+    max-width: 320px;
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 2px;
@@ -297,15 +305,15 @@
 .adm-publish-button-container{
     display: flex;
     justify-content: flex-end;
-    padding-top: 10px;
+    padding-top: 3px;
 }
 .adm-publish-btn{
     background-color: #008000;
     color: white;
     border: none;
-    padding: 14px 50px;
+    padding: 10px 30px;
     border-radius: 30px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer; 
 }
