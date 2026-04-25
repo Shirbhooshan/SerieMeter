@@ -32,18 +32,28 @@ public class UserDAO {
 	}
 
 	public void insertUser(String fullName, String username, String email, String passwordHash) throws Exception {
-		String sql = "INSERT INTO Users (full_name, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)";
 
-		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+		// Get the connection from your DBconfig
+		Connection con = DBconfig.getConnection();
 
-			pst.setString(1, fullName);
-			pst.setString(2, username);
-			pst.setString(3, email);
-			pst.setString(4, passwordHash);
-			pst.setString(5, "user"); // Default role for new registrations
+		// Prepare the SQL string (matching your Users table)
+		String sql = "INSERT INTO users (full_name, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)";
 
-			pst.executeUpdate();
-		}
+		// Create the Prepared Statement
+		PreparedStatement pst = con.prepareStatement(sql);
+
+		// Bind the parameters correctly
+		pst.setString(1, fullName);
+		pst.setString(2, username);
+		pst.setString(3, email);
+		pst.setString(4, passwordHash);
+		pst.setString(5, "User"); // Setting default role to 'user'
+
+		// Execute the update
+		pst.executeUpdate();
+
+		pst.close();
+		con.close();
 	}
 
 	/**
@@ -51,7 +61,7 @@ public class UserDAO {
 	 */
 	public UserModel getUserByUsername(String identifier) throws Exception {
 		UserModel user = null;
-		String query = "SELECT * FROM Users WHERE username = ? OR email = ?";
+		String query = "SELECT * FROM users WHERE username = ? OR email = ?";
 
 		try (Connection conn = DBconfig.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 

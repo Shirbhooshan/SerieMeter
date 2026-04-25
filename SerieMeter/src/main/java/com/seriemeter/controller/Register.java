@@ -32,7 +32,7 @@ public class Register extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/signup.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
