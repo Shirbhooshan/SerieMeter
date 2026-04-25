@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.seriemeter.utils.DBconfig;
+import com.seriemeter.utils.PasswordUtil;
 import com.seriemeter.model.UserModel;
 
 public class UserDAO {
@@ -22,7 +23,7 @@ public class UserDAO {
 				if (rs.next()) {
 					String storedHash = rs.getString("password_hash");
 
-					if (password.equals(storedHash)) {
+					if (PasswordUtil.checkPassword(password, storedHash)) {
 						isValid = true;
 					}
 				}

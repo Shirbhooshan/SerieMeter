@@ -222,7 +222,7 @@ footer p {
                     <label for="fullName">FULL NAME</label>
                     <div class="input-wrapper">
                         <img src="assets/icon/user.svg" alt="user-logo" class="logos">
-                        <input type="text" id="fullName" name="fullName" placeholder="Random Name" required>
+                        <input type="text" id="fullName" name="full_name" placeholder="e.g. John" required>
                     </div>
                 </div>
 
@@ -230,7 +230,7 @@ footer p {
                     <label for="email">EMAIL ADDRESS</label>
                     <div class="input-wrapper">
                         <img src="assets/icon/envelope.svg" alt="email-logo" class="logos">
-                        <input type="email" id="email" name="email" placeholder="random@gmail.com" required>
+                        <input type="email" id="email" name="email" placeholder="e.g. john@gmail.com" required>
                     </div>
                 </div>
 

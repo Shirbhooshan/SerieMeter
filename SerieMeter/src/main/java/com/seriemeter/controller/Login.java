@@ -58,7 +58,7 @@ public class Login extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			response.sendRedirect(request.getContextPath() + "/About"); // sendRedirect changes URL, client- >
+			response.sendRedirect(request.getContextPath() + "/Explore"); // sendRedirect changes URL, client- >
 																			// server - > (3 way communication)
 		} else {
 			request.setAttribute("error", status);
