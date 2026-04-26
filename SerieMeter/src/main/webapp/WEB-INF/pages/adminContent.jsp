@@ -365,7 +365,7 @@
         
 
     <!-- Form Section -->
-        <form action="index.jsp" method="POST" class="adm-content-grid">
+        <form action="${pageContext.request.contextPath}/AdminContent" method="POST" class="adm-content-grid">
             <div class="adm-form-column">
                 <div class="adm-titles">
                     <h1>Create a cinematic<br>masterpiece</h1>
