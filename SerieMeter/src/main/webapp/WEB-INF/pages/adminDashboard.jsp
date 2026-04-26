@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -285,7 +286,6 @@ html, body {
 </style>
 <body>
 
-	<%@ include file="/components/navbar.jsp"%>
 
 
 	<!-- Dashboard -->
@@ -391,7 +391,7 @@ html, body {
 		</main>
 	</div>
 
-	<%@ include file="/components/footer.jsp"%>
+
 
 </body>
 </html>
