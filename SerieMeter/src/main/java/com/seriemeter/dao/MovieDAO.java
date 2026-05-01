@@ -9,7 +9,7 @@ import com.seriemeter.model.Movie;
 
 public class MovieDAO {
 	//Database Credentials
-	private String jdbcURL = "jdbc:mysql://localhost:3306/admin_content";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/seriemeter";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 	
