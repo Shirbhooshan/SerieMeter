@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored = "false"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -170,33 +170,63 @@
 
 <body>
 
+<<<<<<< HEAD
 	<div class="bm-bookmarks-body">
 		<div class="bm-page-container">
+=======
+	<%@ include file="/components/navbar.jsp"%>
+
+
+	<div class="bookmarks-body">
+		<div class="page-container">
+>>>>>>> refs/remotes/origin/safiyah
 
 			<div class="bm-main-layout">
 
 				<div class="bm-left-side">
 
 					<h1>
+<<<<<<< HEAD
 						Your Personal<br>
 						<span class="bm-green-text">Archive</span>
+=======
+						Your Personal<br> <span class="green-text">Archive</span>
+>>>>>>> refs/remotes/origin/safiyah
 					</h1>
 
 					<p class="bm-subtitle">Keep track of every cinematic journey. Sign
 						in to access your curated bookmarks across all your devices.</p>
 
+<<<<<<< HEAD
 					<div class="bm-btn-row">
 						<a href="${pageContext.request.contextPath}/Login" class="bm-btn bm-btn-black"> <img
 							src="assets/icon/login_icon.svg"
+=======
+					<!-- Login and Sign up buttons -->
+					<div class="btn-row">
+						<a href="${pageContext.request.contextPath}/Login"
+							class="btn btn-black"> <img src="assets/icon/login_icon.svg"
+>>>>>>> refs/remotes/origin/safiyah
 							alt="login logo" style="width: 18px; height: 18px;"> Login
 							to View Bookmarks
+<<<<<<< HEAD
 						</a> <a href="${pageContext.request.contextPath}/Register" class="bm-btn bm-btn-green">Sign up</a>
+=======
+						</a> <a href="${pageContext.request.contextPath}/Register"
+							class="btn btn-green">Sign up</a>
+>>>>>>> refs/remotes/origin/safiyah
 					</div>
 
+<<<<<<< HEAD
 					<div class="bm-feature-note">
 						<img
 							src="assets/icon/cloud_icon.svg"
 							alt="Cloud Sync"
+=======
+					<!-- Cloud Sync note -->
+					<div class="feature-note">
+						<img src="assets/icon/cloud_icon.svg" alt="Cloud Sync"
+>>>>>>> refs/remotes/origin/safiyah
 							style="width: 26px; height: 26px; margin-bottom: 4px;"> <span
 							class="bm-note-title">Cloud Sync</span> <span class="bm-note-desc">Access
 							your lists from anywhere.</span>
@@ -206,17 +236,28 @@
 
 				<div class="bm-right-card">
 
+<<<<<<< HEAD
 					<div class="bm-card-icon-circle">
 						<img
 							src="assets/icon/bookmark_icon.svg"
 							alt="Bookmark">
+=======
+					<!-- Black circle with bookmark icon -->
+					<div class="card-icon-circle">
+						<img src="assets/icon/bookmark_icon.svg" alt="Bookmark">
+>>>>>>> refs/remotes/origin/safiyah
 					</div>
 
 					<h2 class="bm-card-title">Empty Library</h2>
 					<p class="bm-card-desc">Your collection is waiting for its first
 						masterpiece. Discover films to start your archive.</p>
 
+<<<<<<< HEAD
 					<a href="${pageContext.request.contextPath}/Explore" class="bm-explore-link">Explore Trending</a>
+=======
+					<a href="${pageContext.request.contextPath}/Explore"
+						class="explore-link">Explore Trending</a>
+>>>>>>> refs/remotes/origin/safiyah
 
 				</div>
 
@@ -224,6 +265,8 @@
 
 		</div>
 	</div>
+
+	<%@ include file="/components/footer.jsp"%>
 
 </body>
 </html>

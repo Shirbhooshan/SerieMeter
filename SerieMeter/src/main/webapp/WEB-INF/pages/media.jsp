@@ -259,6 +259,9 @@ body {
 </head>
 <body>
 
+	<%@ include file="/components/navbar.jsp"%>
+
+
 	<div class="container">
 		<div class="left-content">
 			<p class="meta">
@@ -355,6 +358,8 @@ body {
 				alt="Movie Poster" class="poster-img">
 		</div>
 	</div>
+	
+	<%@ include file="/components/footer.jsp"%>
 
 </body>
 </html>
