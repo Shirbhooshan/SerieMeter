@@ -397,10 +397,10 @@
 				</div>
 			</header>
 
-
 			<!-- Form Section -->
 			<form action="${pageContext.request.contextPath}/AdminContent"
-				method="POST" class="adm-content-grid">
+				method="POST" enctype="multipart/form-data" class="adm-content-grid">
+
 				<div class="adm-form-column">
 					<div class="adm-titles">
 						<h1>
@@ -410,36 +410,37 @@
 					</div>
 
 					<div class="adm-input-group">
-						<label>Movie Title</label> <input type="text" name="movieTitle"
+						<label>Movie Title</label> <input type="text" name="title"
 							class="adm-form-control" required>
 					</div>
 
 					<div class="adm-input-group">
-						<label>Director's Name</label> <input type="text"
-							name="directorName" class="adm-form-control" required>
+						<label>Director's Name</label> <input type="text" name="director"
+							class="adm-form-control" required>
 					</div>
 
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
-							<label>Release Date</label> <input type="date" name="releaseDate"
-								class="adm-form-control" required>
+							<label>Release Date</label> <input type="date"
+								name="release_date" class="adm-form-control" required>
 						</div>
 						<div class="adm-input-group">
-							<label>Category</label> <select name="category"
+							<label>Category</label> <select name="category_id"
 								class="adm-form-control-category" required>
-								<option value=""></option>
-								<option value="scifi">Sci-Fi</option>
-								<option value="drama">Drama</option>
+								<option value="" disabled selected></option>
+								<option value="1">Movie</option>
+								<option value="2">Series</option>
 							</select>
 						</div>
 						<div class="adm-input-group">
-							<label>Total Time</label> <input type="text" name="totalTime"
+							<label>Total Time</label> <input type="text" name="total_time"
 								class="adm-form-control" required>
 						</div>
 					</div>
+
 					<div class="adm-input-group">
 						<label>Synopsis</label>
-						<textarea name="synopsis"
+						<textarea name="description"
 							class="adm-form-control adm-synopsis-box"></textarea>
 					</div>
 				</div>
@@ -453,17 +454,16 @@
 					</div>
 
 					<div class="adm-poster-upload-area">
-						<img src="assets/images/intersteller.jpg"
-							alt="Poster Upload Placeholder">
+						<input type="file" name="media_profile" accept="image/*" required>
 					</div>
 
 					<div class="adm-input-group adm-genre-group">
-						<label>Genre</label> <select name="genre"
+						<label>Genre</label> <select name="genre_id"
 							class="adm-form-control-genre" required>
-							<option value=""></option>
-							<option value="action">Action</option>
-							<option value="comedy">Comedy</option>
-							<option value="horror">Horror</option>
+							<option value="" disabled selected></option>
+							<option value="1">Action</option>
+							<option value="2">Comedy</option>
+							<option value="3">Horror</option>
 						</select>
 					</div>
 
@@ -471,6 +471,7 @@
 						<button type="submit" class="adm-publish-btn">Publish</button>
 					</div>
 				</div>
+
 			</form>
 		</main>
 	</div>

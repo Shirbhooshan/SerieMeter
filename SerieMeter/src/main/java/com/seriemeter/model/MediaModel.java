@@ -1,28 +1,19 @@
 package com.seriemeter.model;
 
-/* One object of this class = one row from the "media" table.
- * media table columns:
- *   media_id, title, director, release_date,
- *   description, media_profile, category_id, genre_id
- */
-
 public class MediaModel {
+	private int mediaId;
+	private String title;
+	private String director;
+	private String releaseDate;
+	private String totalTime;
+	private String description;
+	private String mediaProfile;
+	private int categoryId;
+	private int genreId;
 
-	private int mediaId; // media_id — primary key
-	private String title; // title
-	private String director; // director
-	private String releaseDate; // release_date (String so JSP can display it easily)
-	private String description; // description (the synopsis text)
-	private String mediaProfile; // media_profile (poster image filename)
-	private int categoryId; // category_id (FK = category table: 1=Movie, 2=Series)
-	private int genreId; // genre_id (FK = genre table)
-
-	// Default constructor
 	public MediaModel() {
 	}
 
-// Getters and Setters
-// JSP uses these via EL: ${media.title} calls getTitle()
 	public int getMediaId() {
 		return mediaId;
 	}
@@ -53,6 +44,14 @@ public class MediaModel {
 
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	public String getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(String totalTime) {
+		this.totalTime = totalTime;
 	}
 
 	public String getDescription() {
