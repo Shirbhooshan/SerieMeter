@@ -324,7 +324,7 @@
                     <a href="#" class="ad-nav-item active">
                         <img src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg" class="ad-nav-icon"> Dashboard
                     </a>
-                    <a href="#" class="ad-nav-item">
+                    <a href="#" class="ad-nav-item" >
                         <img src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg" class="ad-nav-icon"> Content Management
                     </a>
                     <a href="#" class="ad-nav-item">
