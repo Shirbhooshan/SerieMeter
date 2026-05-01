@@ -27,7 +27,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-image: url('assets/images/registerBackground.png');
+	background-image: url('assets/images/registerBackground.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -140,11 +140,11 @@ body {
 
 /* Force the black SVG to render white */
 .avatar-circle .user-icon {
-	width: 66px;
-	height: 66px;
+	width: 88px;
+	height: 88px;
 	filter: brightness(0) invert(1);
 	opacity: 0.55;
-	margin-bottom: -2px;
+	margin-bottom: -10px;
 	flex-shrink: 0;
 }
 
@@ -409,7 +409,7 @@ body {
 							type="password" name="password" id="passInput"
 							class="rounded-input" placeholder="••••••••" required> <img
 							src="assets/icon/eye.svg" alt="Show" class="icon-svg eye-icon"
-							onclick="togglePassword()">
+							onclick="togglePassword()" id ="eyeIcon">
 					</div>
 				</div>
 
