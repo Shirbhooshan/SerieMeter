@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -308,6 +309,134 @@
 	border-radius: 50%;
 	font-weight: 700;
 }
+
+.sm_admin__toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.sm_admin__sort_select {
+	appearance: none;
+	-webkit-appearance: none;
+	background: var(--white);
+	border: 1px solid var(--gray-200);
+	border-radius: 20px;
+	padding: 9px 36px 9px 16px;
+	font-size: 13px;
+	font-family: 'Manrope', sans-serif;
+	color: var(--text);
+	cursor: pointer;
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23888' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 14px center;
+}
+
+.sm_admin__sort_select:focus {
+	outline: none;
+}
+
+.sm_admin__search {
+	display: flex;
+	align-items: center;
+	border: 1px solid #dcdcdc;
+	border-radius: 20px;
+	padding: 9px 16px;
+	gap: 8px;
+	width: 260px;
+	background: #ffffff;
+}
+
+.sm_admin__search input {
+	background: transparent;
+	border: none;
+	outline: none;
+	font-size: 13px;
+	font-family: 'Manrope', sans-serif;
+	color: #1a1a1a;
+	width: 100%;
+}
+
+.sm_admin__search input::placeholder {
+	color: #aaaaaa;
+}
+
+.sm_admin__search img {
+	width: 16px;
+	height: 16px;
+	opacity: 0.5;
+}
+
+/* --- Users Table Styling --- */
+.ad-user-table-container {
+	flex: 1;
+	overflow-y: auto; /* Allows table scrolling if many users are added */
+}
+
+.ad-user-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.ad-user-table th {
+	text-align: left;
+	font-size: 11px;
+	font-weight: 700;
+	color: black;
+	padding: 12px 10px;
+	border-bottom: 1px solid #f0f0f0;
+	letter-spacing: 0.5px;
+	padding: 12px 10px;
+}
+
+.ad-user-table td {
+	padding: 15px 10px;
+	font-size: 13px;
+	color: #1a1a1a;
+	border-bottom: 1px solid #f9f9f9;
+	vertical-align: middle;
+}
+
+/* User Details Cell (#1 + Avatar) */
+.ad-user-id-cell {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.ad-user-avatar-small {
+	width: 32px;
+	height: 32px;
+	background-color: #e0e0e0;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+/* Name/Username Stack */
+.ad-user-name-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.ad-username-bold {
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.ad-username-gray {
+	font-size: 11px;
+	color: #aaaaaa;
+}
+
+/* Role Badge Style */
+.ad-user-role-text {
+	font-size: 12px;
+	color: #555555;
+}
 </style>
 </head>
 <body class="ad-body">
@@ -317,15 +446,17 @@
 		<aside class="ad-sidebar">
 			<div>
 				<div class="ad-logo-container">
-					<img
+					<a href="${pageContext.request.contextPath}/Explore"> <img
 						src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg"
 						alt="Logo">
+					</a>
 				</div>
 				<nav class="ad-nav-menu">
 					<a href="#" class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
-					</a> <a href="${pageContext.request.contextPath}/AdminContent" class="ad-nav-item"> <img
+					</a> <a href="${pageContext.request.contextPath}/AdminContent"
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
 						class="ad-nav-icon"> Content Management
 					</a> <a href="#" class="ad-nav-item active"> <img
@@ -364,8 +495,94 @@
 			<p class="ad-section-subtitle">View and search for all users
 				here.</p>
 
+			<!-- Toolbar: Pushes search to the right -->
+			<div class="sm_admin__toolbar">
+				<div class="sm_admin__search">
+					<input type="text" placeholder="Search for users" id="searchInput"
+						onkeyup="filterTable()" /> <img src="assets/icon/search.svg"
+						alt="Search" />
+				</div>
+			</div>
 
+			<!-- Users Table -->
+			<div class="ad-user-table-container">
+				<table class="ad-user-table">
+					<thead>
+						<tr>
+							<th>USER DETAILS</th>
+							<th>NAME</th>
+							<th>EMAIL ADDRESS</th>
+							<th>TOTAL REVIEW</th>
+							<th>ROLE</th>
+						</tr>
+					</thead>
+					<tbody id="userTableBody">
+						<c:choose>
+							<c:when test="${empty users}">
+								<tr>
+									<td colspan="5"
+										style="text-align: center; padding: 30px; color: #aaa;">
+										No users found.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="u" items="${users}">
+									<tr>
+										<td>
+											<div class="ad-user-id-cell">
+												<img
+													src="${pageContext.request.contextPath}/getimage?name=${u.userName}"
+													alt="avatar" class="ad-user-avatar-small"
+													onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.jpg'">
+												<span>#${u.userId}</span>
+											</div>
+										</td>
+										<td>
+											<div class="ad-user-name-info">
+												<span class="ad-username-bold">${u.fullName}</span> <span
+													class="ad-username-gray">@${u.userName}</span>
+											</div>
+										</td>
+										<td>${u.email}</td>
+										<td>—</td>
+										<td class="ad-user-role-text">${u.role}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
 		</main>
 	</div>
+
+	<script>
+		function filterTable() {
+			// Get the search input value and convert to lowercase
+			const input = document.getElementById("searchInput");
+			const filter = input.value.toLowerCase();
+
+			// Get the table body and all rows within it
+			const tbody = document.getElementById("userTableBody");
+			const rows = tbody.getElementsByTagName("tr");
+
+			// Loop through all table rows
+			for (let i = 0; i < rows.length; i++) {
+				// We skip the "No users found" row if it exists
+				if (rows[i].cells.length < 2)
+					continue;
+
+				// Get the text content of the entire row
+				const rowText = rows[i].textContent || rows[i].innerText;
+
+				// If the text matches the filter, show it; otherwise, hide it
+				if (rowText.toLowerCase().indexOf(filter) > -1) {
+					rows[i].style.display = "";
+				} else {
+					rows[i].style.display = "none";
+				}
+			}
+		}
+	</script>
 </body>
 </html>
