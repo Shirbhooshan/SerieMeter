@@ -15,7 +15,7 @@
 
 <style>
 /* Global Styles */
-.bookmarks-body {
+.bm-bookmarks-body {
 	font-family: 'Manrope', sans-serif;
 	background-color: #ffffff;
 	color: #1a1a1a;
@@ -23,14 +23,14 @@
 }
 
 /* Wide container matching the rest of the site */
-.page-container {
+.bm-page-container {
 	max-width: 1200px;
 	margin: 80px auto;
 	padding: 0 30px;
 }
 
 /* Two column layout — left text, right card */
-.main-layout {
+.bm-main-layout {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -38,22 +38,22 @@
 }
 
 /* Left Side */
-.left-side {
+.bm-left-side {
 	flex: 1;
 }
 
-.left-side h1 {
+.bm-left-side h1 {
 	font-size: 64px;
 	font-weight: 800;
 	line-height: 1.05;
 	margin: 0 0 20px 0;
 }
 
-.green-text {
+.bm-green-text {
 	color: #2eab4a;
 }
 
-.left-side .subtitle {
+.bm-left-side .bm-subtitle {
 	font-size: 17px;
 	color: #555;
 	line-height: 1.6;
@@ -62,14 +62,14 @@
 }
 
 /* Buttons row */
-.btn-row {
+.bm-btn-row {
 	display: flex;
 	align-items: center;
 	gap: 16px;
 	margin-bottom: 50px;
 }
 
-.btn {
+.bm-btn {
 	display: inline-flex;
 	align-items: center;
 	gap: 10px;
@@ -81,48 +81,48 @@
 	transition: opacity 0.2s ease, transform 0.15s ease;
 }
 
-.btn:hover {
+.bm-btn:hover {
 	opacity: 0.82;
 	transform: translateY(-2px);
 }
 
-.btn-black {
+.bm-btn-black {
 	background-color: #000000;
 	color: #ffffff;
 }
 
-.btn-green {
+.bm-btn-green {
 	background-color: #2eab4a;
 	color: #ffffff;
 }
 
 /* Login arrow icon inside the button */
-.btn-icon {
+.bm-btn-icon {
 	width: 18px;
 	height: 18px;
 	fill: #ffffff;
 }
 
 /* Cloud Sync feature note below the buttons */
-.feature-note {
+.bm-feature-note {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
 }
 
-.feature-note .note-title {
+.bm-feature-note .bm-note-title {
 	font-size: 15px;
 	font-weight: 700;
 	color: #1a1a1a;
 }
 
-.feature-note .note-desc {
+.bm-feature-note .bm-note-desc {
 	font-size: 14px;
 	color: #777;
 }
 
-/* Right Side Cardrgb(255, 255, 255), 255, 255) */
-.right-card {
+/* Right Side Card */
+.bm-right-card {
 	width: 380px;
 	flex-shrink: 0;
 	border-radius: 20px;
@@ -135,15 +135,14 @@
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
 }
 
-/* Black circle with bookmark icon inside */
-.card-title {
+.bm-card-title {
 	font-size: 26px;
 	font-weight: 700;
 	color: #1a1a1a;
 	margin-bottom: 14px;
 }
 
-.card-desc {
+.bm-card-desc {
 	font-size: 15px;
 	color: #666;
 	line-height: 1.6;
@@ -151,7 +150,7 @@
 	margin-bottom: 50px;
 }
 
-.explore-link {
+.bm-explore-link {
 	font-size: 13px;
 	font-weight: 700;
 	letter-spacing: 1.5px;
@@ -160,7 +159,7 @@
 	text-transform: uppercase;
 }
 
-.explore-link:hover {
+.bm-explore-link:hover {
 	color: #2eab4a;
 	opacity: 0.82;
 	transform: translateY(-2px);
@@ -171,59 +170,53 @@
 
 <body>
 
-	<div class="bookmarks-body">
-		<div class="page-container">
+	<div class="bm-bookmarks-body">
+		<div class="bm-page-container">
 
-			<!-- Main Two-Column Layout -->
-			<div class="main-layout">
+			<div class="bm-main-layout">
 
-				<!-- Left: Hero Text + Buttons + Feature Note -->
-				<div class="left-side">
+				<div class="bm-left-side">
 
 					<h1>
 						Your Personal<br>
-						<span class="green-text">Archive</span>
+						<span class="bm-green-text">Archive</span>
 					</h1>
 
-					<p class="subtitle">Keep track of every cinematic journey. Sign
+					<p class="bm-subtitle">Keep track of every cinematic journey. Sign
 						in to access your curated bookmarks across all your devices.</p>
 
-					<!-- Login and Sign up buttons -->
-					<div class="btn-row">
-						<a href="${pageContext.request.contextPath}/Login" class="btn btn-black"> <img
+					<div class="bm-btn-row">
+						<a href="${pageContext.request.contextPath}/Login" class="bm-btn bm-btn-black"> <img
 							src="assets/icon/login_icon.svg"
 							alt="login logo" style="width: 18px; height: 18px;"> Login
 							to View Bookmarks
-						</a> <a href="${pageContext.request.contextPath}/Register" class="btn btn-green">Sign up</a>
+						</a> <a href="${pageContext.request.contextPath}/Register" class="bm-btn bm-btn-green">Sign up</a>
 					</div>
 
-					<!-- Cloud Sync note -->
-					<div class="feature-note">
+					<div class="bm-feature-note">
 						<img
 							src="assets/icon/cloud_icon.svg"
 							alt="Cloud Sync"
 							style="width: 26px; height: 26px; margin-bottom: 4px;"> <span
-							class="note-title">Cloud Sync</span> <span class="note-desc">Access
+							class="bm-note-title">Cloud Sync</span> <span class="bm-note-desc">Access
 							your lists from anywhere.</span>
 					</div>
 
 				</div>
 
-				<!-- Right: Empty Library Card -->
-				<div class="right-card">
+				<div class="bm-right-card">
 
-					<!-- Black circle with bookmark icon -->
-					<div class="card-icon-circle">
+					<div class="bm-card-icon-circle">
 						<img
 							src="assets/icon/bookmark_icon.svg"
 							alt="Bookmark">
 					</div>
 
-					<h2 class="card-title">Empty Library</h2>
-					<p class="card-desc">Your collection is waiting for its first
+					<h2 class="bm-card-title">Empty Library</h2>
+					<p class="bm-card-desc">Your collection is waiting for its first
 						masterpiece. Discover films to start your archive.</p>
 
-					<a href="${pageContext.request.contextPath}/Explore" class="explore-link">Explore Trending</a>
+					<a href="${pageContext.request.contextPath}/Explore" class="bm-explore-link">Explore Trending</a>
 
 				</div>
 

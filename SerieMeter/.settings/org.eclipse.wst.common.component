@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                         
     
+=======
+                    
+>>>>>>> refs/remotes/origin/avin
     
     
     
     <wb-module deploy-name="SerieMeter">
+<<<<<<< HEAD
                                                 
         
+=======
+                                        
+>>>>>>> refs/remotes/origin/avin
         
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+<<<<<<< HEAD
                                                 
         
+=======
+                                        
+>>>>>>> refs/remotes/origin/avin
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
                                         
         
+=======
+                                
+>>>>>>> refs/remotes/origin/avin
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
                 
@@ -30,24 +47,39 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
                                                 
         
+=======
+                                        
+>>>>>>> refs/remotes/origin/avin
         
         
         
         <property name="context-root" value="SerieMeter"/>
+<<<<<<< HEAD
                                                 
         
+=======
+                                        
+>>>>>>> refs/remotes/origin/avin
         
         
         
         <property name="java-output-path" value="/SerieMeter/target/classes"/>
+<<<<<<< HEAD
                                             
     
+=======
+                                    
+>>>>>>> refs/remotes/origin/avin
     
     
     
     </wb-module>
+<<<<<<< HEAD
                     
 
+=======
+                
+>>>>>>> refs/remotes/origin/avin
 
 
 
