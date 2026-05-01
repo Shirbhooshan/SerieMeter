@@ -397,7 +397,18 @@
 				</div>
 			</header>
 
+<<<<<<< HEAD
+=======
+    <!-- Form Section -->
+        <form action="${pageContext.request.contextPath}/AdminContent" method="POST" enctype="multipart/form-data" class="adm-content-grid">
+            <div class="adm-form-column">
+                <div class="adm-titles">
+                    <h1>Create a cinematic<br>masterpiece</h1>
+                    <p class="adm-subtitle">Fill in the technical details below</p>
+                </div>
+>>>>>>> refs/remotes/origin/Shuvam
 
+<<<<<<< HEAD
 			<!-- Form Section -->
 			<form action="${pageContext.request.contextPath}/AdminContent"
 				method="POST" class="adm-content-grid">
@@ -408,16 +419,55 @@
 						</h1>
 						<p class="adm-subtitle">Fill in the technical details below</p>
 					</div>
+=======
+                <div class="adm-input-group">
+                    <label>Movie Title</label>
+                    <input type="text" name="title" class="adm-form-control" required>
+                </div>
+>>>>>>> refs/remotes/origin/Shuvam
 
+<<<<<<< HEAD
 					<div class="adm-input-group">
 						<label>Movie Title</label> <input type="text" name="movieTitle"
 							class="adm-form-control" required>
 					</div>
+=======
+                <div class="adm-input-group">
+                    <label>Director's Name</label>
+                    <input type="text" name="director" class="adm-form-control" required>
+                </div>
+>>>>>>> refs/remotes/origin/Shuvam
 
+<<<<<<< HEAD
 					<div class="adm-input-group">
 						<label>Director's Name</label> <input type="text"
 							name="directorName" class="adm-form-control" required>
 					</div>
+=======
+                <div class="adm-row-3-cols">
+                    <div class="adm-input-group">
+                        <label>Release Date</label>
+                        <input type="date" name="release_date" class="adm-form-control" required>
+                    </div>
+                    <div class="adm-input-group">
+                        <label>Category</label>
+                        <select name="category_id" class="adm-form-control-category" required>
+                            <option value="" disabled selected></option>
+                            <option value="1">Movie</option>
+                            <option value="2">Series</option>
+                        </select>
+                    </div>
+                    <div class="adm-input-group">
+                        <label>Total Time</label>
+                        <input type="text" name="total_time" class="adm-form-control" required>
+                    </div>
+                </div>
+                <div class="adm-input-group">
+                    <label>Synopsis</label>
+                    <textarea name="description" class="adm-form-control adm-synopsis-box"></textarea>
+                </div>
+            </div>
+>>>>>>> refs/remotes/origin/Shuvam
 
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
@@ -444,6 +494,7 @@
 					</div>
 				</div>
 
+<<<<<<< HEAD
 				<div class="adm-media-column">
 					<div class="adm-media-header">
 						<h4>Visual identity</h4>
@@ -451,6 +502,23 @@
 							Upload high quality poster.<br>Recommended ratio 2:3
 						</p>
 					</div>
+=======
+                <div class="adm-poster-upload-area">
+                    <img src="assets/images/intersteller.jpg" alt="Poster Upload Placeholder">
+                    <!-- 2. Use a file input for media_profile -->
+                    <input type="file" name="media_profile" accept="image/*" required>
+                </div>
+            
+                <div class="adm-input-group adm-genre-group">
+                    <label>Genre</label>
+                    <select name="genre_id" class="adm-form-control-genre" required>
+                        <option value=""></option>
+                        <option value="1">Action</option>
+                        <option value="2">Comedy</option>
+                        <option value="3">Horror</option>
+                    </select>
+                </div>
+>>>>>>> refs/remotes/origin/Shuvam
 
 					<div class="adm-poster-upload-area">
 						<img src="assets/images/intersteller.jpg"
