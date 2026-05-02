@@ -54,13 +54,13 @@
 	height: auto;
 }
 
-.adm-nav-menu {
+.ad-nav-menu {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
 }
 
-.adm-nav-item {
+.ad-nav-item {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -73,32 +73,33 @@
 	transition: all 0.2s ease;
 }
 
-.adm-nav-item.active {
+.ad-nav-item.active {
 	background-color: #4ebc57;
 	color: #1a1a1a;
 	opacity: 0.82;
 }
 
-.adm-nav-item:not(.active):hover {
+.ad-nav-item:not(.active):hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
-.adm-nav-icon {
+.ad-nav-icon {
 	width: 18px;
 	height: 18px;
 	transition: filter 0.2s ease;
 }
 
-.adm-nav-item.active .adm-nav-icon {
+/* Turns the icon black when the navigation item is active */
+.ad-nav-item.active .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
 
-/* Logout Button */
-.adm-logout-container {
+/* Logout Button with hover design */
+.ad-logout-container {
 	padding: 0 5px;
 }
 
-.adm-logout-btn {
+.ad-logout-btn {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -111,17 +112,16 @@
 	transition: all 0.2s ease;
 }
 
-.adm-logout-btn:hover {
+.ad-logout-btn:hover {
 	background-color: #e75a55;
 	color: #1a1a1a;
 	opacity: 0.82;
 	transform: translateY(-2px);
 }
 
-.adm-logout-btn:hover .adm-nav-icon {
+.ad-logout-btn:hover .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
-
 /* Main Content */
 .adm-main-content {
 	flex: 1;
@@ -261,9 +261,8 @@
 	background-size: 12px;
 }
 
-.adm-form-control:focus,
-.adm-form-control-category:focus,
-.adm-form-control-genre:focus {
+.adm-form-control:focus, .adm-form-control-category:focus,
+	.adm-form-control-genre:focus {
 	border: 1px solid #4ebc57;
 	background-color: #ffffff;
 }
@@ -405,6 +404,10 @@
 .adm-publish-btn:hover {
 	background-color: #008000da;
 }
+
+.ad-text-orange {
+	color: #e37329;
+}
 </style>
 <body class="adm-body">
 	<div class="adm-layout-container">
@@ -413,25 +416,35 @@
 		<aside class="adm-sidebar">
 			<div>
 				<div class="adm-logo-container">
-					<a href="${pageContext.request.contextPath}/Explore">
-						<img src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg" alt="Logo">
+					<a href="${pageContext.request.contextPath}/Explore"> <img
+						src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg"
+						alt="Logo">
 					</a>
 				</div>
-				<nav class="adm-nav-menu">
-					<a href="#" class="adm-nav-item">
-						<img src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg" class="adm-nav-icon"> Dashboard
-					</a>
-					<a href="#" class="adm-nav-item active">
-						<img src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg" class="adm-nav-icon"> Content Management
-					</a>
-					<a href="#" class="adm-nav-item">
-						<img src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg" class="adm-nav-icon"> Users
+				<nav class="ad-nav-menu">
+					<a href="${pageContext.request.contextPath}/AdminBoard"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
+						class="ad-nav-icon"> Dashboard
+					</a> <a href="${pageContext.request.contextPath}/AdminContent"
+						class="ad-nav-item active"> <img
+						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
+						class="ad-nav-icon"> Content Management
+					</a> <a href="${pageContext.request.contextPath}/Edit"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
+						class="ad-nav-icon"> Edit
+					</a> <a href="${pageContext.request.contextPath}/Users" class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
+						class="ad-nav-icon"> Users
 					</a>
 				</nav>
 			</div>
-			<div class="adm-logout-container">
-				<a href="${pageContext.request.contextPath}/Logout" class="adm-logout-btn">
-					<img src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg" class="adm-nav-icon"> Logout
+			<div class="ad-logout-container">
+				<a href="${pageContext.request.contextPath}/Logout"
+					class="ad-logout-btn"> <img
+					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
+					class="ad-nav-icon"> Logout
 				</a>
 			</div>
 		</aside>
@@ -439,11 +452,11 @@
 		<!-- Main Content -->
 		<main class="adm-main-content">
 			<header class="adm-page-header">
-				<h3>Add new media</h3>
+				<h3 style="color: black;">Add new media</h3>
 				<div class="adm-header-profile">
 					<div class="adm-header-profile-text">
-						<span class="adm-profile-name">Adams</span>
-						<span class="adm-profile-email">adams234@gmail.com</span>
+						<span class="adm-profile-name">Adams</span> <span
+							class="adm-profile-email">adams234@gmail.com</span>
 					</div>
 					<div class="adm-profile-avatar"></div>
 				</div>
@@ -456,42 +469,46 @@
 				<!-- LEFT COLUMN -->
 				<div class="adm-form-column">
 					<div class="adm-titles">
-						<h1>Create a cinematic<br>masterpiece</h1>
+						<h1>
+							Create a <span class="ad-text-orange">cinematic<br>masterpiece
+							</span>
+						</h1>
 						<p class="adm-subtitle">Fill in the technical details below</p>
 					</div>
 
 					<div class="adm-input-group">
-						<label>Movie Title</label>
-						<input type="text" name="title" class="adm-form-control" required>
+						<label>Movie Title</label> <input type="text" name="title"
+							class="adm-form-control" required>
 					</div>
 
 					<div class="adm-input-group">
-						<label>Director's Name</label>
-						<input type="text" name="directorName" class="adm-form-control" required>
+						<label>Director's Name</label> <input type="text"
+							name="directorName" class="adm-form-control" required>
 					</div>
 
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
-							<label>Release Date</label>
-							<input type="date" name="release_date" class="adm-form-control" required>
+							<label>Release Date</label> <input type="date"
+								name="release_date" class="adm-form-control" required>
 						</div>
 						<div class="adm-input-group">
-							<label>Category</label>
-							<select name="category_id" class="adm-form-control-category" required>
+							<label>Category</label> <select name="category_id"
+								class="adm-form-control-category" required>
 								<option value="" disabled selected></option>
 								<option value="1">Movie</option>
 								<option value="2">Series</option>
 							</select>
 						</div>
 						<div class="adm-input-group">
-							<label>Total Time</label>
-							<input type="text" name="total_time" class="adm-form-control" required>
+							<label>Total Time</label> <input type="text" name="total_time"
+								class="adm-form-control" required>
 						</div>
 					</div>
 
 					<div class="adm-input-group">
 						<label>Synopsis</label>
-						<textarea name="description" class="adm-form-control adm-synopsis-box"></textarea>
+						<textarea name="description"
+							class="adm-form-control adm-synopsis-box"></textarea>
 					</div>
 				</div>
 
@@ -499,7 +516,9 @@
 				<div class="adm-media-column">
 					<div class="adm-media-header">
 						<h4>Visual identity</h4>
-						<p>Upload high quality poster.<br>Recommended ratio 2:3</p>
+						<p>
+							Upload high quality poster.<br>Recommended ratio 2:3
+						</p>
 					</div>
 
 					<div class="adm-poster-upload-area">
@@ -511,23 +530,24 @@
 							</div>
 							<img id="posterImage" src="#" alt="Poster Preview">
 						</div>
-						<input type="file" id="posterFileInput" name="media_profile" accept="image/*" required>
+						<input type="file" id="posterFileInput" name="media_profile"
+							accept="image/*" required>
 					</div>
 
 					<div class="adm-input-group adm-genre-group">
-						<label>Genre</label>
-						<select name="genre_id" class="adm-form-control-genre" required>
-    						<option value=""></option>
-   	 						<option value="1">Action</option>
-    						<option value="2">Comedy</option>
-    						<option value="3">Horror</option>
-    						<option value="4">Drama</option>
-    						<option value="5">Sci-Fi</option>
-    						<option value="6">Thriller</option>
-    						<option value="7">Romance</option>
-    						<option value="8">Animation</option>
-    						<option value="9">Documentary</option>
-    						<option value="10">Crime</option>
+						<label>Genre</label> <select name="genre_id"
+							class="adm-form-control-genre" required>
+							<option value=""></option>
+							<option value="1">Action</option>
+							<option value="2">Comedy</option>
+							<option value="3">Horror</option>
+							<option value="4">Drama</option>
+							<option value="5">Sci-Fi</option>
+							<option value="6">Thriller</option>
+							<option value="7">Romance</option>
+							<option value="8">Animation</option>
+							<option value="9">Documentary</option>
+							<option value="10">Crime</option>
 						</select>
 					</div>
 
@@ -541,23 +561,28 @@
 	</div>
 
 	<script>
-		document.getElementById('posterFileInput').addEventListener('change', function (e) {
-			const file = e.target.files[0];
-			if (!file) return;
+		document.getElementById('posterFileInput').addEventListener(
+				'change',
+				function(e) {
+					const file = e.target.files[0];
+					if (!file)
+						return;
 
-			const reader = new FileReader();
-			reader.onload = function (event) {
-				const img = document.getElementById('posterImage');
-				const placeholder = document.getElementById('uploadPlaceholder');
-				const preview = document.getElementById('posterPreview');
+					const reader = new FileReader();
+					reader.onload = function(event) {
+						const img = document.getElementById('posterImage');
+						const placeholder = document
+								.getElementById('uploadPlaceholder');
+						const preview = document
+								.getElementById('posterPreview');
 
-				img.src = event.target.result;
-				img.style.display = 'block';
-				placeholder.style.display = 'none';
-				preview.style.border = 'none';
-			};
-			reader.readAsDataURL(file);
-		});
+						img.src = event.target.result;
+						img.style.display = 'block';
+						placeholder.style.display = 'none';
+						preview.style.border = 'none';
+					};
+					reader.readAsDataURL(file);
+				});
 	</script>
 </body>
 </html>

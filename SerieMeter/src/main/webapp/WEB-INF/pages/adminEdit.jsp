@@ -360,7 +360,7 @@
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
-					</a> <a href="#" class="ad-nav-item"> <img
+					</a> <a href="${pageContext.request.contextPath}/Users" class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
 						class="ad-nav-icon"> Users
 					</a>

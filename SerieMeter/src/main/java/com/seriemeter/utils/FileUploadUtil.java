@@ -10,35 +10,34 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class FileUploadUtil {
-	
-	public static final String UPLOAD_DIR = "C:/Users/Shuvam/OneDrive/Documents/Seriemeter/images/";
-	public static String getFileExtension(String fileName) {
-		if (fileName == null || !fileName.contains(".")) {
-			return "";
-		}
-		return fileName.substring(fileName.lastIndexOf("."));
-	}
 
-	public static boolean isImage(Part part) {
-		String contentType = part.getContentType();
-		return contentType != null && contentType.startsWith("image/");
-	}
+    public static String getFileExtension(String fileName) {
+        if (fileName == null || !fileName.contains(".")) {
+            return "";
+        }
+        return fileName.substring(fileName.lastIndexOf("."));
+    }
 
-	public static String buildFileName(String identifier, String extension) {
-		return identifier + extension;
-	}
+    public static boolean isImage(Part part) {
+        String contentType = part.getContentType();
+        return contentType != null && contentType.startsWith("image/");
+    }
 
-	public static void saveFile(Part part, String uploadDir, String fileName) throws IOException {
-		Path uploadPath = Paths.get(uploadDir);
+    public static String buildFileName(String identifier, String extension) {
+        return identifier + extension;
+    }
 
-		if (!Files.exists(uploadPath)) {
-			Files.createDirectories(uploadPath);
-		}
+    public static void saveFile(Part part, String uploadDir, String fileName) throws IOException {
+        Path uploadPath = Paths.get(uploadDir);
 
-		Path filePath = uploadPath.resolve(fileName);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
 
-		try (InputStream inputStream = part.getInputStream()) {
-			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-		}
-	}
+        Path filePath = uploadPath.resolve(fileName);
+
+        try (InputStream inputStream = part.getInputStream()) {
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
 }

@@ -7,17 +7,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+
 import java.io.File;
 import java.io.IOException;
-import com.seriemeter.model.MediaModel;
+
 import com.seriemeter.dao.MediaDAO;
+import com.seriemeter.model.MediaModel;
 import com.seriemeter.utils.FileUploadUtil;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/AdminContent" })
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
-    maxFileSize      = 1024 * 1024 * 10,  // 10MB
-    maxRequestSize   = 1024 * 1024 * 50   // 50MB
+    maxFileSize       = 1024 * 1024 * 10, // 10MB
+    maxRequestSize    = 1024 * 1024 * 50  // 50MB
 )
 public class AdminContent extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -29,51 +31,60 @@ public class AdminContent extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp")
-               .forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            // Collect form data — names must match JSP exactly
+            String title       = request.getParameter("title");
+            String director    = request.getParameter("director");
+            String releaseDate = request.getParameter("release_date");
+            String totalTime   = request.getParameter("total_time");
+            String description = request.getParameter("description");
+            int categoryId     = Integer.parseInt(request.getParameter("category_id"));
+            int genreId        = Integer.parseInt(request.getParameter("genre_id"));
 
-        // 1. Collect Form Data
-        String title       = request.getParameter("title");
-        String director    = request.getParameter("directorName"); // ✅ Fixed: matches name="directorName"
-        String releaseDate = request.getParameter("release_date");
-        String totalTime   = request.getParameter("total_time");
-        String description = request.getParameter("description");
-        int categoryId     = Integer.parseInt(request.getParameter("category_id"));
-        int genreId        = Integer.parseInt(request.getParameter("genre_id"));
+            // Handle file upload → saved to media_uploads subfolder
+            Part filePart = request.getPart("media_profile");
+            String fileName = "default_media.jpg";
 
-        // 2. Handle File Upload — saved OUTSIDE the project
-        Part filePart = request.getPart("media_profile");
-        String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
+            if (filePart != null && filePart.getSize() > 0 && FileUploadUtil.isImage(filePart)) {
+                // Filename based on title e.g. "The Dark Knight" → "the_dark_knight.jpg"
+                String extension = FileUploadUtil.getFileExtension(filePart.getSubmittedFileName());
+                fileName = title.trim().toLowerCase().replaceAll("\\s+", "_") + extension;
 
-        // Use the fixed external path from AppConstants
-        File uploadDir = new File(FileUploadUtil.UPLOAD_DIR);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs(); // mkdirs() creates parent folders too if missing
-        }
+                String uploadDir = System.getProperty("user.home") + File.separator
+                        + "seriemeter_uploads" + File.separator + "media_uploads";
 
-        filePart.write(FileUploadUtil.UPLOAD_DIR + fileName);
+                FileUploadUtil.saveFile(filePart, uploadDir, fileName);
+            }
 
-        // 3. Populate Model
-        MediaModel media = new MediaModel();
-        media.setTitle(title);
-        media.setDirector(director);
-        media.setReleaseDate(releaseDate);
-        media.setTotalTime(totalTime);
-        media.setDescription(description);
-        media.setCategoryId(categoryId);
-        media.setGenreId(genreId);
-        media.setMediaProfile(fileName); // Only the filename is stored in DB
+            // Populate model
+            MediaModel media = new MediaModel();
+            media.setTitle(title);
+            media.setDirector(director);
+            media.setReleaseDate(releaseDate);
+            media.setTotalTime(totalTime);
+            media.setDescription(description);
+            media.setCategoryId(categoryId);
+            media.setGenreId(genreId);
+            media.setMediaProfile(fileName); // only filename stored in DB
 
-        // 4. Save to Database
-        int result = mediaDAO.saveMedia(media);
-        if (result > 0) {
-            response.sendRedirect(request.getContextPath() + "/AdminContent?success=true");
-        } else {
-            request.setAttribute("error", "Failed to publish content.");
+            // Save to database
+            int result = mediaDAO.saveMedia(media);
+
+            if (result > 0) {
+                response.sendRedirect(request.getContextPath() + "/AdminContent?success=true");
+            } else {
+                request.setAttribute("error", "Failed to publish. Check Tomcat console.");
+                doGet(request, response);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Exception: " + e.getMessage());
             doGet(request, response);
         }
     }
