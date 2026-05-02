@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.seriemeter.dao;
 
 import java.sql.Connection;
@@ -51,4 +49,3 @@ public class MediaDAO {
         return result;
     }
 }
->>>>>>> refs/remotes/origin/Shuvam

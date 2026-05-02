@@ -10,7 +10,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class FileUploadUtil {
-
+	
+	public static final String UPLOAD_DIR = "C:/Users/Shuvam/OneDrive/Documents/Seriemeter/images/";
 	public static String getFileExtension(String fileName) {
 		if (fileName == null || !fileName.contains(".")) {
 			return "";

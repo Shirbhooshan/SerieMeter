@@ -9,7 +9,6 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
-
 </head>
 <style>
 /* Base Reset */
@@ -21,9 +20,14 @@
 }
 
 .adm-body {
-	min-height: 100vh;
-	overflow: hidden; /* Disables browser-level scrolling */
-	background-color: #000000;
+	font-family: 'Manrope', sans-serif;
+	background-color: #010101;
+	color: #ffffff;
+	margin: 0;
+	padding: 10px;
+	height: 100vh;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .adm-layout-container {
@@ -31,13 +35,14 @@
 	height: 100%;
 	gap: 10px;
 }
+
 /* --- Sidebar Styles --- */
 .adm-sidebar {
-	width: 220px;
+	width: 260px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: 10px 5px;
+	padding: 15px 5px;
 }
 
 .adm-logo-container {
@@ -59,11 +64,11 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	padding: 10px 12px;
+	padding: 12px 15px;
 	text-decoration: none;
 	color: #ffffff;
 	font-weight: 500;
-	font-size: 12px;
+	font-size: 13px;
 	border-radius: 10px;
 	transition: all 0.2s ease;
 }
@@ -84,12 +89,11 @@
 	transition: filter 0.2s ease;
 }
 
-/* Turns the icon black when the navigation item is active */
 .adm-nav-item.active .adm-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
 
-/* Logout Button with hover design */
+/* Logout Button */
 .adm-logout-container {
 	padding: 0 5px;
 }
@@ -120,9 +124,7 @@
 
 /* Main Content */
 .adm-main-content {
-	flex-grow: 0; /*Stops full-width expansion */
-	width: 84%;
-	height: 100vh;
+	flex: 1;
 	border-radius: 16px;
 	background-color: #ffffff;
 	padding: 20px 30px;
@@ -139,14 +141,14 @@
 }
 
 .adm-page-header h3 {
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .adm-header-profile {
 	display: flex;
 	align-items: center;
-	gap: 15px;
+	gap: 10px;
 }
 
 .adm-header-profile-text {
@@ -156,30 +158,32 @@
 }
 
 .adm-profile-name {
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 13px;
+	font-weight: 700;
 	color: #0F172A;
 }
 
 .adm-profile-email {
-	font-size: 14px;
-	color: #0F172A;
+	font-size: 11px;
+	color: #666666;
 }
 
 .adm-profile-avatar {
-	width: 40px;
-	height: 40px;
-	background-color: #f3f6f9;
+	width: 35px;
+	height: 35px;
+	background-color: #e0e0e0;
 	border-radius: 50%;
 }
 
+/* Form Grid */
 .adm-content-grid {
 	display: flex;
 	gap: 30px;
 	justify-content: space-between;
 	align-items: flex-start;
 }
-/* Form Controls */
+
+/* Left Column */
 .adm-form-column {
 	flex: 2;
 	max-width: 650px;
@@ -215,7 +219,6 @@
 	text-transform: uppercase;
 }
 
-/* Input fields */
 .adm-form-control {
 	width: 100%;
 	margin-bottom: 4px;
@@ -235,8 +238,8 @@
 	background-color: #f3f6f9;
 	border: 1px solid transparent;
 	border-radius: 12px;
-	outline: none; /*It removes the default focus outline */
-	appearance: none; /*It removes the default dropdown arrow */
+	outline: none;
+	appearance: none;
 	background-image: url(assets/icon/drop-down.svg);
 	background-repeat: no-repeat;
 	background-position: right 12px center;
@@ -250,20 +253,21 @@
 	background-color: #f3f6f9;
 	border: 1px solid transparent;
 	border-radius: 12px;
-	outline: none; /*It removes the default focus outline */
-	appearance: none; /*It removes the default dropdown arrow */
+	outline: none;
+	appearance: none;
 	background-image: url(assets/icon/drop-down.svg);
 	background-repeat: no-repeat;
 	background-position: right 12px center;
 	background-size: 12px;
 }
 
-.adm-form-control:focus, .adm-form-control-category:focus,
-	.adm-form-control-genre:focus {
+.adm-form-control:focus,
+.adm-form-control-category:focus,
+.adm-form-control-genre:focus {
 	border: 1px solid #4ebc57;
 	background-color: #ffffff;
 }
-/* Layout for 3 side by side input fields */
+
 .adm-row-3-cols {
 	display: flex;
 	gap: 15px;
@@ -271,9 +275,8 @@
 
 .adm-row-3-cols .adm-input-group {
 	flex: 1;
-	/*It allows each input group to take up an equal amount of space */
 }
-/* Textarea */
+
 .adm-synopsis-box {
 	resize: none;
 	min-height: 250px;
@@ -282,9 +285,16 @@
 	background-color: #f3f6f9;
 	border-radius: 12px;
 	border: 1px solid #e0e0e0;
+	font-size: 14px;
+	outline: none;
 }
 
-/* Media column right side */
+.adm-synopsis-box:focus {
+	border: 1px solid #4ebc57;
+	background-color: #ffffff;
+}
+
+/* Right Column */
 .adm-media-column {
 	flex: 1;
 	max-width: 300px;
@@ -307,26 +317,73 @@
 	margin-bottom: 15px;
 }
 
+/* Poster Upload Area */
 .adm-poster-upload-area {
 	width: 100%;
-	display: flex;
-	justify-content: flex-end;
+	margin-bottom: 2px;
 }
 
-.adm-poster-upload-area img {
-	position: relative;
-	/*It prevents the image from overflowing its container */
+.adm-poster-preview {
 	width: 100%;
-	max-width: 320px;
+	height: 380px;
 	border-radius: 16px;
+	background-color: #f3f6f9;
+	border: 2px dashed #d1d5db;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: border-color 0.2s ease, background-color 0.2s ease;
+	position: relative;
 	overflow: hidden;
-	margin-bottom: 2px;
+}
+
+.adm-poster-preview:hover {
+	border-color: #4ebc57;
+	background-color: #f0fdf1;
+}
+
+.adm-poster-preview img#posterImage {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 14px;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.adm-upload-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	pointer-events: none;
+}
+
+.adm-upload-placeholder span {
+	font-size: 13px;
+	font-weight: 600;
+	color: #4ebc57;
+}
+
+.adm-upload-placeholder p {
+	font-size: 11px;
+	color: #9ca3af;
+	margin: 0;
+}
+
+#posterFileInput {
+	display: none;
 }
 
 .adm-genre-group {
 	width: 100%;
 	margin-top: 10px;
 }
+
 /* Publish Button */
 .adm-publish-button-container {
 	display: flex;
@@ -350,36 +407,31 @@
 }
 </style>
 <body class="adm-body">
-	<!-- Layout Container -->
 	<div class="adm-layout-container">
+
 		<!-- Sidebar -->
 		<aside class="adm-sidebar">
 			<div>
 				<div class="adm-logo-container">
-					<a href="${pageContext.request.contextPath}/Explore"> <img
-						src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg"
-						alt="Logo">
+					<a href="${pageContext.request.contextPath}/Explore">
+						<img src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg" alt="Logo">
 					</a>
 				</div>
 				<nav class="adm-nav-menu">
-					<a href="#" class="adm-nav-item"> <img
-						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
-						class="adm-nav-icon"> Dashboard
-					</a> <a href="#" class="adm-nav-item active"> <img
-						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
-						class="adm-nav-icon"> Content Management
-					</a> <a href="#" class="adm-nav-item"> <img
-						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
-						class="adm-nav-icon"> Users
+					<a href="#" class="adm-nav-item">
+						<img src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg" class="adm-nav-icon"> Dashboard
+					</a>
+					<a href="#" class="adm-nav-item active">
+						<img src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg" class="adm-nav-icon"> Content Management
+					</a>
+					<a href="#" class="adm-nav-item">
+						<img src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg" class="adm-nav-icon"> Users
 					</a>
 				</nav>
 			</div>
-
 			<div class="adm-logout-container">
-				<a href="${pageContext.request.contextPath}/Logout"
-					class="adm-logout-btn"> <img
-					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
-					class="adm-nav-icon"> Logout
+				<a href="${pageContext.request.contextPath}/Logout" class="adm-logout-btn">
+					<img src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg" class="adm-nav-icon"> Logout
 				</a>
 			</div>
 		</aside>
@@ -390,148 +442,92 @@
 				<h3>Add new media</h3>
 				<div class="adm-header-profile">
 					<div class="adm-header-profile-text">
-						<span class="adm-profile-name">Adams</span> <span
-							class="adm-profile-email">adams234@gmail.com</span>
+						<span class="adm-profile-name">Adams</span>
+						<span class="adm-profile-email">adams234@gmail.com</span>
 					</div>
 					<div class="adm-profile-avatar"></div>
 				</div>
 			</header>
 
-<<<<<<< HEAD
-=======
-    <!-- Form Section -->
-        <form action="${pageContext.request.contextPath}/AdminContent" method="POST" enctype="multipart/form-data" class="adm-content-grid">
-            <div class="adm-form-column">
-                <div class="adm-titles">
-                    <h1>Create a cinematic<br>masterpiece</h1>
-                    <p class="adm-subtitle">Fill in the technical details below</p>
-                </div>
->>>>>>> refs/remotes/origin/Shuvam
-
-<<<<<<< HEAD
-			<!-- Form Section -->
+			<!-- Form -->
 			<form action="${pageContext.request.contextPath}/AdminContent"
-				method="POST" class="adm-content-grid">
+				method="POST" enctype="multipart/form-data" class="adm-content-grid">
+
+				<!-- LEFT COLUMN -->
 				<div class="adm-form-column">
 					<div class="adm-titles">
-						<h1>
-							Create a cinematic<br>masterpiece
-						</h1>
+						<h1>Create a cinematic<br>masterpiece</h1>
 						<p class="adm-subtitle">Fill in the technical details below</p>
 					</div>
-=======
-                <div class="adm-input-group">
-                    <label>Movie Title</label>
-                    <input type="text" name="title" class="adm-form-control" required>
-                </div>
->>>>>>> refs/remotes/origin/Shuvam
 
-<<<<<<< HEAD
 					<div class="adm-input-group">
-						<label>Movie Title</label> <input type="text" name="movieTitle"
-							class="adm-form-control" required>
+						<label>Movie Title</label>
+						<input type="text" name="title" class="adm-form-control" required>
 					</div>
-=======
-                <div class="adm-input-group">
-                    <label>Director's Name</label>
-                    <input type="text" name="director" class="adm-form-control" required>
-                </div>
->>>>>>> refs/remotes/origin/Shuvam
 
-<<<<<<< HEAD
 					<div class="adm-input-group">
-						<label>Director's Name</label> <input type="text"
-							name="directorName" class="adm-form-control" required>
+						<label>Director's Name</label>
+						<input type="text" name="directorName" class="adm-form-control" required>
 					</div>
-=======
-                <div class="adm-row-3-cols">
-                    <div class="adm-input-group">
-                        <label>Release Date</label>
-                        <input type="date" name="release_date" class="adm-form-control" required>
-                    </div>
-                    <div class="adm-input-group">
-                        <label>Category</label>
-                        <select name="category_id" class="adm-form-control-category" required>
-                            <option value="" disabled selected></option>
-                            <option value="1">Movie</option>
-                            <option value="2">Series</option>
-                        </select>
-                    </div>
-                    <div class="adm-input-group">
-                        <label>Total Time</label>
-                        <input type="text" name="total_time" class="adm-form-control" required>
-                    </div>
-                </div>
-                <div class="adm-input-group">
-                    <label>Synopsis</label>
-                    <textarea name="description" class="adm-form-control adm-synopsis-box"></textarea>
-                </div>
-            </div>
->>>>>>> refs/remotes/origin/Shuvam
 
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
-							<label>Release Date</label> <input type="date" name="releaseDate"
-								class="adm-form-control" required>
+							<label>Release Date</label>
+							<input type="date" name="release_date" class="adm-form-control" required>
 						</div>
 						<div class="adm-input-group">
-							<label>Category</label> <select name="category"
-								class="adm-form-control-category" required>
-								<option value=""></option>
-								<option value="scifi">Sci-Fi</option>
-								<option value="drama">Drama</option>
+							<label>Category</label>
+							<select name="category_id" class="adm-form-control-category" required>
+								<option value="" disabled selected></option>
+								<option value="1">Movie</option>
+								<option value="2">Series</option>
 							</select>
 						</div>
 						<div class="adm-input-group">
-							<label>Total Time</label> <input type="text" name="totalTime"
-								class="adm-form-control" required>
+							<label>Total Time</label>
+							<input type="text" name="total_time" class="adm-form-control" required>
 						</div>
 					</div>
+
 					<div class="adm-input-group">
 						<label>Synopsis</label>
-						<textarea name="synopsis"
-							class="adm-form-control adm-synopsis-box"></textarea>
+						<textarea name="description" class="adm-form-control adm-synopsis-box"></textarea>
 					</div>
 				</div>
 
-<<<<<<< HEAD
+				<!-- RIGHT COLUMN -->
 				<div class="adm-media-column">
 					<div class="adm-media-header">
 						<h4>Visual identity</h4>
-						<p>
-							Upload high quality poster.<br>Recommended ratio 2:3
-						</p>
+						<p>Upload high quality poster.<br>Recommended ratio 2:3</p>
 					</div>
-=======
-                <div class="adm-poster-upload-area">
-                    <img src="assets/images/intersteller.jpg" alt="Poster Upload Placeholder">
-                    <!-- 2. Use a file input for media_profile -->
-                    <input type="file" name="media_profile" accept="image/*" required>
-                </div>
-            
-                <div class="adm-input-group adm-genre-group">
-                    <label>Genre</label>
-                    <select name="genre_id" class="adm-form-control-genre" required>
-                        <option value=""></option>
-                        <option value="1">Action</option>
-                        <option value="2">Comedy</option>
-                        <option value="3">Horror</option>
-                    </select>
-                </div>
->>>>>>> refs/remotes/origin/Shuvam
 
 					<div class="adm-poster-upload-area">
-						<img src="assets/images/intersteller.jpg"
-							alt="Poster Upload Placeholder">
+						<div class="adm-poster-preview" id="posterPreview"
+							onclick="document.getElementById('posterFileInput').click()">
+							<div class="adm-upload-placeholder" id="uploadPlaceholder">
+								<span style="color: #94A3B8;">Drop poster here</span>
+								<p style="color: #94A3B8;">Browse for local files</p>
+							</div>
+							<img id="posterImage" src="#" alt="Poster Preview">
+						</div>
+						<input type="file" id="posterFileInput" name="media_profile" accept="image/*" required>
 					</div>
 
 					<div class="adm-input-group adm-genre-group">
-						<label>Genre</label> <select name="genre"
-							class="adm-form-control-genre" required>
-							<option value=""></option>
-							<option value="action">Action</option>
-							<option value="comedy">Comedy</option>
-							<option value="horror">Horror</option>
+						<label>Genre</label>
+						<select name="genre_id" class="adm-form-control-genre" required>
+    						<option value=""></option>
+   	 						<option value="1">Action</option>
+    						<option value="2">Comedy</option>
+    						<option value="3">Horror</option>
+    						<option value="4">Drama</option>
+    						<option value="5">Sci-Fi</option>
+    						<option value="6">Thriller</option>
+    						<option value="7">Romance</option>
+    						<option value="8">Animation</option>
+    						<option value="9">Documentary</option>
+    						<option value="10">Crime</option>
 						</select>
 					</div>
 
@@ -539,8 +535,29 @@
 						<button type="submit" class="adm-publish-btn">Publish</button>
 					</div>
 				</div>
+
 			</form>
 		</main>
 	</div>
+
+	<script>
+		document.getElementById('posterFileInput').addEventListener('change', function (e) {
+			const file = e.target.files[0];
+			if (!file) return;
+
+			const reader = new FileReader();
+			reader.onload = function (event) {
+				const img = document.getElementById('posterImage');
+				const placeholder = document.getElementById('uploadPlaceholder');
+				const preview = document.getElementById('posterPreview');
+
+				img.src = event.target.result;
+				img.style.display = 'block';
+				placeholder.style.display = 'none';
+				preview.style.border = 'none';
+			};
+			reader.readAsDataURL(file);
+		});
+	</script>
 </body>
 </html>

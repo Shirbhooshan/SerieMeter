@@ -9,15 +9,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.dao.MediaDAO;
+import com.seriemeter.utils.FileUploadUtil;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/AdminContent" })
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-    maxFileSize = 1024 * 1024 * 10,      // 10MB
-    maxRequestSize = 1024 * 1024 * 50    // 50MB
+    fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
+    maxFileSize      = 1024 * 1024 * 10,  // 10MB
+    maxRequestSize   = 1024 * 1024 * 50   // 50MB
 )
 public class AdminContent extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -27,30 +27,35 @@ public class AdminContent extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp")
+               .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1. Collect Form Data
-        String title = request.getParameter("title");
-        String director = request.getParameter("director");
-        String releaseDate = request.getParameter("release_date");
-        String totalTime = request.getParameter("total_time");
-        String description = request.getParameter("description");
-        int categoryId = Integer.parseInt(request.getParameter("category_id"));
-        int genreId = Integer.parseInt(request.getParameter("genre_id"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        // 2. Handle File Upload (Media Profile)
+        // 1. Collect Form Data
+        String title       = request.getParameter("title");
+        String director    = request.getParameter("directorName"); // ✅ Fixed: matches name="directorName"
+        String releaseDate = request.getParameter("release_date");
+        String totalTime   = request.getParameter("total_time");
+        String description = request.getParameter("description");
+        int categoryId     = Integer.parseInt(request.getParameter("category_id"));
+        int genreId        = Integer.parseInt(request.getParameter("genre_id"));
+
+        // 2. Handle File Upload — saved OUTSIDE the project
         Part filePart = request.getPart("media_profile");
         String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName();
-        
-        // Define path to save image (In webapp/assets/images)
-        String uploadPath = getServletContext().getRealPath("") + File.separator + "assets" + File.separator + "images";
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) uploadDir.mkdir();
-        
-        filePart.write(uploadPath + File.separator + fileName);
+
+        // Use the fixed external path from AppConstants
+        File uploadDir = new File(FileUploadUtil.UPLOAD_DIR);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs(); // mkdirs() creates parent folders too if missing
+        }
+
+        filePart.write(FileUploadUtil.UPLOAD_DIR + fileName);
 
         // 3. Populate Model
         MediaModel media = new MediaModel();
@@ -61,11 +66,10 @@ public class AdminContent extends HttpServlet {
         media.setDescription(description);
         media.setCategoryId(categoryId);
         media.setGenreId(genreId);
-        media.setMediaProfile(fileName); // Save filename to DB
+        media.setMediaProfile(fileName); // Only the filename is stored in DB
 
         // 4. Save to Database
         int result = mediaDAO.saveMedia(media);
-
         if (result > 0) {
             response.sendRedirect(request.getContextPath() + "/AdminContent?success=true");
         } else {
