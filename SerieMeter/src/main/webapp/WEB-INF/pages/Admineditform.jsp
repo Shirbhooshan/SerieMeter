@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +14,8 @@
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
 </head>
-
 <style>
+/* Base Reset */
 * {
 	margin: 0;
 	padding: 0;
@@ -24,9 +24,14 @@
 }
 
 .adm-body {
-	min-height: 100vh;
+	font-family: 'Manrope', sans-serif;
+	background-color: #010101;
+	color: #ffffff;
+	margin: 0;
+	padding: 10px;
+	height: 100vh;
+	box-sizing: border-box;
 	overflow: hidden;
-	background-color: #000000;
 }
 
 .adm-layout-container {
@@ -35,13 +40,13 @@
 	gap: 10px;
 }
 
-/* Sidebar */
+/* --- Sidebar Styles --- */
 .adm-sidebar {
-	width: 220px;
+	width: 260px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding: 10px 5px;
+	padding: 15px 5px;
 }
 
 .adm-logo-container {
@@ -53,50 +58,52 @@
 	height: auto;
 }
 
-.adm-nav-menu {
+.ad-nav-menu {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
 }
 
-.adm-nav-item {
+.ad-nav-item {
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	padding: 10px 12px;
+	padding: 12px 15px;
 	text-decoration: none;
 	color: #ffffff;
 	font-weight: 500;
-	font-size: 12px;
+	font-size: 13px;
 	border-radius: 10px;
 	transition: all 0.2s ease;
 }
 
-.adm-nav-item.active {
+.ad-nav-item.active {
 	background-color: #4ebc57;
 	color: #1a1a1a;
 	opacity: 0.82;
 }
 
-.adm-nav-item:not(.active):hover {
+.ad-nav-item:not(.active):hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
-.adm-nav-icon {
+.ad-nav-icon {
 	width: 18px;
 	height: 18px;
 	transition: filter 0.2s ease;
 }
 
-.adm-nav-item.active .adm-nav-icon {
+/* Turns the icon black when the navigation item is active */
+.ad-nav-item.active .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
 
-.adm-logout-container {
+/* Logout Button with hover design */
+.ad-logout-container {
 	padding: 0 5px;
 }
 
-.adm-logout-btn {
+.ad-logout-btn {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -109,22 +116,19 @@
 	transition: all 0.2s ease;
 }
 
-.adm-logout-btn:hover {
+.ad-logout-btn:hover {
 	background-color: #e75a55;
 	color: #1a1a1a;
 	opacity: 0.82;
 	transform: translateY(-2px);
 }
 
-.adm-logout-btn:hover .adm-nav-icon {
+.ad-logout-btn:hover .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
-
 /* Main Content */
 .adm-main-content {
-	flex-grow: 0;
-	width: 84%;
-	height: 100vh;
+	flex: 1;
 	border-radius: 16px;
 	background-color: #ffffff;
 	padding: 20px 30px;
@@ -141,14 +145,14 @@
 }
 
 .adm-page-header h3 {
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .adm-header-profile {
 	display: flex;
 	align-items: center;
-	gap: 15px;
+	gap: 10px;
 }
 
 .adm-header-profile-text {
@@ -158,41 +162,24 @@
 }
 
 .adm-profile-name {
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 13px;
+	font-weight: 700;
 	color: #0F172A;
 }
 
 .adm-profile-email {
-	font-size: 14px;
-	color: #0F172A;
+	font-size: 11px;
+	color: #666666;
 }
 
 .adm-profile-avatar {
-	width: 40px;
-	height: 40px;
-	background-color: #f3f6f9;
+	width: 35px;
+	height: 35px;
+	background-color: #e0e0e0;
 	border-radius: 50%;
-	overflow: hidden;
 }
 
-.adm-profile-avatar img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-/* Error / success messages */
-.adm-error-msg {
-	background: #fdecea;
-	color: #c62828;
-	border: 1px solid #f5c6cb;
-	border-radius: 8px;
-	padding: 10px 16px;
-	font-size: 13px;
-	margin-bottom: 12px;
-}
-
+/* Form Grid */
 .adm-content-grid {
 	display: flex;
 	gap: 30px;
@@ -200,7 +187,7 @@
 	align-items: flex-start;
 }
 
-/* Form column */
+/* Left Column */
 .adm-form-column {
 	flex: 2;
 	max-width: 650px;
@@ -295,16 +282,22 @@
 
 .adm-synopsis-box {
 	resize: none;
-	min-height: 120px;
+	min-height: 250px;
 	width: 100%;
 	padding: 12px;
 	background-color: #f3f6f9;
 	border-radius: 12px;
 	border: 1px solid #e0e0e0;
 	font-size: 14px;
+	outline: none;
 }
 
-/* Media column */
+.adm-synopsis-box:focus {
+	border: 1px solid #4ebc57;
+	background-color: #ffffff;
+}
+
+/* Right Column */
 .adm-media-column {
 	flex: 1;
 	max-width: 300px;
@@ -321,62 +314,90 @@
 
 .adm-media-header p {
 	font-size: 13px;
+	font-weight: 400;
 	color: #0F172A;
 	line-height: 1.5;
-	margin-bottom: 10px;
 }
 
-/* Current poster preview */
+/* Poster Upload Area */
+.adm-poster-upload-area {
+	width: 100%;
+	margin-bottom: 2px;
+}
+
 .adm-poster-preview {
 	width: 100%;
+	height: 380px;
 	border-radius: 16px;
-	overflow: hidden;
-	margin-bottom: 12px;
-}
-
-.adm-poster-preview img {
-	width: 100%;
-	height: 280px;
-	object-fit: cover;
-	border-radius: 16px;
-	display: block;
-}
-
-/* File upload input styling */
-.adm-file-input-label {
-	display: block;
-	font-size: 13px;
-	font-weight: bold;
-	color: #4b5563;
-	margin-bottom: 6px;
-	text-transform: uppercase;
-}
-
-.adm-file-input {
-	width: 100%;
-	padding: 8px;
 	background-color: #f3f6f9;
-	border: 1px dashed #ccc;
-	border-radius: 10px;
-	font-size: 13px;
+	border: 2px dashed #d1d5db;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	cursor: pointer;
-	margin-bottom: 10px;
+	transition: border-color 0.2s ease, background-color 0.2s ease;
+	position: relative;
+	overflow: hidden;
 }
 
-.adm-file-input:hover {
+.adm-poster-preview:hover {
 	border-color: #4ebc57;
+	background-color: #f0fdf1;
+}
+
+.adm-poster-preview img#posterImage {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 14px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.adm-profile-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.adm-upload-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	pointer-events: none;
+}
+
+.adm-upload-placeholder span {
+	font-size: 13px;
+	font-weight: 600;
+	color: #4ebc57;
+}
+
+.adm-upload-placeholder p {
+	font-size: 11px;
+	color: #9ca3af;
+	margin: 0;
+}
+
+#posterFileInput {
+	display: none;
 }
 
 .adm-genre-group {
 	width: 100%;
-	margin-top: 6px;
+	margin-top: 10px;
 }
 
-/* Apply button */
+/* Publish Button */
 .adm-publish-button-container {
 	display: flex;
 	justify-content: flex-end;
-	padding-top: 10px;
+	padding-top: 3px;
 }
 
 .adm-publish-btn {
@@ -391,10 +412,13 @@
 }
 
 .adm-publish-btn:hover {
-	background-color: #006d00;
+	background-color: #008000da;
+}
+
+.ad-text-orange {
+	color: #e37329;
 }
 </style>
-
 <body class="adm-body">
 	<div class="adm-layout-container">
 
@@ -402,29 +426,36 @@
 		<aside class="adm-sidebar">
 			<div>
 				<div class="adm-logo-container">
-					<img
+					<a href="${pageContext.request.contextPath}/Explore"> <img
 						src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg"
 						alt="Logo">
+					</a>
 				</div>
-				<nav class="adm-nav-menu">
-					<a href="#" class="adm-nav-item"> <img
+				<nav class="ad-nav-menu">
+					<a href="${pageContext.request.contextPath}/AdminBoard"
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
-						class="adm-nav-icon"> Dashboard
+						class="ad-nav-icon"> Dashboard
 					</a> <a href="${pageContext.request.contextPath}/AdminContent"
-						class="adm-nav-item active"> <img
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
-						class="adm-nav-icon"> Content Management
-					</a> <a href="#" class="adm-nav-item"> <img
+						class="ad-nav-icon"> Content Management
+					</a> <a href="${pageContext.request.contextPath}/Edit"
+						class="ad-nav-item active"> <img
+						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
+						class="ad-nav-icon"> Edit
+					</a> <a href="${pageContext.request.contextPath}/Users"
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
-						class="adm-nav-icon"> Users
+						class="ad-nav-icon"> Users
 					</a>
 				</nav>
 			</div>
-			<div class="adm-logout-container">
-				<a href="${pageContext.request.contextPath}/Login"
-					class="adm-logout-btn"> <img
+			<div class="ad-logout-container">
+				<a href="${pageContext.request.contextPath}/Logout"
+					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
-					class="adm-nav-icon"> Logout
+					class="ad-nav-icon"> Logout
 				</a>
 			</div>
 		</aside>
@@ -434,7 +465,7 @@
 
 			<!-- Top bar -->
 			<header class="adm-page-header">
-				<h3>Edit media</h3>
+				<h3 style="color: black;">Edit media</h3>
 				<div class="adm-header-profile">
 					<div class="adm-header-profile-text">
 						<%-- From session set by Login servlet --%>
@@ -443,7 +474,7 @@
 					</div>
 					<div class="adm-profile-avatar">
 						<img
-							src="${pageContext.request.contextPath}/assets/images/${sessionScope.user.userProfile}"
+							src="${pageContext.request.contextPath}/getimage?name=${user.userName}&type=user"
 							alt="Avatar" onerror="this.style.display='none'" />
 					</div>
 				</div>
@@ -519,25 +550,31 @@
 						</p>
 					</div>
 
-					<%-- Show current poster if it exists --%>
-					<div class="adm-poster-preview">
-						<c:choose>
-							<c:when test="${not empty editMedia.mediaProfile}">
-								<img
-									src="${pageContext.request.contextPath}/getimage?name=${editMedia.mediaProfile}&type=media"
-									alt="${editMedia.title}" />
-							</c:when>
-							<c:otherwise>
-								<img
-									src="${pageContext.request.contextPath}/assets/images/intersteller.jpg" />
-							</c:otherwise>
-						</c:choose>
+					<label class="adm-file-input-label">Media Poster</label>
+					<div class="adm-poster-upload-area">
+						<div class="adm-poster-preview" id="posterPreview"
+							onclick="document.getElementById('posterFileInput').click()">
+
+							<%-- Placeholder: Only visible if no image exists (handled via CSS/JS) --%>
+							<div class="adm-upload-placeholder" id="uploadPlaceholder"
+								style="${not empty editMedia.mediaProfile ? 'display: none;' : ''}">
+								<span style="color: #94A3B8;">Drop poster here</span>
+								<p style="color: #94A3B8;">Browse for local files</p>
+							</div>
+
+							<%-- Image: Loads session data if available, otherwise defaults --%>
+							<img id="posterImage"
+								src="${pageContext.request.contextPath}/getimage?name=${editMedia.mediaProfile}&type=media"
+								alt="Poster Preview"
+								style="${not empty editMedia.mediaProfile ? 'display: block;' : 'display: none;'}"
+								onerror="this.style.display='none'; document.getElementById('uploadPlaceholder').style.display='flex';">
+						</div>
+
+						<%-- The actual file input --%>
+						<input type="file" id="posterFileInput" name="media_profile"
+							accept="image/*" onchange="previewImage(this)"
+							style="display: none;">
 					</div>
-
-
-					<label class="adm-file-input-label">Upload New Poster
-						(optional)</label> <input type="file" name="posterImage" accept="image/*"
-						class="adm-file-input" />
 
 					<div class="adm-input-group adm-genre-group">
 						<label>Genre</label>
@@ -560,7 +597,27 @@
 				</div>
 
 			</form>
+
 		</main>
 	</div>
+
+	<script>
+		function previewImage(input) {
+			const preview = document.getElementById('posterImage');
+			const placeholder = document.getElementById('uploadPlaceholder');
+
+			if (input.files && input.files[0]) {
+				const reader = new FileReader();
+
+				reader.onload = function(e) {
+					preview.src = e.target.result;
+					preview.style.display = 'block'; // Show the image
+					placeholder.style.display = 'none'; // Hide the text
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
 </body>
 </html>

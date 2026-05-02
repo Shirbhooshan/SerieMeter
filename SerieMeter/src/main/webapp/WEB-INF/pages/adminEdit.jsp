@@ -360,7 +360,8 @@
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
-					</a> <a href="${pageContext.request.contextPath}/Users" class="ad-nav-item"> <img
+					</a> <a href="${pageContext.request.contextPath}/Users"
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
 						class="ad-nav-icon"> Users
 					</a>
@@ -468,43 +469,64 @@
 			<div class="ad-empty-state" id="emptyState" style="display: none;">
 				No media entries yet. Add media from Content Management.</div>
 
-			<!-- Pagination -->
+			<!-- Pagination 
 			<div class="ad-pagination">
 				<a href="#" class="ad-page-num">&lt;</a> <a href="#"
 					class="ad-page-num active">1</a> <a href="#" class="ad-page-num">2</a>
 				<a href="#" class="ad-page-num">3</a> <a href="#"
 					class="ad-page-num">&gt;</a>
+					-->
+
+			<!-- Pagination -->
+			<div class="ad-pagination" id="paginationControls"></div>
 		</main>
 	</div>
-
 	<script>
-		var rowsPerPage = 4;
-		var currentPage = 1;
+	const rowsPerPage = 5; let currentPage = 1; function updateDisplay() {
+	const rows = Array.from(document.querySelectorAll('#tableBody tr'));
+	const totalPages = Math.ceil(rows.length / rowsPerPage); // 1.
+	Hide/Show rows using a single loop rows.forEach((row, i) => { const
+	isVisible = i >= (currentPage - 1) * rowsPerPage && i < currentPage *
+	rowsPerPage; row.style.display = isVisible ? '' : 'none'; }); // 2.
+	Build buttons as a single string (Much faster/cleaner) const container
+	= document.getElementById('paginationControls'); let buttons = `
+	<button onclick="changePage(${currentPage - 1})"
+		${currentPage === 1 ? 'disabled' : ''}>&lt;</button>
+	`; for (let i = 1; i <= totalPages; i++) { buttons += `
+	<button class="${i === currentPage ? 'active' : ''}"
+		onclick="changePage(${i})">${i}</button>
+	`; } buttons += `
+	<button onclick="changePage(${currentPage + 1})"
+		${currentPage === totalPages ? 'disabled' : ''}>&gt;</button>
+	`; container.innerHTML = (totalPages > 1) ? buttons : ''; } function
+	changePage(page) { currentPage = page; updateDisplay(); }
+</script>
+	<script>
+		function filterTable() {
+			// Get the search input value and convert to lowercase
+			const input = document.getElementById("searchInput");
+			const filter = input.value.toLowerCase();
 
-		/* Run on load — check empty state and set up pagination */
-		window.onload = function() {
-			checkEmpty();
-			updateDisplay();
-		};
+			// Get the table body and all rows within it
+			const tbody = document.getElementById("tableBody");
+			const rows = tbody.getElementsByTagName("tr");
 
-		/* Show empty state message if no rows in table */
-		function checkEmpty() {
-			var rows = document.querySelectorAll('#tableBody tr');
-			document.getElementById('emptyState').style.display = rows.length === 0 ? 'block'
-					: 'none';
-		}
+			// Loop through all table rows
+			for (let i = 0; i < rows.length; i++) {
+				// We skip the "No users found" row if it exists
+				if (rows[i].cells.length < 2)
+					continue;
 
-		/* Show only rows for current page, hides the rest */
-		function updateDisplay() {
-			var rows = document.querySelectorAll('#tableBody tr');
-			var start = (currentPage - 1) * rowsPerPage;
-			var end = start + rowsPerPage;
+				// Get the text content of the entire row
+				const rowText = rows[i].textContent || rows[i].innerText;
 
-			rows.forEach(function(row, i) {
-				row.style.display = (i >= start && i < end) ? '' : 'none';
-			});
-
-			rebuildPageNumbers(rows.length);
+				// If the text matches the filter, show it; otherwise, hide it
+				if (rowText.toLowerCase().indexOf(filter) > -1) {
+					rows[i].style.display = "";
+				} else {
+					rows[i].style.display = "none";
+				}
+			}
 		}
 	</script>
 

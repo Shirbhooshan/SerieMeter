@@ -55,7 +55,7 @@ public class MediaDAO {
 
 		List<MediaModel> mediaList = new ArrayList<>();
 
-		String sql = "SELECT * FROM media ORDER BY media_id DESC";
+		String sql = "SELECT * FROM media ORDER BY media_id ASC";
 
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
