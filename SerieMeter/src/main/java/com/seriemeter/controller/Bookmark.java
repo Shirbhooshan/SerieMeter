@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Bookmark
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/bookmark" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/Bookmark" })
 public class Bookmark extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
