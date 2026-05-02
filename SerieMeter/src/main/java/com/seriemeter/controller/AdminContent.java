@@ -1,73 +1,85 @@
 package com.seriemeter.controller;
 
-import com.seriemeter.dao.MovieDAO;
-import com.seriemeter.model.Movie;
+import com.seriemeter.dao.MediaDAO;
+import com.seriemeter.model.MediaModel;
+import com.seriemeter.model.UserModel;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-/**
- * Servlet implementation class AdminContent
- */
+
 @WebServlet(asyncSupported = true, urlPatterns = { "/AdminContent" })
 public class AdminContent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MovieDAO movieDAO;
-	
-	public void init() {
-		//Initialize the DAO when the servlet starts
-		movieDAO = new MovieDAO();
-	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminContent() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	private MediaDAO mediaDAO;
+
+	public void init() {
+		// Initialize the DAO when the servlet starts
+		mediaDAO = new MediaDAO();
+	}
+
+	public AdminContent() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Session check — only admins allowed
+		HttpSession session = request.getSession(false);
+
+		if (session == null || session.getAttribute("user") == null) {
+			response.sendRedirect(request.getContextPath() + "/Login");
+			return;
+		}
+
+		UserModel loggedInUser = (UserModel) session.getAttribute("user");
+
+		if (!loggedInUser.getRole().equals("Admin")) {
+			response.sendRedirect(request.getContextPath() + "/Home");
+			return;
+		}
+
 		request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. Retrieve form parameters using the "name" attributes from jsp
-		
-		String title = request.getParameter("movieTitle");
-		String director = request.getParameter("directorName");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Retrieving form parameters
+		String title       = request.getParameter("movieTitle");
+		String director    = request.getParameter("directorName");
 		String releaseDate = request.getParameter("releaseDate");
-		String category = request.getParameter("category");
-		String totalTime = request.getParameter("totalTime");
-		String synopsis = request.getParameter("synopsis");
-		String genre = request.getParameter("genre");
-		
-		//2 Create a model object
-		Movie newMovie = new Movie(title, director, releaseDate, category, totalTime, synopsis, genre);
-		
-		//3 Save to database using DAO
-		boolean success = movieDAO.insertMovie(newMovie);
-		
-		//4 Redirect or forward based on success
-		if(success) {
-			// set a success message in the session
-			request.setAttribute("message", "Movie added successfully");
-			//Redirect back to the form or a list page
+		String totalTime   = request.getParameter("totalTime");
+		String synopsis    = request.getParameter("synopsis");
+		int categoryId     = Integer.parseInt(request.getParameter("category"));
+		int genreId        = Integer.parseInt(request.getParameter("genre"));
+
+		// Building a MediaModel (replaces the old Movie object)
+		MediaModel newMedia = new MediaModel();
+		newMedia.setTitle(title);
+		newMedia.setDirector(director);
+		newMedia.setReleaseDate(releaseDate);
+		newMedia.setTotalTime(totalTime);
+		newMedia.setDescription(synopsis);
+		newMedia.setCategoryId(categoryId);
+		newMedia.setGenreId(genreId);
+
+		// Saveing to seriemeter database via MediaDAO (replaces old MovieDAO/admin_content)
+		boolean success = mediaDAO.insertMedia(newMedia);
+
+		// Forwarding back with success or error message
+		if (success) {
+			request.setAttribute("message", "Media added successfully");
 			request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp").forward(request, response);
 		} else {
-			request.setAttribute("error", "Failed to add movie. Please try again.");
+			request.setAttribute("error", "Failed to add media. Please try again.");
 			request.getRequestDispatcher("/WEB-INF/pages/adminContent.jsp").forward(request, response);
 		}
 	}
-
 }

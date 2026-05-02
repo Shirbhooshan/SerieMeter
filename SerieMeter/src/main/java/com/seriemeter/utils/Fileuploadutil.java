@@ -10,7 +10,7 @@ import java.nio.file.StandardCopyOption;
 
 /* class for handling poster image uploads.
  */
-public class FileUploadUtil {
+public class Fileuploadutil {
 
     /*
      * getFileExtension() extracts the file extension from a filename.
@@ -49,7 +49,7 @@ public class FileUploadUtil {
         // Builds the full file path: folder + filename
         Path filePath = uploadPath.resolve(fileName);
 
-        // Reasd from the uploaded file and write it to disk
+        // Readsfrom the uploaded file and write it to disk
         // try-with-resources closes the stream automatically
         try (InputStream inputStream = part.getInputStream()) {
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);

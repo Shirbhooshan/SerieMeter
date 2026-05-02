@@ -6,7 +6,7 @@ import java.util.List;
 import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.model.UserModel;
-import com.seriemeter.utils.FileUploadUtil;
+import com.seriemeter.utils.Fileuploadutil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -132,31 +132,33 @@ public class AdminEdit extends HttpServlet {
 			Part filePart = request.getPart("posterImage");
 
 			if (filePart != null && filePart.getSize() > 0) {
-				// checking it's  an image
-				if (FileUploadUtil.isImage(filePart)) {
+				// checking it's an image
+				if (Fileuploadutil.isImage(filePart)) {
 
-					// Building filename useing mediaId so each media has a unique poster
-					String extension = FileUploadUtil.getFileExtension(filePart.getSubmittedFileName());
+					// Building filename using mediaId so each media has a unique poster
+					String extension = Fileuploadutil.getFileExtension(filePart.getSubmittedFileName());
 					posterFileName = "media_" + mediaId + extension;
 
 					// getRealPath gives us the actual folder path inside the deployed webapp
 					String uploadDir = getServletContext().getRealPath("") + java.io.File.separator + UPLOAD_FOLDER;
 
 					// Saving the file to disk
-					FileUploadUtil.saveFile(filePart, uploadDir, posterFileName);
+					Fileuploadutil.saveFile(filePart, uploadDir, posterFileName);
 
 				} else {
-					// if not image 
+					// if not an image — reload the form with error, keep it filled
+					MediaDAO fetchDAO = new MediaDAO();
+					MediaModel existingMedia = fetchDAO.getMediaById(mediaId);
 					request.setAttribute("error", "Invalid file type. Please upload an image.");
 					request.setAttribute("editMedia", existingMedia);
-					request.getRequestDispatcher("/WEB-INF/pages/adminEditForm.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
 					return;
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			// keeping the existing poster and continue
+			// keeping the existing poster and continuing
 		}
 
 		// Putting values into a MediaModel object to pass to DAO
@@ -170,7 +172,8 @@ public class AdminEdit extends HttpServlet {
 		media.setGenreId(genreId);
 		media.setMediaProfile(posterFileName); // new or existing poster filename
 
-		// Calling DAO to run the UPDATE query
+		// Declaring mediaDAO here so it is in scope for the update call
+		MediaDAO mediaDAO = new MediaDAO();
 		boolean success = mediaDAO.updateMedia(media);
 
 		if (success) {
@@ -180,7 +183,7 @@ public class AdminEdit extends HttpServlet {
 			// going back to edit form with error message
 			request.setAttribute("error", "Update failed. Please try again.");
 			request.setAttribute("editMedia", media); // keeping filled form
-			request.getRequestDispatcher("/WEB-INF/pages/adminEditForm.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
 		}
 	}
 }

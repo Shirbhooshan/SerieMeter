@@ -8,20 +8,20 @@ package com.seriemeter.model;
 public class MediaModel {
 
     private int    mediaId;      // media_id  — primary key
-    private String title;        // title
-    private String director;     // director
-    private String releaseDate;  // release_date
-    private String description;  // description (synopsis text)
-    private String mediaProfile; // media_profile (poster image filename)
+    private String title;        
+    private String director;     
+    private String releaseDate;  
+    private String description;  
+    private String mediaProfile; // media poster
+    private String totalTime;    
     private int    categoryId;   // category_id FK category table (1=Movie, 2=Series)
-    private int    genreId;      // genre_id FK  genre table
+    private int    genreId;      
 
     // Default constructor 
     public MediaModel() {}
 
     // Getters and Setters
-    // JSP reads these via EL: ${media.title} calls getTitle()
-
+   
     public int getMediaId() { return mediaId; }
     public void setMediaId(int mediaId) { this.mediaId = mediaId; }
 
@@ -39,6 +39,9 @@ public class MediaModel {
 
     public String getMediaProfile() { return mediaProfile; }
     public void setMediaProfile(String mediaProfile) { this.mediaProfile = mediaProfile; }
+
+    public String getTotalTime() { return totalTime; }
+    public void setTotalTime(String totalTime) { this.totalTime = totalTime; }
 
     public int getCategoryId() { return categoryId; }
     public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
