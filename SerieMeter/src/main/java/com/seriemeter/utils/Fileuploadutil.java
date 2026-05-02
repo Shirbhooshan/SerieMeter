@@ -8,8 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-/* class for handling poster image uploads.
- */
 public class Fileuploadutil {
 
     /*
