@@ -4,6 +4,8 @@ import com.seriemeter.dao.MediaDAO;
 import java.util.List;
 import com.seriemeter.model.MediaModel;
 
+import java.util.List;
+
 public class MediaService {
     
     // Instantiate the DAO to interact with the database
@@ -24,6 +26,14 @@ public class MediaService {
         int result = mediaDAO.saveMedia(media);
         return result > 0;
     }
+<<<<<<< HEAD
+=======
+    
+    // You can add more methods here later, like:
+    // public List<MediaModel> getAllMedia() { ... }
+    // public boolean deleteMedia(int id) { ... }
+    
+>>>>>>> refs/remotes/origin/avin
     public List<MediaModel> getAllMedia() {
         return mediaDAO.getAllMedia();
     }
