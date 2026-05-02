@@ -1,6 +1,7 @@
 package com.seriemeter.service;
 
 import com.seriemeter.dao.MediaDAO;
+import java.util.List;
 import com.seriemeter.model.MediaModel;
 
 public class MediaService {
@@ -23,8 +24,11 @@ public class MediaService {
         int result = mediaDAO.saveMedia(media);
         return result > 0;
     }
-    
-    // You can add more methods here later, like:
-    // public List<MediaModel> getAllMedia() { ... }
-    // public boolean deleteMedia(int id) { ... }
+    public List<MediaModel> getAllMedia() {
+        return mediaDAO.getAllMedia();
+    }
+
+    public boolean deleteMedia(int mediaId) {
+        return mediaDAO.deleteMedia(mediaId);
+    }
 }

@@ -16,6 +16,10 @@ public class MediaModel {
 	private String mediaProfile; // media_profile (poster image filename)
 	private int categoryId; // category_id (FK = category table: 1=Movie, 2=Series)
 	private int genreId; // genre_id (FK = genre table)
+	private String categoryName;
+	private String genreName;
+	private int totalReviews;
+	private double avgRating;
 
 	// Default constructor
 	public MediaModel() {
@@ -93,5 +97,32 @@ public class MediaModel {
 
 	public void setGenreId(int genreId) {
 		this.genreId = genreId;
+	}
+	public String getCategoryName() { 
+		return categoryName; 
+	}
+	public void setCategoryName(String categoryName) { 
+		this.categoryName = categoryName; 
+	}
+
+	public String getGenreName() { 
+		return genreName; 
+	}
+	public void setGenreName(String genreName) { 
+		this.genreName = genreName; 
+	}
+
+	public int getTotalReviews() { 
+		return totalReviews; 
+	}
+	public void setTotalReviews(int totalReviews) { 
+		this.totalReviews = totalReviews; 
+	}
+
+	public double getAvgRating() { 
+		return avgRating; 
+	}
+	public void setAvgRating(double avgRating) { 
+		this.avgRating = avgRating; 
 	}
 }
