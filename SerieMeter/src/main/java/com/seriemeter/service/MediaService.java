@@ -3,6 +3,8 @@ package com.seriemeter.service;
 import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 
+import java.util.List;
+
 public class MediaService {
     
     // Instantiate the DAO to interact with the database
@@ -27,4 +29,12 @@ public class MediaService {
     // You can add more methods here later, like:
     // public List<MediaModel> getAllMedia() { ... }
     // public boolean deleteMedia(int id) { ... }
+    
+    public List<MediaModel> getAllMedia() {
+        return mediaDAO.getAllMedia();
+    }
+
+    public boolean deleteMedia(int mediaId) {
+        return mediaDAO.deleteMedia(mediaId);
+    }
 }
