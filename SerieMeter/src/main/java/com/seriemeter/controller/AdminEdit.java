@@ -1,41 +1,123 @@
 package com.seriemeter.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import com.seriemeter.dao.MediaDAO;
+import com.seriemeter.model.MediaModel;
+import com.seriemeter.utils.FileUploadUtil;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import jakarta.servlet.http.Part;
 
-/**
- * Servlet implementation class AdminEdit
- */
 @WebServlet(asyncSupported = true, urlPatterns = { "/Edit" })
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2,
+    maxFileSize       = 1024 * 1024 * 10,
+    maxRequestSize    = 1024 * 1024 * 50
+)
 public class AdminEdit extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminEdit() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String idParam = request.getParameter("id");
+
+        if (idParam != null) {
+            try {
+                int mediaId = Integer.parseInt(idParam);
+                MediaDAO mediaDAO = new MediaDAO();
+                MediaModel media = mediaDAO.getMediaById(mediaId);
+
+                if (media != null) {
+                    request.setAttribute("editMedia", media);
+                    request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/Edit");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.sendRedirect(request.getContextPath() + "/Edit");
+            }
+        } else {
+            try {
+                MediaDAO mediaDAO = new MediaDAO();
+                List<MediaModel> mediaList = mediaDAO.getAllMedia();
+                request.setAttribute("mediaList", mediaList);
+                request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
+            }
+        }
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        int mediaId      = Integer.parseInt(request.getParameter("mediaId"));
+        String title     = request.getParameter("movieTitle");
+        String director  = request.getParameter("directorName");
+        String release   = request.getParameter("releaseDate");
+        String totalTime = request.getParameter("totalTime");
+        String synopsis  = request.getParameter("synopsis");
+        int categoryId   = Integer.parseInt(request.getParameter("category"));
+        int genreId      = Integer.parseInt(request.getParameter("genre"));
 
+        String posterFileName = request.getParameter("existingPoster");
+
+        try {
+            Part filePart = request.getPart("posterImage");
+
+            if (filePart != null && filePart.getSize() > 0) {
+                if (FileUploadUtil.isImage(filePart)) {
+                    String extension = FileUploadUtil.getFileExtension(filePart.getSubmittedFileName());
+                    posterFileName = title.trim().toLowerCase().replaceAll("\\s+", "_") + extension;
+
+                    // Save to user.home — same as rest of project
+                    String uploadDir = System.getProperty("user.home") + File.separator
+                            + "seriemeter_uploads" + File.separator + "media_uploads";
+                    FileUploadUtil.saveFile(filePart, uploadDir, posterFileName);
+                } else {
+                    MediaModel existingMedia = new MediaDAO().getMediaById(mediaId);
+                    request.setAttribute("error", "Invalid file type. Please upload an image.");
+                    request.setAttribute("editMedia", existingMedia);
+                    request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        MediaModel media = new MediaModel();
+        media.setMediaId(mediaId);
+        media.setTitle(title);
+        media.setDirector(director);
+        media.setReleaseDate(release);
+        media.setTotalTime(totalTime);
+        media.setDescription(synopsis);
+        media.setCategoryId(categoryId);
+        media.setGenreId(genreId);
+        media.setMediaProfile(posterFileName);
+
+        boolean success = new MediaDAO().updateMedia(media);
+
+        if (success) {
+            response.sendRedirect(request.getContextPath() + "/Edit");
+        } else {
+            request.setAttribute("error", "Update failed. Please try again.");
+            request.setAttribute("editMedia", media);
+            request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
+        }
+    }
 }

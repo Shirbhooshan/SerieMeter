@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -249,6 +248,10 @@ body {
 		</form>
 	</div>
 
+    <div class="footer-text">
+        ©2026 SERIEMETER
+    </div>
+
 	<a href="#" class="back-link"> <img
 		src="assets/icon/left-arrow.svg" alt="" style="width: 14px;"> Go
 		Back
@@ -270,6 +273,5 @@ body {
 			}
 		}
 	</script>
-
 </body>
 </html>

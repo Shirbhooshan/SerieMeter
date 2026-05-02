@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -531,7 +531,7 @@
 										<td>
 											<div class="ad-user-id-cell">
 												<img
-													src="${pageContext.request.contextPath}/getimage?name=${u.userName}"
+													src="${pageContext.request.contextPath}/getimage?name=${u.userName}&type=user"
 													alt="avatar" class="ad-user-avatar-small"
 													onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.jpg'">
 												<span>#${u.userId}</span>
