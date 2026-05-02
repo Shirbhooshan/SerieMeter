@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -446,12 +449,12 @@
 				</div>
 			</header>
 
-			
+
 			<c:if test="${not empty error}">
 				<div class="adm-error-msg">${error}</div>
 			</c:if>
 
-			
+
 			<form action="${pageContext.request.contextPath}/Edit" method="POST"
 				enctype="multipart/form-data" class="adm-content-grid">
 
@@ -480,8 +483,12 @@
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
 							<label>Release Date</label> <input type="date" name="releaseDate"
-								class="adm-form-control" value="${editMedia.releaseDate}"
-								required>
+								class="adm-form-control"
+								value="${fn:substring(editMedia.releaseDate, 0, 10)}" required>
+						</div>
+						<div class="adm-input-group">
+							<label>Total Time</label> <input type="text" name="totalTime"
+								class="adm-form-control" value="${editMedia.totalTime}">
 						</div>
 						<div class="adm-input-group">
 							<label>Category</label>
@@ -517,18 +524,17 @@
 						<c:choose>
 							<c:when test="${not empty editMedia.mediaProfile}">
 								<img
-									src="${pageContext.request.contextPath}/assets/images/${editMedia.mediaProfile}"
+									src="${pageContext.request.contextPath}/getimage?name=${editMedia.mediaProfile}"
 									alt="${editMedia.title}" />
 							</c:when>
 							<c:otherwise>
 								<img
-									src="${pageContext.request.contextPath}/assets/images/intersteller.jpg"
-									alt="No poster" />
+									src="${pageContext.request.contextPath}/assets/images/intersteller.jpg" />
 							</c:otherwise>
 						</c:choose>
 					</div>
 
-					
+
 					<label class="adm-file-input-label">Upload New Poster
 						(optional)</label> <input type="file" name="posterImage" accept="image/*"
 						class="adm-file-input" />

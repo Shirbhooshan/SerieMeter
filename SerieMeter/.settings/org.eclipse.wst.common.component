@@ -1,106 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-<<<<<<< HEAD
-                            
+                                
     
-=======
-                        
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+    
     
     
     
     
     <wb-module deploy-name="SerieMeter">
-<<<<<<< HEAD
-                                                        
+                                                                
         
-=======
-                                                
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         
         
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-<<<<<<< HEAD
-                                                        
+                                                                
         
-=======
-                                                
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-<<<<<<< HEAD
-                                                
+                                                        
         
-=======
-                                        
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-<<<<<<< HEAD
-                        
+                                
         
-=======
-                
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
-                        
+                                
         
-=======
-                
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-<<<<<<< HEAD
-                        
+                                
         
-=======
-                
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-<<<<<<< HEAD
-                                                        
+                                                                
         
-=======
-                                                
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         
         
         
         
         <property name="context-root" value="SerieMeter"/>
-<<<<<<< HEAD
-                                                        
+                                                                
         
         
         
         
         
-=======
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+        
         <property name="java-output-path" value="/SerieMeter/target/classes"/>
-<<<<<<< HEAD
-                                                    
+                                                            
     
-=======
-                                            
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+    
     
     
     
     
     </wb-module>
-<<<<<<< HEAD
-                        
+                            
 
-=======
-                    
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+
 
 
 

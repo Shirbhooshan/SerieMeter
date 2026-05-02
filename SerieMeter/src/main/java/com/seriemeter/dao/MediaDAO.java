@@ -2,53 +2,12 @@ package com.seriemeter.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-<<<<<<< HEAD
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import com.seriemeter.model.MediaModel;
-import com.seriemeter.utils.DBconfig;
-
-public class MediaDAO {
-
-    public int saveMedia(MediaModel media) {
-        int result = 0;
-
-        String sql = "INSERT INTO media (title, director, release_date, total_time, description, media_profile, category_id, genre_id) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = DBconfig.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, media.getTitle());
-            ps.setString(2, media.getDirector());
-
-            // Convert "yyyy-MM-dd" string from HTML date input to SQL Timestamp
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date parsed = sdf.parse(media.getReleaseDate());
-            ps.setTimestamp(3, new Timestamp(parsed.getTime()));
-
-            ps.setString(4, media.getTotalTime());
-            ps.setString(5, media.getDescription());
-            ps.setString(6, media.getMediaProfile());
-            ps.setInt(7, media.getCategoryId());
-            ps.setInt(8, media.getGenreId());
-
-            result = ps.executeUpdate();
-            System.out.println("MediaDAO: rows inserted = " + result);
-
-        } catch (Exception e) {
-            System.out.println("MediaDAO ERROR: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-=======
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.seriemeter.model.MediaModel;
@@ -56,28 +15,37 @@ import com.seriemeter.utils.DBconfig;
 
 public class MediaDAO {
 
-	public boolean insertMedia(MediaModel media) {
+	public int saveMedia(MediaModel media) {
+		int result = 0;
 
 		String sql = "INSERT INTO media (title, director, release_date, total_time, description, media_profile, category_id, genre_id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection conn = DBconfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			pst.setString(1, media.getTitle());
-			pst.setString(2, media.getDirector());
-			pst.setDate(3, java.sql.Date.valueOf(media.getReleaseDate()));
-			pst.setString(4, media.getTotalTime());
-			pst.setString(5, media.getDescription());
-			pst.setString(6, media.getMediaProfile());
-			pst.setInt(7, media.getCategoryId());
-			pst.setInt(8, media.getGenreId());
+			ps.setString(1, media.getTitle());
+			ps.setString(2, media.getDirector());
 
-			return pst.executeUpdate() > 0;
+			// Convert "yyyy-MM-dd" string from HTML date input to SQL Timestamp
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsed = sdf.parse(media.getReleaseDate());
+			ps.setTimestamp(3, new Timestamp(parsed.getTime()));
 
-		} catch (SQLException e) {
+			ps.setString(4, media.getTotalTime());
+			ps.setString(5, media.getDescription());
+			ps.setString(6, media.getMediaProfile());
+			ps.setInt(7, media.getCategoryId());
+			ps.setInt(8, media.getGenreId());
+
+			result = ps.executeUpdate();
+			System.out.println("MediaDAO: rows inserted = " + result);
+
+		} catch (Exception e) {
+			System.out.println("MediaDAO ERROR: " + e.getMessage());
 			e.printStackTrace();
-			return false;
 		}
+
+		return result;
 	}
 
 	/*
@@ -146,34 +114,39 @@ public class MediaDAO {
 			e.printStackTrace();
 		}
 
-		return media; // null means not found
+		return media;
 	}
 
 	/*
-	 * updateMedia(MediaModel media) updates an existing row in the media table.
+	 * updateMedia(MediaModel media) updates the existing row in the media table.
 	 */
 	public boolean updateMedia(MediaModel media) {
 
-		String sql = "UPDATE media SET title = ?, director = ?, release_date = ?, "
+		String sql = "UPDATE media SET title = ?, director = ?, release_date = ?, total_time = ?, "
 				+ "description = ?, category_id = ?, genre_id = ?, media_profile = ? " + "WHERE media_id = ?";
 
 		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
 			pst.setString(1, media.getTitle());
 			pst.setString(2, media.getDirector());
-			pst.setDate(3, java.sql.Date.valueOf(media.getReleaseDate()));
-			pst.setString(4, media.getDescription());
-			pst.setInt(5, media.getCategoryId());
-			pst.setInt(6, media.getGenreId());
-			pst.setString(7, media.getMediaProfile());
-			pst.setInt(8, media.getMediaId()); 
 
-			return pst.executeUpdate() > 0; // true = success
+			// release_date comes as "yyyy-MM-dd" from the form input
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsed = sdf.parse(media.getReleaseDate());
+			pst.setTimestamp(3, new Timestamp(parsed.getTime()));
 
-		} catch (SQLException e) {
+			pst.setString(4, media.getTotalTime());
+			pst.setString(5, media.getDescription());
+			pst.setInt(6, media.getCategoryId());
+			pst.setInt(7, media.getGenreId());
+			pst.setString(8, media.getMediaProfile());
+			pst.setInt(9, media.getMediaId());
+
+			return pst.executeUpdate() > 0;
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
->>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
