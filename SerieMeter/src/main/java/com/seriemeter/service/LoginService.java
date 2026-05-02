@@ -43,11 +43,6 @@ public class LoginService {
 			boolean match = PasswordUtil.checkPassword(password, user.getPassword());
 			System.out.println("Does it match? " + match);
 
-			// TEMPORARY HACK FOR TESTING
-			//if (username.equals("testuser") && password.equals("password123")) {
-			//	return "Success";
-			//}
-
 			if (!PasswordUtil.checkPassword(password, user.getPassword())) {
 				return "Password is incorrect";
 			}

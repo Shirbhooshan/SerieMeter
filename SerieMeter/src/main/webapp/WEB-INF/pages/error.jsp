@@ -142,6 +142,8 @@
 </head>
 <body class="er-error-body">
 
+	<%@ include file="/components/navbar.jsp"%>
+
 	<main class="er-main-layout">
 		<div class="er-error-container">
 

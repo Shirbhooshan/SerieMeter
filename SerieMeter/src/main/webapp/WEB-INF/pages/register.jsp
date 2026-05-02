@@ -1,336 +1,459 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored = "false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | SerieMeter</title>
 
-     <!-- Ensures responsiveness on mobile devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up - Seriemeter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-</head>
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
+
 <style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Manrope', sans-serif;
-    overflow: hidden;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Manrope', sans-serif;
 }
 
 body {
-    min-height: 100vh;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-image: url('assets/images/registerBackground.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	overflow: hidden;
+}
+
+/* Scrollable inner layer — background stays pinned */
+.page-scroll {
+	width: 100%;
+	height: 100vh;
+	overflow-y: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	background-image: url('assets/images/registerBackground.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	padding-top: 30px;
+	padding: 40px 16px 60px;
 }
 
-/* Main container for centering content */
-.rg-container {
-    width: 100%;
-    max-width: 480px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 15px;
+/* --- Logo above card (centered) --- */
+.logo-section {
+	text-align: center;
+	margin-bottom: 25px;
+	width: 100%;
 }
 
-/* --- Logo & Header --- */
-.rg-logo-section {
-    text-align: center;
-    margin-bottom: 20px;
+.logo-img {
+	width: 100%;
+	max-width: 220px;
+	height: auto;
+	margin-bottom: 10px;
 }
 
-/* Main logo */
-.rg-logo {
-    height: 30px; 
-    margin-bottom: 6px;
-}
-/* Small icons */
-.rg-logos {
-    height: 14px;
-    width: 14px;
-    margin-right: 5px;
-}
-.rg-right-arrow {
-    height: 14px;
-    width: 14px;
-}
-.rg-left-arrow {
-    height: 14px;
-    width: 14px;
+.tagline {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #555;
+	font-weight: 600;
 }
 
-.rg-subtitle {
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #000000;
+/* --- Card --- */
+.register-card {
+	background: #28282B;
+	padding: 45px 40px;
+	border-radius: 24px;
+	box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+	width: 90%;
+	max-width: 380px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
-/* --- Main Dark Card --- */
-.rg-card {
-    background-color: #28282B;
-    width: 100%;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /*It provides a subtle shadow for depth */
-    color: white;
-    margin-bottom: 15px;
+/* --- Card header text --- */
+.card-header {
+	text-align: left;
+	margin-bottom: 25px;
 }
 
-/* Card header text */
-.rg-card-header {
-    margin-bottom: 15px;
+.card-header h2 {
+	color: white;
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 4px;
 }
 
-.rg-card-header h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 3px;
+.card-header p {
+	color: #999;
+	font-size: 12px;
 }
 
-.rg-card-header p {
-    font-size: 14px;
-    font-weight: 400;
-    color: #b0b0b0;
+/* --- Avatar Upload --- */
+.avatar-group {
+	margin-bottom: 22px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
 }
 
-/* --- Form Fields --- */
-.rg-form-group {
-    margin-bottom: 14px;
+.avatar-group-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #ccc;
+	padding-left: 10px;
+	letter-spacing: 0.5px;
 }
 
-/* Labels for inputs */
-.rg-form-group label {
-    display: block;
-    font-size: 12px;
-    font-weight: 400;
-    margin-bottom: 4px;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.avatar-label {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	width: 90px;
+	height: 90px;
+	align-self: center;
 }
 
-/* Input container with icon */
-.rg-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 30px;
-    padding: 5px 14px;
+.avatar-circle {
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	background-color: #3a3a3a;
+	border: 3px solid #4a4a4a;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
 }
 
-/* Eye icon for password toggle */
-.rg-eye-icon {
+/* Force the black SVG to render white */
+.avatar-circle .user-icon {
+	width: 88px;
+	height: 88px;
+	filter: brightness(0) invert(1);
+	opacity: 0.55;
+	margin-bottom: -10px;
+	flex-shrink: 0;
+}
+
+/* Badge sits OUTSIDE avatar-circle, positioned on the label wrapper */
+.avatar-badge {
 	position: absolute;
-    right: 14px;
-    height: 14px;
-    width: 14px;
-    cursor: pointer;
+	bottom: 0;
+	right: 0;
+	width: 26px;
+	height: 26px;
+	background: #008a00;
+	border-radius: 50%;
+	border: 2px solid #28282B;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	font-weight: 300;
+	color: white;
+	line-height: 1;
 }
 
-.rg-input-wrapper input {
-    border: none;
-    outline: none;
-    width: 100%;
-    padding: 8px 0;
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
-    background: transparent;
+.avatar-hint {
+	font-size: 10px;
+	color: #666;
+	align-self: center;
 }
 
-/* --- Submit Button --- */
-.rg-btn-submit {
-    width: 100%;
-    background-color: #008a00;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin-top: 10px;
+#profileImageInput {
+	display: none;
 }
 
-.rg-btn-submit:hover {
-    background-color: #006b00;
+/* --- Input Groups --- */
+.input-group {
+	text-align: left;
+	margin-bottom: 20px;
 }
 
-/* --- Card Footer Links --- */
-.rg-card-footer {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 11px;
+.input-group label {
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 8px;
+	color: #ccc;
+	padding-left: 10px;
 }
 
-.rg-terms {
-    color: #a0a0a0;
-    margin-bottom: 20px;
-    font-size: 12px;
-    font-weight: 400;
+.input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
-.rg-terms a, .rg-login-link a {
-    color: #008a00;
-    text-decoration: none;
+/* All form icons forced black to show on white inputs */
+.icon-svg {
+	position: absolute;
+	left: 18px;
+	width: 16px;
+	height: 16px;
+	pointer-events: none;
+	filter: brightness(0);
+	opacity: 0.45;
 }
 
-.rg-login-link {
-    color: #d0d0d0;
-    font-size: 14px;
-    font-weight: 400;
+.eye-icon {
+	left: auto;
+	right: 18px;
+	cursor: pointer;
+	pointer-events: all;
 }
 
-/* --- Bottom Page Links --- */
-.rg-back-link {
+.rounded-input {
+	width: 100%;
+	padding: 14px 14px 14px 48px;
+	border-radius: 50px;
+	border: 1px solid #3a3a3a;
+	background: #fafafa;
+	font-size: 14px;
+	outline: none;
+	color: #1a1a1a;
+	transition: all 0.3s ease;
+}
+
+.rounded-input::placeholder {
+	color: #aaa;
+}
+
+.rounded-input:focus {
+	border-color: #008a00;
+	background: #fff;
+	box-shadow: 0 0 0 4px rgba(0, 138, 0, 0.12);
+}
+
+/* --- Button --- */
+.submit-but {
+	width: 100%;
+	padding: 14px;
+	margin-top: 25px;
+	border-radius: 50px;
+	border: none;
+	background-color: #008a00;
+	color: white;
+	font-weight: 700;
+	font-size: 16px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	transition: transform 0.2s, background 0.2s;
+}
+
+.submit-but:hover {
+	background-color: #007000;
+	transform: translateY(-1px);
+}
+
+.submit-but:active {
+	transform: translateY(0px);
+}
+
+.terms-text {
+	font-size: 11px;
+	color: #666;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.terms-text a {
+	color: #34A853;
+	text-decoration: none;
+}
+
+.signup-text {
+	font-size: 13px;
+	color: #666;
 	margin-top: 15px;
-    margin-bottom: 20px;
+	text-align: center;
 }
 
-.rg-back-link a {
-    color: #777;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.signup-link {
+	color: #34A853;
+	text-decoration: none;
+	font-weight: 700;
 }
 
-.rg-back-link a:hover {
-    color: #333;
+.signup-link:hover {
+	color: #2e9649;
+	text-decoration: underline;
 }
 
-footer p {
-    color: #999;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.5px; /*Space for the text*/
+/* --- Below card --- */
+.back-link {
+	color: #333;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 10px;
+	transition: opacity 0.2s;
+}
+
+.back-link:hover {
+	opacity: 0.7;
+}
+
+.footer-text {
+	font-size: 11px;
+	color: #bbb;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	margin-top: 20px;
 }
 </style>
+</head>
 <body>
-    <div class="rg-container">
-        <!-- Logo Section -->
-        <header class="rg-logo-section">
-            <img src="assets/images/Logo.jpg" alt="Seriemeter Logo" class="rg-logo">
-            <p class="rg-subtitle">YOUR DIGITAL ARCHIVE</p>
-        </header>
 
-         <!-- Registration form card -->
-        <div class="rg-card">
-            <div class="rg-card-header">
-                <h2>Begin your journey</h2>
-                <p>Create your profile to start building lists</p>
-            </div>
+	<script>
+		function previewAvatar(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					// Replace the entire avatar-circle content with the preview image
+					var circle = document.querySelector('.avatar-circle');
+					circle.innerHTML = '<img src="'
+							+ e.target.result
+							+ '" '
+							+ 'style="width:100%; height:100%; object-fit:cover; border-radius:50%;">';
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
 
-<<<<<<< HEAD
-            <form action="${pageContext.request.contextPath}/Register" method="POST" class="register-form">
-=======
-            <!-- Form submits data to RegisterServlet -->
-            <form action="RegisterServlet" method="POST">
->>>>>>> refs/remotes/origin/Shuvam
-                
-                <div class="rg-form-group">
-                    <label for="fullName">FULL NAME</label>
-<<<<<<< HEAD
-                    <div class="input-wrapper">
-                        <img src="assets/icon/user.svg" alt="user-logo" class="logos">
-                        <input type="text" id="fullName" name="full_name" placeholder="e.g. John" required>
-=======
-                    <div class="rg-input-wrapper">
-                        <img src="assets/icon/user.svg" alt="user icon" class="rg-logos">
-                        <input type="text" id="fullName" name="fullName" placeholder="Random Name" required>
->>>>>>> refs/remotes/origin/Shuvam
-                    </div>
-                </div>
+	<div class="page-scroll">
 
-                <div class="rg-form-group">
-                    <label for="email">EMAIL ADDRESS</label>
-<<<<<<< HEAD
-                    <div class="input-wrapper">
-                        <img src="assets/icon/envelope.svg" alt="email-logo" class="logos">
-                        <input type="email" id="email" name="email" placeholder="e.g. john@gmail.com" required>
-=======
-                    <div class="rg-input-wrapper">
-                        <img src="assets/icon/envelope.svg" alt="email-logo" class="rg-logos">
-                        <input type="email" id="email" name="email" placeholder="random@gmail.com" required>
->>>>>>> refs/remotes/origin/Shuvam
-                    </div>
-                </div>
+		<%-- Logo — centered above card --%>
+		<div class="logo-section">
+			<img src="assets/images/Logo.jpg" alt="SerieMeter" class="logo-img">
+			<p class="tagline">Your Digital Archive</p>
+		</div>
 
-                <div class="rg-form-group">
-                    <label for="username">USERNAME</label>
-                    <div class="rg-input-wrapper">
-                        <img src="assets/icon/envelope.svg" alt="user-logo" class="rg-logos">
-                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                    </div>
-                </div>
+		<div class="register-card">
 
-                <div class="rg-form-group">
-                    <label for="password">PASSWORD</label>
-                    <div class="rg-input-wrapper">
-                        <img src="assets/icon/lock.svg" alt="lock-logo" class="rg-logos">
-                        <input type="password" id="password" name="password" placeholder="*****" required>
-                       <img src="assets/icon/eye-black.svg" 
-     						alt="toggle-password" 
-     						id="eyeIcon"
-    	 					class="rg-eye-icon" 
-     						onclick="togglePassword()">
-                    </div>
-                </div>
+			<%-- Card heading --%>
+			<div class="card-header">
+				<h2>Begin your journey</h2>
+				<p>Create your profile to start building lists</p>
+			</div>
 
-                  <!-- Submit button -->
-                <button type="submit" class="rg-btn-submit">
-                    Create Account <img src="assets/icon/arrow-right.svg" alt="arrow-logo" class="rg-right-arrow">
-                </button>
-            </form>
+			<form action="${pageContext.request.contextPath}/Register"
+				method="POST" enctype="multipart/form-data">
 
-             <!-- Footer inside card -->
-            <div class="rg-card-footer">
-                <p class="rg-terms">By creating an account, you agree to our <a href="#">Terms</a>.</p>
-                <p class="rg-login-link">Already have a profile? <a href="${pageContext.request.contextPath}/Login">Sign in</a></p>
-            </div>
-        </div>
+				<%-- Avatar Upload --%>
+				<div class="avatar-group">
+					<span class="avatar-group-label">Profile Photo</span> <label
+						class="avatar-label" for="profileImageInput">
+						<div class="avatar-circle">
+							<img src="assets/icon/user.svg" alt="avatar" class="user-icon">
+						</div>
+						<div class="avatar-badge">+</div>
+					</label> <span class="avatar-hint">Click to upload (mandatory)</span> <input
+						type="file" id="profileImageInput" name="user_profile"
+						accept="image/*" onchange="previewAvatar(this)">
+				</div>
 
-        <!-- Back to login -->
-        <div class="rg-back-link">
-            <a href="${pageContext.request.contextPath}/Login"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="rg-left-arrow"> Go Back</a>
-        </div>
+				<%-- Full Name --%>
+				<div class="input-group">
+					<label>Full Name</label>
+					<div class="input-wrapper">
+						<img src="assets/icon/user.svg" alt="" class="icon-svg"> <input
+							type="text" name="full_name" class="rounded-input"
+							placeholder="e.g. John Doe" required autocomplete="off">
+					</div>
+				</div>
 
-         <!-- Footer -->
-        <footer>
-            <p>&copy;2026 SERIEMETER</p>
-        </footer>
-    </div>
+				<div class="input-group">
+					<label>Email Address</label>
+					<div class="input-wrapper">
+						<img src="assets/icon/envelope.svg" alt="" class="icon-svg">
+						<input type="email" name="email" class="rounded-input"
+							placeholder="e.g. john@gmail.com" required autocomplete="off">
+					</div>
+				</div>
 
-     <!-- JavaScript: Toggle password visibility -->
-    <script>
+				<div class="input-group">
+					<label>Username</label>
+					<div class="input-wrapper">
+						<img src="assets/icon/envelope.svg" alt="" class="icon-svg">
+						<input type="text" name="username" class="rounded-input"
+							placeholder="Enter your username" required autocomplete="off">
+					</div>
+				</div>
+
+				<div class="input-group">
+					<label>Password</label>
+					<div class="input-wrapper">
+						<img src="assets/icon/lock.svg" alt="" class="icon-svg"> <input
+							type="password" name="password" id="passInput"
+							class="rounded-input" placeholder="••••••••" required> <img
+							src="assets/icon/eye.svg" alt="Show" class="icon-svg eye-icon"
+							onclick="togglePassword()" id ="eyeIcon">
+					</div>
+				</div>
+
+				<button type="submit" class="submit-but">
+					Create Account <img src="assets/icon/right-arrow-white.svg" alt=""
+						style="width: 16px;">
+				</button>
+
+				<p class="terms-text">
+					By creating an account, you agree to our <a href="#">Terms</a>.
+				</p>
+
+				<p class="signup-text">
+					Already have an account? <a
+						href="${pageContext.request.contextPath}/Login"
+						class="signup-link">Sign in</a>
+				</p>
+
+			</form>
+		</div>
+
+		<a href="${pageContext.request.contextPath}/Login" class="back-link">
+			<img src="assets/icon/left-arrow.svg" alt="" style="width: 14px;">
+			Go Back
+		</a>
+
+		<div class="footer-text">©2026 SERIEMETER</div>
+
+	</div>
+
+	<script>
 		function togglePassword() {
-			var passwordField = document.getElementById("password");
+			var passwordField = document.getElementById("passInput");
 			var eyeIcon = document.getElementById("eyeIcon");
 
 			if (passwordField.type === "password") {
 				passwordField.type = "text";
-				eyeIcon.src = "assets/icon/eye.svg";
+				eyeIcon.src = "assets/icon/eye-black.svg";
 			} else {
 				passwordField.type = "password";
-				eyeIcon.src = "assets/icon/eye-black.svg";
+				eyeIcon.src = "assets/icon/eye.svg";
 			}
 		}
 	</script>
+
 </body>
 </html>

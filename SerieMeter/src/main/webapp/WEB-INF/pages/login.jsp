@@ -156,6 +156,25 @@ body {
 	transform: translateY(0px);
 }
 
+/* --- Sign Up Section --- */
+.signup-text {
+	font-size: 13px;
+	color: #666;
+	margin-top: 25px;
+}
+
+.signup-link {
+	color: #34A853;
+	text-decoration: none;
+	font-weight: 700;
+	transition: color 0.2s;
+}
+
+.signup-link:hover {
+	color: #2e9649;
+	text-decoration: underline;
+}
+
 .back-link {
 	color: #333;
 	font-size: 14px;
@@ -197,10 +216,10 @@ body {
 				</c:if>
 				<label>Username / Email</label>
 				<div class="input-wrapper">
-					<img src="assets/icon/user.svg" alt="" class="icon-svg"> 
-					<input
+					<img src="assets/icon/user.svg" alt="" class="icon-svg"> <input
 						type="text" name="username" class="rounded-input"
-						placeholder="Enter your email" value="${typedUse}" required autocomplete="off">
+						placeholder="Enter your email" value="${typedUse}" required
+						autocomplete="off">
 				</div>
 			</div>
 
@@ -221,6 +240,12 @@ body {
 				Login <img src="assets/icon/right-arrow-white.svg" alt=""
 					style="width: 16px;">
 			</button>
+
+			<p class="signup-text">
+				Don't have an account? <a
+					href="${pageContext.request.contextPath}/Register"
+					class="signup-link">Sign up</a>
+			</p>
 		</form>
 	</div>
 

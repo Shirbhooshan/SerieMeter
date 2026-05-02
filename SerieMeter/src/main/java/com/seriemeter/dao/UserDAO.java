@@ -3,6 +3,9 @@ package com.seriemeter.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.seriemeter.utils.DBconfig;
 import com.seriemeter.utils.PasswordUtil;
 import com.seriemeter.model.UserModel;
@@ -32,13 +35,14 @@ public class UserDAO {
 		return isValid;
 	}
 
-	public void insertUser(String fullName, String username, String email, String passwordHash) throws Exception {
+	public void insertUser(String fullName, String username, String email, String passwordHash, String userProfile)
+			throws Exception {
 
 		// Get the connection from your DBconfig
 		Connection con = DBconfig.getConnection();
 
 		// Prepare the SQL string (matching your Users table)
-		String sql = "INSERT INTO users (full_name, username, email, password_hash, role) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO users (full_name, username, email, password_hash, role, user_profile) VALUES (?, ?, ?, ?, ?, ?)";
 
 		// Create the Prepared Statement
 		PreparedStatement pst = con.prepareStatement(sql);
@@ -49,6 +53,7 @@ public class UserDAO {
 		pst.setString(3, email);
 		pst.setString(4, passwordHash);
 		pst.setString(5, "User"); // Setting default role to 'user'
+		pst.setString(6, userProfile);
 
 		// Execute the update
 		pst.executeUpdate();
@@ -85,5 +90,28 @@ public class UserDAO {
 			}
 		}
 		return user;
+	}
+
+	public List<UserModel> getAllUsers() throws Exception {
+		List<UserModel> users = new ArrayList<>();
+
+		String query = "SELECT * FROM users";
+
+		try (Connection conn = DBconfig.getConnection();
+				PreparedStatement ps = conn.prepareStatement(query);
+				ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+				UserModel user = new UserModel();
+				user.setUserId(rs.getInt("user_id"));
+				user.setFullName(rs.getString("full_name"));
+				user.setEmail(rs.getString("email"));
+				user.setUserName(rs.getString("username"));
+				user.setRole(rs.getString("role"));
+				user.setUserProfile(rs.getString("user_profile"));
+				users.add(user);
+			}
+		}
+		return users;
 	}
 }

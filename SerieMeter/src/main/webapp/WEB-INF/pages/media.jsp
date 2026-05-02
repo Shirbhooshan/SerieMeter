@@ -12,27 +12,27 @@
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
 <style>
-* {
+html, body {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Manrope', sans-serif;
-}
-
-body {
-	background-color: #fff;
-	/* Replace with your background image path */
-	background-image: url('assets/images/details-bg-accents.png');
-	background-size: cover;
-	background-position: center;
+	width: 100%;
 	min-height: 100vh;
-	padding: 60px 8%;
+	background-image: url('assets/images/Title Screen.jpg');
+	background-size: cover;
+	background-position: top right;
+	background-attachment: scroll; background-color : #fff;
+	overflow-x: hidden;
+	font-family: 'Manrope';
+	background-color: #fff;
 }
 
 .container {
 	display: flex;
 	gap: 80px;
 	align-items: flex-start;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 80px 20px 60px 20px;
 }
 
 .left-content {
@@ -42,7 +42,8 @@ body {
 .right-content {
 	flex: 1.2;
 	position: sticky;
-	top: 60px;
+	top: 100px;
+	margin-top: 120px;
 }
 
 /* Header Info */
@@ -83,20 +84,23 @@ body {
 .btn-icon {
 	width: 22px;
 	height: 22px;
+	filter: brightness(0) invert(1);
 }
 
 /* Wider Dark Rating Pill */
 .rating-box {
 	background: #333;
+	background-filter: blur(10px);
 	color: white;
-	padding: 22px 40px;
-	border-radius: 20px;
+	padding: 24px 45px;
+	border-radius: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 320px;
+	width: 340px;
 	margin-left: auto;
-	margin-bottom: 50px;
+	margin-bottom: 60px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .rating-label {
@@ -167,6 +171,7 @@ body {
 	padding: 40px;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 	border: 1px solid #f0f0f0;
+	overflow: hidden;
 }
 
 .review-card h4 {
@@ -192,6 +197,7 @@ body {
 
 .review-textarea {
 	width: 100%;
+	display: block;
 	height: 160px;
 	background-color: #f5f5f5;
 	border: none;
@@ -199,6 +205,7 @@ body {
 	padding: 20px;
 	outline: none;
 	resize: none;
+	box-sizing: border-box;
 }
 
 .post-btn-container {
@@ -220,8 +227,8 @@ body {
 
 .poster-img {
 	width: 100%;
-	border-radius: 8px;
-	box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+	border-radius: 12px;
+	box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 }
 
 /* Interactive Star Rating */
@@ -280,14 +287,14 @@ body {
 					<%-- We will set 'isBookmarked' in the Backend later --%>
 					<c:when test="${isBookmarked == true}">
 						<button class="bookmark-btn remove-state">
-							<img src="assets/icon/bookmark.svg" alt="" class="btn-icon">
-							Remove Bookmark
+							<img src="assets/icon/bookmark-solid-full.svg" alt=""
+								class="btn-icon"> Remove Bookmark
 						</button>
 					</c:when>
 					<c:otherwise>
 						<button class="bookmark-btn">
-							<img src="assets/icon/bookmark.svg" alt="" class="btn-icon">
-							Add to Bookmark
+							<img src="assets/icon/bookmark-solid-full.svg" alt=""
+								class="btn-icon"> Add to Bookmark
 						</button>
 					</c:otherwise>
 				</c:choose>
@@ -358,7 +365,7 @@ body {
 				alt="Movie Poster" class="poster-img">
 		</div>
 	</div>
-	
+
 	<%@ include file="/components/footer.jsp"%>
 
 </body>
