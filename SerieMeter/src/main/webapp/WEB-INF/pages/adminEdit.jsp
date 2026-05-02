@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -433,12 +435,18 @@
 							<td>${media.mediaId}</td>
 							<td>${media.title}</td>
 							<td>${media.categoryId == 1 ? 'Movie' : 'Series'}</td>
-							<td>${media.genreId}</td>
-							<td>${media.releaseDate}</td>
+							<td>${media.genreId == 1 ? 'Action' :
+       media.genreId == 2 ? 'Comedy' :
+       media.genreId == 3 ? 'Horror' :
+       media.genreId == 4 ? 'Drama' :
+       media.genreId == 5 ? 'Sci-Fi' :
+       media.genreId == 6 ? 'Thriller' :
+       'Romance'}</td>
+							<td>${fn:substring(media.releaseDate, 0, 10)}</td>
 							<td><c:choose>
 									<c:when test="${not empty media.mediaProfile}">
 										<img class="ad-cover-thumb"
-											src="${pageContext.request.contextPath}/assets/images/${media.mediaProfile}"
+											src="${pageContext.request.contextPath}/assets/images/${media.mediaProfile}&type=media"
 											alt="${media.title}" />
 									</c:when>
 									<c:otherwise>

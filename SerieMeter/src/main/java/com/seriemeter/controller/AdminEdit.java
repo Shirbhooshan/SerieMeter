@@ -84,7 +84,8 @@ public class AdminEdit extends HttpServlet {
                     posterFileName = title.trim().toLowerCase().replaceAll("\\s+", "_") + extension;
 
                     // Save to user.home — same as rest of project
-                    String uploadDir = System.getProperty("user.home") + File.separator + "seriemeter_uploads";
+                    String uploadDir = System.getProperty("user.home") + File.separator
+                            + "seriemeter_uploads" + File.separator + "media_uploads";
                     FileUploadUtil.saveFile(filePart, uploadDir, posterFileName);
                 } else {
                     MediaModel existingMedia = new MediaDAO().getMediaById(mediaId);

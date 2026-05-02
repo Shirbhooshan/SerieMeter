@@ -59,7 +59,8 @@ public class Register extends HttpServlet {
 			Part profilePart = request.getPart("user_profile");
 
 			// Upload to root direcory
-			String uploadDir = System.getProperty("user.home") + java.io.File.separator + "seriemeter_uploads";
+			String uploadDir = System.getProperty("user.home") + java.io.File.separator + "seriemeter_uploads"
+					+ java.io.File.separator + "user_uploads";
 
 			// Call service to register
 			service.registerNewUser(fullName, username, email, password, profilePart, uploadDir);

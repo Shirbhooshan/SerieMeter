@@ -524,7 +524,7 @@
 						<c:choose>
 							<c:when test="${not empty editMedia.mediaProfile}">
 								<img
-									src="${pageContext.request.contextPath}/getimage?name=${editMedia.mediaProfile}"
+									src="${pageContext.request.contextPath}/getimage?name=${editMedia.mediaProfile}&type=media"
 									alt="${editMedia.title}" />
 							</c:when>
 							<c:otherwise>

@@ -61,7 +61,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <a href="${pageContext.request.contextPath}/UserProfile" class="sm_navbar__profile">
-                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}"
+                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
                              alt="Profile"
                              class="sm_navbar__profile_pic"
                              onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
