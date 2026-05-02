@@ -2,16 +2,6 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<<<<<<< HEAD
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-=======
->>>>>>> refs/heads/Shirbhooshan
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -258,11 +248,10 @@ body {
 		</form>
 	</div>
 
-<<<<<<< HEAD
     <div class="footer-text">
         ©2026 SERIEMETER
     </div>
-=======
+
 	<a href="#" class="back-link"> <img
 		src="assets/icon/left-arrow.svg" alt="" style="width: 14px;"> Go
 		Back
@@ -284,7 +273,5 @@ body {
 			}
 		}
 	</script>
-
->>>>>>> refs/heads/Shirbhooshan
 </body>
 </html>
