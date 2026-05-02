@@ -234,6 +234,8 @@ body {
 				</div>
 				<a href="#" class="forgot-password">Forgot password?</a>
 			</div>
+			
+			<input type="checkbox" name="rememberMe"> Remember Me
 
 			<button type="submit" class="login-but">
 				Login <img src="assets/icon/right-arrow-white.svg" alt=""

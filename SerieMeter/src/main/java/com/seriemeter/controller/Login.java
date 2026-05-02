@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import com.seriemeter.dao.UserDAO;
+import com.seriemeter.model.UserModel;
 import com.seriemeter.service.LoginService;
 
 /**
@@ -51,10 +52,24 @@ public class Login extends HttpServlet {
 		String status = loginService.authenticate(username, password);
 
 		if (status.equals("Success")) {
-			UserDAO user = new UserDAO();
+			UserDAO userDAO = new UserDAO();
 			HttpSession session = request.getSession();
+			
 			try {
-				session.setAttribute("user", user.getUserByUsername(username));
+				// Fetch user object
+				UserModel user = userDAO.getUserByUsername(username);
+				
+				// Store in session
+				session.setAttribute("user", user);
+				
+				// Role-based Redirection
+	            String contextPath = request.getContextPath();
+	            if (user != null && "Admin".equalsIgnoreCase(user.getRole())) {
+	                response.sendRedirect(contextPath + "/Dashboard");
+	            } else {
+	                response.sendRedirect(contextPath + "/Explore");
+	            }
+	            return;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
