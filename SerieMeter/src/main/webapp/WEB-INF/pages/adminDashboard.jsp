@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,7 +129,7 @@ body {
 	padding: 20px 30px;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+	overflow-y: auto;
 }
 
 .ad-top-header {
@@ -324,7 +326,34 @@ body {
 	transition: opacity 0.5s ease;
 }
 
-<<<<<<< HEAD
+.ad-msg-error {
+	color: red;
+	font-size: 12px;
+	margin-bottom: 8px;
+	background: white;
+	transition: opacity 0.5s ease;
+}
+
+.ad-delete-form {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	background: white;
+}
+
+.ad-delete-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+</style>
+</head>
+<body>
+
+	<div class="ad-layout-container">
+
+		<!-- Sidebar -->
 		<aside class="ad-sidebar">
 			<div>
 				<div class="ad-logo-container">
@@ -333,7 +362,7 @@ body {
 						alt="Logo">
 				</div>
 				<nav class="ad-nav-menu">
-					<a href="${pageContext.request.contextPath}/AdminBoard"
+					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
@@ -352,17 +381,6 @@ body {
 					</a>
 				</nav>
 			</div>
-=======
-.ad-msg-error {
-	color: red;
-	font-size: 12px;
-	margin-bottom: 8px;
-	background: white;
-	transition: opacity 0.5s ease;
-}
->>>>>>> refs/remotes/origin/avin
-
-<<<<<<< HEAD
 			<div class="ad-logout-container">
 				<a href="${pageContext.request.contextPath}/Logout"
 					class="ad-logout-btn"> <img
@@ -372,18 +390,14 @@ body {
 			</div>
 		</aside>
 
+		<!-- Main Content -->
 		<main class="ad-main-content">
+
 			<header class="ad-top-header">
 				<h2 class="ad-header-title">View medias</h2>
-				<div class="ad-profile-section">
-					<div class="ad-profile-info">
-						<p class="ad-profile-name">Adams</p>
-						<p class="ad-profile-email">adams234@gmail.com</p>
-					</div>
-					<label for="pfp" class="ad-profile-pic-label"> <input
-						type="file" id="pfp" style="display: none">
-					</label>
-				</div>
+
+				<!-- Only render this section if a user session exists -->
+				<%@ include file="/components/adminHeader.jsp"%>
 			</header>
 
 			<h1 class="ad-section-title">
@@ -391,19 +405,36 @@ body {
 			</h1>
 			<p class="ad-section-subtitle">View all the added medias here</p>
 
-			<div class="ad-controls">
-				<select class="ad-sort-dropdown">
-					<option>Sort by Date</option>
-				</select>
+			<!-- Success / Error Messages -->
+			<c:if test="${not empty message}">
+				<p class="ad-msg-success" id="successMsg">
+					<c:out value="${message}" />
+				</p>
+			</c:if>
+			<c:if test="${not empty error}">
+				<p class="ad-msg-error" id="errorMsg">
+					<c:out value="${error}" />
+				</p>
+			</c:if>
 
+			<!-- Search & Sort Controls -->
+			<div class="ad-controls">
+				<select id="sortDropdown" class="ad-sort-dropdown"
+					onchange="sortTable()">
+					<option value="default">Sort by Date</option>
+					<option value="newest">Newest First</option>
+					<option value="oldest">Oldest First</option>
+				</select>
 				<div class="ad-search-wrapper">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search-ad-icon.svg"
 						class="ad-search-icon" alt="Search"> <input type="text"
-						class="ad-search-box" placeholder="Search for medias">
+						id="searchInput" class="ad-search-box"
+						placeholder="Search for medias" onkeyup="filterTable()">
 				</div>
 			</div>
 
+			<!-- Media Table -->
 			<table class="ad-table">
 				<thead>
 					<tr>
@@ -412,196 +443,65 @@ body {
 						<th>Category</th>
 						<th>Genre</th>
 						<th>Added Date</th>
-						<th>Total Review</th>
+						<th>Average Rating</th>
 						<th style="width: 60px">Action</th>
 					</tr>
 				</thead>
-				<tbody>
-					<%
-					for (int i = 1; i <= 8; i++) {
-					%>
-					<tr>
-						<td>#<%=i%></td>
-						<td>Beauty and the Beast</td>
-						<td>Movie</td>
-						<td>Romance</td>
-						<td>2026-4-15</td>
-						<td><div class="ad-rating">
-								8.5 <img
-									src="${pageContext.request.contextPath}/assets/icon/star-ad-icon.svg"
-									class="ad-star-icon">
-							</div></td>
-						<td><button
-								style="background: none; border: none; cursor: pointer">
-								<img
-									src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
-									class="ad-delete-icon">
-							</button></td>
-					</tr>
-					<%
-					}
-					%>
+				<tbody id="userTableBody">
+					<c:choose>
+						<c:when test="${not empty mediaList}">
+							<c:forEach var="media" items="${mediaList}">
+								<tr>
+									<td>#<c:out value="${media.mediaId}" /></td>
+									<td><c:out value="${media.title}" /></td>
+									<td>${media.categoryId == 1 ? 'Movie' : 'Series'}</td>
+									<td>${media.genreId == 1 ? 'Action' :
+                         media.genreId == 2 ? 'Comedy' :
+                         media.genreId == 3 ? 'Horror' :
+                         media.genreId == 4 ? 'Drama' :
+                         media.genreId == 5 ? 'Sci-Fi' :
+                         media.genreId == 6 ? 'Thriller' : 'Romance'}</td>
+									<td>${fn:substring(media.releaseDate, 0, 10)}</td>
+									<td>-</td>
+									<td>
+										<form class="ad-delete-form"
+											action="${pageContext.request.contextPath}/Dashboard"
+											method="post">
+											<input type="hidden" name="action" value="delete"> <input
+												type="hidden" name="mediaId" value="${media.mediaId}">
+											<button type="submit" class="ad-delete-btn">
+												<img
+													src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
+													class="ad-delete-icon">
+											</button>
+										</form>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="7"
+									style="text-align: center; padding: 20px; color: #999;">
+									No media found.</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 
+			<!-- Pagination (static placeholder) -->
 			<div class="ad-pagination">
 				<a href="#" class="ad-page-num">&lt;</a> <a href="#"
 					class="ad-page-num active">1</a> <a href="#" class="ad-page-num">2</a>
 				<a href="#" class="ad-page-num">3</a> <a href="#"
 					class="ad-page-num">&gt;</a>
 			</div>
+
 		</main>
 	</div>
-=======
-.ad-delete-form {
-	margin: 0;
-	padding: 0;
-	display: inline;
-	background: white;
-}
 
-.ad-delete-btn {
-	background: none;
-	border: none;
-	cursor: pointer;
-	padding: 0;
-}
-</style>
-</head>
-<body>
-
-<div class="ad-layout-container">
-
-	<!-- Sidebar -->
-	<aside class="ad-sidebar">
-		<div>
-			<div class="ad-logo-container">
-				<img src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg" alt="Logo">
-			</div>
-			<nav class="ad-nav-menu">
-				<a href="${pageContext.request.contextPath}/AdminDashboard" class="ad-nav-item active">
-					<img src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg" class="ad-nav-icon"> Dashboard
-				</a>
-				<a href="#" class="ad-nav-item">
-					<img src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg" class="ad-nav-icon"> Content Management
-				</a>
-				<a href="#" class="ad-nav-item">
-					<img src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg" class="ad-nav-icon"> Users
-				</a>
-			</nav>
-		</div>
-		<div class="ad-logout-container">
-			<a href="${pageContext.request.contextPath}/Logout" class="ad-logout-btn">
-				<img src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg" class="ad-nav-icon"> Logout
-			</a>
-		</div>
-	</aside>
-
-	<!-- Main Content -->
-	<main class="ad-main-content">
-
-		<header class="ad-top-header">
-			<h2 class="ad-header-title">View medias</h2>
-			<div class="ad-profile-section">
-				<div class="ad-profile-info">
-					<p class="ad-profile-name"><c:out value="${loggedInUser.fullName}" /></p>
-					<p class="ad-profile-email"><c:out value="${loggedInUser.email}" /></p>
-				</div>
-				<label for="pfp" class="ad-profile-pic-label">
-					<input type="file" id="pfp" style="display:none">
-				</label>
-			</div>
-		</header>
-
-		<h1 class="ad-section-title">Added <span class="ad-text-orange">medias</span></h1>
-		<p class="ad-section-subtitle">View all the added medias here</p>
-
-		<!-- Success / Error Messages -->
-		<c:if test="${not empty message}">
-			<p class="ad-msg-success" id="successMsg"><c:out value="${message}" /></p>
-		</c:if>
-		<c:if test="${not empty error}">
-			<p class="ad-msg-error" id="errorMsg"><c:out value="${error}" /></p>
-		</c:if>
-
-		<!-- Search & Sort Controls -->
-		<div class="ad-controls">
-			<select id="sortDropdown" class="ad-sort-dropdown" onchange="sortTable()">
-				<option value="default">Sort by Date</option>
-				<option value="newest">Newest First</option>
-				<option value="oldest">Oldest First</option>
-			</select>
-			<div class="ad-search-wrapper">
-				<img src="${pageContext.request.contextPath}/assets/icon/search-ad-icon.svg" class="ad-search-icon" alt="Search">
-				<input type="text" id="searchInput" class="ad-search-box" placeholder="Search for medias" onkeyup="filterTable()">
-			</div>
-		</div>
-
-		<!-- Media Table -->
-		<table class="ad-table">
-			<thead>
-				<tr>
-					<th style="width: 40px">ID</th>
-					<th>Name</th>
-					<th>Category</th>
-					<th>Genre</th>
-					<th>Added Date</th>
-					<th>Average Rating</th>
-					<th style="width: 60px">Action</th>
-				</tr>
-			</thead>
-			<tbody id="userTableBody">
-				<c:choose>
-					<c:when test="${not empty mediaList}">
-						<c:forEach var="media" items="${mediaList}">
-							<tr>
-								<td>#<c:out value="${media.mediaId}" /></td>
-								<td><c:out value="${media.title}" /></td>
-								<td><c:out value="${media.categoryName}" /></td>
-								<td><c:out value="${media.genreName}" /></td>
-								<td><c:out value="${media.releaseDate}" /></td>
-								<td>
-									<div class="ad-rating">
-										<c:out value="${media.avgRating}" />
-										<img src="${pageContext.request.contextPath}/assets/icon/star-ad-icon.svg" class="ad-star-icon">
-									</div>
-								</td>
-								<td>
-									<form class="ad-delete-form" action="${pageContext.request.contextPath}/AdminDashboard" method="post">
-										<input type="hidden" name="action" value="delete">
-										<input type="hidden" name="mediaId" value="${media.mediaId}">
-										<button type="submit" class="ad-delete-btn">
-											<img src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg" class="ad-delete-icon">
-										</button>
-									</form>
-								</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="7" style="text-align:center; padding: 20px; color: #999;">
-								No media found.
-							</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
-
-		<!-- Pagination (static placeholder) -->
-		<div class="ad-pagination">
-			<a href="#" class="ad-page-num">&lt;</a>
-			<a href="#" class="ad-page-num active">1</a>
-			<a href="#" class="ad-page-num">2</a>
-			<a href="#" class="ad-page-num">3</a>
-			<a href="#" class="ad-page-num">&gt;</a>
-		</div>
-
-	</main>
-</div>
-
-<script>
+	<script>
 	// ---------- Auto-hide messages after 5 seconds ----------
 	document.addEventListener("DOMContentLoaded", function() {
 		const successMsg = document.getElementById("successMsg");
@@ -675,6 +575,5 @@ body {
 	}
 </script>
 
->>>>>>> refs/remotes/origin/avin
 </body>
 </html>

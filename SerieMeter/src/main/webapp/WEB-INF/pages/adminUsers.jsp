@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -452,7 +452,7 @@
 					</a>
 				</div>
 				<nav class="ad-nav-menu">
-					<a href="${pageContext.request.contextPath}/AdminBoard"
+					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
@@ -464,7 +464,8 @@
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
-					</a> <a href="${pageContext.request.contextPath}/Users" class="ad-nav-item active"> <img
+					</a> <a href="${pageContext.request.contextPath}/Users"
+						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
 						class="ad-nav-icon"> Users
 					</a>
@@ -483,15 +484,10 @@
 		<main class="ad-main-content">
 			<header class="ad-top-header">
 				<h2 class="ad-header-title">View Users</h2>
-				<div class="ad-profile-section">
-					<div class="ad-profile-info">
-						<p class="ad-profile-name">Adams</p>
-						<p class="ad-profile-email">adams234@gmail.com</p>
-					</div>
-					<label for="pfp" class="ad-profile-pic-label"> <input
-						type="file" id="pfp" style="display: none">
-					</label>
-				</div>
+
+				<!-- Only render this section if a user session exists -->
+				<%@ include file="/components/adminHeader.jsp"%>
+
 			</header>
 
 			<h1 class="ad-section-title">

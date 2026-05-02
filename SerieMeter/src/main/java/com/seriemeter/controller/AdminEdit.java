@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
+import com.seriemeter.model.UserModel;
 import com.seriemeter.utils.FileUploadUtil;
 
 import jakarta.servlet.ServletException;
@@ -14,110 +15,112 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/Edit" })
-@MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 2,
-    maxFileSize       = 1024 * 1024 * 10,
-    maxRequestSize    = 1024 * 1024 * 50
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class AdminEdit extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        String idParam = request.getParameter("id");
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("user") != null) {
+			request.setAttribute("loggedInUser", (UserModel) session.getAttribute("user"));
+		}
 
-        if (idParam != null) {
-            try {
-                int mediaId = Integer.parseInt(idParam);
-                MediaDAO mediaDAO = new MediaDAO();
-                MediaModel media = mediaDAO.getMediaById(mediaId);
+		String idParam = request.getParameter("id");
 
-                if (media != null) {
-                    request.setAttribute("editMedia", media);
-                    request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/Edit");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.sendRedirect(request.getContextPath() + "/Edit");
-            }
-        } else {
-            try {
-                MediaDAO mediaDAO = new MediaDAO();
-                List<MediaModel> mediaList = mediaDAO.getAllMedia();
-                request.setAttribute("mediaList", mediaList);
-                request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-                request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
-            }
-        }
-    }
+		if (idParam != null) {
+			try {
+				int mediaId = Integer.parseInt(idParam);
+				MediaDAO mediaDAO = new MediaDAO();
+				MediaModel media = mediaDAO.getMediaById(mediaId);
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+				if (media != null) {
+					request.setAttribute("editMedia", media);
+					request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
+				} else {
+					response.sendRedirect(request.getContextPath() + "/Edit");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect(request.getContextPath() + "/Edit");
+			}
+		} else {
+			try {
+				MediaDAO mediaDAO = new MediaDAO();
+				List<MediaModel> mediaList = mediaDAO.getAllMedia();
+				request.setAttribute("mediaList", mediaList);
+				request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
+			}
+		}
+	}
 
-        int mediaId      = Integer.parseInt(request.getParameter("mediaId"));
-        String title     = request.getParameter("movieTitle");
-        String director  = request.getParameter("directorName");
-        String release   = request.getParameter("releaseDate");
-        String totalTime = request.getParameter("totalTime");
-        String synopsis  = request.getParameter("synopsis");
-        int categoryId   = Integer.parseInt(request.getParameter("category"));
-        int genreId      = Integer.parseInt(request.getParameter("genre"));
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        String posterFileName = request.getParameter("existingPoster");
+		int mediaId = Integer.parseInt(request.getParameter("mediaId"));
+		String title = request.getParameter("movieTitle");
+		String director = request.getParameter("directorName");
+		String release = request.getParameter("releaseDate");
+		String totalTime = request.getParameter("totalTime");
+		String synopsis = request.getParameter("synopsis");
+		int categoryId = Integer.parseInt(request.getParameter("category"));
+		int genreId = Integer.parseInt(request.getParameter("genre"));
 
-        try {
-            Part filePart = request.getPart("posterImage");
+		String posterFileName = request.getParameter("existingPoster");
 
-            if (filePart != null && filePart.getSize() > 0) {
-                if (FileUploadUtil.isImage(filePart)) {
-                    String extension = FileUploadUtil.getFileExtension(filePart.getSubmittedFileName());
-                    posterFileName = title.trim().toLowerCase().replaceAll("\\s+", "_") + extension;
+		try {
+			Part filePart = request.getPart("posterImage");
 
-                    // Save to user.home — same as rest of project
-                    String uploadDir = System.getProperty("user.home") + File.separator
-                            + "seriemeter_uploads" + File.separator + "media_uploads";
-                    FileUploadUtil.saveFile(filePart, uploadDir, posterFileName);
-                } else {
-                    MediaModel existingMedia = new MediaDAO().getMediaById(mediaId);
-                    request.setAttribute("error", "Invalid file type. Please upload an image.");
-                    request.setAttribute("editMedia", existingMedia);
-                    request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
-                    return;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			if (filePart != null && filePart.getSize() > 0) {
+				if (FileUploadUtil.isImage(filePart)) {
+					String extension = FileUploadUtil.getFileExtension(filePart.getSubmittedFileName());
+					posterFileName = title.trim().toLowerCase().replaceAll("\\s+", "_") + extension;
 
-        MediaModel media = new MediaModel();
-        media.setMediaId(mediaId);
-        media.setTitle(title);
-        media.setDirector(director);
-        media.setReleaseDate(release);
-        media.setTotalTime(totalTime);
-        media.setDescription(synopsis);
-        media.setCategoryId(categoryId);
-        media.setGenreId(genreId);
-        media.setMediaProfile(posterFileName);
+					// Save to user.home — same as rest of project
+					String uploadDir = System.getProperty("user.home") + File.separator + "seriemeter_uploads"
+							+ File.separator + "media_uploads";
+					FileUploadUtil.saveFile(filePart, uploadDir, posterFileName);
+				} else {
+					MediaModel existingMedia = new MediaDAO().getMediaById(mediaId);
+					request.setAttribute("error", "Invalid file type. Please upload an image.");
+					request.setAttribute("editMedia", existingMedia);
+					request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
+					return;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        boolean success = new MediaDAO().updateMedia(media);
+		MediaModel media = new MediaModel();
+		media.setMediaId(mediaId);
+		media.setTitle(title);
+		media.setDirector(director);
+		media.setReleaseDate(release);
+		media.setTotalTime(totalTime);
+		media.setDescription(synopsis);
+		media.setCategoryId(categoryId);
+		media.setGenreId(genreId);
+		media.setMediaProfile(posterFileName);
 
-        if (success) {
-            response.sendRedirect(request.getContextPath() + "/Edit");
-        } else {
-            request.setAttribute("error", "Update failed. Please try again.");
-            request.setAttribute("editMedia", media);
-            request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
-        }
-    }
+		boolean success = new MediaDAO().updateMedia(media);
+
+		if (success) {
+			response.sendRedirect(request.getContextPath() + "/Edit");
+		} else {
+			request.setAttribute("error", "Update failed. Please try again.");
+			request.setAttribute("editMedia", media);
+			request.getRequestDispatcher("/WEB-INF/pages/Admineditform.jsp").forward(request, response);
+		}
+	}
 }

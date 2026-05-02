@@ -13,9 +13,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
-</head>
 <style>
-/* Base Reset */
 * {
 	margin: 0;
 	padding: 0;
@@ -23,7 +21,7 @@
 	font-family: 'Manrope', sans-serif;
 }
 
-.adm-body {
+body {
 	font-family: 'Manrope', sans-serif;
 	background-color: #010101;
 	color: #ffffff;
@@ -34,14 +32,14 @@
 	overflow: hidden;
 }
 
-.adm-layout-container {
+.ad-layout-container {
 	display: flex;
 	height: 100%;
 	gap: 10px;
 }
 
-/* --- Sidebar Styles --- */
-.adm-sidebar {
+/* --- Sidebar --- */
+.ad-sidebar {
 	width: 260px;
 	display: flex;
 	flex-direction: column;
@@ -49,11 +47,11 @@
 	padding: 15px 5px;
 }
 
-.adm-logo-container {
+.ad-logo-container {
 	padding: 0 10px 50px 10px;
 }
 
-.adm-logo-container img {
+.ad-logo-container img {
 	max-width: 190px;
 	height: auto;
 }
@@ -93,12 +91,10 @@
 	transition: filter 0.2s ease;
 }
 
-/* Turns the icon black when the navigation item is active */
 .ad-nav-item.active .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
 
-/* Logout Button with hover design */
 .ad-logout-container {
 	padding: 0 5px;
 }
@@ -126,8 +122,9 @@
 .ad-logout-btn:hover .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
-/* Main Content */
-.adm-main-content {
+
+/* --- Main White Container --- */
+.ad-main-content {
 	flex: 1;
 	border-radius: 16px;
 	background-color: #ffffff;
@@ -137,49 +134,55 @@
 	overflow: hidden;
 }
 
-.adm-page-header {
+.ad-top-header {
 	margin-bottom: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.adm-page-header h3 {
+.ad-top-header h3 {
 	font-size: 16px;
 	font-weight: 700;
+	color: #1a1a1a;
+	margin: 0;
 }
 
-.adm-header-profile {
+/* --- Profile section --- */
+.ad-profile-section {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 }
 
-.adm-header-profile-text {
-	display: flex;
-	flex-direction: column;
+.ad-profile-info {
 	text-align: right;
 }
 
-.adm-profile-name {
-	font-size: 13px;
+.ad-profile-name {
 	font-weight: 700;
-	color: #0F172A;
+	font-size: 13px;
+	margin: 0;
+	color: #1a1a1a;
 }
 
-.adm-profile-email {
+.ad-profile-email {
 	font-size: 11px;
 	color: #666666;
+	margin: 0;
 }
 
-.adm-profile-avatar {
+.ad-profile-pic-label {
 	width: 35px;
 	height: 35px;
 	background-color: #e0e0e0;
 	border-radius: 50%;
+	cursor: pointer;
+	overflow: hidden;
+	display: block;
 }
 
-/* Form Grid */
+/* --- Form Grid --- */
 .adm-content-grid {
 	display: flex;
 	gap: 30px;
@@ -187,7 +190,6 @@
 	align-items: flex-start;
 }
 
-/* Left Column */
 .adm-form-column {
 	flex: 2;
 	max-width: 650px;
@@ -297,7 +299,6 @@
 	background-color: #ffffff;
 }
 
-/* Right Column */
 .adm-media-column {
 	flex: 1;
 	max-width: 300px;
@@ -319,7 +320,6 @@
 	line-height: 1.5;
 }
 
-/* Poster Upload Area */
 .adm-poster-upload-area {
 	width: 100%;
 	margin-bottom: 2px;
@@ -357,13 +357,6 @@
 	left: 0;
 }
 
-.adm-profile-avatar img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 .adm-upload-placeholder {
 	display: flex;
 	flex-direction: column;
@@ -393,7 +386,6 @@
 	margin-top: 10px;
 }
 
-/* Publish Button */
 .adm-publish-button-container {
 	display: flex;
 	justify-content: flex-end;
@@ -418,21 +410,28 @@
 .ad-text-orange {
 	color: #e37329;
 }
+
+.adm-error-msg {
+	color: red;
+	font-size: 12px;
+	margin-bottom: 8px;
+}
 </style>
-<body class="adm-body">
-	<div class="adm-layout-container">
+</head>
+<body>
+	<div class="ad-layout-container">
 
 		<!-- Sidebar -->
-		<aside class="adm-sidebar">
+		<aside class="ad-sidebar">
 			<div>
-				<div class="adm-logo-container">
+				<div class="ad-logo-container">
 					<a href="${pageContext.request.contextPath}/Explore"> <img
 						src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg"
 						alt="Logo">
 					</a>
 				</div>
 				<nav class="ad-nav-menu">
-					<a href="${pageContext.request.contextPath}/AdminBoard"
+					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
@@ -461,30 +460,16 @@
 		</aside>
 
 		<!-- Main Content -->
-		<main class="adm-main-content">
+		<main class="ad-main-content">
 
-			<!-- Top bar -->
-			<header class="adm-page-header">
-				<h3 style="color: black;">Edit media</h3>
-				<div class="adm-header-profile">
-					<div class="adm-header-profile-text">
-						<%-- From session set by Login servlet --%>
-						<span class="adm-profile-name">${sessionScope.user.fullName}</span>
-						<span class="adm-profile-email">${sessionScope.user.email}</span>
-					</div>
-					<div class="adm-profile-avatar">
-						<img
-							src="${pageContext.request.contextPath}/getimage?name=${user.userName}&type=user"
-							alt="Avatar" onerror="this.style.display='none'" />
-					</div>
-				</div>
+			<header class="ad-top-header">
+				<h3>Edit media</h3>
+				<%@ include file="/components/adminHeader.jsp"%>
 			</header>
-
 
 			<c:if test="${not empty error}">
 				<div class="adm-error-msg">${error}</div>
 			</c:if>
-
 
 			<form action="${pageContext.request.contextPath}/Edit" method="POST"
 				enctype="multipart/form-data" class="adm-content-grid">
@@ -497,7 +482,6 @@
 						<p class="adm-subtitle">Make your changes below</p>
 					</div>
 
-					<%-- Hidden field carries the media ID so servlet knows which row to update --%>
 					<input type="hidden" name="mediaId" value="${editMedia.mediaId}" />
 
 					<div class="adm-input-group">
@@ -522,10 +506,8 @@
 								class="adm-form-control" value="${editMedia.totalTime}">
 						</div>
 						<div class="adm-input-group">
-							<label>Category</label>
-							<%-- Pre-selected using categoryId from DB --%>
-							<select name="category" class="adm-form-control-category"
-								required>
+							<label>Category</label> <select name="category"
+								class="adm-form-control-category" required>
 								<option value=""></option>
 								<option value="1" ${editMedia.categoryId == 1 ? 'selected' : ''}>Movie</option>
 								<option value="2" ${editMedia.categoryId == 2 ? 'selected' : ''}>Series</option>
@@ -540,7 +522,6 @@
 					</div>
 				</div>
 
-				<!-- Right column: poster + upload + genre -->
 				<div class="adm-media-column">
 					<div class="adm-media-header">
 						<h4>Visual identity</h4>
@@ -555,14 +536,12 @@
 						<div class="adm-poster-preview" id="posterPreview"
 							onclick="document.getElementById('posterFileInput').click()">
 
-							<%-- Placeholder: Only visible if no image exists (handled via CSS/JS) --%>
 							<div class="adm-upload-placeholder" id="uploadPlaceholder"
 								style="${not empty editMedia.mediaProfile ? 'display: none;' : ''}">
 								<span style="color: #94A3B8;">Drop poster here</span>
 								<p style="color: #94A3B8;">Browse for local files</p>
 							</div>
 
-							<%-- Image: Loads session data if available, otherwise defaults --%>
 							<img id="posterImage"
 								src="${pageContext.request.contextPath}/getimage?name=${editMedia.mediaProfile}&type=media"
 								alt="Poster Preview"
@@ -570,16 +549,14 @@
 								onerror="this.style.display='none'; document.getElementById('uploadPlaceholder').style.display='flex';">
 						</div>
 
-						<%-- The actual file input --%>
 						<input type="file" id="posterFileInput" name="media_profile"
 							accept="image/*" onchange="previewImage(this)"
 							style="display: none;">
 					</div>
 
 					<div class="adm-input-group adm-genre-group">
-						<label>Genre</label>
-						<%-- Pre-selected using genreId from DB --%>
-						<select name="genre" class="adm-form-control-genre" required>
+						<label>Genre</label> <select name="genre"
+							class="adm-form-control-genre" required>
 							<option value=""></option>
 							<option value="1" ${editMedia.genreId == 1 ? 'selected' : ''}>Action</option>
 							<option value="2" ${editMedia.genreId == 2 ? 'selected' : ''}>Comedy</option>
@@ -597,7 +574,6 @@
 				</div>
 
 			</form>
-
 		</main>
 	</div>
 
@@ -608,13 +584,11 @@
 
 			if (input.files && input.files[0]) {
 				const reader = new FileReader();
-
 				reader.onload = function(e) {
 					preview.src = e.target.result;
-					preview.style.display = 'block'; // Show the image
-					placeholder.style.display = 'none'; // Hide the text
+					preview.style.display = 'block';
+					placeholder.style.display = 'none';
 				}
-
 				reader.readAsDataURL(input.files[0]);
 			}
 		}

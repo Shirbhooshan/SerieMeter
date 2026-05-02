@@ -348,7 +348,7 @@
 						alt="Logo">
 				</div>
 				<nav class="ad-nav-menu">
-					<a href="${pageContext.request.contextPath}/AdminBoard"
+					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
@@ -382,17 +382,10 @@
 
 			<header class="ad-top-header">
 				<h2 class="ad-header-title">Edit medias</h2>
-				<div class="ad-profile-section">
-					<div class="ad-profile-info">
 
-						<p class="ad-profile-name">${sessionScope.user.fullName}</p>
-						<p class="ad-profile-email">${sessionScope.user.email}</p>
-					</div>
-					<img
-						src="${pageContext.request.contextPath}/assets/images/${sessionScope.user.userProfile}"
-						class="ad-profile-pic" alt="Profile"
-						onerror="this.style.display='none'" />
-				</div>
+				<!-- Only render this section if a user session exists -->
+				<%@ include file="/components/adminHeader.jsp"%>
+
 			</header>
 
 			<h1 class="ad-section-title">
@@ -447,8 +440,8 @@
 							<td><c:choose>
 									<c:when test="${not empty media.mediaProfile}">
 										<img class="ad-cover-thumb"
-											src="${pageContext.request.contextPath}/assets/images/${media.mediaProfile}&type=media"
-											alt="${media.title}" />
+											src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
+											alt="${media.title}" onerror="this.style.opacity='0.3'" />
 									</c:when>
 									<c:otherwise>
 										<div class="ad-cover-thumb"></div>
@@ -465,68 +458,60 @@
 				</tbody>
 			</table>
 
-
 			<div class="ad-empty-state" id="emptyState" style="display: none;">
 				No media entries yet. Add media from Content Management.</div>
 
-			<!-- Pagination 
-			<div class="ad-pagination">
-				<a href="#" class="ad-page-num">&lt;</a> <a href="#"
-					class="ad-page-num active">1</a> <a href="#" class="ad-page-num">2</a>
-				<a href="#" class="ad-page-num">3</a> <a href="#"
-					class="ad-page-num">&gt;</a>
-					-->
-
-			<!-- Pagination -->
 			<div class="ad-pagination" id="paginationControls"></div>
+
 		</main>
 	</div>
+
 	<script>
-	const rowsPerPage = 5; let currentPage = 1; function updateDisplay() {
-	const rows = Array.from(document.querySelectorAll('#tableBody tr'));
-	const totalPages = Math.ceil(rows.length / rowsPerPage); // 1.
-	Hide/Show rows using a single loop rows.forEach((row, i) => { const
-	isVisible = i >= (currentPage - 1) * rowsPerPage && i < currentPage *
-	rowsPerPage; row.style.display = isVisible ? '' : 'none'; }); // 2.
-	Build buttons as a single string (Much faster/cleaner) const container
-	= document.getElementById('paginationControls'); let buttons = `
-	<button onclick="changePage(${currentPage - 1})"
-		${currentPage === 1 ? 'disabled' : ''}>&lt;</button>
-	`; for (let i = 1; i <= totalPages; i++) { buttons += `
-	<button class="${i === currentPage ? 'active' : ''}"
-		onclick="changePage(${i})">${i}</button>
-	`; } buttons += `
-	<button onclick="changePage(${currentPage + 1})"
-		${currentPage === totalPages ? 'disabled' : ''}>&gt;</button>
-	`; container.innerHTML = (totalPages > 1) ? buttons : ''; } function
-	changePage(page) { currentPage = page; updateDisplay(); }
-</script>
-	<script>
+		const rowsPerPage = 5;
+		let currentPage = 1;
+
+		window.onload = function() {
+			updateDisplay();
+		};
+
+		function updateDisplay() {
+			const rows = Array.from(document.querySelectorAll('#tableBody tr'));
+			const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+			rows.forEach((row, i) => {
+				const isVisible = i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage;
+				row.style.display = isVisible ? '' : 'none';
+			});
+
+			const container = document.getElementById('paginationControls');
+			if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+			let buttons = '<button onclick="changePage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '>&lt;</button>';
+			for (let i = 1; i <= totalPages; i++) {
+				buttons += '<button class="' + (i === currentPage ? 'active' : '') + '" onclick="changePage(' + i + ')">' + i + '</button>';
+			}
+			buttons += '<button onclick="changePage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '>&gt;</button>';
+			container.innerHTML = buttons;
+		}
+
+		function changePage(page) {
+			currentPage = page;
+			updateDisplay();
+		}
+
 		function filterTable() {
-			// Get the search input value and convert to lowercase
 			const input = document.getElementById("searchInput");
 			const filter = input.value.toLowerCase();
-
-			// Get the table body and all rows within it
 			const tbody = document.getElementById("tableBody");
 			const rows = tbody.getElementsByTagName("tr");
 
-			// Loop through all table rows
 			for (let i = 0; i < rows.length; i++) {
-				// We skip the "No users found" row if it exists
-				if (rows[i].cells.length < 2)
-					continue;
-
-				// Get the text content of the entire row
+				if (rows[i].cells.length < 2) continue;
 				const rowText = rows[i].textContent || rows[i].innerText;
-
-				// If the text matches the filter, show it; otherwise, hide it
-				if (rowText.toLowerCase().indexOf(filter) > -1) {
-					rows[i].style.display = "";
-				} else {
-					rows[i].style.display = "none";
-				}
+				rows[i].style.display = rowText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
 			}
+			currentPage = 1;
+			updateDisplay();
 		}
 	</script>
 

@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import java.util.List;
@@ -33,6 +35,12 @@ public class Users extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("user") != null) {
+			request.setAttribute("loggedInUser", (UserModel) session.getAttribute("user"));
+		}
+
 		try {
 			UserDAO dao = new UserDAO();
 			List<UserModel> users = dao.getAllUsers();
