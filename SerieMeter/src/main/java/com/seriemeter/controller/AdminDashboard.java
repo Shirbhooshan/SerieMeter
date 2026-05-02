@@ -38,4 +38,8 @@ public class AdminDashboard extends HttpServlet {
 		doGet(request, response);
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git

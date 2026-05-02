@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register | SerieMeter</title>
@@ -13,15 +14,30 @@
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
 
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - Seriemeter</title>
+</head>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 <style>
+	/* Reset default browser margins */
 * {
+<<<<<<< HEAD
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Manrope', sans-serif;
+=======
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
 body {
+<<<<<<< HEAD
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -45,30 +61,74 @@ body {
 	align-items: center;
 	justify-content: flex-start;
 	padding: 40px 16px 60px;
+=======
+    background-color: #FAF9F6; /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* --- Logo above card (centered) --- */
 .logo-section {
 	text-align: center;
 	margin-bottom: 25px;
 	width: 100%;
+=======
+.container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .logo-img {
 	width: 100%;
 	max-width: 220px;
 	height: auto;
 	margin-bottom: 10px;
+=======
+/* --- Logo & Header --- */
+.logo-section {
+    text-align: center;
+    margin-bottom: 25px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .tagline {
 	font-size: 12px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	color: #555;
 	font-weight: 600;
+=======
+.logo {
+    height: 35px; 
+    margin-bottom: 8px;
+}
+.logos {
+    height: 14px;
+    width: 14px;
+    margin-right: 5px;
+}
+.right-arrow {
+    height: 14px;
+    width: 14px;
+    /* color: white;  */
+}
+.left-arrow {
+    height: 14px;
+    width: 14px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* --- Card --- */
 .register-card {
 	background: #28282B;
@@ -79,26 +139,58 @@ body {
 	max-width: 380px;
 	text-align: center;
 	margin-bottom: 20px;
+=======
+.subtitle {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: #555;
+    text-transform: uppercase;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* --- Card header text --- */
 .card-header {
 	text-align: left;
 	margin-bottom: 25px;
+=======
+/* --- Main Dark Card --- */
+.card {
+    background-color: #2b2b2b; /* Dark gray/black card */
+    width: 100%;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    color: white;
+    margin-bottom: 30px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .card-header h2 {
 	color: white;
 	font-size: 20px;
 	font-weight: 700;
 	margin-bottom: 4px;
+=======
+.card-header {
+    margin-bottom: 25px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .card-header p {
 	color: #999;
 	font-size: 12px;
+=======
+.card-header h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 4px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* --- Avatar Upload --- */
 .avatar-group {
 	margin-bottom: 22px;
@@ -106,8 +198,14 @@ body {
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 10px;
+=======
+.card-header p {
+    font-size: 12px;
+    color: #b0b0b0;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .avatar-group-label {
 	font-size: 11px;
 	font-weight: 700;
@@ -115,8 +213,14 @@ body {
 	color: #ccc;
 	padding-left: 10px;
 	letter-spacing: 0.5px;
+=======
+/* --- Form Fields --- */
+.form-group {
+    margin-bottom: 18px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .avatar-label {
 	cursor: pointer;
 	display: inline-block;
@@ -124,8 +228,18 @@ body {
 	width: 90px;
 	height: 90px;
 	align-self: center;
+=======
+.form-group label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .avatar-circle {
 	width: 90px;
 	height: 90px;
@@ -136,8 +250,18 @@ body {
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
+=======
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px; /* Pill shape */
+    padding: 4px 15px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* Force the black SVG to render white */
 .avatar-circle .user-icon {
 	width: 88px;
@@ -165,24 +289,72 @@ body {
 	font-weight: 300;
 	color: white;
 	line-height: 1;
+=======
+.input-wrapper i {
+    color: #000000;
+    font-size: 14px;
+    margin-right: 12px;
 }
 
+.input-wrapper .toggle-password {
+    margin-right: 0;
+    margin-left: auto;
+    cursor: pointer;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
+}
+
+<<<<<<< HEAD
 .avatar-hint {
 	font-size: 10px;
 	color: #666;
 	align-self: center;
+=======
+.input-wrapper input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 13px;
+    color: #333;
+    background: transparent;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 #profileImageInput {
 	display: none;
+=======
+/* --- Submit Button --- */
+.btn-submit {
+    width: 100%;
+    background-color: #008a00; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Pill shape */
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* --- Input Groups --- */
 .input-group {
 	text-align: left;
 	margin-bottom: 20px;
+=======
+.btn-submit:hover {
+    background-color: #006b00; /* Darker green on hover */
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .input-group label {
 	display: block;
 	font-size: 11px;
@@ -191,14 +363,28 @@ body {
 	margin-bottom: 8px;
 	color: #ccc;
 	padding-left: 10px;
+=======
+/* --- Card Footer Links --- */
+.card-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .input-wrapper {
 	position: relative;
 	display: flex;
 	align-items: center;
+=======
+.terms {
+    color: #a0a0a0;
+    margin-bottom: 20px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* All form icons forced black to show on white inputs */
 .icon-svg {
 	position: absolute;
@@ -208,15 +394,27 @@ body {
 	pointer-events: none;
 	filter: brightness(0);
 	opacity: 0.45;
+=======
+.terms a, .login-link a {
+    color: #008a00;
+    text-decoration: none;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .eye-icon {
 	left: auto;
 	right: 18px;
 	cursor: pointer;
 	pointer-events: all;
+=======
+.login-link {
+    color: #d0d0d0;
+    font-size: 12px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .rounded-input {
 	width: 100%;
 	padding: 14px 14px 14px 48px;
@@ -284,19 +482,41 @@ body {
 	color: #666;
 	margin-top: 15px;
 	text-align: center;
+=======
+/* --- Bottom Page Links --- */
+.back-link {
+    margin-bottom: 30px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .signup-link {
 	color: #34A853;
 	text-decoration: none;
 	font-weight: 700;
+=======
+.back-link a {
+    color: #777;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 .signup-link:hover {
 	color: #2e9649;
 	text-decoration: underline;
+=======
+.back-link a:hover {
+    color: #333;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 
+<<<<<<< HEAD
 /* --- Below card --- */
 .back-link {
 	color: #333;
@@ -320,11 +540,26 @@ body {
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
 	margin-top: 20px;
+=======
+footer p {
+    color: #999;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 }
 </style>
 </head>
 <body>
+<<<<<<< HEAD
+=======
+    <div class="container">
+        <header class="logo-section">
+            <img src="assets/images/Logo.jpg" alt="Seriemeter Logo" class="logo">
+            <p class="subtitle">YOUR DIGITAL ARCHIVE</p>
+        </header>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 	<script>
 		function previewAvatar(input) {
 			if (input.files && input.files[0]) {
@@ -341,26 +576,84 @@ body {
 			}
 		}
 	</script>
+=======
+        <div class="card">
+            <div class="card-header">
+                <h2>Begin your journey</h2>
+                <p>Create your profile to start building lists</p>
+            </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 	<div class="page-scroll">
+=======
+            <form action="${pageContext.request.contextPath}/Register" method="POST" class="register-form">
+                
+                <div class="form-group">
+                    <label for="fullName">FULL NAME</label>
+                    <div class="input-wrapper">
+                        <img src="assets/icon/user.svg" alt="user-logo" class="logos">
+                        <input type="text" id="fullName" name="full_name" placeholder="e.g. John" required>
+                    </div>
+                </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 		<%-- Logo — centered above card --%>
 		<div class="logo-section">
 			<img src="assets/images/Logo.jpg" alt="SerieMeter" class="logo-img">
 			<p class="tagline">Your Digital Archive</p>
 		</div>
+=======
+                <div class="form-group">
+                    <label for="email">EMAIL ADDRESS</label>
+                    <div class="input-wrapper">
+                        <img src="assets/icon/envelope.svg" alt="email-logo" class="logos">
+                        <input type="email" id="email" name="email" placeholder="e.g. john@gmail.com" required>
+                    </div>
+                </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 		<div class="register-card">
+=======
+                <div class="form-group">
+                    <label for="username">USERNAME</label>
+                    <div class="input-wrapper">
+                        <img src="assets/icon/envelope.svg" alt="user-logo" class="logos">
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 			<%-- Card heading --%>
 			<div class="card-header">
 				<h2>Begin your journey</h2>
 				<p>Create your profile to start building lists</p>
 			</div>
+=======
+                <div class="form-group">
+                    <label for="password">PASSWORD</label>
+                    <div class="input-wrapper">
+                        <img src="assets/icon/lock.svg" alt="lock-logo" class="logos">
+                        <input type="password" id="password" name="password" placeholder="*****" required>
+                        <img src="assets/icon/eye-logo.svg" alt="toggle-password" class="logos" class="toggle-password">
+                    </div>
+                </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 			<form action="${pageContext.request.contextPath}/Register"
 				method="POST" enctype="multipart/form-data">
+=======
+                <button type="submit" class="btn-submit">
+                    Create Account <img src="assets/icon/arrow-right.svg" alt="arrow-logo" class="right-arrow">
+                </button>
+            </form>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 				<%-- Avatar Upload --%>
 				<div class="avatar-group">
 					<span class="avatar-group-label">Profile Photo</span> <label
@@ -373,7 +666,15 @@ body {
 						type="file" id="profileImageInput" name="user_profile"
 						accept="image/*" onchange="previewAvatar(this)">
 				</div>
+=======
+            <div class="card-footer">
+                <p class="terms">By creating an account, you agree to our <a href="#">Terms</a>.</p>
+                <p class="login-link">Already have a profile? <a href="login.jsp">Sign in</a></p>
+            </div>
+        </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 				<%-- Full Name --%>
 				<div class="input-group">
 					<label>Full Name</label>
@@ -383,7 +684,13 @@ body {
 							placeholder="e.g. John Doe" required autocomplete="off">
 					</div>
 				</div>
+=======
+        <div class="back-link">
+            <a href="index.jsp"><img src="assets/icon/arrow-left.svg" alt="arrow-logo" class="left-arrow"> Go Back</a>
+        </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
+<<<<<<< HEAD
 				<div class="input-group">
 					<label>Email Address</label>
 					<div class="input-wrapper">
@@ -455,5 +762,11 @@ body {
 		}
 	</script>
 
+=======
+        <footer>
+            <p>&copy;2026 SERIEMETER</p>
+        </footer>
+    </div>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 </body>
 </html>

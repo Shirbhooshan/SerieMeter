@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -226,7 +225,11 @@ html, body {
 					and reviews. Discover hidden gems and cinematic masterpieces
 					through a lens of true expertise.</p>
 
+<<<<<<< HEAD
 				<a href="${pageContext.request.contextPath}/Explore" class="cta-btn">Start Exploring!</a>
+=======
+				<a href="${pageContext.request.contextPath}/Explore" class="cta-btn">Start Exploring</a>
+>>>>>>> branch 'safiyah' of https://github.com/Shirbhooshan/SerieMeter.git
 
 				<div class="sql-badge">
 					<img src="assets/icon/sql.svg" alt="SQL" class="sql-icon-svg">
