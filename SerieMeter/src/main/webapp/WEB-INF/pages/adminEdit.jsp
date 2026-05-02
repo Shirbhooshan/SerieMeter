@@ -473,7 +473,7 @@
 	</div>
 
 	<script>
-    var rowsPerPage = 4; /* match adminDashboard which shows 8 rows */
+    var rowsPerPage = 4;
     var currentPage = 1;
 
     /* Run on load — check empty state and set up pagination */
@@ -488,7 +488,7 @@
         document.getElementById('emptyState').style.display = rows.length === 0 ? 'block' : 'none';
     }
 
-    /* Show only rows for current page, hide the rest */
+    /* Show only rows for current page, hides the rest */
     function updateDisplay() {
         var rows = document.querySelectorAll('#tableBody tr');
         var start = (currentPage - 1) * rowsPerPage;
@@ -501,7 +501,6 @@
         rebuildPageNumbers(rows.length);
     }
 
-  
     
 </script>
 
