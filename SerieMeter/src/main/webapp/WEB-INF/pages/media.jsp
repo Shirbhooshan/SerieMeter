@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title><%-- ${movie.name} --%> Movie Name | SerieMeter
-</title>
+<title>${media.title} | SerieMeter</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
@@ -20,7 +20,8 @@ html, body {
 	background-image: url('assets/images/Title Screen.jpg');
 	background-size: cover;
 	background-position: top right;
-	background-attachment: scroll; background-color : #fff;
+	background-attachment: scroll;
+	background-color: #fff;
 	overflow-x: hidden;
 	font-family: 'Manrope';
 	background-color: #fff;
@@ -268,19 +269,27 @@ html, body {
 
 	<%@ include file="/components/navbar.jsp"%>
 
+	<%-- Calculate Average Rating --%>
+	<c:set var="totalRating" value="0" />
+	<c:set var="reviewCount" value="${reviews.size()}" />
+
+	<c:forEach var="r" items="${reviews}">
+		<c:set var="totalRating" value="${totalRating + r.rating}" />
+	</c:forEach>
+
+	<%-- Calculate average (Out of 5) and scale to 10 for the UI --%>
+	<c:set var="avgRating"
+		value="${reviewCount > 0 ? (totalRating / reviewCount) * 2 : 0.0}" />
 
 	<div class="container">
 		<div class="left-content">
 			<p class="meta">
-				<%-- ${movie.year} --%>
-				2024 &nbsp;•&nbsp;
-				<%-- ${movie.genre} --%>
+				<%-- Replaced static 2024 with dynamic database date --%>
+				${media.releaseDate} &nbsp;•&nbsp;
+				<%-- Placeholder for Genre, can update later --%>
 				[Genre]
 			</p>
-			<h1 class="title">
-				<%-- ${movie.name} --%>
-				Movie Name
-			</h1>
+			<h1 class="title">${media.title}</h1>
 
 			<div class="bookmark-container">
 				<c:choose>
@@ -304,22 +313,12 @@ html, body {
 				<span class="orange-line"></span>
 				<h3>Synopsis</h3>
 			</div>
-			<p class="synopsis-text">
-				<%-- ${movie.synopsis} --%>
-				In the neon-lit metropolis of Lumina, Detective Kaito Ishikawa, a
-				tormented soul haunted by past failures, navigates a labyrinth of
-				deceit and technological marvels. When a brilliant AI inventor, Dr.
-				Aris Thorne, is found dead in his lab, Kaito is thrust into a case
-				that blurs the line between reality and simulation...
-			</p>
+			<p class="synopsis-text">${media.description}</p>
 
 			<div class="separator"></div>
 
 			<div class="director-label">Director</div>
-			<div class="director-name">
-				<%-- ${movie.director} --%>
-				[Name]
-			</div>
+			<div class="director-name">${media.director}</div>
 
 			<div class="separator"></div>
 
@@ -331,38 +330,83 @@ html, body {
 			<div class="review-card">
 				<h4>Add your review</h4>
 
-				<div class="star-rating">
-					<input type="radio" name="rating" id="star5" value="5"><label
-						for="star5"><img src="assets/icon/star.svg"></label> <input
-						type="radio" name="rating" id="star4" value="4"><label
-						for="star4"><img src="assets/icon/star.svg"></label> <input
-						type="radio" name="rating" id="star3" value="3"><label
-						for="star3"><img src="assets/icon/star.svg"></label> <input
-						type="radio" name="rating" id="star2" value="2"><label
-						for="star2"><img src="assets/icon/star.svg"></label> <input
-						type="radio" name="rating" id="star1" value="1"><label
-						for="star1"><img src="assets/icon/star.svg"></label>
-				</div>
+				<c:choose>
+					<c:when test="${not empty sessionScope.user}">
+						<form action="${pageContext.request.contextPath}/Media"
+							method="POST" class="review-form">
+							<!-- CRITICAL: Hidden input to pass media_id to the Servlet -->
+							<input type="hidden" name="media_id" value="${media.mediaId}">
 
-				<label class="review-label">REVIEW</label>
-				<textarea class="review-textarea" name="user_review"></textarea>
+							<div class="star-rating">
+								<input type="radio" name="rating" id="star5" value="5" required><label
+									for="star5"><img src="assets/icon/star.svg"></label> <input
+									type="radio" name="rating" id="star4" value="4"><label
+									for="star4"><img src="assets/icon/star.svg"></label> <input
+									type="radio" name="rating" id="star3" value="3"><label
+									for="star3"><img src="assets/icon/star.svg"></label> <input
+									type="radio" name="rating" id="star2" value="2"><label
+									for="star2"><img src="assets/icon/star.svg"></label> <input
+									type="radio" name="rating" id="star1" value="1"><label
+									for="star1"><img src="assets/icon/star.svg"></label>
+							</div>
 
-				<div class="post-btn-container">
-					<button type="submit" class="post-btn">POST REVIEW</button>
-				</div>
+							<label class="review-label">REVIEW</label>
+							<!-- CRITICAL: Changed name to 'review_text' to match the Servlet -->
+							<textarea class="review-textarea" name="review_text" required></textarea>
+
+							<div class="post-btn-container">
+								<button type="submit" class="post-btn">POST REVIEW</button>
+							</div>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<!-- Displayed to users who are not logged in -->
+						<p style="margin-top: 15px; color: #666;">
+							<a href="${pageContext.request.contextPath}/Login"
+								style="color: #449d5d; font-weight: bold; text-decoration: none;">Log
+								in</a> to leave a review.
+						</p>
+					</c:otherwise>
+				</c:choose>
+			</div>
+
+			<!-- Loop to display existing reviews fetched from the database -->
+			<div class="existing-reviews" style="margin-top: 40px;">
+				<c:if test="${empty reviews}">
+					<p style="color: #888;">No reviews yet. Be the first to review!</p>
+				</c:if>
+
+				<c:forEach var="review" items="${reviews}">
+					<div class="review-card"
+						style="margin-bottom: 20px; padding: 25px;">
+						<div
+							style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+							<h4 style="margin: 0;">${review.username}</h4>
+							<span style="color: #f9a825; font-size: 18px; font-weight: bold;">&#9733;
+								${review.rating}/5</span>
+						</div>
+						<small style="color: #aaa; display: block; margin-bottom: 15px;">${review.createdAt}</small>
+						<p style="margin: 0; line-height: 1.6; color: #555;">${review.reviewText}</p>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 
 		<div class="right-content">
 			<div class="rating-box">
 				<span class="rating-label">Rating</span> <span class="rating-score">★
-					<%-- ${movie.rating} --%> 9.2 <span
-					style="font-size: 12px; color: #888; font-weight: 400;">/10</span>
+					<c:choose>
+						<c:when test="${reviewCount > 0}">
+							<fmt:formatNumber value="${avgRating}" maxFractionDigits="1" />
+						</c:when>
+						<c:otherwise>0.0</c:otherwise>
+					</c:choose> <span style="font-size: 12px; color: #888; font-weight: 400;">/10</span>
 				</span>
 			</div>
 
-			<img src="<%-- ${movie.posterUrl} --%> assets/images/media_test.png"
-				alt="Movie Poster" class="poster-img">
+			<img
+				src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
+				alt="${media.title}" class="poster-img">
 		</div>
 	</div>
 
