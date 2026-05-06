@@ -69,7 +69,7 @@
                     </a>
                 </c:when>
                 <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/Register" class="sm_navbar__signup">Sign In</a>
+                    <a href="${pageContext.request.contextPath}/Login" class="sm_navbar__signup">Sign In</a>
                 </c:otherwise>
             </c:choose>
         </div>
