@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>${media.title}| SerieMeter</title>
+<title>${media.title}|SerieMeter</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
@@ -100,7 +100,9 @@ html, body {
 }
 
 .rating-box {
-	background: #333;
+	background: rgba(18, 18, 18, 0.85);
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
 	color: white;
 	padding: 24px 45px;
 	border-radius: 40px;
@@ -110,7 +112,8 @@ html, body {
 	width: 340px;
 	margin-left: auto;
 	margin-bottom: 60px;
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .rating-label {
