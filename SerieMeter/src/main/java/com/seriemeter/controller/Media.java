@@ -54,6 +54,15 @@ public class Media extends HttpServlet {
 					request.setAttribute("media", media);
 					request.setAttribute("reviews", reviews);
 
+					// Check if logged-in user has bookmarked this media
+					boolean isBookmarked = false;
+					HttpSession session = request.getSession(false);
+					if (session != null && session.getAttribute("user") != null) {
+						UserModel user = (UserModel) session.getAttribute("user");
+						isBookmarked = new com.seriemeter.dao.BookmarkDAO().isBookmarked(user.getUserId(), mediaId);
+					}
+					request.setAttribute("isBookmarked", isBookmarked);
+
 					// Forward to the JSP inside WEB-INF for security
 					request.getRequestDispatcher("/WEB-INF/pages/media.jsp").forward(request, response);
 				} else {
