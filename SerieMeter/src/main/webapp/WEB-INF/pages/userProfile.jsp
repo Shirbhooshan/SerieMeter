@@ -478,6 +478,53 @@ body {
 				});
 			});
 		});
+		
+		// ── Copy-email-to-clipboard logic
+
+		// Select the copy icon image element
+		const copyIcon = document.querySelector('.up-copy-icon');
+
+		// Listen for a click on the copy icon
+		copyIcon.addEventListener('click', function () {
+
+		    // Grab the first child node of the email paragraph, which is the raw
+		    // email text node (the <img> tag is the second child, so childNodes[0]
+		    // gives us only the text). .trim() removes any accidental whitespace.
+		    const email = document.querySelector('.up-user-email').childNodes[0].textContent.trim();
+
+		    // navigator.clipboard.writeText() is the modern browser API for writing
+		    // text to the user's clipboard. It returns a Promise.
+		    navigator.clipboard.writeText(email)
+
+		        .then(function () {
+		            // ── Success: email was copied ──────────────────────────────
+
+		            // Swap the copy icon to a checkmark so the user gets instant
+		            // visual confirmation that the copy worked.
+		            copyIcon.src = 'assets/icon/check.svg';
+
+		            // Also set a tooltip so hovering shows "Copied!"
+		            copyIcon.title = 'Copied!';
+
+		            // After 2 seconds, restore the original copy icon and clear
+		            // the tooltip, ready for the user to copy again if needed.
+		            setTimeout(function () {
+		                copyIcon.src = 'assets/icon/copy.svg';
+		                copyIcon.title = '';
+		            }, 2000);
+		        })
+
+		        .catch(function () {
+		            // ── Failure: clipboard write was blocked or unsupported ────
+
+		            // This can happen when:
+		            //   • The page is served over plain HTTP (not HTTPS)
+		            //   • The browser has blocked clipboard permissions
+		            //   • An older browser doesn't support the Clipboard API
+		            // Show a simple alert so the failure isn't silent.
+		            alert('Failed to copy email. Please copy it manually.');
+		        });
+		});
 	</script>
 
 </body>
