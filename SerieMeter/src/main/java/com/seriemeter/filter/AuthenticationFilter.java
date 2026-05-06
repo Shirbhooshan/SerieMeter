@@ -34,6 +34,7 @@ public class AuthenticationFilter implements Filter {
 			} else {
 				res.sendRedirect(req.getContextPath() + "/Explore");
 			}
+			return;
 		} else {
 			// Not logged in → allow access
 			chain.doFilter(request, response);

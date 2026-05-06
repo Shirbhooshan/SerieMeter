@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.seriemeter.controller.Media;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.utils.DBconfig;
 
