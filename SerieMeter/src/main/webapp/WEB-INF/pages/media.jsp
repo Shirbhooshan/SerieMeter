@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>${media.title} | SerieMeter</title>
+<title>${media.title}|SerieMeter</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
@@ -17,14 +18,14 @@ html, body {
 	padding: 0;
 	width: 100%;
 	min-height: 100vh;
-	background-image: url('assets/images/Title Screen.jpg');
+	background-image:
+		url('${pageContext.request.contextPath}/assets/images/Title Screen.jpg');
 	background-size: cover;
 	background-position: top right;
 	background-attachment: scroll;
 	background-color: #fff;
 	overflow-x: hidden;
-	font-family: 'Manrope';
-	background-color: #fff;
+	font-family: 'Manrope', sans-serif;
 }
 
 .container {
@@ -47,11 +48,23 @@ html, body {
 	margin-top: 120px;
 }
 
-/* Header Info */
 .meta {
 	color: #888;
 	font-size: 13px;
 	margin-bottom: 10px;
+}
+
+.genre-tag {
+	display: inline-block;
+	background: #f0f0f0;
+	color: #555;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding: 4px 12px;
+	border-radius: 20px;
+	margin-bottom: 14px;
 }
 
 .title {
@@ -61,7 +74,6 @@ html, body {
 	margin-bottom: 30px;
 }
 
-/* Bookmark Button States */
 .bookmark-btn {
 	background-color: #449d5d;
 	color: white;
@@ -77,7 +89,6 @@ html, body {
 	transition: background 0.3s ease;
 }
 
-/* Red state for removing */
 .bookmark-btn.remove-state {
 	background-color: #e53935;
 }
@@ -88,10 +99,8 @@ html, body {
 	filter: brightness(0) invert(1);
 }
 
-/* Wider Dark Rating Pill */
 .rating-box {
 	background: #333;
-	background-filter: blur(10px);
 	color: white;
 	padding: 24px 45px;
 	border-radius: 40px;
@@ -118,7 +127,6 @@ html, body {
 	color: #f9a825;
 }
 
-/* Section Headings with Horizontal Line */
 .section-header {
 	display: flex;
 	align-items: center;
@@ -145,7 +153,6 @@ html, body {
 	margin-bottom: 30px;
 }
 
-/* Director Section with Separator */
 .director-label {
 	font-size: 12px;
 	color: #999;
@@ -165,13 +172,14 @@ html, body {
 	margin: 30px 0;
 }
 
-/* Review Card Adjustments */
+/* --- Write Review Card --- */
 .review-card {
 	background: #fff;
 	border-radius: 30px;
 	padding: 40px;
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 	border: 1px solid #f0f0f0;
+	border-left: 6px solid #4ebc57; /* green accent */
 	overflow: hidden;
 }
 
@@ -179,13 +187,37 @@ html, body {
 	font-size: 15px;
 	font-weight: 700;
 	color: #444;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
-.stars {
-	color: #f9a825;
-	font-size: 18px;
+/* --- Interactive Star Rating (input) --- */
+.star-rating {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	gap: 6px;
 	margin-bottom: 25px;
+}
+
+.star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+}
+
+.star-rating label img {
+	width: 100%;
+	filter: grayscale(100%) opacity(0.25);
+	transition: filter 0.15s ease;
+}
+
+.star-rating label:hover img, .star-rating label:hover ~ label img,
+	.star-rating input:checked ~ label img {
+	filter: grayscale(0%) opacity(1);
 }
 
 .review-label {
@@ -207,6 +239,8 @@ html, body {
 	outline: none;
 	resize: none;
 	box-sizing: border-box;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14px;
 }
 
 .post-btn-container {
@@ -226,42 +260,85 @@ html, body {
 	cursor: pointer;
 }
 
+/* --- Existing Review Cards --- */
+.existing-review-card {
+	background: #fff;
+	border-radius: 20px;
+	padding: 28px 30px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+	border: 1px solid #f0f0f0;
+	margin-bottom: 20px;
+	position: relative;
+	overflow: hidden;
+}
+
+.review-top-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.reviewer-info {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.reviewer-avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background-color: #e0e0e0;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.reviewer-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.reviewer-meta {
+	display: flex;
+	flex-direction: column;
+}
+
+.reviewer-name {
+	font-size: 14px;
+	font-weight: 700;
+	color: #1a1a1a;
+}
+
+.reviewer-date {
+	font-size: 12px;
+	color: #aaa;
+	margin-top: 2px;
+}
+
+/* Display stars (static, showing rating) */
+.display-stars {
+	display: flex;
+	gap: 3px;
+}
+
+.display-stars img {
+	width: 20px;
+	height: 20px;
+}
+
+.review-body {
+	font-size: 14px;
+	line-height: 1.7;
+	color: #444;
+	margin: 0;
+}
+
 .poster-img {
 	width: 100%;
 	border-radius: 12px;
 	box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-}
-
-/* Interactive Star Rating */
-.star-rating {
-	display: flex;
-	flex-direction: row-reverse;
-	/* Allows us to use the ~ sibling selector easily */
-	justify-content: flex-end;
-	gap: 8px;
-	margin-bottom: 25px;
-}
-
-.star-rating input {
-	display: none;
-}
-
-.star-rating label {
-	cursor: pointer;
-	width: 24px;
-	height: 24px;
-}
-
-.star-rating label img {
-	width: 100%;
-	filter: grayscale(100%) opacity(0.3); /* Default "empty" state */
-	transition: filter 0.2s ease;
-}
-
-/* Hover and Checked Logic: Fill previous stars */
-.star-rating label:hover img, .star-rating label:hover ~ label img,
-	.star-rating input:checked ~ label img {
-	filter: grayscale(0%) opacity(1); /* "Filled" state */
 }
 </style>
 </head>
@@ -269,41 +346,75 @@ html, body {
 
 	<%@ include file="/components/navbar.jsp"%>
 
-	<%-- Calculate Average Rating --%>
+	<%-- Calculate average rating from reviews list --%>
 	<c:set var="totalRating" value="0" />
-	<c:set var="reviewCount" value="${reviews.size()}" />
-
+	<c:set var="reviewCount" value="${fn:length(reviews)}" />
 	<c:forEach var="r" items="${reviews}">
 		<c:set var="totalRating" value="${totalRating + r.rating}" />
 	</c:forEach>
-
-	<%-- Calculate average (Out of 5) and scale to 10 for the UI --%>
 	<c:set var="avgRating"
 		value="${reviewCount > 0 ? (totalRating / reviewCount) * 2 : 0.0}" />
 
+	<%-- Genre name mapping from genre_id --%>
+	<c:set var="genreName" value="General" />
+	<c:if test="${media.genreId == 1}">
+		<c:set var="genreName" value="Action" />
+	</c:if>
+	<c:if test="${media.genreId == 2}">
+		<c:set var="genreName" value="Comedy" />
+	</c:if>
+	<c:if test="${media.genreId == 3}">
+		<c:set var="genreName" value="Horror" />
+	</c:if>
+	<c:if test="${media.genreId == 4}">
+		<c:set var="genreName" value="Drama" />
+	</c:if>
+	<c:if test="${media.genreId == 5}">
+		<c:set var="genreName" value="Sci-Fi" />
+	</c:if>
+	<c:if test="${media.genreId == 6}">
+		<c:set var="genreName" value="Thriller" />
+	</c:if>
+	<c:if test="${media.genreId == 7}">
+		<c:set var="genreName" value="Romance" />
+	</c:if>
+
 	<div class="container">
 		<div class="left-content">
-			<p class="meta">
-				<%-- Replaced static 2024 with dynamic database date --%>
-				${media.releaseDate} &nbsp;•&nbsp;
-				<%-- Placeholder for Genre, can update later --%>
-				[Genre]
+
+			<%-- Genre tag + date meta --%>
+			<span class="genre-tag"> <c:choose>
+					<c:when test="${media.genreId == 1}">Action</c:when>
+					<c:when test="${media.genreId == 2}">Comedy</c:when>
+					<c:when test="${media.genreId == 3}">Horror</c:when>
+					<c:when test="${media.genreId == 4}">Drama</c:when>
+					<c:when test="${media.genreId == 5}">Sci-Fi</c:when>
+					<c:when test="${media.genreId == 6}">Thriller</c:when>
+					<c:when test="${media.genreId == 7}">Romance</c:when>
+					<c:otherwise>General</c:otherwise>
+				</c:choose>
+			</span>
+
+			<p class="meta">${fn:substring(media.releaseDate, 0, 10)}
+				&nbsp;•&nbsp; ${media.totalTime} &nbsp;•&nbsp; ${media.categoryId == 1 ? 'Movie' : 'Series'}
 			</p>
+
 			<h1 class="title">${media.title}</h1>
 
 			<div class="bookmark-container">
 				<c:choose>
-					<%-- We will set 'isBookmarked' in the Backend later --%>
 					<c:when test="${isBookmarked == true}">
 						<button class="bookmark-btn remove-state">
-							<img src="assets/icon/bookmark-solid-full.svg" alt=""
-								class="btn-icon"> Remove Bookmark
+							<img
+								src="${pageContext.request.contextPath}/assets/icon/bookmark-solid-full.svg"
+								alt="" class="btn-icon"> Remove Bookmark
 						</button>
 					</c:when>
 					<c:otherwise>
 						<button class="bookmark-btn">
-							<img src="assets/icon/bookmark-solid-full.svg" alt=""
-								class="btn-icon"> Add to Bookmark
+							<img
+								src="${pageContext.request.contextPath}/assets/icon/bookmark-solid-full.svg"
+								alt="" class="btn-icon"> Add to Bookmark
 						</button>
 					</c:otherwise>
 				</c:choose>
@@ -327,32 +438,37 @@ html, body {
 				<h3>Reviews</h3>
 			</div>
 
+			<%-- Write Review Card --%>
 			<div class="review-card">
 				<h4>Add your review</h4>
-
 				<c:choose>
 					<c:when test="${not empty sessionScope.user}">
-						<form action="${pageContext.request.contextPath}/Media"
-							method="POST" class="review-form">
-							<!-- CRITICAL: Hidden input to pass media_id to the Servlet -->
+						<form
+							action="${pageContext.request.contextPath}/Media?id=${media.mediaId}"
+							method="POST">
 							<input type="hidden" name="media_id" value="${media.mediaId}">
 
 							<div class="star-rating">
-								<input type="radio" name="rating" id="star5" value="5" required><label
-									for="star5"><img src="assets/icon/star.svg"></label> <input
-									type="radio" name="rating" id="star4" value="4"><label
-									for="star4"><img src="assets/icon/star.svg"></label> <input
-									type="radio" name="rating" id="star3" value="3"><label
-									for="star3"><img src="assets/icon/star.svg"></label> <input
-									type="radio" name="rating" id="star2" value="2"><label
-									for="star2"><img src="assets/icon/star.svg"></label> <input
-									type="radio" name="rating" id="star1" value="1"><label
-									for="star1"><img src="assets/icon/star.svg"></label>
+								<input type="radio" name="rating" id="star5" value="5" required>
+								<label for="star5"><img
+									src="${pageContext.request.contextPath}/assets/icon/star.svg"></label>
+								<input type="radio" name="rating" id="star4" value="4">
+								<label for="star4"><img
+									src="${pageContext.request.contextPath}/assets/icon/star.svg"></label>
+								<input type="radio" name="rating" id="star3" value="3">
+								<label for="star3"><img
+									src="${pageContext.request.contextPath}/assets/icon/star.svg"></label>
+								<input type="radio" name="rating" id="star2" value="2">
+								<label for="star2"><img
+									src="${pageContext.request.contextPath}/assets/icon/star.svg"></label>
+								<input type="radio" name="rating" id="star1" value="1">
+								<label for="star1"><img
+									src="${pageContext.request.contextPath}/assets/icon/star.svg"></label>
 							</div>
 
-							<label class="review-label">REVIEW</label>
-							<!-- CRITICAL: Changed name to 'review_text' to match the Servlet -->
-							<textarea class="review-textarea" name="review_text" required></textarea>
+							<label class="review-label">YOUR REVIEW</label>
+							<textarea class="review-textarea" name="review_text"
+								placeholder="Write your thoughts..." required></textarea>
 
 							<div class="post-btn-container">
 								<button type="submit" class="post-btn">POST REVIEW</button>
@@ -360,7 +476,6 @@ html, body {
 						</form>
 					</c:when>
 					<c:otherwise>
-						<!-- Displayed to users who are not logged in -->
 						<p style="margin-top: 15px; color: #666;">
 							<a href="${pageContext.request.contextPath}/Login"
 								style="color: #449d5d; font-weight: bold; text-decoration: none;">Log
@@ -370,26 +485,54 @@ html, body {
 				</c:choose>
 			</div>
 
-			<!-- Loop to display existing reviews fetched from the database -->
-			<div class="existing-reviews" style="margin-top: 40px;">
+			<%-- Existing Reviews --%>
+			<div style="margin-top: 30px;">
 				<c:if test="${empty reviews}">
 					<p style="color: #888;">No reviews yet. Be the first to review!</p>
 				</c:if>
 
 				<c:forEach var="review" items="${reviews}">
-					<div class="review-card"
-						style="margin-bottom: 20px; padding: 25px;">
-						<div
-							style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-							<h4 style="margin: 0;">${review.username}</h4>
-							<span style="color: #f9a825; font-size: 18px; font-weight: bold;">&#9733;
-								${review.rating}/5</span>
+					<div class="existing-review-card">
+						<div class="review-top-row">
+							<div class="reviewer-info">
+								<div class="reviewer-avatar">
+									<img
+										src="${pageContext.request.contextPath}/getimage?name=${review.username}&type=user"
+										alt="${review.username}"
+										onerror="this.parentElement.style.background='#ddd'; this.style.display='none'">
+								</div>
+								<div class="reviewer-meta">
+									<span class="reviewer-name">${review.username}</span> <span
+										class="reviewer-date"> <fmt:formatDate
+											value="${review.createdAt}" pattern="MMM dd, yyyy" />
+									</span>
+								</div>
+							</div>
+
+							<%-- Display stars based on rating number --%>
+							<div class="display-stars">
+								<c:forEach begin="1" end="5" var="i">
+									<c:choose>
+										<c:when test="${i <= review.rating}">
+											<img
+												src="${pageContext.request.contextPath}/assets/icon/star.svg"
+												style="width: 20px; filter: grayscale(0%) opacity(1);">
+										</c:when>
+										<c:otherwise>
+											<img
+												src="${pageContext.request.contextPath}/assets/icon/star.svg"
+												style="width: 20px; filter: grayscale(100%) opacity(0.25);">
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</div>
 						</div>
-						<small style="color: #aaa; display: block; margin-bottom: 15px;">${review.createdAt}</small>
-						<p style="margin: 0; line-height: 1.6; color: #555;">${review.reviewText}</p>
+
+						<p class="review-body">${review.reviewText}</p>
 					</div>
 				</c:forEach>
 			</div>
+
 		</div>
 
 		<div class="right-content">

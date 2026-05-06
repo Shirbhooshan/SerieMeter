@@ -2,6 +2,7 @@ package com.seriemeter.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -54,22 +55,32 @@ public class Login extends HttpServlet {
 		if (status.equals("Success")) {
 			UserDAO userDAO = new UserDAO();
 			HttpSession session = request.getSession();
-			
+
 			try {
 				// Fetch user object
 				UserModel user = userDAO.getUserByUsername(username);
-				
+
 				// Store in session
 				session.setAttribute("user", user);
-				
+
+				// Remember Me cookie
+				String rememberMe = request.getParameter("rememberMe");
+				if ("on".equals(rememberMe)) {
+					Cookie cookie = new Cookie("rememberMe", username);
+					cookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+					cookie.setPath("/");
+					cookie.setHttpOnly(true); // not accessible via JS
+					response.addCookie(cookie);
+				}
+
 				// Role-based Redirection
-	            String contextPath = request.getContextPath();
-	            if (user != null && "Admin".equalsIgnoreCase(user.getRole())) {
-	                response.sendRedirect(contextPath + "/Dashboard");
-	            } else {
-	                response.sendRedirect(contextPath + "/Explore");
-	            }
-	            return;
+				String contextPath = request.getContextPath();
+				if (user != null && "Admin".equalsIgnoreCase(user.getRole())) {
+					response.sendRedirect(contextPath + "/Dashboard");
+				} else {
+					response.sendRedirect(contextPath + "/Explore");
+				}
+				return;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
