@@ -11,9 +11,6 @@ import java.util.List;
 import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 
-/**
- * Servlet implementation class Genre
- */
 @WebServlet(asyncSupported = true, urlPatterns = { "/Search" })
 public class SearchFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,18 +36,6 @@ public class SearchFilter extends HttpServlet {
 		MediaDAO mediaDAO = new MediaDAO();
 		List<MediaModel> searchResults;
 
-		// Logic: If the query is empty, show all. If not, filter.
-		if (query != null && !query.trim().isEmpty()) {
-			searchResults = mediaDAO.searchMedia(query);
-		} else {
-			searchResults = mediaDAO.getAllMedia();
-		}
-
-		// Store the list in a request attribute to be used by the JSP
-		request.setAttribute("results", searchResults);
-
-		// Also store the keyword to show "Results for: 'Inception'" on the page
-		request.setAttribute("searchKeyword", query);
 
 		// Redirect/Forward to your search results page
 		request.getRequestDispatcher("WEB-INF/pages/searchFilter.jsp").forward(request, response);
