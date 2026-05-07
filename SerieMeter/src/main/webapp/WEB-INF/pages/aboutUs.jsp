@@ -213,7 +213,7 @@ body {
 
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/safiyah.jpg" alt="Safiyah">
+						<img src="assets/images/aboutUs/Safiyah.png" alt="Safiyah">
 					</div>
 					<div class="name">Safiyah Malik</div>
 					<div class="role">Role</div>
@@ -222,7 +222,7 @@ body {
 
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/shuvam.jpg" alt="Shuvam">
+						<img src="assets/images/aboutUs/Shuvam.jpeg" alt="Shuvam">
 					</div>
 					<div class="name">Shuvam Karki</div>
 					<div class="role">Role</div>
@@ -231,7 +231,7 @@ body {
 
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/avin.jpg" alt="Avin">
+						<img src="assets/images/aboutUs/Avin.jpeg" alt="Avin">
 					</div>
 					<div class="name">Avin Subedi</div>
 					<div class="role">Role</div>
