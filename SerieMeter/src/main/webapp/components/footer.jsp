@@ -30,16 +30,16 @@
 			<div class="sm_footer__col">
 				<h4>Explore</h4>
 				<ul>
-					<li><a href="#">Movies</a></li>
-					<li><a href="#">Series</a></li>
-					<li><a href="#">Global Search</a></li>
+					<li><a href="${pageContext.request.contextPath}/Movies">Movies</a></li>
+					<li><a href="${pageContext.request.contextPath}/Series">Series</a></li>
+					<li><a href="${pageContext.request.contextPath}/Search">Global Search</a></li>
 				</ul>
 			</div>
 
 			<div class="sm_footer__col">
 				<h4>Dev</h4>
 				<ul>
-					<li><a href="#">Documentation</a></li>
+					<li><a href="https://github.com/Shirbhooshan/SerieMeter">Documentation</a></li>
 				</ul>
 			</div>
 		</div>
