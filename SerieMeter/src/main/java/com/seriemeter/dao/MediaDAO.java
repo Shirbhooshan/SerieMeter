@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.seriemeter.controller.Media;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.utils.DBconfig;
 
@@ -166,4 +167,94 @@ public class MediaDAO {
 		}
 		return rowDeleted;
 	}
+
+	// Returns only movies (category_id = 1), joined with genre name
+	
+	public List<MediaModel> getMovies() {
+		List<MediaModel> list = new ArrayList<>();
+		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
+				+ "WHERE m.category_id = 1 " + "ORDER BY m.media_id DESC";
+		try (Connection con = DBconfig.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery()) {
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setDirector(rs.getString("director"));
+				media.setReleaseDate(rs.getString("release_date"));
+				media.setTotalTime(rs.getString("total_time"));
+				media.setDescription(rs.getString("description"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setCategoryId(rs.getInt("category_id"));
+				media.setGenreId(rs.getInt("genre_id"));
+				media.setGenreName(rs.getString("genre_name"));
+				list.add(media);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	// Returns only series (category_id = 2), joined with genre name
+	public List<MediaModel> getSeries() {
+		List<MediaModel> list = new ArrayList<>();
+		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
+				+ "WHERE m.category_id = 2 " + "ORDER BY m.media_id DESC";
+		try (Connection con = DBconfig.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery()) {
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setDirector(rs.getString("director"));
+				media.setReleaseDate(rs.getString("release_date"));
+				media.setTotalTime(rs.getString("total_time"));
+				media.setDescription(rs.getString("description"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setCategoryId(rs.getInt("category_id"));
+				media.setGenreId(rs.getInt("genre_id"));
+				media.setGenreName(rs.getString("genre_name"));
+				list.add(media);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	// Returns top 8 most reviewed media, most reviews = trending
+	
+	// LEFT JOIN so media with 0 reviews still appear
+	
+	public List<MediaModel> getTrendingMedia() {
+		List<MediaModel> list = new ArrayList<>();
+		String sql = "SELECT m.*, g.genre_name, COUNT(r.review_id) AS review_count " + "FROM media m "
+				+ "JOIN genre g ON m.genre_id = g.genre_id " + "LEFT JOIN review r ON m.media_id = r.media_id "
+				+ "GROUP BY m.media_id, g.genre_name " + "ORDER BY review_count DESC " + "LIMIT 8";
+		try (Connection con = DBconfig.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery()) {
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setDirector(rs.getString("director"));
+				media.setReleaseDate(rs.getString("release_date"));
+				media.setTotalTime(rs.getString("total_time"));
+				media.setDescription(rs.getString("description"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setCategoryId(rs.getInt("category_id"));
+				media.setGenreId(rs.getInt("genre_id"));
+				media.setGenreName(rs.getString("genre_name"));
+				list.add(media);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

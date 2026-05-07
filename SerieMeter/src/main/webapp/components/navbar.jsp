@@ -42,8 +42,8 @@
 
         <ul class="sm_navbar__nav">
             <li><a href="${pageContext.request.contextPath}/Explore">Explore</a></li>
-            <li><a href="#">Movies</a></li>
-            <li><a href="#">Series</a></li>
+            <li><a href="${pageContext.request.contextPath}/Movies">Movies</a></li>
+            <li><a href="${pageContext.request.contextPath}/Series">Series</a></li>
             <li><a href="${pageContext.request.contextPath}/About">About Us</a></li>
         </ul>
 

@@ -10,6 +10,7 @@ public class MediaModel {
 	private String mediaProfile;
 	private int categoryId;
 	private int genreId;
+	private String genreName;
 
 	public MediaModel() {
 	}
@@ -84,5 +85,13 @@ public class MediaModel {
 
 	public void setGenreId(int genreId) {
 		this.genreId = genreId;
+	}
+
+	public String getGenreName() {
+		return genreName;
+	}
+
+	public void setGenreName(String g) {
+		this.genreName = g;
 	}
 }

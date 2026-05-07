@@ -12,16 +12,16 @@ import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 
 /**
- * Servlet implementation class Genre
+ * Servlet implementation class Series
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/Search" })
-public class SearchFilter extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/Series" })
+public class Series extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SearchFilter() {
+	public Series() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,29 +32,18 @@ public class SearchFilter extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// Get the 'query' variable from the navbar input name="query"
-		String query = request.getParameter("query");
-
 		MediaDAO mediaDAO = new MediaDAO();
-		List<MediaModel> searchResults;
 
-		// Logic: If the query is empty, show all. If not, filter.
-		if (query != null && !query.trim().isEmpty()) {
-			searchResults = mediaDAO.searchMedia(query);
-		} else {
-			searchResults = mediaDAO.getAllMedia();
-		}
+		// Getting movies (category_id = 1)
+		List<MediaModel> allSeries = mediaDAO.getSeries();
 
-		// Store the list in a request attribute to be used by the JSP
-		request.setAttribute("results", searchResults);
+		// Putting movie request so movies.jsp can read them
+		request.setAttribute("serieList", allSeries);
 
-		// Also store the keyword to show "Results for: 'Inception'" on the page
-		request.setAttribute("searchKeyword", query);
-
-		// Redirect/Forward to your search results page
-		request.getRequestDispatcher("WEB-INF/pages/searchFilter.jsp").forward(request, response);
+		// Forward to the JSP
+		request.getRequestDispatcher("/WEB-INF/pages/series.jsp").forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

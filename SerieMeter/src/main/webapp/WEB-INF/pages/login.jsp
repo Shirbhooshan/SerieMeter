@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html lang="en">
 <head>
@@ -235,6 +235,15 @@ body {
 				<a href="#" class="forgot-password">Forgot password?</a>
 			</div>
 
+			<div
+				style="display: flex; align-items: center; gap: 8px; padding-left: 10px; margin-bottom: 5px;">
+				<input type="checkbox" name="rememberMe" id="rememberMe"
+					style="width: 14px; height: 14px; accent-color: #34A853; cursor: pointer;">
+				<label for="rememberMe"
+					style="font-size: 12px; color: #666; cursor: pointer;">Remember
+					me</label>
+			</div>
+
 			<button type="submit" class="login-but">
 				Login <img src="assets/icon/right-arrow-white.svg" alt=""
 					style="width: 16px;">
@@ -248,9 +257,7 @@ body {
 		</form>
 	</div>
 
-    <div class="footer-text">
-        ©2026 SERIEMETER
-    </div>
+	<div class="footer-text">©2026 SERIEMETER</div>
 
 	<a href="#" class="back-link"> <img
 		src="assets/icon/left-arrow.svg" alt="" style="width: 14px;"> Go

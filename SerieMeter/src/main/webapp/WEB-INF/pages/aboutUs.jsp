@@ -204,7 +204,7 @@ body {
 			<div class="team-grid">
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/shirbhooshan.jpg" alt="Shirbhooshan">
+						<img src="assets/images/aboutUs/Shirbhooshan.png" alt="Shirbhooshan">
 					</div>
 					<div class="name">Shirbhooshan</div>
 					<div class="role">Team Lead</div>
