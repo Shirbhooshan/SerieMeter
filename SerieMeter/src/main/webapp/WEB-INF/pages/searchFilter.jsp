@@ -57,7 +57,6 @@ a {
 }
 
 /* Sidebar */
-
 .sm_sf_sidebar {
 	width: 260px;
 	min-width: 260px;
@@ -380,35 +379,35 @@ a {
 </head>
 <body>
 
-	<!-- Navbar component --> 
+	<!-- Navbar component -->
 	<%@ include file="/components/navbar.jsp"%>
 
 
 	<div class="sm_sf_body">
 
-		<!-- Sidebar Filters --> 
-		
+		<!-- Sidebar Filters -->
+
 		<aside class="sm_sf_sidebar">
 			<div class="sm_sf_sidebar_title">Filters</div>
 
-			<!-- Category  --> 
+			<!-- Category  -->
 			<div class="sm_sf_filter_label">Category Type</div>
 			<div class="sm_sf_pill_row">
 				<button class="sm_sf_pill active" onclick="smSfSelectCat(this)">Movie</button>
 				<button class="sm_sf_pill inactive" onclick="smSfSelectCat(this)">Series</button>
 			</div>
 
-			<!-- Genre --> 
+			<!-- Genre -->
 			<div class="sm_sf_filter_label">Genre</div>
 			<div class="sm_sf_genre_grid">
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Action</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Comedy</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Drama</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Thriller</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Horror</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Sci-Fi</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Romance</div>
-				<div class="sm_sf_genre_tag" onclick="this.classList.toggle('on')">Animation</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Action</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Comedy</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Drama</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Thriller</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Horror</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Sci-Fi</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Romance</div>
+				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Animation</div>
 			</div>
 
 			<!-- Release Year -->
@@ -445,7 +444,7 @@ a {
 
 
 		<!-- Content  -->
-		
+
 		<main class="sm_sf_content">
 
 			<h1 class="sm_sf_heading">Search</h1>
@@ -466,9 +465,9 @@ a {
 			<!--  Card grid is in empty state now, cards will be added later -->
 			<div class="sm_sf_cards_grid">
 
-				
 
-				<!-- Empty state --> 
+
+				<!-- Empty state -->
 				<div class="sm_sf_empty">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search.svg"
@@ -507,7 +506,17 @@ a {
 					});
 			btn.classList.add('on');
 		}
-
+		
+		
+		/* Genre tag toggle — only one active at a time */
+		function smSfSelectGenre(tag) {
+			document.querySelectorAll('.sm_sf_genre_tag').forEach(function(t) {
+				t.classList.remove('on');
+			});
+			tag.classList.add('on');
+		}
+		
+		
 		/* Reset all filters back to default */
 		function smSfResetAll() {
 			var pills = document.querySelectorAll('.sm_sf_pill');
