@@ -106,9 +106,9 @@
 	</a>
 
 	<ul class="nav-links">
-		<li><a href="explore.jsp">Explore</a></li>
-		<li><a href="movies.jsp">Movies</a></li>
-		<li><a href="series.jsp">Series</a></li>
+		<li><a href="${pageContext.request.contextPath}/Explore">Explore</a></li>
+		<li><a href="${pageContext.request.contextPath}/Movies">Movies</a></li>
+		<li><a href="${pageContext.request.contextPath}/Series">Series</a></li>
 		<li><a href="${pageContext.request.contextPath}/About">About
 				Us</a></li>
 	</ul>
