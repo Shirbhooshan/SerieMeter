@@ -61,11 +61,11 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
-                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
+                        <%-- Added timestamp parameter to break cache and removed username text --%>
+                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user&t=<%=System.currentTimeMillis()%>"
                              alt="Profile"
                              class="sm_navbar__profile_pic"
                              onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
-                        ${sessionScope.user.userName}
                     </a>
                 </c:when>
                 <c:otherwise>
