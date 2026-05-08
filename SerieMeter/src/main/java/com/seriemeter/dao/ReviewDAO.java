@@ -56,4 +56,28 @@ public class ReviewDAO {
 		}
 		return reviews;
 	}
+	// Fetch all reviews written by a specific user for the profile page
+	public List<ReviewModel> getReviewsByUserId(int userId) {
+	    List<ReviewModel> reviews = new ArrayList<>();
+	    String query = "SELECT * FROM review WHERE user_id = ? ORDER BY created_at DESC";
+	    try (Connection conn = DBconfig.getConnection();
+	         PreparedStatement pst = conn.prepareStatement(query)) {
+	        pst.setInt(1, userId);
+	        ResultSet rs = pst.executeQuery();
+	        while (rs.next()) {
+	            ReviewModel review = new ReviewModel();
+	            review.setReviewId(rs.getInt("review_id"));
+	            review.setUserId(rs.getInt("user_id"));
+	            review.setMediaId(rs.getInt("media_id"));
+	            review.setRating(rs.getInt("rating"));
+	            review.setReviewText(rs.getString("review_text"));
+	            review.setCreatedAt(rs.getTimestamp("created_at"));
+	            reviews.add(review);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return reviews;
+	}
+
 }

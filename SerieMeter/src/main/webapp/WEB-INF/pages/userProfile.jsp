@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +12,10 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <style>
+/* Reset & base styles */
 * {
 	margin: 0;
 	padding: 0;
@@ -26,49 +30,24 @@ body {
 	min-height: 100vh;
 }
 
-/* Top section with background image */
-.sm-top-white-bg {
-	width: 100%;
-	background-image: url('assets/images/rectangle.png');
-	background-size: cover;
-}
-
-.seriemeter-container {
+/* Full-width layout wrapper with horizontal padding */
+.up-container {
 	width: 100%;
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 0 20px;
 }
 
-/* Header section (Welcome + Logout) */
-.sm-header {
+/* Top banner with background image */
+.up-top-white-bg {
 	width: 100%;
-	display: flex;
-	align-items: center;
-	padding: 20px 0;
-	position: relative;
+	background-image: url('assets/images/rectangle.png');
+	background-size: cover;
+	background-position: center;
 }
 
-.sm-welcome-text {
-	font-size: 64px;
-	font-weight: bold;
-	color: #599453;
-	transform: translate(150%, 70%);
-}
-
-.sm-logout-btn {
-	margin-left: auto;
-	padding: 10px 35px;
-	background-color: #A54A44;
-	color: white;
-	text-decoration: none;
-	border-radius: 32px;
-	font-size: 14px;
-	font-weight: bold;
-}
-
-/* Profile summary section */
-.sm-profile-summary {
+/* Profile summary row: avatar+info on the left, stats on the right */
+.up-profile-summary {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -77,13 +56,15 @@ body {
 	margin-bottom: 25px;
 }
 
-.sm-profile-header {
+/* Left cluster: circular avatar + text details */
+.up-profile-header {
 	display: flex;
 	align-items: center;
 	gap: 20px;
 }
 
-.sm-avatar {
+/* Circular avatar image */
+.up-avatar {
 	width: 110px;
 	height: 110px;
 	border-radius: 50%;
@@ -91,13 +72,15 @@ body {
 	background-color: #e0e0e0;
 }
 
-.sm-user-name {
+/* User display name */
+.up-user-name {
 	font-size: 24px;
 	font-weight: bold;
 	color: #000000;
 }
 
-.sm-user-email {
+/* Email row with inline copy icon */
+.up-user-email {
 	font-size: 14px;
 	color: #616161;
 	display: flex;
@@ -105,31 +88,112 @@ body {
 	gap: 5px;
 }
 
-.sm-copy-icon {
+/* Small copy icon beside the email address */
+.up-copy-icon {
 	font-size: 16px;
 	cursor: pointer;
 	height: 24px;
 	width: 24px;
 }
 
-.sm-stats {
+/* Three-dot menu: wrapper gives the popup its positioning anchor */
+.up-menu-wrapper {
+	position: relative;
+	display: inline-block;
+}
+
+/* The "⋯" button that opens the dropdown */
+.up-three-dot-btn {
+	background: none;
+	border: none;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #333;
+	padding: 4px 8px;
+	border-radius: 6px;
+	line-height: 1;
+	letter-spacing: 2px;
+	transition: background-color 0.2s ease;
+}
+
+.up-three-dot-btn:hover {
+	background-color: #f0f0f0;
+}
+
+/* Dropdown popup — hidden until .up-popup-active is added via JS */
+.up-popup-menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 8px);
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    min-width: 160px;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* JS adds this class to make the popup visible */
+.up-popup-menu.up-popup-active {
+	display: block;
+}
+
+/* Each row inside the popup (Edit Profile, Logout, etc.) */
+.up-popup-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.15s ease;
+	white-space: nowrap;
+}
+
+.up-popup-item:hover {
+	background-color: #f5f5f5;
+}
+
+/* Logout row uses red text */
+.up-popup-item.up-logout-item {
+	color: #E05454;
+}
+
+/* Icons inside the popup rows */
+.up-popup-item img {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+/* Stats block on the right side of the profile summary */
+.up-stats {
 	display: flex;
 	gap: 40px;
 	text-align: right;
 }
 
-.sm-stat-item {
+.up-stat-item {
 	display: flex;
 	flex-direction: column;
 }
 
-.sm-stat-number {
+/* Large number (e.g. "3") */
+.up-stat-number {
 	font-size: 48px;
 	font-weight: bold;
 	color: #2F2F2F;
 }
 
-.sm-stat-label {
+/* Small uppercase label below the number */
+.up-stat-label {
 	font-size: 12px;
 	font-weight: bold;
 	color: #8D8D8D;
@@ -137,14 +201,15 @@ body {
 	margin-top: -5px;
 }
 
-/* Cards section */
-.sm-content-cards {
+/* Stacked list of content cards */
+.up-content-cards {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-.sm-card {
+/* Individual card container */
+.up-card {
 	background-color: #fff;
 	padding: 25px;
 	border-radius: 12px;
@@ -153,70 +218,297 @@ body {
 	min-height: 200px;
 }
 
-.sm-card-header {
+/* Card title on the left, sort buttons on the right */
+.up-card-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
 }
 
-.sm-card-header h3 {
+.up-card-header h3 {
 	font-size: 18px;
 	font-weight: 600;
 	color: #151515;
 }
 
-.sm-sort-options {
+/* Group of Oldest / Newest sort buttons */
+.up-sort-options {
 	display: flex;
 	gap: 10px;
 }
 
-.sm-sort-btn {
+/* Default (inactive) sort button */
+.up-sort-btn {
 	padding: 8px 20px;
 	border-radius: 20px;
 	border: 1px solid #E0E0E0;
 	background-color: #F8F9FA;
 	font-size: 12px;
+	font-family: 'Manrope', sans-serif;
+	font-weight: 500;
 	cursor: pointer;
+	text-decoration: none;
+	color: #333;
+	transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.sm-sort-btn.sm-active {
+/* Active sort button highlighted in green */
+.up-sort-btn.up-active {
 	background-color: #D9F1D7;
 	color: #43A53A;
 	border-color: #B1E6B0;
 }
 
-.sm-card-body {
+/* Card body centres the empty-state message */
+.up-card-body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
+	height: 120px;
 }
 
-.sm-empty-message {
+/* Empty state text shown when no items exist */
+.up-empty-message {
 	font-size: 16px;
 	text-align: center;
+	font-style: italic;
 }
 
-.sm-empty-message a {
+.up-empty-message a {
 	color: #629AC4;
+	text-decoration: none;
 }
 
-/* Footer section */
-.sm-footer {
+.up-empty-message a:hover {
+	text-decoration: underline;
+}
+
+/* ── Bookmark poster grid ───────────────────────────────────────────────── */
+
+.up-bookmarks-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+/* Each bookmark card: poster image + info below */
+.up-bookmark-card {
+    position: relative;
+    width: 170px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+/* Poster image fills the card width with a fixed height */
+.up-bookmark-poster {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    background-color: #e0e0e0;
+}
+
+/* Red heart bookmark icon in the top-right corner of the poster */
+.up-bookmark-heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.up-bookmark-heart img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Info row below the poster */
+.up-bookmark-info {
+    margin-top: 8px;
+}
+
+.up-bookmark-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.up-bookmark-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.up-bookmark-genre {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8D8D8D;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.up-bookmark-year {
+    font-size: 12px;
+    color: #8D8D8D;
+}
+
+/* "+" add-more card */
+.up-bookmark-add {
+    width: 170px;
+    height: 240px;
+    border-radius: 10px;
+    border: 2px dashed #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+
+.up-bookmark-add:hover {
+    border-color: #43A53A;
+}
+
+.up-bookmark-add span {
+    font-size: 28px;
+    color: #ccc;
+    line-height: 1;
+}
+
+/* ── Review items ──────────────────────────────────────────────────────── */
+
+.up-review-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 14px;
+    background-color: #fafafa;
+}
+
+/* Left column: media title + date */
+.up-review-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.up-review-media-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #629AC4;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.up-review-date {
+    font-size: 12px;
+    color: #999;
+    margin-top: auto;
+}
+
+/* Right column: stars + review text */
+.up-review-right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Star icons row */
+.up-review-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.up-star {
+    width: 20px;
+    height: 20px;
+}
+
+/* Filled star — gold colour via CSS filter */
+.up-star.filled {
+    filter: invert(68%) sepia(89%) saturate(500%) hue-rotate(1deg) brightness(105%) contrast(101%);
+}
+
+/* Empty star appears faded */
+.up-star.empty {
+    opacity: 0.25;
+}
+
+/* Review text */
+.up-review-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Pagination row below reviews */
+.up-review-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.up-page-nav {
+    color: #888;
+    text-decoration: none;
+}
+
+.up-page-num {
+    color: #888;
+    text-decoration: none;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.up-page-num.up-page-active {
+    background-color: #f0f0f0;
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+/* Footer section*/
+.up-footer {
 	text-align: center;
 	margin-top: 40px;
-	padding-bottom: 20px;
+	padding-bottom: 100px;
 }
 
-.sm-discover-text {
+.up-discover-text {
 	font-size: 18px;
 	font-weight: 600;
 	color: #151515;
 	margin-bottom: 15px;
 }
 
-.sm-explore-btn {
+/* Green pill button */
+.up-explore-btn {
 	padding: 12px 35px;
 	background-color: #008000;
 	color: white;
@@ -224,99 +516,345 @@ body {
 	border-radius: 32px;
 	font-size: 14px;
 	font-weight: 700;
+	font-family: 'Manrope', sans-serif;
 	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.up-explore-btn:hover {
+	background-color: #006800;
 }
 </style>
 
 <body>
 
-
 	<%@ include file="/components/navbar.jsp"%>
 
-	<!-- Top section with background image -->
-	<div class="sm-top-white-bg">
-		<div class="seriemeter-container">
+	<!-- Top banner with background image -->
+	<div class="up-top-white-bg">
+		<div class="up-container">
 
-			<!-- Header with Welcome text and Logout button -->
-			<header class="sm-header">
-				<h1 class="sm-welcome-text">Welcome,</h1>
-				<a href="${pageContext.request.contextPath}/Login"
-					class="sm-logout-btn">Logout</a>
-			</header>
+			<!-- Profile summary: avatar + name/email/menu on left, stats on right -->
+			<section class="up-profile-summary">
 
-			<!-- User profile summary section -->
-			<section class="sm-profile-summary">
-				<div class="sm-profile-header">
-					<img src="assets/images/userProfile.jpg" alt="User Avatar"
-						class="sm-avatar">
-					<div class="sm-user-details">
-						<h2 class="sm-user-name">Alex Berg</h2>
-						<p class="sm-user-email">
-							alex@gmail.com <img src="assets/icon/copy.svg" alt="Copy"
-								class="sm-copy-icon">
+				<!-- Left side: avatar, name, 3-dot menu, email -->
+				<div class="up-profile-header">
+
+					<!-- User avatar: use uploaded profile pic or fall back to default -->
+					<c:choose>
+						<c:when test="${not empty sessionUser.userProfile}">
+							<img src="${pageContext.request.contextPath}/getimage?name=${sessionUser.userProfile}&type=user"
+								alt="User Avatar" class="up-avatar">
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/assets/images/userProfile.jpg"
+								alt="User Avatar" class="up-avatar">
+						</c:otherwise>
+					</c:choose>
+
+					<!-- Name row + email -->
+					<div class="up-user-details">
+
+						<!-- Name and three-dot options button on the same row -->
+						<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+
+							<%-- Display the logged-in user's full name prefixed with @ --%>
+							<h2 class="up-user-name">
+								@<c:out value="${sessionUser.fullName}" />
+							</h2>
+
+							<!-- Three-dot menu wrapper -->
+							<div class="up-menu-wrapper">
+
+								<!-- Toggle button — click opens/closes the popup -->
+								<button class="up-three-dot-btn" id="upMenuToggle"
+									aria-label="More options" aria-expanded="false">&#8943;</button>
+
+								<!-- Dropdown popup menu -->
+								<div class="up-popup-menu" id="upPopupMenu" role="menu">
+
+									<!-- Edit Profile option -->
+									<a href="#" class="up-popup-item" role="menuitem">
+										<img alt="Edit" src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+										Edit Profile
+									</a>
+
+									<!-- Logout option — redirects to Logout servlet -->
+									<a href="${pageContext.request.contextPath}/Logout"
+										class="up-popup-item up-logout-item" role="menuitem">
+										<img alt="Logout" src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+										Logout
+									</a>
+
+								</div>
+
+							</div>
+						</div>
+
+						<!-- Email address with copy icon — value pulled from session -->
+						<p class="up-user-email">
+							<c:out value="${sessionUser.email}" />
+							<img src="${pageContext.request.contextPath}/assets/icon/copy.svg"
+								alt="Copy email" class="up-copy-icon">
 						</p>
+
+					</div>
+
+				</div>
+
+				<!-- Right side: live bookmark and review counts from the servlet -->
+				<div class="up-stats">
+					<div class="up-stat-item">
+						<span class="up-stat-number">${bookmarkCount}</span>
+						<span class="up-stat-label">BOOKMARKS</span>
+					</div>
+					<div class="up-stat-item">
+						<span class="up-stat-number">${reviewCount}</span>
+						<span class="up-stat-label">REVIEWS</span>
 					</div>
 				</div>
-				<div class="sm-stats">
-					<div class="sm-stat-item">
-						<span class="sm-stat-number">3</span> <span class="sm-stat-label">BOOKMARKS</span>
-					</div>
-					<div class="sm-stat-item">
-						<span class="sm-stat-number">3</span> <span class="sm-stat-label">REVIEWS</span>
-					</div>
-				</div>
+
 			</section>
 
 		</div>
 	</div>
 
-	<!-- Main content cards -->
-	<main class="sm-main-content seriemeter-container">
-		<section class="sm-content-cards">
+	<!-- Main content: Bookmarks and Reviews cards -->
+	<main class="up-container">
+		<section class="up-content-cards">
 
-			<div class="sm-card bookmarks-card">
-				<div class="sm-card-header">
+			<!-- ── Bookmarks card ─────────────────────────────────────────── -->
+			<div class="up-card up-bookmarks-card">
+				<div class="up-card-header">
 					<h3>Bookmarks</h3>
-					<div class="sm-sort-options">
-						<button class="sm-sort-btn sm-active">Oldest</button>
-						<button class="sm-sort-btn">Newest</button>
+					<%-- Sort buttons: highlight whichever order is currently active --%>
+					<div class="up-sort-options">
+						<a href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
+							class="up-sort-btn ${bookmarkSort == 'oldest' ? 'up-active' : ''}">Oldest</a>
+						<a href="${pageContext.request.contextPath}/User?bookmarkSort=newest&reviewSort=${reviewSort}"
+							class="up-sort-btn ${bookmarkSort == 'newest' ? 'up-active' : ''}">Newest</a>
 					</div>
 				</div>
-				<div class="sm-card-body">
-					<p class="sm-empty-message">
-						<a href="#">Nothing bookmarked yet!!</a>
-					</p>
-				</div>
+
+				<c:choose>
+					<c:when test="${empty userBookmarks}">
+						<!-- No bookmarks yet — link takes the user to Explore -->
+						<div class="up-card-body">
+							<p class="up-empty-message">
+								<a href="${pageContext.request.contextPath}/Explore">Nothing bookmarked yet!</a>
+							</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<%-- Poster grid of bookmarked media --%>
+						<div class="up-bookmarks-grid">
+							<c:forEach var="media" items="${userBookmarks}">
+								<div class="up-bookmark-card"
+									onclick="location.href='${pageContext.request.contextPath}/Media?id=${media.mediaId}'">
+
+									<!-- Poster image — served via GetImageServlet -->
+									<c:choose>
+										<c:when test="${not empty media.mediaProfile}">
+											<img class="up-bookmark-poster"
+												src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
+												alt="${media.title}">
+										</c:when>
+										<c:otherwise>
+											<img class="up-bookmark-poster"
+												src="${pageContext.request.contextPath}/assets/images/userProfile.jpg"
+												alt="${media.title}">
+										</c:otherwise>
+									</c:choose>
+
+									<!-- Red heart icon overlay -->
+									<div class="up-bookmark-heart">
+										<img alt="heart" src="${pageContext.request.contextPath}/assets/icon/heart.svg">
+									</div>
+
+									<!-- Title, year, genre below poster -->
+									<div class="up-bookmark-info">
+										<div class="up-bookmark-title">
+											<c:out value="${media.title}" />
+										</div>
+										<div class="up-bookmark-meta">
+											<span class="up-bookmark-genre">
+												<c:out value="${media.genreName}" />
+											</span>
+											<%-- Extract 4-digit year from release_date string --%>
+											<span class="up-bookmark-year">
+												<c:if test="${not empty media.releaseDate}">
+													<c:out value="${fn:substring(media.releaseDate, 0, 4)}" />
+												</c:if>
+											</span>
+										</div>
+									</div>
+
+								</div>
+							</c:forEach>
+
+							<!-- "+" card — quick link to discover more -->
+							<a href="${pageContext.request.contextPath}/Explore"
+								class="up-bookmark-add" title="Discover more">
+								<span>+</span>
+							</a>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
-			<div class="sm-card reviews-card">
-				<div class="sm-card-header">
+			<!-- ── Reviews card ──────────────────────────────────────────── -->
+			<div class="up-card up-reviews-card">
+				<div class="up-card-header">
 					<h3>Reviews</h3>
-					<div class="sm-sort-options">
-						<button class="sm-sort-btn sm-active">Oldest</button>
-						<button class="sm-sort-btn">Newest</button>
+					<%-- Sort buttons: highlight whichever order is currently active --%>
+					<div class="up-sort-options">
+						<a href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
+							class="up-sort-btn ${reviewSort == 'oldest' ? 'up-active' : ''}">Oldest</a>
+						<a href="${pageContext.request.contextPath}/User?reviewSort=newest&bookmarkSort=${bookmarkSort}"
+							class="up-sort-btn ${reviewSort == 'newest' ? 'up-active' : ''}">Newest</a>
 					</div>
 				</div>
-				<div class="sm-card-body">
-					<p class="sm-empty-message">
-						<a href="#">Nothing reviewed yet!!</a>
-					</p>
-				</div>
+
+				<c:choose>
+					<c:when test="${empty userReviews}">
+						<!-- No reviews yet — link takes the user to Explore -->
+						<div class="up-card-body">
+							<p class="up-empty-message">
+								<a href="${pageContext.request.contextPath}/Explore">Nothing reviewed yet!</a>
+							</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<%-- Loop through each review --%>
+						<c:forEach var="review" items="${userReviews}">
+							<div class="up-review-item">
+
+								<!-- Left column: media title + relative date -->
+								<div class="up-review-left">
+									<span class="up-review-media-title">
+										<c:out value="${review.mediaTitle}" />
+									</span>
+
+									<!-- Relative date (Today / Yesterday / N days ago) -->
+									<p class="up-review-date">
+										<c:set var="diffMs"   value="${now.time - review.createdAt.time}" />
+										<c:set var="diffDays" value="${diffMs / (1000 * 60 * 60 * 24)}" />
+										<c:choose>
+											<c:when test="${diffDays < 1}">Today</c:when>
+											<c:when test="${diffDays < 2}">Yesterday</c:when>
+											<c:otherwise>
+												<fmt:formatNumber value="${diffDays}" maxFractionDigits="0" /> days ago
+											</c:otherwise>
+										</c:choose>
+									</p>
+								</div>
+
+								<!-- Right column: stars + review text -->
+								<div class="up-review-right">
+
+									<!-- Stars row — DB rating is 1-5, display directly -->
+									<div class="up-review-stars">
+										<c:set var="fullStars" value="${review.rating}" />
+										<c:forEach begin="1" end="5" var="i">
+											<c:choose>
+												<c:when test="${i <= fullStars}">
+													<img src="${pageContext.request.contextPath}/assets/icon/star.svg"
+														alt="filled star" class="up-star filled">
+												</c:when>
+												<c:otherwise>
+													<img src="${pageContext.request.contextPath}/assets/icon/star-none.svg"
+														alt="empty star" class="up-star empty">
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</div>
+
+									<!-- Review text -->
+									<p class="up-review-text">
+										<c:out value="${review.reviewText}" />
+									</p>
+
+								</div>
+
+							</div>
+						</c:forEach>
+
+						<!-- Pagination placeholder (static for now) -->
+						<div class="up-review-pagination">
+							<a href="#" class="up-page-nav">&lt;</a>
+							<a href="#" class="up-page-num up-page-active">1</a>
+							<a href="#" class="up-page-nav">&gt;</a>
+						</div>
+
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 		</section>
 	</main>
 
-	<!-- Footer -->
-	<footer class="sm-footer seriemeter-container">
-		<p class="sm-discover-text">
-			Discover more to<br>bookmark & review
+	<!-- Footer: call-to-action to explore more content -->
+	<footer class="up-footer up-container">
+		<p class="up-discover-text">
+			Discover more to<br>bookmark &amp; review
 		</p>
-		<button class="sm-explore-btn">Explore now</button>
+		<button class="up-explore-btn"
+			onclick="location.href='${pageContext.request.contextPath}/Explore'">
+			Explore now
+		</button>
 	</footer>
 
-
 	<%@ include file="/components/footer.jsp"%>
+
+	<script>
+		// ── Three-dot popup menu logic ─────────────────────────────────────────
+
+		const menuToggle = document.getElementById('upMenuToggle');
+		const popupMenu  = document.getElementById('upPopupMenu');
+
+		// Toggle the popup open or closed when the button is clicked
+		menuToggle.addEventListener('click', function (event) {
+			event.stopPropagation();
+			const isOpen = popupMenu.classList.toggle('up-popup-active');
+			menuToggle.setAttribute('aria-expanded', isOpen);
+		});
+
+		// Close the popup when the user clicks anywhere else on the page
+		document.addEventListener('click', function () {
+			popupMenu.classList.remove('up-popup-active');
+			menuToggle.setAttribute('aria-expanded', 'false');
+		});
+
+		// Clicking inside the popup should not close it
+		popupMenu.addEventListener('click', function (event) {
+			event.stopPropagation();
+		});
+
+		// ── Copy-email-to-clipboard logic ──────────────────────────────────────
+
+		const copyIcon = document.querySelector('.up-copy-icon');
+
+		copyIcon.addEventListener('click', function () {
+
+			// Read the email text from the paragraph's first text node
+			const email = document.querySelector('.up-user-email').childNodes[0].textContent.trim();
+
+			navigator.clipboard.writeText(email)
+				.then(function () {
+					// Swap to checkmark for 2 seconds as visual confirmation
+					copyIcon.src   = '${pageContext.request.contextPath}/assets/icon/check.svg';
+					copyIcon.title = 'Copied!';
+
+					setTimeout(function () {
+						copyIcon.src   = '${pageContext.request.contextPath}/assets/icon/copy.svg';
+						copyIcon.title = '';
+					}, 2000);
+				})
+				.catch(function () {
+					alert('Failed to copy email. Please copy it manually.');
+				});
+		});
+	</script>
 
 </body>
 </html>

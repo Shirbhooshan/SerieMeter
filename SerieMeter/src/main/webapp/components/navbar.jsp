@@ -84,6 +84,23 @@
 			</c:choose>
 		</div>
 	</nav>
+            <%-- Show profile if logged in, Sign In button if not --%>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
+                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
+                             alt="Profile"
+                             class="sm_navbar__profile_pic"
+                             onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+                        ${sessionScope.user.userName}
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/Register" class="sm_navbar__signup">Sign In</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </nav>
 
 </body>
 </html>
