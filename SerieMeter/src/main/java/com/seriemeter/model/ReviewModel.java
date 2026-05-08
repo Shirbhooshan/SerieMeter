@@ -3,71 +3,82 @@ package com.seriemeter.model;
 import java.sql.Timestamp;
 
 public class ReviewModel {
-	private int reviewId;
-	private int userId;
-	private int mediaId;
-	private int rating;
-	private String reviewText;
-	private Timestamp createdAt;
-	private String username;
+    private int reviewId;
+    private int userId;
+    private int mediaId;
+    private int rating;
+    private String reviewText;
+    private Timestamp createdAt;
+    private String username;
+    /** FIX: populated via JOIN in UserProfileDAO so the profile page can show the title. */
+    private String mediaTitle;
 
-	public ReviewModel() {
-	}
+    public ReviewModel() {
+    }
 
-	// Getters and Setters
-	public int getReviewId() {
-		return reviewId;
-	}
+    // Getters and Setters
 
-	public void setReviewId(int reviewId) {
-		this.reviewId = reviewId;
-	}
+    public int getReviewId() {
+        return reviewId;
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public int getMediaId() {
-		return mediaId;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public void setMediaId(int mediaId) {
-		this.mediaId = mediaId;
-	}
+    public int getMediaId() {
+        return mediaId;
+    }
 
-	public int getRating() {
-		return rating;
-	}
+    public void setMediaId(int mediaId) {
+        this.mediaId = mediaId;
+    }
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+    public int getRating() {
+        return rating;
+    }
 
-	public String getReviewText() {
-		return reviewText;
-	}
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
-	public void setReviewText(String reviewText) {
-		this.reviewText = reviewText;
-	}
+    public String getReviewText() {
+        return reviewText;
+    }
 
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
 
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getMediaTitle() {
+        return mediaTitle;
+    }
+
+    public void setMediaTitle(String mediaTitle) {
+        this.mediaTitle = mediaTitle;
+    }
 }
