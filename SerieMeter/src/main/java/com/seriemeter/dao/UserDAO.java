@@ -114,4 +114,40 @@ public class UserDAO {
 		}
 		return users;
 	}
+	
+	// Update user details WITHOUT changing password 
+	public void updateUserDetails(UserModel user) throws Exception {
+	    String sql = "UPDATE users SET full_name = ?, username = ?, user_profile = ? WHERE user_id = ?";
+
+	    try (Connection con = DBconfig.getConnection();
+	         PreparedStatement pst = con.prepareStatement(sql)) {
+
+	        pst.setString(1, user.getFullName());
+	        pst.setString(2, user.getUserName());
+	        pst.setString(3, user.getUserProfile());
+	        pst.setInt(4, user.getUserId());
+
+	        int rows = pst.executeUpdate();
+	        System.out.println("updateUserDetails rows affected: " + rows);
+	    }
+	}
+
+	// Update user details AND password hash 
+	public void updateUserWithPassword(UserModel user) throws Exception {
+	    String sql = "UPDATE users SET full_name = ?, username = ?, password_hash = ?, user_profile = ? WHERE user_id = ?";
+
+	    try (Connection con = DBconfig.getConnection();
+	         PreparedStatement pst = con.prepareStatement(sql)) {
+
+	        pst.setString(1, user.getFullName());
+	        pst.setString(2, user.getUserName());
+	        pst.setString(3, user.getPassword());
+	        pst.setString(4, user.getUserProfile());
+	        pst.setInt(5, user.getUserId());
+
+	        int rows = pst.executeUpdate();
+	        System.out.println("updateUserWithPassword rows affected: " + rows);
+	    }
+	}
+	
 }

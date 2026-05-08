@@ -14,7 +14,9 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 @WebFilter(urlPatterns = { "/Edit", "/Users", "/AdminContent", "/Dashboard", "/Report" })
+
 public class AdminFilter implements Filter {
 
 	@Override
@@ -32,7 +34,7 @@ public class AdminFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			// Redirect if not admin
-			res.sendRedirect(req.getContextPath() + "/Login");
+			res.sendError(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
 }

@@ -4,10 +4,24 @@
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                              https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	version="6.0">
-	<display-name>SerieMeter</display-name>
+<display-name>SerieMeter</display-name>
 
+<!--  404 — Page or URL not found  -->
 	<error-page>
-		<error-code>404</error-code>
-		<location>/404</location>
+	<error-code>404</error-code>
+	<location>/error</location>
 	</error-page>
+	
+	<!--  500 - Internal server error (Java code crash or unhandled exception)  -->
+	<error-page>
+	<error-code>500</error-code>
+	<location>/error</location>
+	</error-page>
+	
+	<!--  403 - Forbidden (user does not have permission to access the resource)  -->
+	<error-page>
+	<error-code>403</error-code>
+	<location>/error</location>
+	</error-page>
+	
 </web-app>

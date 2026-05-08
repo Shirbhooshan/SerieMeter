@@ -65,7 +65,7 @@
 				src="assets/icon/bookmarkss.svg" alt="Bookmarks"
 				class="sm_navbar__bookmark_icon" />
 			</a>
-
+			
 			<%-- Show profile if logged in, Sign In button if not --%>
 			<c:choose>
 				<c:when test="${not empty sessionScope.user}">
@@ -84,6 +84,24 @@
 			</c:choose>
 		</div>
 	</nav>
+
+            <%-- Show profile if logged in, Sign In button if not --%>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
+                        <%-- Added timestamp parameter to break cache and removed username text --%>
+                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user&t=<%=System.currentTimeMillis()%>"
+                             alt="Profile"
+                             class="sm_navbar__profile_pic"
+                             onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/Register" class="sm_navbar__signup">Sign In</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </nav>
 
 </body>
 </html>

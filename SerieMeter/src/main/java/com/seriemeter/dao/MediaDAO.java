@@ -50,13 +50,15 @@ public class MediaDAO {
 	}
 
 	/*
-	 * getAllMedia() returns every row from media table, newest first.
+	 * getAllMedia() returns only rows where is_deleted = 0 (not soft deleted),
+	 * ordered by media_id ascending.
 	 */
 	public List<MediaModel> getAllMedia() {
 
 		List<MediaModel> mediaList = new ArrayList<>();
 
-		String sql = "SELECT * FROM media ORDER BY media_id ASC";
+		// Only fetch media that has not been soft deleted
+		String sql = "SELECT * FROM media WHERE is_deleted = 0 ORDER BY media_id ASC";
 
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
@@ -73,6 +75,7 @@ public class MediaDAO {
 				media.setMediaProfile(rs.getString("media_profile"));
 				media.setCategoryId(rs.getInt("category_id"));
 				media.setGenreId(rs.getInt("genre_id"));
+				media.setDeleted(rs.getBoolean("is_deleted"));
 				mediaList.add(media);
 			}
 
@@ -108,6 +111,7 @@ public class MediaDAO {
 					media.setMediaProfile(rs.getString("media_profile"));
 					media.setCategoryId(rs.getInt("category_id"));
 					media.setGenreId(rs.getInt("genre_id"));
+					media.setDeleted(rs.getBoolean("is_deleted"));
 				}
 			}
 
@@ -151,21 +155,23 @@ public class MediaDAO {
 		}
 	}
 
-	// Delete media by ID
-	private static final String DELETE_MEDIA_SQL = "DELETE FROM media WHERE media_id = ?";
-
+	/*
+	 * deleteMedia() performs a soft delete — sets is_deleted = 1 instead of
+	 * removing the row from the database permanently.
+	 * The record remains in the DB but will not appear in any public-facing queries.
+	 */
 	public boolean deleteMedia(int mediaId) {
-		boolean rowDeleted = false;
+		String sql = "UPDATE media SET is_deleted = 1 WHERE media_id = ?";
 		try (Connection conn = DBconfig.getConnection();
-				PreparedStatement ps = conn.prepareStatement(DELETE_MEDIA_SQL)) {
+				PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ps.setInt(1, mediaId);
-			rowDeleted = ps.executeUpdate() > 0;
+			return ps.executeUpdate() > 0;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return rowDeleted;
 	}
 
 	// Returns only movies (category_id = 1), joined with genre name
