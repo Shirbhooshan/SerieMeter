@@ -8,23 +8,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import com.seriemeter.dao.UserDAO;
 import com.seriemeter.model.UserModel;
 
 /**
- * Servlet implementation class Users
+ * Servlet implementation class AdminReport
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/Users" })
-public class Users extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/Report" })
+public class AdminReport extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Users() {
+	public AdminReport() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,7 +34,6 @@ public class Users extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			request.setAttribute("loggedInUser", (UserModel) session.getAttribute("user"));
@@ -45,12 +43,12 @@ public class Users extends HttpServlet {
 			UserDAO dao = new UserDAO();
 			List<UserModel> users = dao.getAllUsers();
 			request.setAttribute("users", users);
-			request.getRequestDispatcher("/WEB-INF/pages/adminUsers.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/adminReport.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException("Failed to load users", e);
 		}
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

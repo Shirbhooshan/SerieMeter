@@ -257,15 +257,82 @@ public class MediaDAO {
 		return list;
 	}
 
-	public List<MediaModel> searchMedia(String query) {
+	public List<MediaModel> searchMedia(String query, int categoryId, int genreId, String yearRange, String sortBy) {
+
 		List<MediaModel> results = new ArrayList<>();
-		String sql = "SELECT * FROM media WHERE title LIKE ? OR director LIKE ? ORDER BY title ASC";
+		StringBuilder where = new StringBuilder("WHERE 1=1 ");
+		List<Object> params = new ArrayList<>();
+
+		// title OR director
+		if (query != null && !query.trim().isEmpty()) {
+			where.append("AND (LOWER(m.title) LIKE ? OR LOWER(m.director) LIKE ?) ");
+			String like = "%" + query.trim().toLowerCase() + "%";
+			params.add(like);
+			params.add(like);
+		}
+
+		// Category filter
+		if (categoryId == 1 || categoryId == 2) {
+			where.append("AND m.category_id = ? ");
+			params.add(categoryId);
+		}
+
+		// Genre filter
+		if (genreId > 0) {
+			where.append("AND m.genre_id = ? ");
+			params.add(genreId);
+		}
+
+		// Year range filter
+		if (yearRange != null && !yearRange.trim().isEmpty()) {
+			switch (yearRange.trim()) {
+			case "2020-2026":
+				where.append("AND YEAR(m.release_date) BETWEEN 2020 AND 2026 ");
+				break;
+			case "2015-2019":
+				where.append("AND YEAR(m.release_date) BETWEEN 2015 AND 2019 ");
+				break;
+			case "2010-2014":
+				where.append("AND YEAR(m.release_date) BETWEEN 2010 AND 2014 ");
+				break;
+			case "2000-2009":
+				where.append("AND YEAR(m.release_date) BETWEEN 2000 AND 2009 ");
+				break;
+			case "pre2000":
+				where.append("AND YEAR(m.release_date) < 2000 ");
+				break;
+			}
+		}
+
+		// Sort order
+		if (sortBy == null)
+			sortBy = "";
+		String order;
+		switch (sortBy) {
+		case "oldest":
+			order = "ORDER BY m.release_date ASC ";
+			break;
+		case "az":
+			order = "ORDER BY m.title ASC ";
+			break;
+		case "newest":
+		default:
+			order = "ORDER BY m.release_date DESC ";
+			break;
+		}
+
+		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id " + where
+				+ order;
 
 		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
-			String like = "%" + query.trim() + "%";
-			pst.setString(1, like);
-			pst.setString(2, like);
+			for (int i = 0; i < params.size(); i++) {
+				Object p = params.get(i);
+				if (p instanceof Integer)
+					pst.setInt(i + 1, (Integer) p);
+				else
+					pst.setString(i + 1, (String) p);
+			}
 
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
@@ -279,11 +346,14 @@ public class MediaDAO {
 				media.setMediaProfile(rs.getString("media_profile"));
 				media.setCategoryId(rs.getInt("category_id"));
 				media.setGenreId(rs.getInt("genre_id"));
+				media.setGenreName(rs.getString("genre_name"));
 				results.add(media);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return results;
 	}
 
