@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,13 +126,13 @@ body {
     display: none;
     position: absolute;
     top: 0;
-    left: calc(100% + 8px); /*It provides horizontal offset from the button */
+    left: calc(100% + 8px);
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     min-width: 160px;
-    z-index: 999; /*It ensures the popup appears above other elements */
+    z-index: 999;
     overflow: hidden;
 }
 
@@ -245,6 +248,8 @@ body {
 	font-family: 'Manrope', sans-serif;
 	font-weight: 500;
 	cursor: pointer;
+	text-decoration: none;
+	color: #333;
 	transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -277,6 +282,215 @@ body {
 
 .up-empty-message a:hover {
 	text-decoration: underline;
+}
+
+/* ── Bookmark poster grid ───────────────────────────────────────────────── */
+
+.up-bookmarks-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+/* Each bookmark card: poster image + info below */
+.up-bookmark-card {
+    position: relative;
+    width: 170px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+/* Poster image fills the card width with a fixed height */
+.up-bookmark-poster {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    background-color: #e0e0e0;
+}
+
+/* Red heart bookmark icon in the top-right corner of the poster */
+.up-bookmark-heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.up-bookmark-heart img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Info row below the poster */
+.up-bookmark-info {
+    margin-top: 8px;
+}
+
+.up-bookmark-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.up-bookmark-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.up-bookmark-genre {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8D8D8D;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.up-bookmark-year {
+    font-size: 12px;
+    color: #8D8D8D;
+}
+
+/* "+" add-more card */
+.up-bookmark-add {
+    width: 170px;
+    height: 240px;
+    border-radius: 10px;
+    border: 2px dashed #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+
+.up-bookmark-add:hover {
+    border-color: #43A53A;
+}
+
+.up-bookmark-add span {
+    font-size: 28px;
+    color: #ccc;
+    line-height: 1;
+}
+
+/* ── Review items ──────────────────────────────────────────────────────── */
+
+.up-review-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 14px;
+    background-color: #fafafa;
+}
+
+/* Left column: media title + date */
+.up-review-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.up-review-media-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #629AC4;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.up-review-date {
+    font-size: 12px;
+    color: #999;
+    margin-top: auto;
+}
+
+/* Right column: stars + review text */
+.up-review-right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Star icons row */
+.up-review-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.up-star {
+    width: 20px;
+    height: 20px;
+}
+
+/* Filled star — gold colour via CSS filter */
+.up-star.filled {
+    filter: invert(68%) sepia(89%) saturate(500%) hue-rotate(1deg) brightness(105%) contrast(101%);
+}
+
+/* Empty star appears faded */
+.up-star.empty {
+    opacity: 0.25;
+}
+
+/* Review text */
+.up-review-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Pagination row below reviews */
+.up-review-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.up-page-nav {
+    color: #888;
+    text-decoration: none;
+}
+
+.up-page-num {
+    color: #888;
+    text-decoration: none;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.up-page-num.up-page-active {
+    background-color: #f0f0f0;
+    color: #1a1a1a;
+    font-weight: 700;
 }
 
 /* Footer section*/
@@ -320,22 +534,34 @@ body {
 	<div class="up-top-white-bg">
 		<div class="up-container">
 
-			<!-- Profile summary: avatar + name/email/menu on the left, stats on the right -->
+			<!-- Profile summary: avatar + name/email/menu on left, stats on right -->
 			<section class="up-profile-summary">
 
 				<!-- Left side: avatar, name, 3-dot menu, email -->
 				<div class="up-profile-header">
 
-					<!-- User avatar -->
-					<img src="assets/images/userProfile.jpg" alt="User Avatar"
-						class="up-avatar">
+					<!-- User avatar: use uploaded profile pic or fall back to default -->
+					<c:choose>
+						<c:when test="${not empty sessionUser.userProfile}">
+							<img src="${pageContext.request.contextPath}/getimage?name=${sessionUser.userProfile}&type=user"
+								alt="User Avatar" class="up-avatar">
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/assets/images/userProfile.jpg"
+								alt="User Avatar" class="up-avatar">
+						</c:otherwise>
+					</c:choose>
 
 					<!-- Name row + email -->
 					<div class="up-user-details">
 
 						<!-- Name and three-dot options button on the same row -->
 						<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-							<h2 class="up-user-name">Alex Berg</h2>
+
+							<%-- Display the logged-in user's full name prefixed with @ --%>
+							<h2 class="up-user-name">
+								@<c:out value="${sessionUser.fullName}" />
+							</h2>
 
 							<!-- Three-dot menu wrapper -->
 							<div class="up-menu-wrapper">
@@ -349,16 +575,14 @@ body {
 
 									<!-- Edit Profile option -->
 									<a href="#" class="up-popup-item" role="menuitem">
-										<!-- Inline pencil SVG icon -->
-										<img alt="Logout" src="assets/icon/edit-up-profile.svg">
+										<img alt="Edit" src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
 										Edit Profile
 									</a>
 
-									<!-- Logout option — redirects to Login servlet -->
-									<a href="${pageContext.request.contextPath}/Login"
+									<!-- Logout option — redirects to Logout servlet -->
+									<a href="${pageContext.request.contextPath}/Logout"
 										class="up-popup-item up-logout-item" role="menuitem">
-										<!-- Inline logout SVG icon -->
-										<img alt="Logout" src="assets/icon/logout-up-icon.svg">
+										<img alt="Logout" src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
 										Logout
 									</a>
 
@@ -367,24 +591,25 @@ body {
 							</div>
 						</div>
 
-						<!-- Email address with copy icon -->
+						<!-- Email address with copy icon — value pulled from session -->
 						<p class="up-user-email">
-							alex@gmail.com
-							<img src="assets/icon/copy.svg" alt="Copy email" class="up-copy-icon">
+							<c:out value="${sessionUser.email}" />
+							<img src="${pageContext.request.contextPath}/assets/icon/copy.svg"
+								alt="Copy email" class="up-copy-icon">
 						</p>
 
 					</div>
 
 				</div>
 
-				<!-- Right side: bookmark and review counts -->
+				<!-- Right side: live bookmark and review counts from the servlet -->
 				<div class="up-stats">
 					<div class="up-stat-item">
-						<span class="up-stat-number">3</span>
+						<span class="up-stat-number">${bookmarkCount}</span>
 						<span class="up-stat-label">BOOKMARKS</span>
 					</div>
 					<div class="up-stat-item">
-						<span class="up-stat-number">3</span>
+						<span class="up-stat-number">${reviewCount}</span>
 						<span class="up-stat-label">REVIEWS</span>
 					</div>
 				</div>
@@ -398,36 +623,171 @@ body {
 	<main class="up-container">
 		<section class="up-content-cards">
 
-			<!-- Bookmarks card -->
+			<!-- ── Bookmarks card ─────────────────────────────────────────── -->
 			<div class="up-card up-bookmarks-card">
 				<div class="up-card-header">
 					<h3>Bookmarks</h3>
+					<%-- Sort buttons: highlight whichever order is currently active --%>
 					<div class="up-sort-options">
-						<button class="up-sort-btn up-active">Oldest</button>
-						<button class="up-sort-btn">Newest</button>
+						<a href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
+							class="up-sort-btn ${bookmarkSort == 'oldest' ? 'up-active' : ''}">Oldest</a>
+						<a href="${pageContext.request.contextPath}/User?bookmarkSort=newest&reviewSort=${reviewSort}"
+							class="up-sort-btn ${bookmarkSort == 'newest' ? 'up-active' : ''}">Newest</a>
 					</div>
 				</div>
-				<div class="up-card-body">
-					<p class="up-empty-message">
-						<a href="#">Nothing bookmarked yet!!</a>
-					</p>
-				</div>
+
+				<c:choose>
+					<c:when test="${empty userBookmarks}">
+						<!-- No bookmarks yet — link takes the user to Explore -->
+						<div class="up-card-body">
+							<p class="up-empty-message">
+								<a href="${pageContext.request.contextPath}/Explore">Nothing bookmarked yet!</a>
+							</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<%-- Poster grid of bookmarked media --%>
+						<div class="up-bookmarks-grid">
+							<c:forEach var="media" items="${userBookmarks}">
+								<div class="up-bookmark-card"
+									onclick="location.href='${pageContext.request.contextPath}/Media?id=${media.mediaId}'">
+
+									<!-- Poster image — served via GetImageServlet -->
+									<c:choose>
+										<c:when test="${not empty media.mediaProfile}">
+											<img class="up-bookmark-poster"
+												src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
+												alt="${media.title}">
+										</c:when>
+										<c:otherwise>
+											<img class="up-bookmark-poster"
+												src="${pageContext.request.contextPath}/assets/images/userProfile.jpg"
+												alt="${media.title}">
+										</c:otherwise>
+									</c:choose>
+
+									<!-- Red heart icon overlay -->
+									<div class="up-bookmark-heart">
+										<img alt="heart" src="${pageContext.request.contextPath}/assets/icon/heart.svg">
+									</div>
+
+									<!-- Title, year, genre below poster -->
+									<div class="up-bookmark-info">
+										<div class="up-bookmark-title">
+											<c:out value="${media.title}" />
+										</div>
+										<div class="up-bookmark-meta">
+											<span class="up-bookmark-genre">
+												<c:out value="${media.genreName}" />
+											</span>
+											<%-- Extract 4-digit year from release_date string --%>
+											<span class="up-bookmark-year">
+												<c:if test="${not empty media.releaseDate}">
+													<c:out value="${fn:substring(media.releaseDate, 0, 4)}" />
+												</c:if>
+											</span>
+										</div>
+									</div>
+
+								</div>
+							</c:forEach>
+
+							<!-- "+" card — quick link to discover more -->
+							<a href="${pageContext.request.contextPath}/Explore"
+								class="up-bookmark-add" title="Discover more">
+								<span>+</span>
+							</a>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
-			<!-- Reviews card -->
+			<!-- ── Reviews card ──────────────────────────────────────────── -->
 			<div class="up-card up-reviews-card">
 				<div class="up-card-header">
 					<h3>Reviews</h3>
+					<%-- Sort buttons: highlight whichever order is currently active --%>
 					<div class="up-sort-options">
-						<button class="up-sort-btn up-active">Oldest</button>
-						<button class="up-sort-btn">Newest</button>
+						<a href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
+							class="up-sort-btn ${reviewSort == 'oldest' ? 'up-active' : ''}">Oldest</a>
+						<a href="${pageContext.request.contextPath}/User?reviewSort=newest&bookmarkSort=${bookmarkSort}"
+							class="up-sort-btn ${reviewSort == 'newest' ? 'up-active' : ''}">Newest</a>
 					</div>
 				</div>
-				<div class="up-card-body">
-					<p class="up-empty-message">
-						<a href="#">Nothing reviewed yet!!</a>
-					</p>
-				</div>
+
+				<c:choose>
+					<c:when test="${empty userReviews}">
+						<!-- No reviews yet — link takes the user to Explore -->
+						<div class="up-card-body">
+							<p class="up-empty-message">
+								<a href="${pageContext.request.contextPath}/Explore">Nothing reviewed yet!</a>
+							</p>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<%-- Loop through each review --%>
+						<c:forEach var="review" items="${userReviews}">
+							<div class="up-review-item">
+
+								<!-- Left column: media title + relative date -->
+								<div class="up-review-left">
+									<span class="up-review-media-title">
+										<c:out value="${review.mediaTitle}" />
+									</span>
+
+									<!-- Relative date (Today / Yesterday / N days ago) -->
+									<p class="up-review-date">
+										<c:set var="diffMs"   value="${now.time - review.createdAt.time}" />
+										<c:set var="diffDays" value="${diffMs / (1000 * 60 * 60 * 24)}" />
+										<c:choose>
+											<c:when test="${diffDays < 1}">Today</c:when>
+											<c:when test="${diffDays < 2}">Yesterday</c:when>
+											<c:otherwise>
+												<fmt:formatNumber value="${diffDays}" maxFractionDigits="0" /> days ago
+											</c:otherwise>
+										</c:choose>
+									</p>
+								</div>
+
+								<!-- Right column: stars + review text -->
+								<div class="up-review-right">
+
+									<!-- Stars row — DB rating is 1-5, display directly -->
+									<div class="up-review-stars">
+										<c:set var="fullStars" value="${review.rating}" />
+										<c:forEach begin="1" end="5" var="i">
+											<c:choose>
+												<c:when test="${i <= fullStars}">
+													<img src="${pageContext.request.contextPath}/assets/icon/star.svg"
+														alt="filled star" class="up-star filled">
+												</c:when>
+												<c:otherwise>
+													<img src="${pageContext.request.contextPath}/assets/icon/star-none.svg"
+														alt="empty star" class="up-star empty">
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</div>
+
+									<!-- Review text -->
+									<p class="up-review-text">
+										<c:out value="${review.reviewText}" />
+									</p>
+
+								</div>
+
+							</div>
+						</c:forEach>
+
+						<!-- Pagination placeholder (static for now) -->
+						<div class="up-review-pagination">
+							<a href="#" class="up-page-nav">&lt;</a>
+							<a href="#" class="up-page-num up-page-active">1</a>
+							<a href="#" class="up-page-nav">&gt;</a>
+						</div>
+
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 		</section>
@@ -438,20 +798,23 @@ body {
 		<p class="up-discover-text">
 			Discover more to<br>bookmark &amp; review
 		</p>
-		<button class="up-explore-btn">Explore now</button>
+		<button class="up-explore-btn"
+			onclick="location.href='${pageContext.request.contextPath}/Explore'">
+			Explore now
+		</button>
 	</footer>
 
 	<%@ include file="/components/footer.jsp"%>
 
 	<script>
-		// Three-dot popup menu logic
+		// ── Three-dot popup menu logic ─────────────────────────────────────────
 
 		const menuToggle = document.getElementById('upMenuToggle');
 		const popupMenu  = document.getElementById('upPopupMenu');
 
 		// Toggle the popup open or closed when the button is clicked
 		menuToggle.addEventListener('click', function (event) {
-			event.stopPropagation(); // prevent click from immediately bubbling to document
+			event.stopPropagation();
 			const isOpen = popupMenu.classList.toggle('up-popup-active');
 			menuToggle.setAttribute('aria-expanded', isOpen);
 		});
@@ -467,63 +830,29 @@ body {
 			event.stopPropagation();
 		});
 
-		// Sort button logic: highlight only the clicked button within its group
-		document.querySelectorAll('.up-sort-options').forEach(function (group) {
-			group.querySelectorAll('.up-sort-btn').forEach(function (btn) {
-				btn.addEventListener('click', function () {
-					group.querySelectorAll('.up-sort-btn').forEach(function (b) {
-						b.classList.remove('up-active');
-					});
-					btn.classList.add('up-active');
-				});
-			});
-		});
-		
-		// ── Copy-email-to-clipboard logic
+		// ── Copy-email-to-clipboard logic ──────────────────────────────────────
 
-		// Select the copy icon image element
 		const copyIcon = document.querySelector('.up-copy-icon');
 
-		// Listen for a click on the copy icon
 		copyIcon.addEventListener('click', function () {
 
-		    // Grab the first child node of the email paragraph, which is the raw
-		    // email text node (the <img> tag is the second child, so childNodes[0]
-		    // gives us only the text). .trim() removes any accidental whitespace.
-		    const email = document.querySelector('.up-user-email').childNodes[0].textContent.trim();
+			// Read the email text from the paragraph's first text node
+			const email = document.querySelector('.up-user-email').childNodes[0].textContent.trim();
 
-		    // navigator.clipboard.writeText() is the modern browser API for writing
-		    // text to the user's clipboard. It returns a Promise.
-		    navigator.clipboard.writeText(email)
+			navigator.clipboard.writeText(email)
+				.then(function () {
+					// Swap to checkmark for 2 seconds as visual confirmation
+					copyIcon.src   = '${pageContext.request.contextPath}/assets/icon/check.svg';
+					copyIcon.title = 'Copied!';
 
-		        .then(function () {
-		            // ── Success: email was copied ──────────────────────────────
-
-		            // Swap the copy icon to a checkmark so the user gets instant
-		            // visual confirmation that the copy worked.
-		            copyIcon.src = 'assets/icon/check.svg';
-
-		            // Also set a tooltip so hovering shows "Copied!"
-		            copyIcon.title = 'Copied!';
-
-		            // After 2 seconds, restore the original copy icon and clear
-		            // the tooltip, ready for the user to copy again if needed.
-		            setTimeout(function () {
-		                copyIcon.src = 'assets/icon/copy.svg';
-		                copyIcon.title = '';
-		            }, 2000);
-		        })
-
-		        .catch(function () {
-		            // ── Failure: clipboard write was blocked or unsupported ────
-
-		            // This can happen when:
-		            //   • The page is served over plain HTTP (not HTTPS)
-		            //   • The browser has blocked clipboard permissions
-		            //   • An older browser doesn't support the Clipboard API
-		            // Show a simple alert so the failure isn't silent.
-		            alert('Failed to copy email. Please copy it manually.');
-		        });
+					setTimeout(function () {
+						copyIcon.src   = '${pageContext.request.contextPath}/assets/icon/copy.svg';
+						copyIcon.title = '';
+					}, 2000);
+				})
+				.catch(function () {
+					alert('Failed to copy email. Please copy it manually.');
+				});
 		});
 	</script>
 

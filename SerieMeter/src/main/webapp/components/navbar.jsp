@@ -60,7 +60,7 @@
             <%-- Show profile if logged in, Sign In button if not --%>
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <a href="${pageContext.request.contextPath}/UserProfile" class="sm_navbar__profile">
+                    <a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
                         <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
                              alt="Profile"
                              class="sm_navbar__profile_pic"
