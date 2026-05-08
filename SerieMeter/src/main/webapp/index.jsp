@@ -82,11 +82,11 @@ html, body {
 	justify-content: center;
 	background-color: #fff;
 	position: relative;
-	/* Modify this part for background image */
 	background-image: url('assets/images/home-background.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+	padding: 20px;
 }
 
 .hero-content {
@@ -94,29 +94,28 @@ html, body {
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	max-width: 650px;
-	padding: 20px;
+	max-width: 800px;
 }
 
 .badge {
 	display: inline-block;
 	border: 1px solid #D1D5DB;
 	border-radius: 999px;
-	padding: 6px 18px;
+	padding: 4px 14px;
 	font-size: 10px;
 	font-weight: 700;
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
 	color: #34A853;
-	margin-bottom: 30px;
+	margin-bottom: 2vh;
 }
 
 .hero-title {
 	font-size: 80px;
 	font-weight: 800;
-	line-height: 0.9;
+	line-height: 0.95;
 	letter-spacing: -3px;
-	margin-bottom: 24px;
+	margin-bottom: 2vh;
 	color: #000;
 }
 
@@ -130,8 +129,8 @@ html, body {
 	font-size: 15px;
 	color: #6B7280;
 	line-height: 1.5;
-	max-width: 420px;
-	margin-bottom: 35px;
+	max-width: 480px;
+	margin-bottom: 3vh;
 }
 
 .cta-btn {
@@ -139,12 +138,12 @@ html, body {
 	color: #fff;
 	border: none;
 	border-radius: 999px;
-	padding: 16px 45px;
-	font-size: 16px;
+	padding: 14px 40px;
+	font-size: 15px;
 	font-weight: 700;
 	cursor: pointer;
 	text-decoration: none;
-	margin-bottom: 25px;
+	margin-bottom: 2vh;
 	box-shadow: 0 4px 14px rgba(52, 168, 83, 0.3);
 }
 
@@ -152,7 +151,7 @@ html, body {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	font-size: 10px;
+	font-size: 9px;
 	font-weight: 700;
 	letter-spacing: 1.2px;
 	text-transform: uppercase;
@@ -170,10 +169,11 @@ html, body {
 	flex-shrink: 0;
 	background-color: #fff; /* Changed to white */
 	border-top: 1px solid #E5E7EB; /* Light grey top border */
-	padding: 30px 80px;
+	padding: 15px 80px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	height: 70px;
 }
 
 .footer-logo img {

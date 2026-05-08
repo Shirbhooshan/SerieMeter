@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <style>
 :root {
 	--nav-bg: #121212;
@@ -10,19 +12,20 @@
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--nav-gradient);
-    padding: 0 5%; 
-    height: 65px; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    border-bottom: 1px solid rgba(255,255,255,0.05); /* Very subtle bottom edge */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--nav-gradient);
+	padding: 0 5%;
+	height: 65px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	/* Very subtle bottom edge */
 }
 
 /* Logo Section */
@@ -34,22 +37,22 @@
 }
 
 .nav-logo img {
-    height: 32px; 
-    width: auto;
-    display: block;
-    mix-blend-mode: screen;
+	height: 32px;
+	width: auto;
+	display: block;
+	mix-blend-mode: screen;
 }
 
 /* Center Navigation Links */
 .nav-links {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 35px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 35px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .nav-links a {
@@ -79,14 +82,14 @@
 }
 
 .signup-btn {
-    background-color: var(--accent-green);
-    color: var(--text-white);
-    text-decoration: none;
-    padding: 8px 24px; 
-    border-radius: 50px;
-    font-size: 13px; 
-    font-weight: 600;
-    transition: all 0.3s ease;
+	background-color: var(--accent-green);
+	color: var(--text-white);
+	text-decoration: none;
+	padding: 8px 24px;
+	border-radius: 50px;
+	font-size: 13px;
+	font-weight: 600;
+	transition: all 0.3s ease;
 }
 
 .signup-btn:hover {
@@ -97,6 +100,25 @@
 /* Content spacer so the navbar doesn't overlap body content */
 .nav-spacer {
 	height: 80px;
+}
+
+/* Profile pill shown when logged in */
+.sm_navbar__profile {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+	color: #1a1a1a;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.sm_navbar__profile_pic {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #e0e0e0;
 }
 </style>
 
@@ -113,10 +135,24 @@
 				Us</a></li>
 	</ul>
 
-	<div class="nav-auth">
-		<a href="${pageContext.request.contextPath}/Login" class="login-link">Login</a>
-		<a href="${pageContext.request.contextPath}/Register"
-			class="signup-btn">Sign up</a>
-	</div>
+	<c:choose>
+		<c:when test="${not empty sessionScope.user}">
+			<a href="${pageContext.request.contextPath}/UserProfile"
+				class="sm_navbar__profile"> <img
+				src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
+				alt="Profile" class="sm_navbar__profile_pic"
+				onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+				${sessionScope.user.userName}
+			</a>
+		</c:when>
+		<c:otherwise>
+			<div class="nav-auth">
+				<a href="${pageContext.request.contextPath}/Login"
+					class="login-link">Login</a> <a
+					href="${pageContext.request.contextPath}/Register"
+					class="signup-btn">Sign up</a>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </nav>
 <div class="nav-spacer"></div>
