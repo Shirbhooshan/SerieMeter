@@ -13,7 +13,7 @@
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
 <style>
-/* ----- Global Reset (only box-sizing) ----- */
+/* --- Global Reset (only box-sizing) --- */
 * {
 	box-sizing: border-box;
 }
@@ -107,6 +107,7 @@ body {
 	padding: 12px 15px;
 	border-radius: 10px;
 	transition: all 0.2s ease;
+	cursor: pointer;
 }
 
 .ad-logout-btn:hover {
@@ -347,13 +348,85 @@ body {
 	cursor: pointer;
 	padding: 0;
 }
+
+/* ----- Logout Modal Design ----- */
+.logout-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 10000;
+}
+
+.logout-modal {
+	background: #ffffff;
+	padding: 30px;
+	border-radius: 16px;
+	width: 340px;
+	text-align: center;
+	color: #1a1a1a;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.logout-modal-title {
+	font-size: 22px;
+	font-weight: 800;
+	margin: 0 0 10px 0;
+}
+
+.logout-modal-text {
+	font-size: 14px;
+	color: #555555;
+	margin-bottom: 30px;
+}
+
+.logout-modal-actions {
+	display: flex;
+	gap: 12px;
+}
+
+.logout-action-btn {
+	flex: 1;
+	padding: 12px;
+	border: none;
+	border-radius: 10px;
+	font-weight: 700;
+	cursor: pointer;
+	font-size: 14px;
+	text-decoration: none;
+	transition: background 0.2s;
+}
+
+.btn-no {
+	background-color: #f0f0f0;
+	color: #1a1a1a;
+}
+
+.btn-no:hover {
+	background-color: #e5e5e5;
+}
+
+.btn-yes {
+	background-color: #e75a55;
+	color: #ffffff;
+	display: inline-block;
+}
+
+.btn-yes:hover {
+	background-color: #d64a45;
+}
+
 </style>
 </head>
 <body>
 
 	<div class="ad-layout-container">
 
-		<!-- Sidebar -->
 		<aside class="ad-sidebar">
 			<div>
 				<div class="ad-logo-container">
@@ -382,7 +455,7 @@ body {
 				</nav>
 			</div>
 			<div class="ad-logout-container">
-				<a href="${pageContext.request.contextPath}/Logout"
+				<a href="#" onclick="showLogoutModal(); return false;"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
 					class="ad-nav-icon"> Logout
@@ -390,13 +463,11 @@ body {
 			</div>
 		</aside>
 
-		<!-- Main Content -->
 		<main class="ad-main-content">
 
 			<header class="ad-top-header">
 				<h2 class="ad-header-title">View medias</h2>
 
-				<!-- Only render this section if a user session exists -->
 				<%@ include file="/components/adminHeader.jsp"%>
 			</header>
 
@@ -405,7 +476,6 @@ body {
 			</h1>
 			<p class="ad-section-subtitle">View all the added medias here</p>
 
-			<!-- Success / Error Messages -->
 			<c:if test="${not empty message}">
 				<p class="ad-msg-success" id="successMsg">
 					<c:out value="${message}" />
@@ -417,7 +487,6 @@ body {
 				</p>
 			</c:if>
 
-			<!-- Search & Sort Controls -->
 			<div class="ad-controls">
 				<select id="sortDropdown" class="ad-sort-dropdown"
 					onchange="sortTable()">
@@ -434,7 +503,6 @@ body {
 				</div>
 			</div>
 
-			<!-- Media Table -->
 			<table class="ad-table">
 				<thead>
 					<tr>
@@ -490,7 +558,6 @@ body {
 				</tbody>
 			</table>
 
-			<!-- Pagination (static placeholder) -->
 			<div class="ad-pagination">
 				<a href="#" class="ad-page-num">&lt;</a> <a href="#"
 					class="ad-page-num active">1</a> <a href="#" class="ad-page-num">2</a>
@@ -501,7 +568,35 @@ body {
 		</main>
 	</div>
 
+	<div id="logoutModal" class="logout-modal-overlay">
+		<div class="logout-modal">
+			<h3 class="logout-modal-title">Logout</h3>
+			<p class="logout-modal-text">Are you sure you want to log out?</p>
+			<div class="logout-modal-actions">
+				<button class="logout-action-btn btn-no" onclick="hideLogoutModal()">No</button>
+				<a href="${pageContext.request.contextPath}/Logout" class="logout-action-btn btn-yes">Yes</a>
+			</div>
+		</div>
+	</div>
+
 	<script>
+	// ---------- Logout Modal Logic ----------
+	function showLogoutModal() {
+		document.getElementById('logoutModal').style.display = 'flex';
+	}
+
+	function hideLogoutModal() {
+		document.getElementById('logoutModal').style.display = 'none';
+	}
+
+	// Close modal if user clicks outside the modal content
+	window.onclick = function(event) {
+		const modal = document.getElementById('logoutModal');
+		if (event.target == modal) {
+			hideLogoutModal();
+		}
+	}
+
 	// ---------- Auto-hide messages after 5 seconds ----------
 	document.addEventListener("DOMContentLoaded", function() {
 		const successMsg = document.getElementById("successMsg");
