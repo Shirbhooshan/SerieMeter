@@ -40,7 +40,6 @@
 	gap: 10px;
 }
 
-/* --- Sidebar --- */
 .ad-sidebar {
 	width: 260px;
 	display: flex;
@@ -101,15 +100,9 @@
 	font-size: 13px;
 	padding: 12px 15px;
 	border-radius: 10px;
-	transition: all 0.2s ease;
 }
 
-.ad-logout-btn:hover {
-	background-color: #e75a55;
-	color: #1a1a1a;
-}
-
-/* --- Main Content White Box --- */
+/* --- Main Content --- */
 .ad-main-content {
 	flex: 1;
 	background-color: #ffffff;
@@ -119,6 +112,19 @@
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
+}
+
+.ad-top-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.ad-header-title {
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0;
 }
 
 /* Header adjustments */
@@ -176,7 +182,7 @@
 	color: var(--accent-orange);
 }
 
-/* --- REFINED STATS CARDS (MATCHING IMAGE 2) --- */
+/* --- STATS CARDS UPDATED --- */
 .ad-stats-grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -187,88 +193,84 @@
 .ad-stat-card {
 	background: #ffffff;
 	border: 1.5px solid #f2f2f2;
-	border-radius: 40px; /* High rounding per image 2 */
-	padding: 30px;
+	border-radius: 40px;
+	padding: 25px;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start; /* Vertical stack */
-	transition: all 0.3s ease;
-}
-
-.ad-stat-card:hover {
-	border-color: #e0e0e0;
-	transform: translateY(-4px);
+	align-items: flex-start;
 }
 
 .ad-stat-icon {
-	width: 32px;
+	width: 32px; /* Set icon container size */
 	height: 32px;
-	margin-bottom: 15px;
+	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .ad-stat-icon img {
 	width: 100%;
 	height: 100%;
-	opacity: 0.8;
+	filter: grayscale(100%) opacity(0.6);
 }
 
 .ad-stat-label {
 	font-size: 11px;
 	font-weight: 800;
 	color: #aaaaaa;
-	text-transform: uppercase; /* Uppercase caption */
+	text-transform: uppercase;
 	letter-spacing: 0.8px;
-	margin-bottom: 5px;
+	margin-bottom: 2px;
 }
 
 .ad-stat-value {
-	font-size: 48px; /* Large value per image 2 */
+	font-size: 54px;
 	font-weight: 800;
 	margin: 0;
 	color: #1a1a1a;
 	line-height: 1;
 }
 
-/* --- Chart Section --- */
 .ad-chart-container {
-	border: 1px solid #f0f0f0;
+	border: 1px solid #f2f2f2;
 	border-radius: 24px;
-	padding: 20px;
-	margin-bottom: 25px;
+	padding: 25px;
+	margin-bottom: 20px;
 }
 
 .ad-chart-title {
-	font-size: 14px;
-	font-weight: 700;
-	color: #888;
-	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: 800;
 	margin-bottom: 20px;
 }
 
 .ad-bar-chart {
 	display: flex;
 	align-items: flex-end;
-	justify-content: space-around;
-	height: 120px;
+	justify-content: center; /* Center the bars */
+	height: 250px; /* Increased height from 120px */
 	background: #fcfcfc;
 	border-radius: 12px;
-	padding: 20px 10px 10px 10px;
-	gap: 10px;
+	padding: 30px 20px 20px 20px;
+	gap: 40px; /* Increased gap for better spacing with fewer genres */
 }
 
 .ad-bar-group {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	flex: 1;
-	gap: 8px;
+	width: 80px; /* Increased group width */
+	gap: 12px;
 }
 
 .ad-bar {
 	width: 100%;
 	background: #e0e0e0;
-	border-radius: 8px;
-	max-width: 40px;
+	border-radius: 10px; /* Smoother rounding */
+	max-width: 60px; /* Increased max width */
+	min-height: 8px;
+	transition: height 0.4s ease;
 }
 
 .ad-bar.highlight {
@@ -276,23 +278,32 @@
 }
 
 .ad-bar-label {
-	font-size: 9px;
+	font-size: 11px; /* Slightly larger text */
 	font-weight: 700;
-	color: #bbbbbb;
+	color: #999999;
 	text-transform: uppercase;
+	text-align: center;
 }
 
-/* --- Medias Table --- */
+/* --- NEW TABLE SECTION RECTANGLE --- */
+.ad-table-section {
+	border: 1px solid #f2f2f2;
+	border-radius: 24px;
+	padding: 25px;
+	margin-bottom: 20px;
+}
+
 .ad-table-header-row {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 }
 
 .ad-table-info h3 {
 	font-size: 18px;
 	margin: 0;
+	font-weight: 800;
 }
 
 .ad-table-info p {
@@ -321,6 +332,15 @@
 	font-weight: 600;
 	border-bottom: 1px solid #f9f9f9;
 }
+
+/* Fixed Thumbnails */
+.ad-cover-thumb {
+	width: 35px;
+	height: 48px;
+	background: #eee;
+	border-radius: 6px;
+	object-fit: cover;
+}
 </style>
 </head>
 <body class="ad-body">
@@ -337,7 +357,7 @@
 				</div>
 				<nav class="ad-nav-menu">
 					<a href="${pageContext.request.contextPath}/Dashboard"
-						class="ad-nav-item active"> <img
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
 					</a> <a href="${pageContext.request.contextPath}/AdminContent"
@@ -348,6 +368,10 @@
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
+					</a> <a href="${pageContext.request.contextPath}/Report"
+						class="ad-nav-item active"> <img
+						src="${pageContext.request.contextPath}/assets/icon/report.svg"
+						class="ad-nav-icon"> Report & Analytics
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
@@ -382,96 +406,103 @@
 							src="${pageContext.request.contextPath}/assets/icon/users-report.svg">
 					</div>
 					<span class="ad-stat-label">Registered Users</span>
-					<h2 class="ad-stat-value">4</h2>
+					<h2 class="ad-stat-value">${totalUsers}</h2>
 				</div>
-
 				<div class="ad-stat-card">
 					<div class="ad-stat-icon">
-						<img src="${pageContext.request.contextPath}/assets/icon/review-report.svg">
+						<img
+							src="${pageContext.request.contextPath}/assets/icon/review-report.svg">
 					</div>
 					<span class="ad-stat-label">Total Reviews</span>
-					<h2 class="ad-stat-value">16</h2>
+					<h2 class="ad-stat-value">${totalReviews}</h2>
 				</div>
-
 				<div class="ad-stat-card">
 					<div class="ad-stat-icon">
 						<img
 							src="${pageContext.request.contextPath}/assets/icon/media-report.svg">
 					</div>
 					<span class="ad-stat-label">Total Medias</span>
-					<h2 class="ad-stat-value">20</h2>
+					<h2 class="ad-stat-value">${totalMedia}</h2>
 				</div>
-
 				<div class="ad-stat-card">
 					<div class="ad-stat-icon">
-						<img src="${pageContext.request.contextPath}/assets/icon/star-report.svg">
+						<img
+							src="${pageContext.request.contextPath}/assets/icon/star-report.svg">
 					</div>
 					<span class="ad-stat-label">Average Ratings</span>
-					<h2 class="ad-stat-value">6.8</h2>
+					<h2 class="ad-stat-value">${avgRating}</h2>
 				</div>
 			</div>
 
 			<div class="ad-chart-container">
-				<div class="ad-chart-title">Ratings Over Genres</div>
+				<div class="ad-chart-title">Review Distribution by Genre (%)</div>
 				<div class="ad-bar-chart">
-					<div class="ad-bar-group">
-						<div class="ad-bar" style="height: 60%;"></div>
-						<div class="ad-bar-label">Action</div>
-					</div>
-					<div class="ad-bar-group">
-						<div class="ad-bar highlight" style="height: 90%;"></div>
-						<div class="ad-bar-label">Horror</div>
-					</div>
-					<div class="ad-bar-group">
-						<div class="ad-bar" style="height: 40%;"></div>
-						<div class="ad-bar-label">Sci-Fi</div>
-					</div>
-					<div class="ad-bar-group">
-						<div class="ad-bar" style="height: 75%;"></div>
-						<div class="ad-bar-label">Drama</div>
-					</div>
-					<div class="ad-bar-group">
-						<div class="ad-bar" style="height: 55%;"></div>
-						<div class="ad-bar-label">Comedy</div>
-					</div>
-					<div class="ad-bar-group">
-						<div class="ad-bar" style="height: 30%;"></div>
-						<div class="ad-bar-label">Thriller</div>
-					</div>
+					<c:forEach var="entry" items="${genreCounts}">
+						<div class="ad-bar-group">
+							<c:set var="percentage"
+								value="${(entry.value * 100.0) / totalGenreReviews}" />
+
+							<div class="ad-bar ${entry.value == maxCount ? 'highlight' : ''}"
+								style="height: ${percentage}%;"></div>
+							<div class="ad-bar-label">
+								${entry.key} <br> <span
+									style="font-size: 10px; opacity: 0.7;">${entry.value}
+									(${String.format("%.1f", percentage)}%)</span>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 
-			<div class="ad-table-header-row">
-				<div class="ad-table-info">
-					<h3>Medias</h3>
-					<p>Highest engaging titles</p>
+			<section class="ad-table-section">
+				<div class="ad-table-header-row">
+					<div class="ad-table-info">
+						<h3>Medias</h3>
+						<p>Highest engaging titles</p>
+					</div>
 				</div>
-			</div>
 
-			<table class="ad-media-table">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>NAME</th>
-						<th>CATEGORY</th>
-						<th>GENRE</th>
-						<th>TOTAL BOOKMARK</th>
-						<th>TOTAL REVIEW</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>#1</td>
-						<td style="display: flex; align-items: center; gap: 10px;">
-							<div class="ad-media-thumb"></div> Interstellar
-						</td>
-						<td>Movie</td>
-						<td>Sci-Fi</td>
-						<td>52</td>
-						<td>120</td>
-					</tr>
-				</tbody>
-			</table>
+				<table class="ad-media-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>NAME</th>
+							<th>CATEGORY</th>
+							<th>GENRE</th>
+							<th>BOOKMARKS</th>
+							<th>REVIEWS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="item" items="${topMedia}">
+							<tr>
+								<td>#${item.mediaId}</td>
+								<td style="display: flex; align-items: center; gap: 12px;">
+									<c:choose>
+										<c:when test="${not empty item.mediaProfile}">
+											<img class="ad-cover-thumb"
+												src="${pageContext.request.contextPath}/getimage?name=${item.mediaProfile}&type=media"
+												alt="${item.title}"
+												onerror="this.style.opacity='0.3'; this.src='${pageContext.request.contextPath}/assets/images/placeholder.jpg';" />
+										</c:when>
+										<c:otherwise>
+											<div class="ad-cover-thumb"
+												style="background: #eee; border: 1px solid #ddd;"></div>
+										</c:otherwise>
+									</c:choose> <span>${item.title}</span>
+								</td>
+								<td><c:choose>
+										<c:when test="${item.categoryId == 1}">Movie</c:when>
+										<c:otherwise>Series</c:otherwise>
+									</c:choose></td>
+								<td>${item.genreName}</td>
+								<td>${item.bookmarkCount}</td>
+								<td>${item.reviewCount}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</section>
 		</main>
 	</div>
 </body>

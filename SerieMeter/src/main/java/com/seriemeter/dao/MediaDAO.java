@@ -357,4 +357,29 @@ public class MediaDAO {
 		return results;
 	}
 
+	public List<MediaModel> getMediaByGenre(String genreName) {
+		List<MediaModel> list = new ArrayList<>();
+		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
+				+ "WHERE g.genre_name = ?";
+
+		try (Connection c = DBconfig.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+
+			ps.setString(1, genreName);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setGenreName(rs.getString("genre_name"));
+				// ... set other fields as needed
+				list.add(media);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

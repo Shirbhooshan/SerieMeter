@@ -389,7 +389,7 @@ a {
 		<!-- Sidebar Filters -->
 
 		<aside class="sm_sf_sidebar">
-			<div class="sm_sf_sidebar_title">Filters</div>
+			<div class="sm_sf_sidebar_title">Quick Search</div>
 
 			<!-- Category  -->
 			<div class="sm_sf_filter_label">Category Type</div>
@@ -439,8 +439,7 @@ a {
 				</button>
 			</div>
 
-			<button class="sm_sf_reset_btn" onclick="smSfResetAll()">Reset
-				All Filters</button>
+			<button class="sm_sf_reset_btn" onclick="smSfResetAll()">Search</button>
 		</aside>
 
 
