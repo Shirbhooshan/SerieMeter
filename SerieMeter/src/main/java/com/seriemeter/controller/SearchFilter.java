@@ -29,18 +29,19 @@ public class SearchFilter extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// Get the 'query' variable from the navbar input name="query"
+
 		String query = request.getParameter("query");
+		request.setAttribute("query", query);
 
-		MediaDAO mediaDAO = new MediaDAO();
-		List<MediaModel> searchResults;
+		if (query != null && !query.trim().isEmpty()) {
+			MediaDAO mediaDAO = new MediaDAO();
+			List<MediaModel> results = mediaDAO.searchMedia(query);
+			request.setAttribute("results", results);
+		}
 
-
-		// Redirect/Forward to your search results page
-		request.getRequestDispatcher("WEB-INF/pages/searchFilter.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/searchFilter.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

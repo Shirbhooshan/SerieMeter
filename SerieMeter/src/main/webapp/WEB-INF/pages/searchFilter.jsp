@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -446,36 +447,65 @@ a {
 		<!-- Content  -->
 
 		<main class="sm_sf_content">
-
-			<h1 class="sm_sf_heading">Search</h1>
+			<c:choose>
+				<c:when test="${not empty query}">
+					<h1 class="sm_sf_heading">
+						Results for "
+						<c:out value="${query}" />
+						"
+					</h1>
+				</c:when>
+				<c:otherwise>
+					<h1 class="sm_sf_heading">Search</h1>
+				</c:otherwise>
+			</c:choose>
 			<p class="sm_sf_sub">Filter and find exactly what you want to
 				watch</p>
 
-			<!-- Sorting row -->
-			<div class="sm_sf_sort_row">
-				<span class="sm_sf_sort_label">Sort By</span> <select
-					class="sm_sf_sort_select">
-					<option>Top Rated</option>
-					<option>Newest First</option>
-					<option>Oldest First</option>
-					<option>A – Z</option>
-				</select>
-			</div>
-
-			<!--  Card grid is in empty state now, cards will be added later -->
 			<div class="sm_sf_cards_grid">
+				<c:choose>
+					<c:when test="${not empty results}">
+						<c:forEach var="media" items="${results}">
+							<a
+								href="${pageContext.request.contextPath}/Media?id=${media.mediaId}"
+								class="sm_sf_card">
+								<div class="sm_sf_card_poster">
+									<img
+										src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
+										alt="${media.title}"
+										onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+								</div>
 
-
-
-				<!-- Empty state -->
-				<div class="sm_sf_empty">
-					<img
-						src="${pageContext.request.contextPath}/assets/icon/search.svg"
-						alt="search" />
-					<p>No results yet</p>
-					<span>Select filters and search to find media</span>
-				</div>
-
+								<div class="sm_sf_card_row">
+									<div style="flex: 1; overflow: hidden;">
+										<h3 class="sm_sf_card_title">${media.title}</h3>
+										<p class="sm_sf_card_genre">${media.categoryId == 1 ? 'Movie' : 'Series'}</p>
+									</div>
+									<div class="sm_sf_card_year">
+										${fn:substring(media.releaseDate, 0, 4)}</div>
+								</div>
+							</a>
+						</c:forEach>
+					</c:when>
+					<c:when test="${results != null && empty results}">
+						<div class="sm_sf_empty">
+							<img
+								src="${pageContext.request.contextPath}/assets/icon/search.svg"
+								alt="search" />
+							<p>No results found</p>
+							<span>Try a different keyword</span>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="sm_sf_empty">
+							<img
+								src="${pageContext.request.contextPath}/assets/icon/search.svg"
+								alt="search" />
+							<p>No results yet</p>
+							<span>Type something in the search bar above and hit Enter</span>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 		</main>
@@ -506,8 +536,7 @@ a {
 					});
 			btn.classList.add('on');
 		}
-		
-		
+
 		/* Genre tag toggle — only one active at a time */
 		function smSfSelectGenre(tag) {
 			document.querySelectorAll('.sm_sf_genre_tag').forEach(function(t) {
@@ -515,8 +544,7 @@ a {
 			});
 			tag.classList.add('on');
 		}
-		
-		
+
 		/* Reset all filters back to default */
 		function smSfResetAll() {
 			var pills = document.querySelectorAll('.sm_sf_pill');

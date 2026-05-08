@@ -257,4 +257,34 @@ public class MediaDAO {
 		return list;
 	}
 
+	public List<MediaModel> searchMedia(String query) {
+		List<MediaModel> results = new ArrayList<>();
+		String sql = "SELECT * FROM media WHERE title LIKE ? OR director LIKE ? ORDER BY title ASC";
+
+		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+
+			String like = "%" + query.trim() + "%";
+			pst.setString(1, like);
+			pst.setString(2, like);
+
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setDirector(rs.getString("director"));
+				media.setReleaseDate(rs.getString("release_date"));
+				media.setTotalTime(rs.getString("total_time"));
+				media.setDescription(rs.getString("description"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setCategoryId(rs.getInt("category_id"));
+				media.setGenreId(rs.getInt("genre_id"));
+				results.add(media);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
 }
