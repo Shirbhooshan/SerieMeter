@@ -166,6 +166,8 @@
         width: 20px;
         height: 20px;
         pointer-events: none;
+        filter: brightness(0);
+		opacity: 0.45;
     }
 
     /* Text inputs on the left panel */
@@ -236,8 +238,6 @@
         width: 22px;
         height: 22px;
         cursor: pointer;
-        opacity: 0.75;
-        transition: opacity 0.2s ease;
     }
 
     .ep-eye-icon:hover {
@@ -284,7 +284,7 @@
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         transition: opacity 0.2s ease;
     }
 
@@ -292,6 +292,7 @@
         opacity: 0.75;
     }
 
+    /* Only the text is underlined, not the arrow icon */
     .ep-go-back-btn .ep-link-text {
         text-decoration: underline;
     }
@@ -343,7 +344,7 @@
                                          id="ep-img-preview">
                                 </c:when>
                                 <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}/assets/images/default_profile.png"
+                                    <img src="${pageContext.request.contextPath}/assets/images/default_profile.jpg"
                                          alt="Profile Picture"
                                          class="ep-profile-pic"
                                          id="ep-img-preview">
@@ -381,7 +382,7 @@
                     <div class="ep-input-group">
                         <label>Username</label>
                         <div class="ep-field-wrapper">
-                            <img src="${pageContext.request.contextPath}/assets/icon/at-sign.svg"
+                            <img src="${pageContext.request.contextPath}/assets/icon/envelope.svg"
                                  alt="" class="ep-field-icon">
                             <input type="text"
                                    name="username"
@@ -395,7 +396,7 @@
 
                     <h2>Password and<br>Security</h2>
 
-                    <!-- Current Password -->
+                    <!-- Current Password — eye icon swaps between eye.svg and eye-black.svg on toggle -->
                     <div class="ep-input-group">
                         <label>Current Password</label>
                         <div class="ep-field-wrapper">
@@ -405,11 +406,12 @@
                             <img src="${pageContext.request.contextPath}/assets/icon/eye.svg"
                                  alt="Show/Hide"
                                  class="ep-eye-icon"
-                                 onclick="epTogglePass('ep-pass-cur')">
+                                 id="ep-eye-cur"
+                                 onclick="epTogglePass('ep-pass-cur', 'ep-eye-cur')">
                         </div>
                     </div>
 
-                    <!-- New Password -->
+                    <!-- New Password — eye icon swaps between eye.svg and eye-black.svg on toggle -->
                     <div class="ep-input-group">
                         <label>New Password</label>
                         <div class="ep-field-wrapper">
@@ -419,11 +421,12 @@
                             <img src="${pageContext.request.contextPath}/assets/icon/eye.svg"
                                  alt="Show/Hide"
                                  class="ep-eye-icon"
-                                 onclick="epTogglePass('ep-pass-new')">
+                                 id="ep-eye-new"
+                                 onclick="epTogglePass('ep-pass-new', 'ep-eye-new')">
                         </div>
                     </div>
 
-                    <!-- Confirm New Password -->
+                    <!-- Confirm New Password — eye icon swaps between eye.svg and eye-black.svg on toggle -->
                     <div class="ep-input-group">
                         <label>Confirm New Password</label>
                         <div class="ep-field-wrapper">
@@ -433,7 +436,8 @@
                             <img src="${pageContext.request.contextPath}/assets/icon/eye.svg"
                                  alt="Show/Hide"
                                  class="ep-eye-icon"
-                                 onclick="epTogglePass('ep-pass-conf')">
+                                 id="ep-eye-conf"
+                                 onclick="epTogglePass('ep-pass-conf', 'ep-eye-conf')">
                         </div>
                     </div>
 
@@ -447,11 +451,12 @@
                 <!-- Save Changes: submits the form -->
                 <button type="submit" class="ep-save-btn">Save Changes</button>
 
-                <!-- Go Back: arrow is plain, only "Go Back" text is underlined -->
+                <!-- Go Back: uses left-arrow.svg icon, only "Go Back" text is underlined -->
                 <button type="button"
                         class="ep-go-back-btn"
                         onclick="history.back()">
-                    <span>&larr;</span>
+                    <img src="${pageContext.request.contextPath}/assets/icon/left-arrow.svg"
+                         alt="" style="width: 14px;">
                     <span class="ep-link-text">Go Back</span>
                 </button>
 
@@ -464,9 +469,19 @@
 
     <script>
         // Toggle password field between hidden and visible
-        function epTogglePass(inputId) {
+        // Also swaps the eye icon between eye.svg (hidden) and eye-black.svg (visible)
+        // — matches the same behaviour as the register page
+        function epTogglePass(inputId, iconId) {
             const field = document.getElementById(inputId);
-            field.type = (field.type === 'password') ? 'text' : 'password';
+            const icon  = document.getElementById(iconId);
+
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.src = '${pageContext.request.contextPath}/assets/icon/eye-black.svg';
+            } else {
+                field.type = 'password';
+                icon.src = '${pageContext.request.contextPath}/assets/icon/eye.svg';
+            }
         }
 
         // Show a live preview of the selected profile image before uploading
