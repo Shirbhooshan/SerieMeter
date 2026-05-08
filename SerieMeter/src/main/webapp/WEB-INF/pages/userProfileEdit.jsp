@@ -43,6 +43,16 @@
         align-items: center;
     }
 
+    /* Error message shown above the card */
+    .ep-msg-error {
+        color: #ff4d4d;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 16px;
+        transition: opacity 0.5s ease;
+    }
+
     /* --- Outer dark card: stretches edge to edge, holds both panels ---
        Internal padding creates the "floating" gap around the white left panel.
        Reduced padding so white panel expands closer to all dark card edges. */
@@ -310,6 +320,11 @@
               enctype="multipart/form-data"
               class="ep-edit-form">
 
+            <%-- Error message: shown when password is wrong or new passwords don't match --%>
+            <c:if test="${not empty error}">
+                <p class="ep-msg-error" id="errorMsg"><c:out value="${error}" /></p>
+            </c:if>
+
             <div class="ep-main-card">
 
                 <!-- Left Panel: Edit Profile (floats inside dark card) -->
@@ -445,7 +460,6 @@
         </form>
     </main>
 
-
     <%@ include file="/components/footer.jsp"%>
 
     <script>
@@ -465,6 +479,20 @@
             };
             reader.readAsDataURL(file);
         }
+
+        // ---------- Auto-hide error message after 5 seconds ----------
+        document.addEventListener("DOMContentLoaded", function () {
+            const errorMsg = document.getElementById("errorMsg");
+
+            if (errorMsg) {
+                setTimeout(function () {
+                    errorMsg.style.opacity = "0";
+                    setTimeout(function () {
+                        errorMsg.style.display = "none";
+                    }, 500); // wait for fade transition to complete
+                }, 5000);
+            }
+        });
     </script>
 
 </body>
