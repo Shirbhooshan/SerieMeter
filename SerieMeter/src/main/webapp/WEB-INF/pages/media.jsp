@@ -435,8 +435,8 @@ html, body {
 						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<%-- Not logged in — clicking redirects to login --%>
-						<a href="${pageContext.request.contextPath}/Login"
+						<!-- Not logged in — clicking redirects to login -->
+						<a href="${pageContext.request.contextPath}/Bookmarks"
 							style="text-decoration: none;">
 							<button class="bookmark-btn">
 								<img
@@ -513,7 +513,7 @@ html, body {
 				</c:choose>
 			</div>
 
-			<%-- Existing Reviews --%>
+			<!-- Existing Reviews -->
 			<div style="margin-top: 30px;">
 				<c:if test="${empty reviews}">
 					<p style="color: #888;">No reviews yet. Be the first to review!</p>
@@ -537,7 +537,7 @@ html, body {
 								</div>
 							</div>
 
-							<%-- Display stars based on rating number --%>
+							<!-- Display stars based on rating number -->
 							<div class="display-stars">
 								<c:forEach begin="1" end="5" var="i">
 									<c:choose>

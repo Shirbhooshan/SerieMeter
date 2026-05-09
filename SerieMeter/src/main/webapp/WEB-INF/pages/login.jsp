@@ -198,13 +198,40 @@ body {
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
 }
+
+/* "Go Back" button */
+.ep-go-back-btn {
+	background: none;
+	border: none;
+	color: #535353;
+	font-size: 13px;
+	font-weight: 600;
+	font-family: 'Manrope', sans-serif;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	transition: opacity 0.2s ease;
+}
+
+.ep-go-back-btn:hover {
+	opacity: 0.75;
+}
+
+.ep-go-back-btn .ep-link-text {
+	text-decoration: underline;
+}
 </style>
 </head>
 <body>
 
 	<div class="login-card">
 		<div class="logo-section">
-			<img src="assets/images/Logo.jpg" alt="SerieMeter" class="logo-img">
+			<div>
+				<a href="${pageContext.request.contextPath}/Explore"> <img
+					src="assets/images/Logo.jpg" alt="SerieMeter" class="logo-img">
+				</a>
+			</div>
 			<p class="tagline">Your Digital Archive</p>
 		</div>
 
@@ -259,10 +286,10 @@ body {
 
 	<div class="footer-text">©2026 SERIEMETER</div>
 
-	<a href="#" class="back-link"> <img
-		src="assets/icon/left-arrow.svg" alt="" style="width: 14px;"> Go
-		Back
-	</a>
+	<button type="button" class="ep-go-back-btn" onclick="history.back()">
+		<img src="assets/icon/left-arrow.svg" alt="" style="width: 14px;">
+		Go Back
+	</button>
 
 	<div class="footer-text">©2026 SERIEMETER</div>
 

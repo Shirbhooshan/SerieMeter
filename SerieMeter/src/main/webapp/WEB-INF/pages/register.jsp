@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -315,11 +315,21 @@ body {
 }
 
 .footer-text {
+	position: absolute;
+	bottom: 30px;
 	font-size: 11px;
 	color: #bbb;
 	letter-spacing: 1.5px;
 	text-transform: uppercase;
-	margin-top: 20px;
+}
+
+/* "Go Back" button */
+.ep-go-back-btn:hover {
+	opacity: 0.75;
+}
+
+.ep-go-back-btn .ep-link-text {
+	text-decoration: underline;
 }
 </style>
 </head>
@@ -344,9 +354,13 @@ body {
 
 	<div class="page-scroll">
 
-		<%-- Logo — centered above card --%>
+		<!-- Logo — centered above card -->
 		<div class="logo-section">
-			<img src="assets/images/Logo.jpg" alt="SerieMeter" class="logo-img">
+			<div>
+				<a href="${pageContext.request.contextPath}/Explore"> <img
+					src="assets/images/Logo.jpg" alt="SerieMeter" class="logo-img">
+				</a>
+			</div>
 			<p class="tagline">Your Digital Archive</p>
 		</div>
 
@@ -409,7 +423,7 @@ body {
 							type="password" name="password" id="passInput"
 							class="rounded-input" placeholder="••••••••" required> <img
 							src="assets/icon/eye.svg" alt="Show" class="icon-svg eye-icon"
-							onclick="togglePassword()" id ="eyeIcon">
+							onclick="togglePassword()" id="eyeIcon">
 					</div>
 				</div>
 
@@ -431,10 +445,11 @@ body {
 			</form>
 		</div>
 
-		<a href="${pageContext.request.contextPath}/Login" class="back-link">
+		<button type="button" class="ep-go-back-btn" onclick="history.back()"
+			style="background: none; border: none; color: #535353; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: opacity 0.2s ease;">
 			<img src="assets/icon/left-arrow.svg" alt="" style="width: 14px;">
 			Go Back
-		</a>
+		</button>
 
 		<div class="footer-text">©2026 SERIEMETER</div>
 
