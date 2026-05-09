@@ -46,29 +46,47 @@ public class BookmarkDAO {
 		}
 	}
 
-	public List<MediaModel> getBookmarkedMedia(int userId) {
-		List<MediaModel> list = new ArrayList<>();
-		String sql = "SELECT m.* FROM media m " + "JOIN watchlist w ON m.media_id = w.media_id "
-				+ "WHERE w.user_id = ? " + "ORDER BY w.added_date DESC";
-		try (Connection conn = DBconfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-			ps.setInt(1, userId);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				MediaModel media = new MediaModel();
-				media.setMediaId(rs.getInt("media_id"));
-				media.setTitle(rs.getString("title"));
-				media.setDirector(rs.getString("director"));
-				media.setReleaseDate(rs.getString("release_date"));
-				media.setTotalTime(rs.getString("total_time"));
-				media.setDescription(rs.getString("description"));
-				media.setMediaProfile(rs.getString("media_profile"));
-				media.setCategoryId(rs.getInt("category_id"));
-				media.setGenreId(rs.getInt("genre_id"));
-				list.add(media);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
+	public void clearAllBookmarks(int userId) {
+	    String sql = "DELETE FROM watchlist WHERE user_id = ?";
+	    try (Connection conn = DBconfig.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setInt(1, userId);
+	        ps.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
+	
+	  // Getting all book marked media for a user
+    // JOINs genre table so genreName is available in the JSP via ${media.genreName}
+    public List<MediaModel> getBookmarkedMedia(int userId) {
+        List<MediaModel> list = new ArrayList<>();
+        String sql = "SELECT m.*, g.genre_name FROM media m "
+                   + "JOIN watchlist w ON m.media_id = w.media_id "
+                   + "JOIN genre g ON m.genre_id = g.genre_id "
+                   + "WHERE w.user_id = ? "
+                   + "ORDER BY w.added_date DESC";
+        try (Connection conn = DBconfig.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                MediaModel media = new MediaModel();
+                media.setMediaId(rs.getInt("media_id"));
+                media.setTitle(rs.getString("title"));
+                media.setDirector(rs.getString("director"));
+                media.setReleaseDate(rs.getString("release_date"));
+                media.setTotalTime(rs.getString("total_time"));
+                media.setDescription(rs.getString("description"));
+                media.setMediaProfile(rs.getString("media_profile"));
+                media.setCategoryId(rs.getInt("category_id"));
+                media.setGenreId(rs.getInt("genre_id"));
+                media.setGenreName(rs.getString("genre_name")); 
+                list.add(media);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

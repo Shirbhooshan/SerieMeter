@@ -75,8 +75,8 @@
 				src="assets/icon/bookmarkss.svg" alt="Bookmarks"
 				class="sm_navbar__bookmark_icon" />
 			</a>
-
-			<%-- Show profile if logged in, Sign In button if not --%>
+			
+			<!-- Show profile if logged in, Sign In button if not -->
 			<c:choose>
 				<c:when test="${not empty sessionScope.user}">
 					<a href="${pageContext.request.contextPath}/User"
@@ -94,6 +94,22 @@
 			</c:choose>
 		</div>
 	</nav>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <a href="${pageContext.request.contextPath}/UserProfile" class="sm_navbar__profile">
+                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
+                             alt="Profile"
+                             class="sm_navbar__profile_pic"
+                             onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+                        ${sessionScope.user.userName}
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/Login" class="sm_navbar__signup">Sign In</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </nav>
 
 </body>
 </html>
