@@ -235,6 +235,7 @@
         width: 18px;
         height: 18px;
         cursor: pointer;
+        margin-bottom: 8px;
     }
 
     .ep-eye-icon:hover {
