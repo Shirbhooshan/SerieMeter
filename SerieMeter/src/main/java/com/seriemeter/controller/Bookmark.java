@@ -14,7 +14,7 @@ import com.seriemeter.dao.BookmarkDAO;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.model.UserModel;
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/Bookmark" })
+@WebServlet(asyncSupported = false, urlPatterns = { "/Bookmark" })
 public class Bookmark extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class Bookmark extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/bookmark.jsp").forward(request, response);
     }
 
-    // handles remove one or clear all actions
+    // handles add, remove, and clearAll actions
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -58,20 +58,31 @@ public class Bookmark extends HttpServlet {
         UserModel user = (UserModel) session.getAttribute("user");
         BookmarkDAO bookmarkDAO = new BookmarkDAO();
 
-        // action param tells us what to do
         String action = request.getParameter("action");
 
-        if ("remove".equals(action)) {
-            // Remove one bookmark, mediaId comes from hidden form field in JSP
-            int mediaId = Integer.parseInt(request.getParameter("mediaId"));
+        // media.jsp sends "media_id", bookmark.jsp sends "mediaId"
+       
+        String mediaIdParam = request.getParameter("media_id");
+        if (mediaIdParam == null) {
+            mediaIdParam = request.getParameter("mediaId");
+        }
+
+        if ("add".equals(action) && mediaIdParam != null) {
+            // Add bookmark is called from media.jsp
+            int mediaId = Integer.parseInt(mediaIdParam);
+            bookmarkDAO.addBookmark(user.getUserId(), mediaId);
+
+        } else if ("remove".equals(action) && mediaIdParam != null) {
+            // Remove one bookmark is called from media.jsp or bookmark.jsp
+            int mediaId = Integer.parseInt(mediaIdParam);
             bookmarkDAO.removeBookmark(user.getUserId(), mediaId);
 
         } else if ("clearAll".equals(action)) {
-            // Remove all bookmarks for this user
-        	bookmarkDAO.clearAllBookmarks(user.getUserId());
+            // Remove all bookmarks for user is called from bookmark.jsp
+            bookmarkDAO.clearAllBookmarks(user.getUserId());
         }
 
-        // Redirect back to GET so the page reloads with updated list
+        // Redirects back to GET so the page reloads with updated list
         response.sendRedirect(request.getContextPath() + "/Bookmark");
     }
 }
