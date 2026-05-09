@@ -386,7 +386,7 @@ public class MediaDAO {
 
 		String query = "SELECT media_id FROM media ORDER BY RAND() LIMIT 1";
 
-		try (Connection conn = DBconfig.getConnection(); 
+		try (Connection conn = DBconfig.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);
 				ResultSet rs = ps.executeQuery()) {
 
@@ -397,6 +397,42 @@ public class MediaDAO {
 			e.printStackTrace();
 		}
 		return randomId;
+	}
+
+	/**
+	 * Returns all media with their average rating (scaled to /10). avgRating will
+	 * be 0.0 if no reviews exist for that media.
+	 */
+	public List<MediaModel> getAllMediaWithAvgRating() {
+		List<MediaModel> mediaList = new ArrayList<>();
+
+		String sql = "SELECT m.*, " + "       COALESCE(AVG(r.rating) * 2, 0) AS avg_rating " + "FROM media m "
+				+ "LEFT JOIN review r ON m.media_id = r.media_id " + "GROUP BY m.media_id " + "ORDER BY m.media_id ASC";
+
+		try (Connection con = DBconfig.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery()) {
+
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setDirector(rs.getString("director"));
+				media.setReleaseDate(rs.getString("release_date"));
+				media.setTotalTime(rs.getString("total_time"));
+				media.setDescription(rs.getString("description"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setCategoryId(rs.getInt("category_id"));
+				media.setGenreId(rs.getInt("genre_id"));
+				media.setAvgRating(rs.getDouble("avg_rating"));
+				mediaList.add(media);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return mediaList;
 	}
 
 }

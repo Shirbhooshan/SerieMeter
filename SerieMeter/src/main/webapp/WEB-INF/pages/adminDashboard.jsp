@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -420,7 +421,6 @@ body {
 .btn-yes:hover {
 	background-color: #d64a45;
 }
-
 </style>
 </head>
 <body>
@@ -535,7 +535,16 @@ body {
                          media.genreId == 5 ? 'Sci-Fi' :
                          media.genreId == 6 ? 'Thriller' : 'Romance'}</td>
 									<td>${fn:substring(media.releaseDate, 0, 10)}</td>
-									<td>-</td>
+									<td><c:choose>
+											<c:when test="${media.avgRating > 0}">
+            ★ <fmt:formatNumber value="${media.avgRating}"
+													maxFractionDigits="1" />/10
+        </c:when>
+											<c:otherwise>
+												<span style="color: #bbb; font-style: italic;">Not
+													rated</span>
+											</c:otherwise>
+										</c:choose></td>
 									<td>
 										<form class="ad-delete-form"
 											action="${pageContext.request.contextPath}/Dashboard"
@@ -579,7 +588,8 @@ body {
 			<p class="logout-modal-text">Are you sure you want to log out?</p>
 			<div class="logout-modal-actions">
 				<button class="logout-action-btn btn-no" onclick="hideLogoutModal()">No</button>
-				<a href="${pageContext.request.contextPath}/Logout" class="logout-action-btn btn-yes">Yes</a>
+				<a href="${pageContext.request.contextPath}/Logout"
+					class="logout-action-btn btn-yes">Yes</a>
 			</div>
 		</div>
 	</div>

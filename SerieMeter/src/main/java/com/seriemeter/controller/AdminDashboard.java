@@ -1,5 +1,6 @@
 package com.seriemeter.controller;
 
+import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.model.UserModel;
 import com.seriemeter.service.MediaService;
@@ -29,20 +30,13 @@ public class AdminDashboard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Auth check commented out — will be handled by AdminFilter later
-		/*
-		 * HttpSession session = request.getSession(false); if (session == null ||
-		 * session.getAttribute("user") == null) {
-		 * response.sendRedirect(request.getContextPath() + "/Login"); return; }
-		 */
-
-		// Still pass user to JSP if session exists — safe to keep, doesn't enforce auth
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			request.setAttribute("loggedInUser", (UserModel) session.getAttribute("user"));
 		}
 
-		List<MediaModel> mediaList = mediaService.getAllMedia();
+		MediaDAO mediaDAO = new MediaDAO();
+		List<MediaModel> mediaList = mediaDAO.getAllMediaWithAvgRating();
 		request.setAttribute("mediaList", mediaList);
 
 		request.getRequestDispatcher("/WEB-INF/pages/adminDashboard.jsp").forward(request, response);
@@ -51,13 +45,6 @@ public class AdminDashboard extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// Auth check commented out — will be handled by AdminFilter later
-		/*
-		 * HttpSession session = request.getSession(false); if (session == null ||
-		 * session.getAttribute("user") == null) {
-		 * response.sendRedirect(request.getContextPath() + "/Login"); return; }
-		 */
 
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {

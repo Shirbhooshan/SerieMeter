@@ -66,9 +66,10 @@
 			</form>
 
 			<a href="${pageContext.request.contextPath}/Randomize"
-				class="sm_navbar__random_btn" title="Randomize Content"> <img
-				src="assets/icon/random-nav.svg" alt="Randomize"
-				class="sm_navbar__bookmark_icon" />
+				class="sm_navbar__bookmark_btn" title="Surprise me!"
+				style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;">
+				<img src="assets/icon/random-nav.svg" alt="Randomize"
+				class="sm_navbar__bookmark_icon" style="width: 20px; height: 20px;"">
 			</a> <a href="${pageContext.request.contextPath}/Bookmark"
 				class="sm_navbar__bookmark_btn"> <img
 				src="assets/icon/bookmarkss.svg" alt="Bookmarks"

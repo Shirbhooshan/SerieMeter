@@ -11,6 +11,7 @@ public class MediaModel {
 	private int categoryId;
 	private int genreId;
 	private String genreName;
+	private double avgRating;
 
 	public MediaModel() {
 	}
@@ -93,5 +94,13 @@ public class MediaModel {
 
 	public void setGenreName(String g) {
 		this.genreName = g;
+	}
+
+	public double getAvgRating() {
+		return avgRating;
+	}
+
+	public void setAvgRating(double avgRating) {
+		this.avgRating = avgRating;
 	}
 }

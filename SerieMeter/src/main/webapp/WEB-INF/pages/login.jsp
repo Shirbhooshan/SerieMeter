@@ -217,7 +217,7 @@ body {
 				<div class="input-wrapper">
 					<img src="assets/icon/user.svg" alt="" class="icon-svg"> <input
 						type="text" name="username" class="rounded-input"
-						placeholder="Enter your email" value="${typedUse}" required
+						placeholder="Enter your email" value="${typedUser}" required
 						autocomplete="off">
 				</div>
 			</div>

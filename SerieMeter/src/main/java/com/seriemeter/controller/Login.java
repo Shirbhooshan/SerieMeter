@@ -88,8 +88,33 @@ public class Login extends HttpServlet {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				request.setAttribute("error", "Something went wrong. Please try again.");
+				request.setAttribute("typedUser", username);
+				request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 			}
-			response.sendRedirect(request.getContextPath() + "/Explore");
+
+		} else {
+			// Authentication failure
+			String errorMsg;
+			switch (status) {
+			case "Username is required":
+			case "Password is required":
+				errorMsg = status;
+				break;
+			case "User doesn't exists":
+				errorMsg = "No account found with that username or email.";
+				break;
+			case "Password is incorrect":
+				errorMsg = "Incorrect password. Please try again.";
+				break;
+			default:
+				errorMsg = "Login failed. Please try again.";
+			}
+
+			// Re-populate the username field so the user doesn't have to retype it
+			request.setAttribute("error", errorMsg);
+			request.setAttribute("typedUser", username);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 		}
 	}
 }
