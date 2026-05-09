@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -204,7 +204,8 @@ body {
 			<div class="team-grid">
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/aboutUs/Shirbhooshan.png" alt="Shirbhooshan">
+						<img src="assets/images/aboutUs/Shirbhooshan.png"
+							alt="Shirbhooshan">
 					</div>
 					<div class="name">Shirbhooshan</div>
 					<div class="role">Team Lead</div>

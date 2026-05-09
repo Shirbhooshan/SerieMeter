@@ -574,7 +574,7 @@ body {
 								<div class="up-popup-menu" id="upPopupMenu" role="menu">
 
 									<!-- Edit Profile option -->
-									<a href="#" class="up-popup-item" role="menuitem">
+									<a href="${pageContext.request.contextPath}/UserEdit" class="up-popup-item" role="menuitem">
 										<img alt="Edit" src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
 										Edit Profile
 									</a>

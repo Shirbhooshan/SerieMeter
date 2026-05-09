@@ -137,7 +137,7 @@
 
 	<c:choose>
 		<c:when test="${not empty sessionScope.user}">
-			<a href="${pageContext.request.contextPath}/UserProfile"
+			<a href="${pageContext.request.contextPath}/User"
 				class="sm_navbar__profile"> <img
 				src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
 				alt="Profile" class="sm_navbar__profile_pic"

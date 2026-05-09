@@ -10,11 +10,7 @@ public class MediaModel {
 	private String mediaProfile;
 	private int categoryId;
 	private int genreId;
-<<<<<<< HEAD
-	private boolean isDeleted; // Soft delete flag — true means hidden from display
-=======
 	private String genreName;
->>>>>>> refs/remotes/origin/Shirbhooshan
 
 	public MediaModel() {
 	}
@@ -91,20 +87,11 @@ public class MediaModel {
 		this.genreId = genreId;
 	}
 
-<<<<<<< HEAD
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-=======
 	public String getGenreName() {
 		return genreName;
 	}
 
 	public void setGenreName(String g) {
 		this.genreName = g;
->>>>>>> refs/remotes/origin/Shirbhooshan
 	}
 }

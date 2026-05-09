@@ -23,7 +23,7 @@ import java.nio.file.Paths;
  * and POST (process profile update form).
  * Mapping: /UserProfileEdit
  */
-@WebServlet("/UserProfileEdit")
+@WebServlet("/UserEdit")
 @MultipartConfig
 public class UserProfileEdit extends HttpServlet {
 

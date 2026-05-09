@@ -182,7 +182,7 @@
 	color: var(--accent-orange);
 }
 
-/* --- STATS CARDS UPDATED --- */
+/* --- STATS CARDS --- */
 .ad-stats-grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -192,7 +192,7 @@
 
 .ad-stat-card {
 	background: #ffffff;
-	border: 1.5px solid #f2f2f2;
+	border: 1.5px solid #dedddd;
 	border-radius: 40px;
 	padding: 25px;
 	display: flex;
@@ -201,18 +201,21 @@
 }
 
 .ad-stat-icon {
-	width: 32px; /* Set icon container size */
+	width: 32px;
 	height: 32px;
-	margin-bottom: 8px;
+	margin-bottom: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background: #f9f9f9;
+	border-radius: 10px;
 }
 
 .ad-stat-icon img {
-	width: 100%;
-	height: 100%;
-	filter: grayscale(100%) opacity(0.6);
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
+	opacity: 0.9;
 }
 
 .ad-stat-label {
@@ -221,11 +224,11 @@
 	color: #aaaaaa;
 	text-transform: uppercase;
 	letter-spacing: 0.8px;
-	margin-bottom: 2px;
+	margin-bottom: 4px;
 }
 
 .ad-stat-value {
-	font-size: 54px;
+	font-size: 48px;
 	font-weight: 800;
 	margin: 0;
 	color: #1a1a1a;
@@ -233,7 +236,7 @@
 }
 
 .ad-chart-container {
-	border: 1px solid #f2f2f2;
+	border: 1.5px solid #f2f2f2;
 	border-radius: 24px;
 	padding: 25px;
 	margin-bottom: 20px;
@@ -247,30 +250,32 @@
 
 .ad-bar-chart {
 	display: flex;
-	align-items: flex-end;
-	justify-content: center; /* Center the bars */
-	height: 250px; /* Increased height from 120px */
+	align-items: flex-end; /* Keeps everything pinned to the bottom */
+	justify-content: center;
+	height: 300px; /* Increased height for better visibility */
 	background: #fcfcfc;
 	border-radius: 12px;
-	padding: 30px 20px 20px 20px;
-	gap: 40px; /* Increased gap for better spacing with fewer genres */
+	padding: 40px 20px 20px 20px;
+	gap: 40px;
+	border: 1px solid #eee;
 }
 
 .ad-bar-group {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 80px; /* Increased group width */
-	gap: 12px;
+	justify-content: flex-end; /* Pushes the label to the very bottom */
+	width: 80px;
+	height: 100%;
+	gap: 8px;
 }
 
 .ad-bar {
-	width: 100%;
+	width: 40px;
 	background: #e0e0e0;
-	border-radius: 10px; /* Smoother rounding */
-	max-width: 60px; /* Increased max width */
-	min-height: 8px;
-	transition: height 0.4s ease;
+	border-radius: 6px 6px 0 0; /* Only round the top corners */
+	min-height: 4px;
+	transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ad-bar.highlight {
@@ -278,16 +283,17 @@
 }
 
 .ad-bar-label {
-	font-size: 11px; /* Slightly larger text */
+	font-size: 10px;
 	font-weight: 700;
-	color: #999999;
+	color: #999;
 	text-transform: uppercase;
 	text-align: center;
+	line-height: 1.3;
 }
 
 /* --- NEW TABLE SECTION RECTANGLE --- */
 .ad-table-section {
-	border: 1px solid #f2f2f2;
+	border: 1.5px solid #f2f2f2;
 	border-radius: 24px;
 	padding: 25px;
 	margin-bottom: 20px;
@@ -419,7 +425,7 @@
 				<div class="ad-stat-card">
 					<div class="ad-stat-icon">
 						<img
-							src="${pageContext.request.contextPath}/assets/icon/media-report.svg">
+							src="${pageContext.request.contextPath}/assets/icon/medias.svg">
 					</div>
 					<span class="ad-stat-label">Total Medias</span>
 					<h2 class="ad-stat-value">${totalMedia}</h2>

@@ -49,6 +49,11 @@
 			<li><a href="${pageContext.request.contextPath}/Series">Series</a></li>
 			<li><a href="${pageContext.request.contextPath}/About">About
 					Us</a></li>
+			<c:if
+				test="${not empty sessionScope.user && sessionScope.user.role eq 'Admin'}">
+				<li><a href="${pageContext.request.contextPath}/Dashboard"
+					style="color: var(--orange); font-weight: 800;">Dashboard</a></li>
+			</c:if>
 		</ul>
 
 		<div class="sm_navbar__right">
@@ -60,12 +65,16 @@
 				</div>
 			</form>
 
-			<a href="${pageContext.request.contextPath}/Bookmark"
+			<a href="${pageContext.request.contextPath}/Randomize"
+				class="sm_navbar__random_btn" title="Randomize Content"> <img
+				src="assets/icon/random-nav.svg" alt="Randomize"
+				class="sm_navbar__bookmark_icon" />
+			</a> <a href="${pageContext.request.contextPath}/Bookmark"
 				class="sm_navbar__bookmark_btn"> <img
 				src="assets/icon/bookmarkss.svg" alt="Bookmarks"
 				class="sm_navbar__bookmark_icon" />
 			</a>
-			
+
 			<%-- Show profile if logged in, Sign In button if not --%>
 			<c:choose>
 				<c:when test="${not empty sessionScope.user}">
@@ -84,24 +93,6 @@
 			</c:choose>
 		</div>
 	</nav>
-
-            <%-- Show profile if logged in, Sign In button if not --%>
-            <c:choose>
-                <c:when test="${not empty sessionScope.user}">
-                    <a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
-                        <%-- Added timestamp parameter to break cache and removed username text --%>
-                        <img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user&t=<%=System.currentTimeMillis()%>"
-                             alt="Profile"
-                             class="sm_navbar__profile_pic"
-                             onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
-                    </a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/Register" class="sm_navbar__signup">Sign In</a>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </nav>
 
 </body>
 </html>
