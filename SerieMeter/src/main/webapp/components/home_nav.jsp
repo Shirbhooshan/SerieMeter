@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
@@ -19,31 +18,15 @@
 	padding: 0 5%;
 	height: 65px;
 	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
+	top: 0; left: 0; right: 0;
 	z-index: 1000;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-	/* Very subtle bottom edge */
+	box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+	border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Logo Section */
-.nav-logo {
-	display: flex;
-	align-items: center;
-	text-decoration: none;
-	gap: 10px;
-}
+.nav-logo { display: flex; align-items: center; text-decoration: none; gap: 10px; }
+.nav-logo img { height: 32px; width: auto; display: block; mix-blend-mode: screen; }
 
-.nav-logo img {
-	height: 32px;
-	width: auto;
-	display: block;
-	mix-blend-mode: screen;
-}
-
-/* Center Navigation Links */
 .nav-links {
 	position: absolute;
 	left: 50%;
@@ -51,8 +34,7 @@
 	display: flex;
 	gap: 35px;
 	list-style: none;
-	margin: 0;
-	padding: 0;
+	margin: 0; padding: 0;
 }
 
 .nav-links a {
@@ -62,24 +44,12 @@
 	font-weight: 500;
 	transition: color 0.3s ease;
 }
+.nav-links a:hover { color: var(--text-white); }
+.nav-links a.nav-admin { color: #4ebc57; font-weight: 800; }
 
-.nav-links a:hover {
-	color: var(--text-white);
-}
+.nav-auth { display: flex; align-items: center; gap: 25px; }
 
-/* Right Auth Section */
-.nav-auth {
-	display: flex;
-	align-items: center;
-	gap: 25px;
-}
-
-.login-link {
-	text-decoration: none;
-	color: var(--text-white);
-	font-size: 14px;
-	font-weight: 500;
-}
+.login-link { text-decoration: none; color: var(--text-white); font-size: 14px; font-weight: 500; }
 
 .signup-btn {
 	background-color: var(--accent-green);
@@ -91,35 +61,27 @@
 	font-weight: 600;
 	transition: all 0.3s ease;
 }
+.signup-btn:hover { background-color: #45b353; transform: translateY(-2px); }
 
-.signup-btn:hover {
-	background-color: #45b353;
-	transform: translateY(-2px);
-}
-
-/* Content spacer so the navbar doesn't overlap body content */
-.nav-spacer {
-	height: 80px;
-}
-
-/* Profile pill shown when logged in */
+/* Profile pill — mirrors navbar.jsp */
 .sm_navbar__profile {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	text-decoration: none;
-	color: #1a1a1a;
+	color: var(--text-white);
 	font-size: 13px;
 	font-weight: 600;
 }
-
 .sm_navbar__profile_pic {
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
 	object-fit: cover;
-	border: 2px solid #e0e0e0;
+	border: 2px solid rgba(255,255,255,0.3);
 }
+
+.nav-spacer { height: 80px; }
 </style>
 
 <nav class="navbar">
@@ -131,28 +93,31 @@
 		<li><a href="${pageContext.request.contextPath}/Explore">Explore</a></li>
 		<li><a href="${pageContext.request.contextPath}/Movies">Movies</a></li>
 		<li><a href="${pageContext.request.contextPath}/Series">Series</a></li>
-		<li><a href="${pageContext.request.contextPath}/About">About
-				Us</a></li>
+		<li><a href="${pageContext.request.contextPath}/About">About Us</a></li>
+		<%-- Show Dashboard link only for logged-in admins --%>
+		<c:if test="${not empty sessionScope.user && sessionScope.user.role eq 'Admin'}">
+			<li><a href="${pageContext.request.contextPath}/Dashboard" class="nav-admin">Dashboard</a></li>
+		</c:if>
 	</ul>
 
-	<c:choose>
-		<c:when test="${not empty sessionScope.user}">
-			<a href="${pageContext.request.contextPath}/User"
-				class="sm_navbar__profile"> <img
-				src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
-				alt="Profile" class="sm_navbar__profile_pic"
-				onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
-				${sessionScope.user.userName}
-			</a>
-		</c:when>
-		<c:otherwise>
-			<div class="nav-auth">
-				<a href="${pageContext.request.contextPath}/Login"
-					class="login-link">Login</a> <a
-					href="${pageContext.request.contextPath}/Register"
-					class="signup-btn">Sign up</a>
-			</div>
-		</c:otherwise>
-	</c:choose>
+	<div class="nav-auth">
+		<c:choose>
+			<c:when test="${not empty sessionScope.user}">
+				<!-- Logged in: show profile pill -->
+				<a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
+					<img src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
+						 alt="Profile"
+						 class="sm_navbar__profile_pic"
+						 onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+					${sessionScope.user.userName}
+				</a>
+			</c:when>
+			<c:otherwise>
+				<!-- Not logged in: show Login + Sign up -->
+				<a href="${pageContext.request.contextPath}/Login" class="login-link">Login</a>
+				<a href="${pageContext.request.contextPath}/Register" class="signup-btn">Sign up</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </nav>
 <div class="nav-spacer"></div>

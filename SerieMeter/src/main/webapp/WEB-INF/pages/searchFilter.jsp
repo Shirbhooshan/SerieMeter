@@ -14,8 +14,6 @@
 	rel="stylesheet" />
 
 <style>
-
-/* Base*/
 *, *::before, *::after {
 	box-sizing: border-box;
 	margin: 0;
@@ -48,7 +46,6 @@ a {
 	color: inherit;
 }
 
-/* Page Body  */
 .sm_sf_body {
 	display: flex;
 	flex: 1;
@@ -57,7 +54,7 @@ a {
 	align-items: flex-start;
 }
 
-/* Sidebar */
+/* ── Sidebar ── */
 .sm_sf_sidebar {
 	width: 260px;
 	min-width: 260px;
@@ -73,7 +70,6 @@ a {
 	color: var(--text);
 }
 
-/* Label above each filter group */
 .sm_sf_filter_label {
 	font-size: 10px;
 	font-weight: 700;
@@ -84,7 +80,6 @@ a {
 	margin-bottom: 10px;
 }
 
-/* Movie / Series toggle pills */
 .sm_sf_pill_row {
 	display: flex;
 	gap: 10px;
@@ -116,7 +111,6 @@ a {
 	color: var(--white);
 }
 
-/* Genre 2-col grid */
 .sm_sf_genre_grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -141,7 +135,6 @@ a {
 	border-color: var(--orange);
 }
 
-/* Year dropdown  */
 .sm_sf_year_select {
 	width: 100%;
 	background: var(--white);
@@ -153,7 +146,6 @@ a {
 	font-family: 'Manrope', sans-serif;
 	cursor: pointer;
 	appearance: none;
-	-webkit-appearance: none;
 	background-image: url("../icon/drop-down.svg");
 	background-repeat: no-repeat;
 	background-position: right 12px center;
@@ -165,68 +157,49 @@ a {
 	border-color: var(--orange);
 }
 
-/* Rating pills */
-.sm_sf_rating_row {
-	display: flex;
-	gap: 8px;
-}
-
-.sm_sf_rating_pill {
-	flex: 1;
-	padding: 8px 0;
-	background: var(--white);
-	border: 1px solid var(--gray-300);
-	border-radius: 6px;
-	color: var(--gray-600);
-	font-size: 13px;
-	font-family: 'Manrope', sans-serif;
-	font-weight: 600;
-	cursor: pointer;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 4px;
-	transition: background .2s, color .2s;
-}
-
-.sm_sf_rating_pill img {
-	width: 12px;
-	height: 12px;
-}
-
-.sm_sf_rating_pill:hover, .sm_sf_rating_pill.on {
-	background: var(--orange);
-	color: var(--white);
-	border-color: var(--orange);
-}
-
-/* star icon turns white when pill is active */
-.sm_sf_rating_pill.on img, .sm_sf_rating_pill:hover img {
-	filter: brightness(0) invert(1);
-}
-
-/* Reset button */
-.sm_sf_reset_btn {
+/* Search button */
+.sm_sf_search_btn {
 	width: 100%;
 	margin-top: 22px;
 	padding: 12px;
-	background: var(--black);
+	background: var(--orange);
 	color: var(--white);
 	border: none;
 	border-radius: 24px;
 	font-size: 14px;
 	font-family: 'Manrope', sans-serif;
-	font-weight: 600;
+	font-weight: 700;
 	cursor: pointer;
 	transition: background .2s;
 }
 
-.sm_sf_reset_btn:hover {
-	background: #333;
+.sm_sf_search_btn:hover {
+	background: #d4703e;
 }
 
-/* ── Content Area  */
+/* Reset button */
+.sm_sf_reset_btn {
+	width: 100%;
+	margin-top: 10px;
+	padding: 11px;
+	background: var(--white);
+	color: var(--gray-600);
+	border: 1.5px solid var(--gray-300);
+	border-radius: 24px;
+	font-size: 13px;
+	font-family: 'Manrope', sans-serif;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all .2s;
+}
+
+.sm_sf_reset_btn:hover {
+	background: var(--gray-100);
+	border-color: var(--gray-400);
+	color: var(--black);
+}
+
+/* ── Content ── */
 .sm_sf_content {
 	flex: 1;
 }
@@ -243,45 +216,81 @@ a {
 	font-size: 14px;
 	color: var(--gray-400);
 	margin-top: 5px;
-	margin-bottom: 18px;
+	margin-bottom: 14px;
 }
 
-/* Sort row */
-.sm_sf_sort_row {
+/* Active filter tags row */
+.sm_sf_active_tags {
 	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 20px;
+	min-height: 0;
+}
+
+.sm_sf_tag_chip {
+	display: inline-flex;
 	align-items: center;
-	justify-content: flex-end;
-	gap: 10px;
-	margin-bottom: 22px;
+	gap: 6px;
+	background: var(--black);
+	color: var(--white);
+	font-size: 12px;
+	font-weight: 600;
+	padding: 5px 12px 5px 14px;
+	border-radius: 20px;
+	letter-spacing: 0.3px;
 }
 
-.sm_sf_sort_label {
-	font-size: 11px;
-	font-weight: 700;
-	letter-spacing: 1.2px;
+.sm_sf_tag_chip span {
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.6);
 	text-transform: uppercase;
-	color: var(--gray-400);
+	letter-spacing: 1px;
+	margin-right: 2px;
 }
 
-.sm_sf_sort_select {
-	background: var(--white);
-	border: 1px solid var(--gray-300);
-	border-radius: 6px;
-	color: var(--text);
-	padding: 7px 28px 7px 12px;
+.sm_sf_tag_chip a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	color: #fff;
+	font-size: 10px;
+	line-height: 1;
+	text-decoration: none;
+	margin-left: 2px;
+	transition: background .15s;
+}
+
+.sm_sf_tag_chip a:hover {
+	background: rgba(255, 255, 255, 0.4);
+}
+
+/* Category chip gets orange accent */
+.sm_sf_tag_chip.cat {
+	background: #2a2a2a;
+}
+
+.sm_sf_tag_chip.genre {
+	background: var(--orange);
+}
+
+.sm_sf_tag_chip.year {
+	background: #5a5a8a;
+}
+
+.sm_sf_tag_chip.query {
+	background: #2a6a3a;
+}
+
+/* Result count */
+.sm_sf_result_count {
 	font-size: 13px;
-	font-family: 'Manrope', sans-serif;
-	cursor: pointer;
-	appearance: none;
-	-webkit-appearance: none;
-	background-image: url("../icon/drop-down.svg");
-	background-repeat: no-repeat;
-	background-position: right 10px center;
-	background-size: 12px;
-}
-
-.sm_sf_sort_select:focus {
-	outline: none;
+	color: var(--gray-400);
+	margin-bottom: 16px;
 }
 
 /* Card grid */
@@ -291,7 +300,6 @@ a {
 	gap: 20px 18px;
 }
 
-/* Card */
 .sm_sf_card {
 	cursor: pointer;
 }
@@ -348,7 +356,6 @@ a {
 	margin-top: 3px;
 }
 
-/* Empty state — shown until backend is wired up */
 .sm_sf_empty {
 	grid-column: 1/-1;
 	display: flex;
@@ -380,87 +387,171 @@ a {
 </head>
 <body>
 
-	<!-- Navbar component -->
 	<%@ include file="/components/navbar.jsp"%>
 
+	<%-- Build "remove this filter" URLs --%>
+	<c:set var="baseUrl" value="${pageContext.request.contextPath}/Search" />
 
 	<div class="sm_sf_body">
 
-		<!-- Sidebar Filters -->
-
+		<!-- ── Sidebar Filters ── -->
 		<aside class="sm_sf_sidebar">
 			<div class="sm_sf_sidebar_title">Quick Search</div>
 
-			<!-- Category  -->
-			<div class="sm_sf_filter_label">Category Type</div>
-			<div class="sm_sf_pill_row">
-				<button class="sm_sf_pill active" onclick="smSfSelectCat(this)">Movie</button>
-				<button class="sm_sf_pill inactive" onclick="smSfSelectCat(this)">Series</button>
-			</div>
+			<form id="filterForm"
+				action="${pageContext.request.contextPath}/Search" method="GET">
 
-			<!-- Genre -->
-			<div class="sm_sf_filter_label">Genre</div>
-			<div class="sm_sf_genre_grid">
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Action</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Comedy</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Drama</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Thriller</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Horror</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Sci-Fi</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Romance</div>
-				<div class="sm_sf_genre_tag" onclick="smSfSelectGenre(this)">Animation</div>
-			</div>
+				<!-- Preserve keyword query -->
+				<input type="hidden" name="query" id="hiddenQuery" value="${query}">
 
-			<!-- Release Year -->
-			<div class="sm_sf_filter_label">Release Year</div>
-			<select class="sm_sf_year_select">
-				<option>All Years</option>
-				<option>2020–2024</option>
-				<option>2015–2019</option>
-				<option>2010–2014</option>
-				<option>2000–2009</option>
-				<option>Before 2000</option>
-			</select>
+				<!-- Category -->
+				<div class="sm_sf_filter_label">Category Type</div>
+				<input type="hidden" name="category" id="hiddenCategory"
+					value="${category}">
+				<div class="sm_sf_pill_row">
+					<button type="button"
+						class="sm_sf_pill ${category == '1' ? 'active' : 'inactive'}"
+						onclick="smSfSelectCat(this, '1')">Movie</button>
+					<button type="button"
+						class="sm_sf_pill ${category == '2' ? 'active' : 'inactive'}"
+						onclick="smSfSelectCat(this, '2')">Series</button>
+				</div>
 
-			<!--  Minimum Rating -->
-			<div class="sm_sf_filter_label">Minimum Rating</div>
-			<div class="sm_sf_rating_row">
-				<button class="sm_sf_rating_pill" onclick="smSfSelectRating(this)">
-					<img src="${pageContext.request.contextPath}/assets/icon/star.svg"
-						alt="star" /> 7+
-				</button>
-				<button class="sm_sf_rating_pill" onclick="smSfSelectRating(this)">
-					<img src="${pageContext.request.contextPath}/assets/icon/star.svg"
-						alt="star" /> 8+
-				</button>
-				<button class="sm_sf_rating_pill" onclick="smSfSelectRating(this)">
-					<img src="${pageContext.request.contextPath}/assets/icon/star.svg"
-						alt="star" /> 9+
-				</button>
-			</div>
+				<!-- Genre -->
+				<div class="sm_sf_filter_label">Genre</div>
+				<input type="hidden" name="genre" id="hiddenGenre" value="${genre}">
+				<div class="sm_sf_genre_grid">
+					<div class="sm_sf_genre_tag ${genre == '1'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '1')">Action</div>
+					<div class="sm_sf_genre_tag ${genre == '2'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '2')">Comedy</div>
+					<div class="sm_sf_genre_tag ${genre == '3'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '3')">Horror</div>
+					<div class="sm_sf_genre_tag ${genre == '4'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '4')">Drama</div>
+					<div class="sm_sf_genre_tag ${genre == '5'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '5')">Sci-Fi</div>
+					<div class="sm_sf_genre_tag ${genre == '6'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '6')">Thriller</div>
+					<div class="sm_sf_genre_tag ${genre == '7'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '7')">Romance</div>
+					<div class="sm_sf_genre_tag ${genre == '8'  ? 'on' : ''}"
+						onclick="smSfSelectGenre(this, '8')">Animation</div>
+				</div>
 
-			<button class="sm_sf_reset_btn" onclick="smSfResetAll()">Search</button>
+				<!-- Release Year -->
+				<div class="sm_sf_filter_label">Release Year</div>
+				<select name="yearRange" class="sm_sf_year_select">
+					<option value="">All Years</option>
+					<option value="2020-2026"
+						${yearRange == '2020-2026' ? 'selected' : ''}>2020 – 2026</option>
+					<option value="2015-2019"
+						${yearRange == '2015-2019' ? 'selected' : ''}>2015 – 2019</option>
+					<option value="2010-2014"
+						${yearRange == '2010-2014' ? 'selected' : ''}>2010 – 2014</option>
+					<option value="2000-2009"
+						${yearRange == '2000-2009' ? 'selected' : ''}>2000 – 2009</option>
+					<option value="pre2000"
+						${yearRange == 'pre2000'   ? 'selected' : ''}>Before 2000</option>
+				</select>
+
+				<button type="submit" class="sm_sf_search_btn">Apply
+					Filters</button>
+			</form>
+
+			<!-- Reset — clears everything, keeps only the page -->
+			<a href="${pageContext.request.contextPath}/Search">
+				<button type="button" class="sm_sf_reset_btn">Reset Search
+					Filters</button>
+			</a>
 		</aside>
 
 
-		<!-- Content  -->
-
+		<!-- ── Content ── -->
 		<main class="sm_sf_content">
+
+			<%-- Heading --%>
 			<c:choose>
 				<c:when test="${not empty query}">
 					<h1 class="sm_sf_heading">
-						Results for "
+						Results for &ldquo;
 						<c:out value="${query}" />
-						"
+						&rdquo;
 					</h1>
+				</c:when>
+				<c:when
+					test="${not empty category or not empty genre or not empty yearRange}">
+					<h1 class="sm_sf_heading">Filtered Results</h1>
 				</c:when>
 				<c:otherwise>
 					<h1 class="sm_sf_heading">Search</h1>
 				</c:otherwise>
 			</c:choose>
+
 			<p class="sm_sf_sub">Filter and find exactly what you want to
 				watch</p>
 
+			<!-- ── Active filter chips ── -->
+			<div class="sm_sf_active_tags">
+
+				<!-- Keyword chip -->
+				<c:if test="${not empty query}">
+					<span class="sm_sf_tag_chip query"> <span>keyword</span> <c:out
+							value="${query}" /> <a
+						href="${baseUrl}?category=${category}&genre=${genre}&yearRange=${yearRange}"
+						title="Remove">✕</a>
+					</span>
+				</c:if>
+
+				<!-- Category chip -->
+				<c:if test="${not empty category}">
+					<span class="sm_sf_tag_chip cat"> <span>type</span> <c:choose>
+							<c:when test="${category == '1'}">Movie</c:when>
+							<c:otherwise>Series</c:otherwise>
+						</c:choose> <a
+						href="${baseUrl}?query=${query}&genre=${genre}&yearRange=${yearRange}"
+						title="Remove">✕</a>
+					</span>
+				</c:if>
+
+				<!-- Genre chip -->
+				<c:if test="${not empty genre}">
+					<span class="sm_sf_tag_chip genre"> <span>genre</span> <c:choose>
+							<c:when test="${genre == '1'}">Action</c:when>
+							<c:when test="${genre == '2'}">Comedy</c:when>
+							<c:when test="${genre == '3'}">Horror</c:when>
+							<c:when test="${genre == '4'}">Drama</c:when>
+							<c:when test="${genre == '5'}">Sci-Fi</c:when>
+							<c:when test="${genre == '6'}">Thriller</c:when>
+							<c:when test="${genre == '7'}">Romance</c:when>
+							<c:when test="${genre == '8'}">Animation</c:when>
+						</c:choose> <a
+						href="${baseUrl}?query=${query}&category=${category}&yearRange=${yearRange}"
+						title="Remove">✕</a>
+					</span>
+				</c:if>
+
+				<!-- Year chip -->
+				<c:if test="${not empty yearRange}">
+					<span class="sm_sf_tag_chip year"> <span>year</span> <c:choose>
+							<c:when test="${yearRange == 'pre2000'}">Before 2000</c:when>
+							<c:otherwise>
+								<c:out value="${yearRange}" />
+							</c:otherwise>
+						</c:choose> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre}"
+						title="Remove">✕</a>
+					</span>
+				</c:if>
+			</div>
+
+			<!-- Result count (only when a search was performed) -->
+			<c:if test="${results != null}">
+				<p class="sm_sf_result_count">${resultCount}result${resultCount != 1 ? 's' : ''}
+					found</p>
+			</c:if>
+
+			<!-- Cards -->
 			<div class="sm_sf_cards_grid">
 				<c:choose>
 					<c:when test="${not empty results}">
@@ -474,14 +565,12 @@ a {
 										alt="${media.title}"
 										onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
 								</div>
-
 								<div class="sm_sf_card_row">
 									<div style="flex: 1; overflow: hidden;">
 										<h3 class="sm_sf_card_title">${media.title}</h3>
 										<p class="sm_sf_card_genre">${media.categoryId == 1 ? 'Movie' : 'Series'}</p>
 									</div>
-									<div class="sm_sf_card_year">
-										${fn:substring(media.releaseDate, 0, 4)}</div>
+									<div class="sm_sf_card_year">${fn:substring(media.releaseDate, 0, 4)}</div>
 								</div>
 							</a>
 						</c:forEach>
@@ -492,7 +581,7 @@ a {
 								src="${pageContext.request.contextPath}/assets/icon/search.svg"
 								alt="search" />
 							<p>No results found</p>
-							<span>Try a different keyword</span>
+							<span>Try adjusting your filters or a different keyword</span>
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -501,69 +590,54 @@ a {
 								src="${pageContext.request.contextPath}/assets/icon/search.svg"
 								alt="search" />
 							<p>No results yet</p>
-							<span>Type something in the search bar above and hit Enter</span>
+							<span>Type a keyword or apply filters to get started</span>
 						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
-
 		</main>
-
 	</div>
 
-
-	<!-- Footer Component -->
 	<%@ include file="/components/footer.jsp"%>
 
-
 	<script>
-		/* Category pill toggle — only one active at a time */
-		function smSfSelectCat(btn) {
-			document.querySelectorAll('.sm_sf_pill').forEach(function(b) {
+	// Track selected values
+	let selectedCategory = '${category}';
+	let selectedGenre    = '${genre}';
+
+	function smSfSelectCat(btn, val) {
+		// Toggle off if same button clicked again
+		if (selectedCategory === val) {
+			selectedCategory = '';
+			document.querySelectorAll('.sm_sf_pill').forEach(b => {
+				b.classList.remove('active');
+				b.classList.add('inactive');
+			});
+		} else {
+			selectedCategory = val;
+			document.querySelectorAll('.sm_sf_pill').forEach(b => {
 				b.classList.remove('active');
 				b.classList.add('inactive');
 			});
 			btn.classList.remove('inactive');
 			btn.classList.add('active');
 		}
+		document.getElementById('hiddenCategory').value = selectedCategory;
+	}
 
-		/* Rating pill toggle — only one active at a time */
-		function smSfSelectRating(btn) {
-			document.querySelectorAll('.sm_sf_rating_pill').forEach(
-					function(b) {
-						b.classList.remove('on');
-					});
-			btn.classList.add('on');
-		}
-
-		/* Genre tag toggle — only one active at a time */
-		function smSfSelectGenre(tag) {
-			document.querySelectorAll('.sm_sf_genre_tag').forEach(function(t) {
-				t.classList.remove('on');
-			});
+	function smSfSelectGenre(tag, val) {
+		// Toggle off if same tag clicked again
+		if (selectedGenre === val) {
+			selectedGenre = '';
+			document.querySelectorAll('.sm_sf_genre_tag').forEach(t => t.classList.remove('on'));
+		} else {
+			selectedGenre = val;
+			document.querySelectorAll('.sm_sf_genre_tag').forEach(t => t.classList.remove('on'));
 			tag.classList.add('on');
 		}
-
-		/* Reset all filters back to default */
-		function smSfResetAll() {
-			var pills = document.querySelectorAll('.sm_sf_pill');
-			pills[0].classList.add('active');
-			pills[0].classList.remove('inactive');
-			pills[1].classList.add('inactive');
-			pills[1].classList.remove('active');
-
-			document.querySelectorAll('.sm_sf_genre_tag').forEach(function(t) {
-				t.classList.remove('on');
-			});
-
-			document.querySelector('.sm_sf_year_select').selectedIndex = 0;
-
-			document.querySelectorAll('.sm_sf_rating_pill').forEach(
-					function(b) {
-						b.classList.remove('on');
-					});
-		}
-	</script>
+		document.getElementById('hiddenGenre').value = selectedGenre;
+	}
+</script>
 
 </body>
 </html>
