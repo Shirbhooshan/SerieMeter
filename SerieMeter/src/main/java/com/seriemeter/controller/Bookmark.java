@@ -11,56 +11,78 @@ import java.io.IOException;
 import java.util.List;
 
 import com.seriemeter.dao.BookmarkDAO;
-import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.model.UserModel;
 
-/**
- * Servlet implementation class Bookmark
- */
-@WebServlet(asyncSupported = true, urlPatterns = { "/Bookmark" })
+@WebServlet(asyncSupported = false, urlPatterns = { "/Bookmark" })
 public class Bookmark extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private BookmarkDAO bookmarkDAO = new BookmarkDAO();
-	private MediaDAO mediaDAO = new MediaDAO();
+    private static final long serialVersionUID = 1L;
 
-	// show the user's bookmark page
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    // loads the user's bookmarks and shows in the page
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect(request.getContextPath() + "/Login");
-			return;
-		}
+        HttpSession session = request.getSession(false);
 
-		UserModel user = (UserModel) session.getAttribute("user");
-		List<MediaModel> bookmarkedMedia = bookmarkDAO.getBookmarkedMedia(user.getUserId());
-		request.setAttribute("bookmarkedMedia", bookmarkedMedia);
-		request.getRequestDispatcher("/WEB-INF/pages/bookmark.jsp").forward(request, response);
-	}
+        // If not logged in sends user to the logged-out bookmark page
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect(request.getContextPath() + "/Bookmarks");
+            return;
+        }
 
-	// add or remove a bookmark, then redirect back to media page
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+        // Getting logged in user from session
+        UserModel user = (UserModel) session.getAttribute("user");
 
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect(request.getContextPath() + "/Login");
-			return;
-		}
+        // Loads the user's bookmarks
+        BookmarkDAO bookmarkDAO = new BookmarkDAO();
+        List<MediaModel> bookmarkList = bookmarkDAO.getBookmarkedMedia(user.getUserId());
 
-		UserModel user = (UserModel) session.getAttribute("user");
-		int userId = user.getUserId();
-		int mediaId = Integer.parseInt(request.getParameter("media_id"));
-		String action = request.getParameter("action");
+        // Puts the list in request so bookmark.jsp can loop through it
+        request.setAttribute("bookmarkList", bookmarkList);
 
-		if ("add".equals(action)) {
-			bookmarkDAO.addBookmark(userId, mediaId);
-		} else if ("remove".equals(action)) {
-			bookmarkDAO.removeBookmark(userId, mediaId);
-		}
+        request.getRequestDispatcher("/WEB-INF/pages/bookmark.jsp").forward(request, response);
+    }
 
-		response.sendRedirect(request.getContextPath() + "/Media?id=" + mediaId);
-	}
+    // handles add, remove, and clearAll actions
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+
+        // If not logged in sends user back to login
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect(request.getContextPath() + "/Login");
+            return;
+        }
+
+        UserModel user = (UserModel) session.getAttribute("user");
+        BookmarkDAO bookmarkDAO = new BookmarkDAO();
+
+        String action = request.getParameter("action");
+
+        // media.jsp sends "media_id", bookmark.jsp sends "mediaId"
+       
+        String mediaIdParam = request.getParameter("media_id");
+        if (mediaIdParam == null) {
+            mediaIdParam = request.getParameter("mediaId");
+        }
+
+        if ("add".equals(action) && mediaIdParam != null) {
+            // Add bookmark is called from media.jsp
+            int mediaId = Integer.parseInt(mediaIdParam);
+            bookmarkDAO.addBookmark(user.getUserId(), mediaId);
+
+        } else if ("remove".equals(action) && mediaIdParam != null) {
+            // Remove one bookmark is called from media.jsp or bookmark.jsp
+            int mediaId = Integer.parseInt(mediaIdParam);
+            bookmarkDAO.removeBookmark(user.getUserId(), mediaId);
+
+        } else if ("clearAll".equals(action)) {
+            // Remove all bookmarks for user is called from bookmark.jsp
+            bookmarkDAO.clearAllBookmarks(user.getUserId());
+        }
+
+        // Redirects back to GET so the page reloads with updated list
+        response.sendRedirect(request.getContextPath() + "/Bookmark");
+    }
 }

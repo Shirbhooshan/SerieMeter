@@ -175,7 +175,7 @@ public class MediaDAO {
 	}
 
 	// Returns only movies (category_id = 1), joined with genre name
-	
+
 	public List<MediaModel> getMovies() {
 		List<MediaModel> list = new ArrayList<>();
 		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
@@ -232,9 +232,9 @@ public class MediaDAO {
 	}
 
 	// Returns top 8 most reviewed media, most reviews = trending
-	
+
 	// LEFT JOIN so media with 0 reviews still appear
-	
+
 	public List<MediaModel> getTrendingMedia() {
 		List<MediaModel> list = new ArrayList<>();
 		String sql = "SELECT m.*, g.genre_name, COUNT(r.review_id) AS review_count " + "FROM media m "

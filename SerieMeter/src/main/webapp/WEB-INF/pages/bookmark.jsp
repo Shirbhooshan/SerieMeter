@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@
 	rel="stylesheet" />
 
 <style>
-/* ── RESET & BASE ── */
+/* Base */
 *, *::before, *::after {
 	box-sizing: border-box;
 	margin: 0;
@@ -21,12 +22,10 @@
 
 :root {
 	--orange: #E8824A;
-	--orange-light: #F0A070;
 	--black: #0D0D0D;
 	--white: #FFFFFF;
 	--gray-100: #F5F5F5;
 	--gray-200: #E8E8E8;
-	--gray-300: #CCCCCC;
 	--gray-400: #AAAAAA;
 	--gray-600: #666666;
 	--text: #1A1A1A;
@@ -44,15 +43,15 @@ a {
 	color: inherit;
 }
 
-/* ── PAGE HEADER ── */
-.page-header {
+/* Page Header */
+.sm_bm_header {
 	padding: 48px 60px 40px;
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
 }
 
-.page-header__label {
+.sm_bm_header_label {
 	font-size: 11px;
 	font-weight: 700;
 	letter-spacing: 2px;
@@ -61,7 +60,7 @@ a {
 	margin-bottom: 10px;
 }
 
-.page-header__title {
+.sm_bm_header_title {
 	font-size: 52px;
 	font-weight: 800;
 	letter-spacing: -1.5px;
@@ -70,13 +69,14 @@ a {
 	margin-bottom: 14px;
 }
 
-.page-header__subtitle {
+.sm_bm_header_sub {
 	font-size: 15px;
 	color: var(--gray-600);
 	line-height: 1.6;
 }
 
-.btn-clear {
+/* Clear all button only shows when bookmarks exist */
+.sm_bm_clear_btn {
 	background: var(--black);
 	color: var(--white);
 	border: none;
@@ -91,26 +91,78 @@ a {
 	white-space: nowrap;
 	margin-top: 8px;
 	transition: background .2s;
+	text-decoration: none;
+	display: inline-block;
 }
 
-.btn-clear:hover {
+.sm_bm_clear_btn:hover {
 	background: #333;
 }
 
-/* ── BOOKMARKS GRID ── */
-.bookmarks-grid {
+/* Shown when the user has no bookmarks */
+.sm_bm_empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 80px 20px 120px;
+	gap: 16px;
+	text-align: center;
+}
+
+.sm_bm_empty_icon {
+	width: 56px;
+	height: 56px;
+	opacity: 0.3;
+}
+
+.sm_bm_empty_title {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.sm_bm_empty_sub {
+	font-size: 14px;
+	color: var(--gray-400);
+	max-width: 320px;
+	line-height: 1.6;
+}
+
+.sm_bm_explore_btn {
+	margin-top: 8px;
+	background: var(--orange);
+	color: var(--white);
+	border: none;
+	border-radius: 28px;
+	padding: 12px 28px;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	transition: background .2s;
+}
+
+.sm_bm_explore_btn:hover {
+	background: #d4703b;
+}
+
+/* Bookmarks Grid */
+.sm_bm_grid {
 	padding: 0 60px 80px;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 28px 24px;
 }
 
-/* ── BOOKMARK CARD ── */
-.bcard {
+/*  Bookmark Card */
+.sm_bm_card {
 	cursor: pointer;
 }
 
-.bcard__poster {
+.sm_bm_card_poster {
 	position: relative;
 	width: 100%;
 	aspect-ratio: 2/3;
@@ -120,40 +172,63 @@ a {
 	margin-bottom: 12px;
 }
 
-.bcard__heart {
+.sm_bm_card_poster img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform .3s;
+}
+
+.sm_bm_card:hover .sm_bm_card_poster img {
+	transform: scale(1.04);
+}
+
+/* Remove bookmark button */
+.sm_bm_remove_btn {
 	position: absolute;
 	top: 10px;
 	right: 10px;
 	width: 32px;
 	height: 32px;
 	background: var(--white);
+	border: none;
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	z-index: 2;
+	cursor: pointer;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	transition: background .2s;
 }
 
-.bcard__heart svg {
-	color: #e53935;
+.sm_bm_remove_btn:hover {
+	background: #fee2e2;
 }
 
-.bcard__info {
+.sm_bm_remove_btn img {
+	width: 14px;
+	height: 14px;
+}
+
+.sm_bm_card_info {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
 	gap: 8px;
 }
 
-.bcard__title {
+.sm_bm_card_title {
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 1.3;
 	color: var(--black);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.bcard__year {
+.sm_bm_card_year {
 	font-size: 14px;
 	font-weight: 500;
 	color: var(--gray-400);
@@ -161,7 +236,7 @@ a {
 	margin-top: 1px;
 }
 
-.bcard__genre {
+.sm_bm_card_genre {
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 1px;
@@ -171,164 +246,102 @@ a {
 }
 </style>
 </head>
-
 <body>
 
+	<!-- Navbar component -->
 	<%@ include file="/components/navbar.jsp"%>
 
-	<div class="page-header">
-		<div class="page-header__left">
-			<p class="page-header__label">Personal Archive</p>
-			<h1 class="page-header__title">Your Bookmarks</h1>
-			<p class="page-header__subtitle">
-				A curated collection of your favorite cinematic journeys.<br>
-				Ready to be revisited at any moment.
+
+	<!-- Page header -->
+	<div class="sm_bm_header">
+		<div>
+			<p class="sm_bm_header_label">Personal Archive</p>
+			<h1 class="sm_bm_header_title">Your Bookmarks</h1>
+			<p class="sm_bm_header_sub">
+				A curated collection of your saved titles.<br> Ready to be
+				revisited at any moment.
 			</p>
 		</div>
-		<button class="btn-clear">CLEAR ALL</button>
+
+		<!-- Clear all button only show if there are bookmarks -->
+
+		<c:if test="${not empty bookmarkList}">
+			<form action="${pageContext.request.contextPath}/Bookmark"
+				method="post" style="display: inline;">
+				<input type="hidden" name="action" value="clearAll" />
+				<button type="submit" class="sm_bm_clear_btn"
+					onclick="return confirm('Are you sure you want to clear all bookmarks?')">
+					Clear All</button>
+			</form>
+		</c:if>
 	</div>
 
-	<div class="bookmarks-grid">
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">Mamma Mia!</div>
-					<div class="bcard__genre">Adventure</div>
-				</div>
-				<div class="bcard__year">2020</div>
-			</div>
-		</div>
+	<!-- if no bookmarks then it is empty otherwise it shows the grid -->
+	<c:choose>
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">The Good Place</div>
-					<div class="bcard__genre">Biography</div>
-				</div>
-				<div class="bcard__year">2021</div>
-			</div>
-		</div>
+		<c:when test="${empty bookmarkList}">
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">Star Wars</div>
-					<div class="bcard__genre">Biography</div>
-				</div>
-				<div class="bcard__year">2021</div>
-			</div>
-		</div>
+			<!-- Empty state shown until user adds bookmarks -->
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
+			<div class="sm_bm_empty">
+				<img class="sm_bm_empty_icon"
+					src="${pageContext.request.contextPath}/assets/icon/bookmark_icon.svg"
+					alt="No bookmarks" />
+				<p class="sm_bm_empty_title">No bookmarks yet</p>
+				<p class="sm_bm_empty_sub">Start exploring movies and series and
+					save your favourites here.</p>
+				<a href="${pageContext.request.contextPath}/Explore"
+					class="sm_bm_explore_btn"> Explore Now </a>
 			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">Interstellar</div>
-					<div class="bcard__genre">Biography</div>
-				</div>
-				<div class="bcard__year">2021</div>
-			</div>
-		</div>
+		</c:when>
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">The Trueman Show</div>
-					<div class="bcard__genre">Biography</div>
-				</div>
-				<div class="bcard__year">2021</div>
-			</div>
-		</div>
+		<c:otherwise>
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">Grey's Anatomy</div>
-					<div class="bcard__genre">Fantasy</div>
-				</div>
-				<div class="bcard__year">2022</div>
-			</div>
-		</div>
+			<!-- Bookmark cards grid -->
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">Forrest Grump</div>
-					<div class="bcard__genre">Action</div>
-				</div>
-				<div class="bcard__year">2023</div>
-			</div>
-		</div>
+			<div class="sm_bm_grid">
+				<c:forEach var="media" items="${bookmarkList}">
+					<div class="sm_bm_card">
 
-		<div class="bcard">
-			<div class="bcard__poster">
-				<div class="bcard__heart">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-						<path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-				</div>
-			</div>
-			<div class="bcard__info">
-				<div>
-					<div class="bcard__title">Young Sheldon</div>
-					<div class="bcard__genre">Biography</div>
-				</div>
-				<div class="bcard__year">2021</div>
-			</div>
-		</div>
+						<div class="sm_bm_card_poster">
+							<a
+								href="${pageContext.request.contextPath}/Media?id=${media.mediaId}">
+								<img
+								src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
+								alt="${media.title}" />
+							</a>
+							<form action="${pageContext.request.contextPath}/Bookmark"
+								method="post">
+								<input type="hidden" name="action" value="remove" /> <input
+									type="hidden" name="mediaId" value="${media.mediaId}" />
+								<button class="sm_bm_remove_btn" type="submit"
+									title="Remove bookmark">
+									<img
+										src="${pageContext.request.contextPath}/assets/icon/heart.svg"
+										alt="Remove" />
+								</button>
+							</form>
+						</div>
 
-	</div>
+						<div class="sm_bm_card_info">
+							<div>
+								<div class="sm_bm_card_title">${media.title}</div>
+								<div class="sm_bm_card_genre">${media.genreName}</div>
+							</div>
+							<div class="sm_bm_card_year">${media.releaseDate}</div>
+						</div>
 
+					</div>
+				</c:forEach>
+			</div>
+		</c:otherwise>
+
+	</c:choose>
+
+
+	<!-- Footer component -->
 	<%@ include file="/components/footer.jsp"%>
-	
+
 </body>
 </html>

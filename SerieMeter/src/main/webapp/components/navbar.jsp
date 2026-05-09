@@ -57,7 +57,7 @@
                 <img src="assets/icon/bookmarkss.svg" alt="Bookmarks" class="sm_navbar__bookmark_icon" />
             </a>
 
-            <%-- Show profile if logged in, Sign In button if not --%>
+            
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <a href="${pageContext.request.contextPath}/User" class="sm_navbar__profile">
@@ -69,7 +69,7 @@
                     </a>
                 </c:when>
                 <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/Register" class="sm_navbar__signup">Sign In</a>
+                    <a href="${pageContext.request.contextPath}/Login" class="sm_navbar__signup">Sign In</a>
                 </c:otherwise>
             </c:choose>
         </div>
