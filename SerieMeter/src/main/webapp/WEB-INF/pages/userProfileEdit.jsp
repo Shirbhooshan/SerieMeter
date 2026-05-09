@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-    /* --- Base Reset --- */
+    /* -- Base Reset -- */
     * {
         margin: 0;
         padding: 0;
@@ -25,19 +25,19 @@
         min-height: 100vh;
     }
 
-    /* --- Page Wrapper: vertical breathing room above and below the card --- */
+    /* --- Page Wrapper: flexible centering to avoid scrolling --- */
     .ep-page-wrapper {
         flex: 1;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
-        padding: 40px 24px 0 24px;
+        align-items: center; /* Centers the whole form vertically */
+        padding: 10px 24px;
     }
 
     /* --- Form wrapper stretches to near full width --- */
     .ep-edit-form {
         width: 100%;
-        max-width: 1200px;
+        max-width: 1000px; /* Slightly narrower to match tighter vertical proportions */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -46,50 +46,45 @@
     /* Error message shown above the card */
     .ep-msg-error {
         color: #ff4d4d;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         text-align: center;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         transition: opacity 0.5s ease;
     }
 
-    /* --- Outer dark card: stretches edge to edge, holds both panels ---
-       Internal padding creates the "floating" gap around the white left panel.
-       Reduced padding so white panel expands closer to all dark card edges. */
+    /* --- Outer dark card: stretches edge to edge, holds both panels --- */
     .ep-main-card {
         background-color: #28282B;
-        border-radius: 28px;
+        border-radius: 24px;
         display: flex;
         align-items: stretch;
         width: 100%;
-        padding: 14px 0 14px 14px; /* smaller padding = white panel sits closer to edges */
+        padding: 8px 0 8px 8px; 
         gap: 0;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
-        min-height: 580px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
 
     /* LEFT PANEL — Edit Profile
-       Floats inside the dark card thanks to the card's padding.
-       Has its own border-radius on all four corners and a shadow.
-       ================================================ */
+       Floats inside the dark card thanks to the card's padding. */
     .ep-left-panel {
         background-color: #F6F6F6;
         width: 46%;
         flex-shrink: 0;
-        padding: 50px 50px 50px 50px;
-        border-radius: 20px; /* all corners rounded — looks elevated/floating */
+        padding: 24px 32px;
+        border-radius: 18px; 
         display: flex;
         flex-direction: column;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14); /* gives the floating appearance */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12); 
     }
 
-    /* "Edit Profile" heading — same font size as right panel heading */
+    /* "Edit Profile" heading */
     .ep-left-panel h2 {
         color: #D56E3F;
-        font-size: 42px;   
+        font-size: 24px;   
         font-weight: 720;  
-        margin-bottom: 30px;
-        line-height: 1.25;
+        margin-bottom: 16px;
+        line-height: 1.2;
     }
 
     /* Profile photo section: centred column */
@@ -97,17 +92,17 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 35px;
+        margin-bottom: 16px;
     }
 
     /* Green-bordered circle wrapper */
     .ep-pic-wrapper {
-        width: 160px;
-        height: 160px;
+        width: 85px;
+        height: 85px;
         border-radius: 50%;
         border: 1.5px solid #2EAB29;
-        padding: 4px;
-        margin-bottom: 16px;
+        padding: 3px;
+        margin-bottom: 10px;
     }
 
     /* Profile picture inside the circle */
@@ -123,9 +118,9 @@
         background-color: #EBEBEB;
         border: 1px solid #D6D6D6;
         color: #919191;
-        padding: 9px 24px;
+        padding: 6px 16px;
         border-radius: 20px;
-        font-size: 13px;
+        font-size: 11px; 
         font-weight: 600;
         font-family: 'Manrope', sans-serif;
         cursor: pointer;
@@ -139,17 +134,17 @@
 
     /* Input groups (label + field) */
     .ep-input-group {
-        margin-bottom: 22px;
+        margin-bottom: 12px;
     }
 
     .ep-input-group label {
         display: block;
-        font-size: 15px;
+        font-size: 11px; 
         font-weight: 700;
         color: #28282B;
         text-transform: uppercase;
-        letter-spacing: 0.8px;
-        margin-bottom: 10px;
+        letter-spacing: 0.6px;
+        margin-bottom: 6px;
     }
 
     /* Wrapper gives us the anchor for the left icon */
@@ -162,12 +157,13 @@
     /* Icon sitting inside the left edge of the field */
     .ep-field-icon {
         position: absolute;
-        left: 18px;
-        width: 20px;
-        height: 20px;
+        left: 14px;
+        width: 16px;
+        height: 16px;
         pointer-events: none;
         filter: brightness(0);
 		opacity: 0.45;
+		margin-bottom: 6px;
     }
 
     /* Text inputs on the left panel */
@@ -176,13 +172,13 @@
         background-color: #EBEBEB;
         border: none;
         border-radius: 28px;
-        padding: 16px 18px 16px 50px;
+        padding: 10px 16px 10px 38px; 
         color: #28282B;
-        font-size: 15px;
+        font-size: 13px;
         font-family: 'Manrope', sans-serif;
-        /* Inner shadow: Y-2, Blur-4, color #878787 at 25% */
         box-shadow: inset 0px 2px 4px rgba(135, 135, 135, 0.25);
         outline: none;
+        margin-bottom: 8px;
     }
 
     .ep-left-panel input[type="text"]::placeholder {
@@ -192,29 +188,29 @@
     /* RIGHT PANEL — Password and Security */
     .ep-right-panel {
         flex: 1;
-        padding: 50px 55px 50px 50px;
+        padding: 24px 38px;
         display: flex;
         flex-direction: column;
     }
 
-    /* "Password and Security" heading — two lines, same size as left heading */
+    /* "Password and Security" heading */
     .ep-right-panel h2 {
         color: #ffffff;
-        font-size: 42px;
+        font-size: 24px;
         font-weight: 720;
-        line-height: 1.25;
-        margin-bottom: 68px; /* controls how far down the first field label sits */
+        line-height: 1.2;
+        margin-bottom: 38px; 
     }
 
     /* Labels in the right panel */
     .ep-right-panel label {
         display: block;
-        font-size: 15px;
+        font-size: 11px;
         font-weight: 700;
         color: #BEBEBE;
         text-transform: uppercase;
-        letter-spacing: 0.9px;
-        margin-bottom: 26px;
+        letter-spacing: 0.6px;
+        margin-bottom: 10px; 
     }
 
     /* Password input fields */
@@ -224,19 +220,20 @@
         background-color: #EDEDED;
         border: none;
         border-radius: 28px;
-        padding: 16px 50px 16px 22px;
+        padding: 10px 36px 10px 20px; 
         color: #28282B;
-        font-size: 15px;
+        font-size: 13px;
         font-family: 'Manrope', sans-serif;
         outline: none;
+        margin-bottom: 8px;
     }
 
     /* Eye icon on the right edge of password fields */
     .ep-eye-icon {
         position: absolute;
-        right: 18px;
-        width: 22px;
-        height: 22px;
+        right: 14px;
+        width: 18px;
+        height: 18px;
         cursor: pointer;
     }
 
@@ -246,12 +243,12 @@
 
     /* ACTION AREA — Save / Go Back */
     .ep-action-area {
-        margin-top: 50px;
-        margin-bottom: 50px;
+        margin-top: 26px; 
+        margin-bottom: 18px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 50px; /* equal spacing between Save and Go Back */
+        gap: 20px; 
     }
 
     /* Green "Save Changes" button */
@@ -260,8 +257,8 @@
         color: #ffffff;
         border: none;
         border-radius: 28px;
-        padding: 15px 60px;
-        font-size: 16px;
+        padding: 10px 38px; 
+        font-size: 14px;
         font-weight: 700;
         font-family: 'Manrope', sans-serif;
         cursor: pointer;
@@ -278,13 +275,13 @@
         background: none;
         border: none;
         color: #535353;
-        font-size: 15px;
+        font-size: 13px; 
         font-weight: 600;
         font-family: 'Manrope', sans-serif;
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         transition: opacity 0.2s ease;
     }
 
@@ -292,7 +289,6 @@
         opacity: 0.75;
     }
 
-    /* Only the text is underlined, not the arrow icon */
     .ep-go-back-btn .ep-link-text {
         text-decoration: underline;
     }
@@ -301,8 +297,8 @@
     @media (max-width: 860px) {
         .ep-main-card {
             flex-direction: column;
-            padding: 20px;
-            gap: 20px;
+            padding: 16px;
+            gap: 16px;
         }
         .ep-left-panel,
         .ep-right-panel {
@@ -328,11 +324,9 @@
 
             <div class="ep-main-card">
 
-                <!-- Left Panel: Edit Profile (floats inside dark card) -->
                 <div class="ep-left-panel">
                     <h2>Edit Profile</h2>
 
-                    <!-- Profile picture section -->
                     <div class="ep-photo-section">
                         <div class="ep-pic-wrapper">
                             <%-- Load user's uploaded picture or fall back to default --%>
@@ -352,7 +346,6 @@
                             </c:choose>
                         </div>
 
-                        <!-- Hidden file input triggered by the button below -->
                         <button type="button"
                                 class="ep-change-photo-btn"
                                 onclick="document.getElementById('ep-file-input').click()">
@@ -366,7 +359,6 @@
                                onchange="epPreviewImage(event)">
                     </div>
 
-                    <!-- Full Name field -->
                     <div class="ep-input-group">
                         <label>Full Name</label>
                         <div class="ep-field-wrapper">
@@ -378,7 +370,6 @@
                         </div>
                     </div>
 
-                    <!-- Username field -->
                     <div class="ep-input-group">
                         <label>Username</label>
                         <div class="ep-field-wrapper">
@@ -391,12 +382,10 @@
                     </div>
                 </div>
 
-                <!-- Right Panel: Password and Security -->
                 <div class="ep-right-panel">
 
                     <h2>Password and<br>Security</h2>
 
-                    <!-- Current Password — eye icon swaps between eye.svg and eye-black.svg on toggle -->
                     <div class="ep-input-group">
                         <label>Current Password</label>
                         <div class="ep-field-wrapper">
@@ -411,7 +400,6 @@
                         </div>
                     </div>
 
-                    <!-- New Password — eye icon swaps between eye.svg and eye-black.svg on toggle -->
                     <div class="ep-input-group">
                         <label>New Password</label>
                         <div class="ep-field-wrapper">
@@ -426,7 +414,6 @@
                         </div>
                     </div>
 
-                    <!-- Confirm New Password — eye icon swaps between eye.svg and eye-black.svg on toggle -->
                     <div class="ep-input-group">
                         <label>Confirm New Password</label>
                         <div class="ep-field-wrapper">
@@ -445,18 +432,15 @@
 
             </div>
 
-            <!-- ── Action Buttons: equal spacing above, between, and below ── -->
             <div class="ep-action-area">
 
-                <!-- Save Changes: submits the form -->
                 <button type="submit" class="ep-save-btn">Save Changes</button>
 
-                <!-- Go Back: uses left-arrow.svg icon, only "Go Back" text is underlined -->
                 <button type="button"
                         class="ep-go-back-btn"
                         onclick="history.back()">
                     <img src="${pageContext.request.contextPath}/assets/icon/left-arrow.svg"
-                         alt="" style="width: 14px;">
+                         alt="" style="width: 12px;">
                     <span class="ep-link-text">Go Back</span>
                 </button>
 
@@ -470,7 +454,6 @@
     <script>
         // Toggle password field between hidden and visible
         // Also swaps the eye icon between eye.svg (hidden) and eye-black.svg (visible)
-        // — matches the same behaviour as the register page
         function epTogglePass(inputId, iconId) {
             const field = document.getElementById(inputId);
             const icon  = document.getElementById(iconId);
