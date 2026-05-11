@@ -544,9 +544,6 @@ body {
 							<option value="5">Sci-Fi</option>
 							<option value="6">Thriller</option>
 							<option value="7">Romance</option>
-							<option value="8">Animation</option>
-							<option value="9">Documentary</option>
-							<option value="10">Crime</option>
 						</select>
 					</div>
 
