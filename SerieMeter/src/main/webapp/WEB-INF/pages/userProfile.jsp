@@ -514,6 +514,149 @@ body {
 .up-explore-btn:hover {
 	background-color: #006800;
 }
+/* Tablet / half-screen (~768px) */
+@media (max-width: 768px) {
+
+	.up-container {
+		padding: 0 14px;
+	}
+
+	/* Stack avatar+info above stats */
+	.up-profile-summary {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+		padding: 20px 16px;
+	}
+
+	/* Shrink avatar */
+	.up-avatar {
+		width: 80px;
+		height: 80px;
+	}
+
+	.up-user-name {
+		font-size: 18px;
+	}
+
+	.up-user-email {
+		font-size: 12px;
+	}
+
+	/* Stats move below profile info, left-aligned */
+	.up-stats {
+		gap: 24px;
+		text-align: left;
+		width: 100%;
+	}
+
+	.up-stat-number {
+		font-size: 34px;
+	}
+
+	.up-stat-label {
+		font-size: 10px;
+	}
+
+	/* Card padding tighter */
+	.up-card {
+		padding: 16px;
+	}
+
+	/* Card header wraps on small screens */
+	.up-card-header {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.up-card-header h3 {
+		font-size: 15px;
+	}
+
+	.up-sort-btn {
+		padding: 6px 14px;
+		font-size: 11px;
+	}
+
+	/* Bookmark cards: 2 per row on tablet */
+	.up-bookmark-card,
+	.up-bookmark-add {
+		width: calc(50% - 10px);
+	}
+
+	.up-bookmark-poster {
+		height: 200px;
+	}
+
+	/* Reviews: single column */
+	.up-review-item {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.up-review-media-title {
+		font-size: 20px;
+	}
+
+	.up-review-stars {
+		justify-content: flex-start;
+	}
+
+	.up-review-text {
+		text-align: left;
+	}
+}
+
+/* Small mobile (~480px) */
+@media (max-width: 480px) {
+
+	.up-profile-header {
+		gap: 12px;
+	}
+
+	.up-avatar {
+		width: 64px;
+		height: 64px;
+	}
+
+	.up-user-name {
+		font-size: 15px;
+	}
+
+	.up-stat-number {
+		font-size: 28px;
+	}
+
+	/* Bookmark cards: 2 per row, smaller */
+	.up-bookmark-card,
+	.up-bookmark-add {
+		width: calc(50% - 9px);
+	}
+
+	.up-bookmark-poster {
+		height: 160px;
+	}
+
+	.up-bookmark-title {
+		font-size: 12px;
+	}
+
+	.up-discover-text {
+		font-size: 15px;
+	}
+
+	.up-explore-btn {
+		padding: 10px 28px;
+		font-size: 13px;
+	}
+
+	/* Popup opens downward on very small screens */
+	.up-popup-menu {
+		left: auto;
+		right: 0;
+		top: calc(100% + 6px);
+	}
+}
 </style>
 
 <body>
@@ -805,7 +948,7 @@ body {
 			event.stopPropagation();
 		});
 
-		// ── Copy-email-to-clipboard logic ──────────────────────────────────────
+		// ── Copy-email-to-clipboard logic
 
 		const copyIcon = document.querySelector('.up-copy-icon');
 

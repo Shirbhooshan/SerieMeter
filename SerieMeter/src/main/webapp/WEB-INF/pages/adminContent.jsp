@@ -409,6 +409,177 @@ body {
 .ad-text-orange {
 	color: #e37329;
 }
+
+/* ── Media Queries ──────────────────────────────────────────────────────── */
+
+/* Tablet / half-screen (~768px) */
+@media (max-width: 768px) {
+
+	body {
+		overflow: auto;
+		height: auto;
+	}
+
+	.ad-layout-container {
+		flex-direction: column;
+		height: auto;
+	}
+
+	/* Sidebar becomes a compact top bar */
+	.ad-sidebar {
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 12px;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.ad-logo-container {
+		padding: 0;
+	}
+
+	.ad-logo-container img {
+		max-width: 120px;
+	}
+
+	/* Nav items in a horizontal scrollable row */
+	.ad-nav-menu {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+
+	.ad-nav-item {
+		padding: 8px 10px;
+		font-size: 12px;
+		gap: 6px;
+	}
+
+	/* Hide nav label text, show only icons on very compressed sidebar */
+	.ad-nav-item span {
+		display: none;
+	}
+
+	.ad-logout-container {
+		padding: 0;
+	}
+
+	.ad-logout-btn {
+		padding: 8px 10px;
+		font-size: 12px;
+	}
+
+	/* Main content: allow scroll, reduce padding */
+	.ad-main-content {
+		overflow: auto;
+		padding: 16px 18px;
+		border-radius: 12px;
+	}
+
+	/* Form grid stacks vertically */
+	.adm-content-grid {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.adm-form-column {
+		max-width: 100%;
+	}
+
+	.adm-titles h1 {
+		font-size: 26px;
+	}
+
+	.adm-titles .adm-subtitle {
+		font-size: 14px;
+	}
+
+	/* Media/poster column full width */
+	.adm-media-column {
+		max-width: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 16px;
+		align-items: flex-start;
+	}
+
+	.adm-media-header {
+		width: 100%;
+	}
+
+	.adm-poster-upload-area {
+		flex: 1;
+		min-width: 200px;
+	}
+
+	.adm-poster-preview {
+		height: 260px;
+	}
+
+	/* Genre + publish button side by side */
+	.adm-genre-group {
+		flex: 1;
+		min-width: 140px;
+		margin-top: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.adm-form-control-genre {
+		width: 100%;
+	}
+
+	/* 3-col row stacks to 1 col */
+	.adm-row-3-cols {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.adm-synopsis-box {
+		min-height: 160px;
+	}
+}
+
+/* Small mobile (~480px) */
+@media (max-width: 480px) {
+
+	/* Show nav labels again at smallest size (horizontal space is gone) */
+	.ad-nav-menu {
+		gap: 4px;
+	}
+
+	.ad-nav-item span {
+		display: inline;
+	}
+
+	.adm-titles h1 {
+		font-size: 22px;
+	}
+
+	.adm-media-column {
+		flex-direction: column;
+	}
+
+	.adm-poster-preview {
+		height: 220px;
+	}
+
+	.adm-genre-group {
+		width: 100%;
+	}
+
+	.adm-publish-button-container {
+		justify-content: stretch;
+	}
+
+	.adm-publish-btn {
+		width: 100%;
+		text-align: center;
+	}
+}
 </style>
 </head>
 <body>
@@ -427,23 +598,23 @@ body {
 					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
-						class="ad-nav-icon"> Dashboard
+						class="ad-nav-icon"> <span>Dashboard</span>
 					</a> <a href="${pageContext.request.contextPath}/AdminContent"
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
-						class="ad-nav-icon"> Content Management
+						class="ad-nav-icon"> <span>Content Management</span>
 					</a> <a href="${pageContext.request.contextPath}/Edit"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
-						class="ad-nav-icon"> Edit
+						class="ad-nav-icon"> <span>Edit</span>
 					</a> <a href="${pageContext.request.contextPath}/Report"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/report.svg"
-						class="ad-nav-icon"> Report & Analytics
+						class="ad-nav-icon"> <span>Report & Analytics</span>
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
-						class="ad-nav-icon"> Users
+						class="ad-nav-icon"> <span>Users</span>
 					</a>
 				</nav>
 			</div>
@@ -452,7 +623,7 @@ body {
 				<a href="${pageContext.request.contextPath}/Logout"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
-					class="ad-nav-icon"> Logout
+					class="ad-nav-icon"> <span>Logout</span>
 				</a>
 			</div>
 		</aside>
