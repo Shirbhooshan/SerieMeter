@@ -442,7 +442,7 @@ body {
 						class="ad-nav-icon"> Report & Analytics
 					</a> <a href="${pageContext.request.contextPath}/Feedback"
 						class="ad-nav-item"> <img
-						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
+						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
 						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img

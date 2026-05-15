@@ -329,8 +329,6 @@
 	font-family: 'Manrope', sans-serif;
 	color: var(--text);
 	cursor: pointer;
-	background-image:
-		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23888' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right 14px center;
 }
@@ -470,7 +468,7 @@
 						class="ad-nav-icon"> Report & Analytics
 					</a> <a href="${pageContext.request.contextPath}/Feedback"
 						class="ad-nav-item"> <img
-						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
+						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
 						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item active"> <img
