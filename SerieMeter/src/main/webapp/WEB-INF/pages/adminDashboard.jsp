@@ -599,21 +599,34 @@ body {
 				</p>
 			</c:if>
 
-			<div class="ad-controls">
-				<select id="sortDropdown" class="ad-sort-dropdown"
-					onchange="sortTable()">
-					<option value="default">Sort by Date</option>
-					<option value="newest">Newest First</option>
-					<option value="oldest">Oldest First</option>
-				</select>
+			<%--
+			    Search and sort handled by the servlet (GET request).
+			--%>
+			<form method="GET"
+			      action="${pageContext.request.contextPath}/Dashboard"
+			      class="ad-controls"
+			      id="filterForm">
+			
+					<select name="sort" class="ad-sort-dropdown"
+					        onchange="document.getElementById('filterForm').submit()">
+					
+					    <option value="" ${empty sortValue ? 'selected' : ''}>Sort by Date</option>
+					    <option value="newest" ${sortValue == 'newest' ? 'selected' : ''}>Newest First</option>
+					    <option value="oldest" ${sortValue == 'oldest' ? 'selected' : ''}>Oldest First</option>
+					</select>
+
 				<div class="ad-search-wrapper">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search-ad-icon.svg"
-						class="ad-search-icon" alt="Search"> <input type="text"
-						id="searchInput" class="ad-search-box"
-						placeholder="Search for medias" onkeyup="filterTable()">
+						class="ad-search-icon" alt="Search">
+					<input type="text"
+						   name="search"
+						   class="ad-search-box"
+						   placeholder="Search for medias"
+						   value="${searchValue}">
 				</div>
-			</div>
+
+			</form>
 
 			<table class="ad-table">
 				<thead>
@@ -732,55 +745,7 @@ body {
 			}, 5000);
 		}
 	});
-
-	// ---------- Search / Filter ----------
-	function filterTable() {
-		const input = document.getElementById("searchInput");
-		const filter = input.value.toLowerCase();
-		const tbody = document.getElementById("userTableBody");
-		const rows = tbody.getElementsByTagName("tr");
-
-		for (let i = 0; i < rows.length; i++) {
-			// Skip rows that are not actual data rows (e.g., "No media found" has only 1 cell)
-			if (rows[i].cells.length < 2) continue;
-			const rowText = rows[i].textContent || rows[i].innerText;
-			rows[i].style.display = rowText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
-		}
-	}
-
-	// ---------- Sort by Release Date (client-side) ----------
-	function sortTable() {
-		const sortValue = document.getElementById("sortDropdown").value;
-		
-		// If default "Sort by Date" is selected, do nothing
-		if (sortValue === "default") return;
-		
-		const tbody = document.getElementById("userTableBody");
-		const rows = Array.from(tbody.getElementsByTagName("tr"));
-
-		// Filter out the "no media found" row if present (has colspan)
-		const dataRows = rows.filter(row => row.cells.length >= 2);
-
-		// Sort based on the date column (index 4 = Added Date)
-		dataRows.sort((rowA, rowB) => {
-			const dateA = rowA.cells[4].textContent.trim();
-			const dateB = rowB.cells[4].textContent.trim();
-			if (sortValue === "newest") {
-				return dateB.localeCompare(dateA); // newer first
-			} else {
-				return dateA.localeCompare(dateB); // older first
-			}
-		});
-
-		// Re-append sorted rows
-		for (let row of dataRows) {
-			tbody.appendChild(row);
-		}
-
-		// Re-apply current search filter (so hidden rows remain hidden)
-		filterTable();
-	}
-</script>
+	</script>
 
 </body>
 </html>

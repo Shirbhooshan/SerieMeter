@@ -262,5 +262,58 @@ public class MediaDAO {
 		}
 		return list;
 	}
+	
+	
+	// Overloaded method for search filter and sort order
+	
+	public List<MediaModel> getAllMedia(String search, String sort) {
+
+	    List<MediaModel> mediaList = new ArrayList<>();
+
+	    // Build query with optional search filter and sort order
+	    String order;
+	    if ("newest".equals(sort)) {
+	        order = "ORDER BY release_date DESC";
+	    } else if ("oldest".equals(sort)) {
+	        order = "ORDER BY release_date ASC";
+	    } else {
+	        order = "ORDER BY media_id ASC"; // default: natural DB order
+	    }
+
+	    String sql = "SELECT * FROM media WHERE is_deleted = 0 "
+	               + "AND (title LIKE ? OR director LIKE ?) "
+	               + order;
+
+	    try (Connection con = DBconfig.getConnection();
+	         PreparedStatement pst = con.prepareStatement(sql)) {
+
+	        // Wrap search term with wildcards for LIKE matching
+	        String term = "%" + (search != null ? search : "") + "%";
+	        pst.setString(1, term);
+	        pst.setString(2, term);
+
+	        try (ResultSet rs = pst.executeQuery()) {
+	            while (rs.next()) {
+	                MediaModel media = new MediaModel();
+	                media.setMediaId(rs.getInt("media_id"));
+	                media.setTitle(rs.getString("title"));
+	                media.setDirector(rs.getString("director"));
+	                media.setReleaseDate(rs.getString("release_date"));
+	                media.setTotalTime(rs.getString("total_time"));
+	                media.setDescription(rs.getString("description"));
+	                media.setMediaProfile(rs.getString("media_profile"));
+	                media.setCategoryId(rs.getInt("category_id"));
+	                media.setGenreId(rs.getInt("genre_id"));
+	                media.setDeleted(rs.getBoolean("is_deleted"));
+	                mediaList.add(media);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return mediaList;
+	}
 
 }

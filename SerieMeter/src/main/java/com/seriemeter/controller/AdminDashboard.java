@@ -42,9 +42,19 @@ public class AdminDashboard extends HttpServlet {
 			request.setAttribute("loggedInUser", (UserModel) session.getAttribute("user"));
 		}
 
-		List<MediaModel> mediaList = mediaService.getAllMedia();
+		
+		// Read search and sort params from the request (empty string if not present)
+		String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+		String sort = request.getParameter("sort") != null ? request.getParameter("sort") : "";
+
+		// Pass back to JSP so the form fields retain their values after submit
+		request.setAttribute("searchValue", search);
+		request.setAttribute("sortValue", sort);
+
+		List<MediaModel> mediaList = mediaService.getAllMedia(search, sort);
 		request.setAttribute("mediaList", mediaList);
 
+		
 		request.getRequestDispatcher("/WEB-INF/pages/adminDashboard.jsp").forward(request, response);
 	}
 
