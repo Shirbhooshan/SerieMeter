@@ -18,7 +18,7 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #1a1a1a;
+    color: #121212;
     font-size: 13px;
     font-weight: 600;
 }
@@ -28,8 +28,50 @@
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #e0e0e0;
 }
+
+
+:root {
+	--nav-bg: #121212;
+	--nav-gradient: linear-gradient(180deg, #1e1e1e 0%, #000000 100%);
+	--accent-green: #38a346;
+	--text-white: #ffffff;
+	--text-gray: #b0b0b0;
+}
+
+.sm_navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--nav-gradient);
+	padding: 0 5%;
+	height: 65px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	/* Very subtle bottom edge */
+}
+
+/* Logo wrapper */
+.sm_navbar__logo {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	gap: 10px;
+}
+
+/* Logo image */
+.sm_navbar__logo img {
+	height: 32px;
+	width: auto;
+	display: block;
+	mix-blend-mode: screen;
+}
+
 </style>
 </head>
 
@@ -37,7 +79,7 @@
 
     <nav class="sm_navbar">
         <a href="${pageContext.request.contextPath}/Explore" class="sm_navbar__logo">
-            <img src="assets/images/LogoBlack.jpg" alt="SerieMeter" />
+            <img src="assets/images/LogoBlack.jpg" alt="SerieMeter Logo">
         </a>
 
         <ul class="sm_navbar__nav">
@@ -65,7 +107,6 @@
                              alt="Profile"
                              class="sm_navbar__profile_pic"
                              onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
-                        ${sessionScope.user.userName}
                     </a>
                 </c:when>
                 <c:otherwise>
