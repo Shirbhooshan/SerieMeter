@@ -146,7 +146,7 @@ body {
 	margin: 0;
 }
 
-/* --- Profile section (matches dashboard exactly) --- */
+/* --- Profile section --- */
 .ad-profile-section {
 	display: flex;
 	align-items: center;
@@ -410,7 +410,12 @@ body {
 	color: #e37329;
 }
 
-/* ── Media Queries ──────────────────────────────────────────────────────── */
+/* Desktop: hide the responsive-only top row in media column */
+.adm-media-top-row {
+	display: none;
+}
+
+/* Media Queries  */
 
 /* Tablet / half-screen (~768px) */
 @media (max-width: 768px) {
@@ -478,14 +483,17 @@ body {
 		border-radius: 12px;
 	}
 
-	/* Form grid stacks vertically */
+	/* Keep form and media side by side on tablet */
 	.adm-content-grid {
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		gap: 20px;
+		align-items: flex-start;
 	}
 
 	.adm-form-column {
-		max-width: 100%;
+		flex: 1 1 55%;
+		max-width: none;
 	}
 
 	.adm-titles h1 {
@@ -496,22 +504,37 @@ body {
 		font-size: 14px;
 	}
 
-	/* Media/poster column full width */
+	/* Hide Director and Category from left form column on tablet */
+	.adm-input-group--director {
+		display: none;
+	}
+
+	.adm-input-group--category {
+		display: none;
+	}
+
+	/* Media column: right side, full flex column */
 	.adm-media-column {
-		max-width: 100%;
-		flex-direction: row;
-		flex-wrap: wrap;
-		gap: 16px;
-		align-items: flex-start;
+		flex: 1 1 38%;
+		max-width: none;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	/* Show Director + Category row at top of media column */
+	.adm-media-top-row {
+		display: flex;
+		gap: 10px;
+	}
+
+	.adm-media-top-row .adm-input-group {
+		flex: 1;
+		margin-bottom: 0;
 	}
 
 	.adm-media-header {
 		width: 100%;
-	}
-
-	.adm-poster-upload-area {
-		flex: 1;
-		min-width: 200px;
 	}
 
 	.adm-poster-preview {
@@ -520,19 +543,14 @@ body {
 
 	/* Genre + publish button side by side */
 	.adm-genre-group {
-		flex: 1;
-		min-width: 140px;
 		margin-top: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
 	}
 
 	.adm-form-control-genre {
 		width: 100%;
 	}
 
-	/* 3-col row stacks to 1 col */
+	/* 3-col row: Release Date and Total Time stack vertically (Category hidden) */
 	.adm-row-3-cols {
 		flex-direction: column;
 		gap: 0;
@@ -546,7 +564,7 @@ body {
 /* Small mobile (~480px) */
 @media (max-width: 480px) {
 
-	/* Show nav labels again at smallest size (horizontal space is gone) */
+	/* Show nav labels again at smallest size */
 	.ad-nav-menu {
 		gap: 4px;
 	}
@@ -555,12 +573,32 @@ body {
 		display: inline;
 	}
 
+	/* Stack form and media column vertically on small mobile */
+	.adm-content-grid {
+		flex-direction: column;
+	}
+
+	/* Restore Director and Category in left form column on small mobile */
+	.adm-input-group--director {
+		display: block;
+	}
+
+	.adm-input-group--category {
+		display: block;
+	}
+
+	/* Hide the media-top-row on small mobile since fields are back in form */
+	.adm-media-top-row {
+		display: none;
+	}
+
 	.adm-titles h1 {
 		font-size: 22px;
 	}
 
 	.adm-media-column {
 		flex-direction: column;
+		width: 100%;
 	}
 
 	.adm-poster-preview {
@@ -578,6 +616,12 @@ body {
 	.adm-publish-btn {
 		width: 100%;
 		text-align: center;
+	}
+
+	/* Restore 3-col row layout on small mobile */
+	.adm-row-3-cols {
+		flex-direction: row;
+		gap: 15px;
 	}
 }
 </style>
@@ -638,6 +682,7 @@ body {
 			<form action="${pageContext.request.contextPath}/AdminContent"
 				method="POST" enctype="multipart/form-data" class="adm-content-grid">
 
+				<!-- ═══ LEFT: Form Column ═══ -->
 				<div class="adm-form-column">
 					<div class="adm-titles">
 						<h1>
@@ -648,31 +693,35 @@ body {
 					</div>
 
 					<div class="adm-input-group">
-						<label>Movie Title</label> <input type="text" name="title"
-							class="adm-form-control" required>
+						<label>Movie Title</label>
+						<input type="text" name="title" class="adm-form-control" required>
 					</div>
 
-					<div class="adm-input-group">
-						<label>Director's Name</label> <input type="text"
-							name="directorName" class="adm-form-control" required>
+					<!-- Hidden on tablet (768px); shown in media column instead -->
+					<div class="adm-input-group adm-input-group--director">
+						<label>Director's Name</label>
+						<input type="text" name="directorName" class="adm-form-control">
 					</div>
 
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
-							<label>Release Date</label> <input type="date"
-								name="release_date" class="adm-form-control" required>
+							<label>Release Date</label>
+							<input type="date" name="release_date" class="adm-form-control" required>
 						</div>
-						<div class="adm-input-group">
-							<label>Category</label> <select name="category_id"
-								class="adm-form-control-category" required>
+
+						<!-- Hidden on tablet (768px); shown in media column instead -->
+						<div class="adm-input-group adm-input-group--category">
+							<label>Category</label>
+							<select name="category_id" class="adm-form-control-category">
 								<option value="" disabled selected></option>
 								<option value="1">Movie</option>
 								<option value="2">Series</option>
 							</select>
 						</div>
+
 						<div class="adm-input-group">
-							<label>Total Time</label> <input type="text" name="total_time"
-								class="adm-form-control" required>
+							<label>Total Time</label>
+							<input type="text" name="total_time" class="adm-form-control" required>
 						</div>
 					</div>
 
@@ -683,7 +732,25 @@ body {
 					</div>
 				</div>
 
+				<!-- ═══ RIGHT: Media Column ═══ -->
 				<div class="adm-media-column">
+
+					<!-- Tablet-only: Director + Category moved here -->
+					<div class="adm-media-top-row">
+						<div class="adm-input-group">
+							<label>Director's Name</label>
+							<input type="text" name="directorName" class="adm-form-control">
+						</div>
+						<div class="adm-input-group">
+							<label>Category</label>
+							<select name="category_id" class="adm-form-control-category">
+								<option value="" disabled selected></option>
+								<option value="1">Movie</option>
+								<option value="2">Series</option>
+							</select>
+						</div>
+					</div>
+
 					<div class="adm-media-header">
 						<h4>Visual identity</h4>
 						<p>
@@ -705,8 +772,8 @@ body {
 					</div>
 
 					<div class="adm-input-group adm-genre-group">
-						<label>Genre</label> <select name="genre_id"
-							class="adm-form-control-genre" required>
+						<label>Genre</label>
+						<select name="genre_id" class="adm-form-control-genre" required>
 							<option value=""></option>
 							<option value="1">Action</option>
 							<option value="2">Comedy</option>

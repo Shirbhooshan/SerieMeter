@@ -23,6 +23,12 @@
 	font-family: 'Manrope', sans-serif;
 }
 
+/* Prevent horizontal overflow on all screen sizes */
+html, body {
+	overflow-x: hidden;
+	max-width: 100%;
+}
+
 body {
 	font-family: 'Manrope', sans-serif;
 	background-color: #F3F3F3;
@@ -41,9 +47,11 @@ body {
 /* Top banner with background image */
 .up-top-white-bg {
 	width: 100%;
+	max-width: 100%;
 	background-image: url('assets/images/rectangle.png');
 	background-size: cover;
 	background-position: center;
+	overflow: hidden;
 }
 
 /* Profile summary row: avatar+info on the left, stats on the right */
@@ -284,7 +292,7 @@ body {
 	text-decoration: underline;
 }
 
-/* ── Bookmark poster grid ───────────────────────────────────────────────── */
+/* ── Bookmark poster grid  */
 .up-bookmarks-grid {
 	display: flex;
 	flex-wrap: wrap;
@@ -390,7 +398,7 @@ body {
 	line-height: 1;
 }
 
-/* ── Review items ──────────────────────────────────────────────────────── */
+/* Review items  */
 .up-review-item {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -412,14 +420,14 @@ body {
 .up-review-media-title {
 	font-size: 26px;
 	font-weight: 700;
-	color: #000000; /* Updated to black */
+	color: #000000;
 	line-height: 1.25;
 	margin-bottom: 8px;
 }
 
 .up-review-date {
 	font-size: 12px;
-	color: #000000; /* Updated to black */
+	color: #000000;
 	margin-top: auto;
 }
 
@@ -435,7 +443,7 @@ body {
 	gap: 4px;
 	margin-bottom: 10px;
 	align-items: center;
-	justify-content: flex-end; /* Right aligned stars */
+	justify-content: flex-end;
 }
 
 .up-star {
@@ -448,7 +456,7 @@ body {
 	font-size: 14px;
 	color: #333;
 	line-height: 1.6;
-	text-align: right; /* Right aligned text */
+	text-align: right;
 }
 
 /* Pagination row below reviews */
@@ -483,7 +491,7 @@ body {
 	font-weight: 700;
 }
 
-/* Footer section*/
+/* Footer section */
 .up-footer {
 	text-align: center;
 	margin-top: 40px;
@@ -514,11 +522,20 @@ body {
 .up-explore-btn:hover {
 	background-color: #006800;
 }
+
+/* Media Queries */
+
 /* Tablet / half-screen (~768px) */
 @media (max-width: 768px) {
 
 	.up-container {
 		padding: 0 14px;
+		/* Prevent any child from bleeding outside */
+		overflow: hidden;
+	}
+
+	.up-top-white-bg {
+		overflow: hidden;
 	}
 
 	/* Stack avatar+info above stats */
@@ -605,6 +622,12 @@ body {
 	.up-review-text {
 		text-align: left;
 	}
+
+	/* Footer: match desktop bottom padding */
+	.up-footer {
+		margin-top: 40px;
+		padding-bottom: 100px;
+	}
 }
 
 /* Small mobile (~480px) */
@@ -655,6 +678,12 @@ body {
 		left: auto;
 		right: 0;
 		top: calc(100% + 6px);
+	}
+
+	/* Footer: match desktop bottom padding */
+	.up-footer {
+		margin-top: 40px;
+		padding-bottom: 100px;
 	}
 }
 </style>
@@ -925,7 +954,7 @@ body {
 	<%@ include file="/components/footer.jsp"%>
 
 	<script>
-		// ── Three-dot popup menu logic ─────────────────────────────────────────
+		// Three-dot popup menu logic 
 
 		const menuToggle = document.getElementById('upMenuToggle');
 		const popupMenu  = document.getElementById('upPopupMenu');
