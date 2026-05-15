@@ -30,7 +30,7 @@
         flex: 1;
         display: flex;
         justify-content: center;
-        align-items: center; /* Centers the whole form vertically */
+        align-items: center; 
         padding: 10px 24px;
     }
 
@@ -294,16 +294,75 @@
         text-decoration: underline;
     }
 
-    /* --- Responsive: stack panels on small screens --- */
+    /* --- Responsive: media queries --- */
+
+    /* Tablets and Small Laptops (1024px and below) */
+    @media (max-width: 1024px) {
+        .ep-edit-form {
+            max-width: 900px;
+        }
+        .ep-left-panel, .ep-right-panel {
+            padding: 24px;
+        }
+    }
+
+    /* Mobile Devices (860px and below) */
     @media (max-width: 860px) {
+        body {
+            height: auto;
+            overflow-y: visible; /* Allows vertical scroll if content exceeds screen height */
+        }
+
+        .ep-page-wrapper {
+            padding: 20px 15px;
+            align-items: flex-start; /* Ensure content starts at top to allow scrolling */
+        }
+
         .ep-main-card {
             flex-direction: column;
-            padding: 16px;
-            gap: 16px;
+            padding: 12px; /* Uniform padding when stacked */
+            gap: 12px;
         }
-        .ep-left-panel,
-        .ep-right-panel {
+
+        .ep-left-panel, .ep-right-panel {
             width: 100%;
+            padding: 20px;
+        }
+
+        .ep-right-panel h2, .ep-left-panel h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .ep-action-area {
+            margin-top: 20px;
+            gap: 15px;
+        }
+    }
+
+    /* Extra Small Devices (480px and below) */
+    @media (max-width: 480px) {
+        .ep-main-card {
+            border-radius: 16px;
+        }
+        
+        .ep-left-panel, .ep-right-panel {
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .ep-left-panel h2, .ep-right-panel h2 {
+            font-size: 20px;
+        }
+
+        .ep-pic-wrapper {
+            width: 75px;
+            height: 75px;
+        }
+
+        .ep-save-btn {
+            width: 100%; /* Better touch target on small screens */
+            padding: 12px;
         }
     }
 </style>

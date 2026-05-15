@@ -139,6 +139,74 @@
 	font-size: 14px;
 	text-transform: uppercase;
 }
+
+/* ----- Necessary Media Queries ----- */
+
+/* For Tablets and Small Desktops (1100px) */
+@media (max-width: 1100px) {
+    .er-error-container {
+        gap: 80px; /* Reduce the massive gap */
+        padding: 0 40px;
+    }
+    .er-error-number {
+        font-size: 250px; /* Shrink the error number */
+    }
+}
+
+/* For Mobile Devices (768px) */
+@media (max-width: 768px) {
+    .er-error-container {
+        flex-direction: column; /* Stack vertically */
+        gap: 40px;
+        text-align: center;
+        padding-bottom: 50px;
+    }
+
+    .er-left-side {
+        margin-top: 50px;
+    }
+
+    .er-error-code {
+        margin-left: 0; /* Center the label */
+    }
+
+    .er-error-number {
+        font-size: 180px; /* Drastically scale down for mobile screens */
+        letter-spacing: -8px;
+    }
+
+    .er-right-side {
+        margin-right: 0; /* Clear the desktop offset */
+        max-width: 90%;
+    }
+
+    .er-title {
+        font-size: 32px;
+    }
+
+    .er-description {
+        font-size: 16px;
+        text-align: center; /* Better readability on mobile */
+    }
+
+    .er-buttons-group {
+        justify-content: center;
+        flex-direction: column; /* Stack buttons on very narrow screens */
+        gap: 15px;
+    }
+    
+    .er-btn {
+        width: 100%; /* Full width buttons for mobile touch targets */
+        padding: 14px 20px;
+    }
+}
+
+/* Extra small screens (400px) */
+@media (max-width: 400px) {
+    .er-error-number {
+        font-size: 120px;
+    }
+}
 </style>
 </head>
 <body class="er-error-body">
@@ -148,7 +216,6 @@
 	<main class="er-main-layout">
 		<div class="er-error-container">
 
-			<!-- Left: Error code label + dynamic error number -->
 			<div class="er-left-side">
 				<p class="er-error-code">Error Code</p>
 				<div class="er-error-number">
@@ -156,7 +223,6 @@
 				</div>
 			</div>
 
-			<!-- Right: Dynamic title and description based on error code -->
 			<div class="er-right-side">
 
 				<c:choose>

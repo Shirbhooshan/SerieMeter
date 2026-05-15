@@ -202,7 +202,7 @@ body {
 	background: transparent;
 }
 
-/* ----- Controls (search & sort) ----- */
+/* --- Controls (search & sort) --- */
 .ad-controls {
 	display: flex;
 	justify-content: flex-end;
@@ -419,6 +419,118 @@ body {
 
 .btn-yes:hover {
 	background-color: #d64a45;
+}
+
+/* -- Media Queries -- */
+
+/* Tablets and below (992px) */
+@media (max-width: 992px) {
+    .ad-sidebar {
+        width: 200px;
+    }
+    .ad-logo-container {
+        padding-bottom: 30px;
+    }
+    .ad-logo-container img {
+        max-width: 150px;
+    }
+    .ad-main-content {
+        padding: 15px 20px;
+    }
+    .ad-section-title {
+        font-size: 22px;
+    }
+}
+
+/* Mobile Devices (768px) */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        overflow: visible; /* Allow scrolling on mobile */
+    }
+
+    .ad-layout-container {
+        flex-direction: column; /* Stack sidebar on top */
+        height: auto;
+    }
+
+    .ad-sidebar {
+        width: 100%;
+        padding: 10px;
+        justify-content: flex-start;
+    }
+
+    .ad-logo-container {
+        padding-bottom: 15px;
+        text-align: center;
+    }
+
+    .ad-nav-menu {
+        flex-direction: row; /* Horizontal nav for mobile */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .ad-nav-item {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .ad-logout-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .ad-main-content {
+        margin-top: 10px;
+        border-radius: 12px;
+        padding: 15px;
+        overflow-x: auto; /* Allow table to scroll horizontally */
+    }
+
+    .ad-top-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .ad-profile-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .ad-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ad-search-box {
+        width: 100%;
+    }
+
+    /* Table responsivness: Allow scroll */
+    .ad-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Extra Small Devices (480px) */
+@media (max-width: 480px) {
+    .ad-section-title {
+        font-size: 20px;
+    }
+    .ad-nav-menu {
+        gap: 5px;
+    }
+    .ad-nav-item {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
 }
 
 </style>

@@ -412,16 +412,16 @@ body {
 }
 
 .up-review-media-title {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 700;
-    color: #629AC4;
+    color: #000000; /* Updated to black */
     line-height: 1.25;
     margin-bottom: 8px;
 }
 
 .up-review-date {
     font-size: 12px;
-    color: #999;
+    color: #000000; /* Updated to black */
     margin-top: auto;
 }
 
@@ -437,6 +437,7 @@ body {
     gap: 4px;
     margin-bottom: 10px;
     align-items: center;
+    justify-content: flex-end; /* Right aligned stars */
 }
 
 .up-star {
@@ -444,21 +445,13 @@ body {
     height: 20px;
 }
 
-/* Filled star — gold colour via CSS filter */
-.up-star.filled {
-    filter: invert(68%) sepia(89%) saturate(500%) hue-rotate(1deg) brightness(105%) contrast(101%);
-}
-
-/* Empty star appears faded */
-.up-star.empty {
-    opacity: 0.25;
-}
 
 /* Review text */
 .up-review-text {
     font-size: 14px;
     color: #333;
     line-height: 1.6;
+    text-align: right; /* Right aligned text */
 }
 
 /* Pagination row below reviews */
@@ -530,17 +523,13 @@ body {
 
 	<%@ include file="/components/navbar.jsp"%>
 
-	<!-- Top banner with background image -->
 	<div class="up-top-white-bg">
 		<div class="up-container">
 
-			<!-- Profile summary: avatar + name/email/menu on left, stats on right -->
 			<section class="up-profile-summary">
 
-				<!-- Left side: avatar, name, 3-dot menu, email -->
 				<div class="up-profile-header">
 
-					<!-- User avatar: use uploaded profile pic or fall back to default -->
 					<c:choose>
 						<c:when test="${not empty sessionUser.userProfile}">
 							<img src="${pageContext.request.contextPath}/getimage?name=${sessionUser.userProfile}&type=user"
@@ -552,10 +541,8 @@ body {
 						</c:otherwise>
 					</c:choose>
 
-					<!-- Name row + email -->
 					<div class="up-user-details">
 
-						<!-- Name and three-dot options button on the same row -->
 						<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
 
 							<%-- Display the logged-in user's full name prefixed with @ --%>
@@ -563,23 +550,18 @@ body {
 								@<c:out value="${sessionUser.fullName}" />
 							</h2>
 
-							<!-- Three-dot menu wrapper -->
 							<div class="up-menu-wrapper">
 
-								<!-- Toggle button — click opens/closes the popup -->
 								<button class="up-three-dot-btn" id="upMenuToggle"
 									aria-label="More options" aria-expanded="false">&#8943;</button>
 
-								<!-- Dropdown popup menu -->
 								<div class="up-popup-menu" id="upPopupMenu" role="menu">
 
-									<!-- Edit Profile option -->
-									<a href="#" class="up-popup-item" role="menuitem">
+									<a href="${pageContext.request.contextPath}/UserProfileEdit" class="up-popup-item" role="menuitem">
 										<img alt="Edit" src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
 										Edit Profile
 									</a>
 
-									<!-- Logout option — redirects to Logout servlet -->
 									<a href="${pageContext.request.contextPath}/Logout"
 										class="up-popup-item up-logout-item" role="menuitem">
 										<img alt="Logout" src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
@@ -591,7 +573,6 @@ body {
 							</div>
 						</div>
 
-						<!-- Email address with copy icon — value pulled from session -->
 						<p class="up-user-email">
 							<c:out value="${sessionUser.email}" />
 							<img src="${pageContext.request.contextPath}/assets/icon/copy.svg"
@@ -602,7 +583,6 @@ body {
 
 				</div>
 
-				<!-- Right side: live bookmark and review counts from the servlet -->
 				<div class="up-stats">
 					<div class="up-stat-item">
 						<span class="up-stat-number">${bookmarkCount}</span>
@@ -619,11 +599,9 @@ body {
 		</div>
 	</div>
 
-	<!-- Main content: Bookmarks and Reviews cards -->
 	<main class="up-container">
 		<section class="up-content-cards">
 
-			<!-- ── Bookmarks card ─────────────────────────────────────────── -->
 			<div class="up-card up-bookmarks-card">
 				<div class="up-card-header">
 					<h3>Bookmarks</h3>
@@ -638,7 +616,6 @@ body {
 
 				<c:choose>
 					<c:when test="${empty userBookmarks}">
-						<!-- No bookmarks yet — link takes the user to Explore -->
 						<div class="up-card-body">
 							<p class="up-empty-message">
 								<a href="${pageContext.request.contextPath}/Explore">Nothing bookmarked yet!</a>
@@ -652,7 +629,6 @@ body {
 								<div class="up-bookmark-card"
 									onclick="location.href='${pageContext.request.contextPath}/Media?id=${media.mediaId}'">
 
-									<!-- Poster image — served via GetImageServlet -->
 									<c:choose>
 										<c:when test="${not empty media.mediaProfile}">
 											<img class="up-bookmark-poster"
@@ -666,12 +642,10 @@ body {
 										</c:otherwise>
 									</c:choose>
 
-									<!-- Red heart icon overlay -->
 									<div class="up-bookmark-heart">
 										<img alt="heart" src="${pageContext.request.contextPath}/assets/icon/heart.svg">
 									</div>
 
-									<!-- Title, year, genre below poster -->
 									<div class="up-bookmark-info">
 										<div class="up-bookmark-title">
 											<c:out value="${media.title}" />
@@ -692,7 +666,6 @@ body {
 								</div>
 							</c:forEach>
 
-							<!-- "+" card — quick link to discover more -->
 							<a href="${pageContext.request.contextPath}/Explore"
 								class="up-bookmark-add" title="Discover more">
 								<span>+</span>
@@ -702,7 +675,6 @@ body {
 				</c:choose>
 			</div>
 
-			<!-- ── Reviews card ──────────────────────────────────────────── -->
 			<div class="up-card up-reviews-card">
 				<div class="up-card-header">
 					<h3>Reviews</h3>
@@ -717,7 +689,6 @@ body {
 
 				<c:choose>
 					<c:when test="${empty userReviews}">
-						<!-- No reviews yet — link takes the user to Explore -->
 						<div class="up-card-body">
 							<p class="up-empty-message">
 								<a href="${pageContext.request.contextPath}/Explore">Nothing reviewed yet!</a>
@@ -729,13 +700,11 @@ body {
 						<c:forEach var="review" items="${userReviews}">
 							<div class="up-review-item">
 
-								<!-- Left column: media title + relative date -->
 								<div class="up-review-left">
 									<span class="up-review-media-title">
 										<c:out value="${review.mediaTitle}" />
 									</span>
 
-									<!-- Relative date (Today / Yesterday / N days ago) -->
 									<p class="up-review-date">
 										<c:set var="diffMs"   value="${now.time - review.createdAt.time}" />
 										<c:set var="diffDays" value="${diffMs / (1000 * 60 * 60 * 24)}" />
@@ -749,27 +718,24 @@ body {
 									</p>
 								</div>
 
-								<!-- Right column: stars + review text -->
 								<div class="up-review-right">
 
-									<!-- Stars row — DB rating is 1-5, display directly -->
 									<div class="up-review-stars">
 										<c:set var="fullStars" value="${review.rating}" />
 										<c:forEach begin="1" end="5" var="i">
 											<c:choose>
 												<c:when test="${i <= fullStars}">
-													<img src="${pageContext.request.contextPath}/assets/icon/star.svg"
+													<img src="${pageContext.request.contextPath}/assets/icon/star-userp.svg"
 														alt="filled star" class="up-star filled">
 												</c:when>
 												<c:otherwise>
-													<img src="${pageContext.request.contextPath}/assets/icon/star-none.svg"
+													<img src="${pageContext.request.contextPath}/assets/icon/fadedstar-userp.svg"
 														alt="empty star" class="up-star empty">
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
 									</div>
 
-									<!-- Review text -->
 									<p class="up-review-text">
 										<c:out value="${review.reviewText}" />
 									</p>
@@ -779,7 +745,6 @@ body {
 							</div>
 						</c:forEach>
 
-						<!-- Pagination placeholder (static for now) -->
 						<div class="up-review-pagination">
 							<a href="#" class="up-page-nav">&lt;</a>
 							<a href="#" class="up-page-num up-page-active">1</a>
@@ -793,7 +758,6 @@ body {
 		</section>
 	</main>
 
-	<!-- Footer: call-to-action to explore more content -->
 	<footer class="up-footer up-container">
 		<p class="up-discover-text">
 			Discover more to<br>bookmark &amp; review
