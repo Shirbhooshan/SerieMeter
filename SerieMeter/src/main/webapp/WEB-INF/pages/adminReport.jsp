@@ -378,6 +378,10 @@
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/report.svg"
 						class="ad-nav-icon"> Report & Analytics
+					</a> <a href="${pageContext.request.contextPath}/Feedback"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
+						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"

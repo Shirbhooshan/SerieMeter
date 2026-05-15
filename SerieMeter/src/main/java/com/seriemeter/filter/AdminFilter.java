@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
-@WebFilter(urlPatterns = { "/Edit", "/Users", "/AdminContent", "/Dashboard", "/Report" })
+@WebFilter(urlPatterns = { "/Edit", "/Users", "/AdminContent", "/Dashboard", "/Report", "/Feedback" })
 
 public class AdminFilter implements Filter {
 

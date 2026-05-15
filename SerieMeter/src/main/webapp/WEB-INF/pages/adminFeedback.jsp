@@ -1,20 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Medias – SerieMeter Admin</title>
+<title>Feedback Messages</title>
+
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
 
 <style>
+/* --- Global Styles --- */
 .ad-body {
 	font-family: 'Manrope', sans-serif;
 	background-color: #010101;
@@ -23,20 +21,21 @@
 	padding: 10px;
 	height: 100vh;
 	box-sizing: border-box;
-	overflow: hidden;
+	overflow: hidden; /* Prevent body scroll */
 }
 
 * {
 	box-sizing: border-box;
 }
 
+/* --- Main Layout --- */
 .ad-layout-container {
 	display: flex;
 	height: 100%;
 	gap: 10px;
 }
 
-/* Sidebar */
+/* --- Sidebar Styles --- */
 .ad-sidebar {
 	width: 260px;
 	display: flex;
@@ -89,10 +88,12 @@
 	transition: filter 0.2s ease;
 }
 
+/* Turns the icon black when the navigation item is active */
 .ad-nav-item.active .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
 
+/* Logout Button with hover design */
 .ad-logout-container {
 	padding: 0 5px;
 }
@@ -121,7 +122,7 @@
 	filter: brightness(0) saturate(100%);
 }
 
-/* Main White Box */
+/* --- Main White Box  --- */
 .ad-main-content {
 	flex: 1;
 	background-color: #ffffff;
@@ -130,10 +131,10 @@
 	padding: 20px 30px;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+	overflow: hidden; /* No scrolling in the box */
 }
 
-/* Top header */
+/* Header adjustments */
 .ad-top-header {
 	display: flex;
 	justify-content: space-between;
@@ -169,16 +170,15 @@
 	margin: 0;
 }
 
-.ad-profile-pic {
+.ad-profile-pic-label {
 	width: 35px;
 	height: 35px;
 	background-color: #e0e0e0;
 	border-radius: 50%;
-	overflow: hidden;
-	object-fit: cover;
+	cursor: pointer;
 }
 
-/* Heading */
+/* Content Area Titles */
 .ad-section-title {
 	font-size: 28px;
 	font-weight: 800;
@@ -196,7 +196,7 @@
 	margin: 0 0 15px 0;
 }
 
-/* Controls */
+/* Search & Sort */
 .ad-controls {
 	display: flex;
 	justify-content: flex-end;
@@ -210,6 +210,7 @@
 	align-items: center;
 }
 
+/* Position the search icon on the right */
 .ad-search-icon {
 	position: absolute;
 	right: 15px;
@@ -219,14 +220,14 @@
 	pointer-events: none;
 }
 
+/* padding in the search box */
 .ad-search-box {
 	border: 1px solid #dcdcdc;
 	border-radius: 17px;
-	padding: 9px 32px 9px 15px;
+	padding: 9px 32px 9px 15px; /* Padding Right: 32px (Room for icon!) */
 	font-size: 12px;
 	outline: none;
 	width: 220px;
-	font-family: 'Manrope', sans-serif;
 }
 
 .ad-sort-dropdown {
@@ -236,18 +237,17 @@
 	font-size: 12px;
 	color: #555;
 	outline: none;
-	font-family: 'Manrope', sans-serif;
 }
 
-/* Table */
+/* Table Density (Maximized for 8 rows) */
 .ad-table {
 	width: 100%;
 	border-collapse: collapse;
-	table-layout: fixed;
+	table-layout: fixed; /* Ensures consistency */
 }
 
 .ad-table th, .ad-table td {
-	padding: 10px 8px;
+	padding: 8px 5px; /* Extremely tight padding */
 	text-align: left;
 	border-bottom: 1px solid #f2f2f2;
 	white-space: nowrap;
@@ -267,47 +267,24 @@
 	color: #555555;
 }
 
-/* Poster thumbnail */
-.ad-cover-thumb {
-	width: 40px;
-	height: 56px;
-	border-radius: 6px;
-	background-color: #e8e8e8;
-	object-fit: cover;
-	display: block;
+.ad-rating {
+	display: flex;
+	align-items: center;
+	gap: 3px;
 }
 
-/* Edit button */
-.ad-edit-btn {
-	background-color: #4ebc57;
-	color: #ffffff;
-	border: none;
-	border-radius: 6px;
-	padding: 6px 14px;
-	font-size: 11px;
-	font-family: 'Manrope', sans-serif;
-	font-weight: 600;
-	cursor: pointer;
-	text-decoration: none;
-	display: inline-block;
-	transition: background 0.2s;
+.ad-star-icon {
+	width: 12px;
+	height: 12px;
 }
 
-.ad-edit-btn:hover {
-	background-color: #3aa844;
+.ad-delete-icon {
+	width: 16px;
+	height: 16px;
 }
 
-/* Empty state */
-.ad-empty-state {
-	text-align: center;
-	padding: 40px 20px;
-	color: #aaaaaa;
-	font-size: 13px;
-}
-
-/* Pagination  */
+/* Pagination (Fixed to bottom) */
 .ad-pagination {
-	margin-top: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -319,7 +296,6 @@
 .ad-page-num {
 	color: #888888;
 	text-decoration: none;
-	cursor: pointer;
 }
 
 .ad-page-num.active {
@@ -333,13 +309,140 @@
 	border-radius: 50%;
 	font-weight: 700;
 }
+
+.sm_admin__toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.sm_admin__sort_select {
+	appearance: none;
+	-webkit-appearance: none;
+	background: var(--white);
+	border: 1px solid var(--gray-200);
+	border-radius: 20px;
+	padding: 9px 36px 9px 16px;
+	font-size: 13px;
+	font-family: 'Manrope', sans-serif;
+	color: var(--text);
+	cursor: pointer;
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23888' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 14px center;
+}
+
+.sm_admin__sort_select:focus {
+	outline: none;
+}
+
+.sm_admin__search {
+	display: flex;
+	align-items: center;
+	border: 1px solid #dcdcdc;
+	border-radius: 20px;
+	padding: 9px 16px;
+	gap: 8px;
+	width: 260px;
+	background: #ffffff;
+}
+
+.sm_admin__search input {
+	background: transparent;
+	border: none;
+	outline: none;
+	font-size: 13px;
+	font-family: 'Manrope', sans-serif;
+	color: #1a1a1a;
+	width: 100%;
+}
+
+.sm_admin__search input::placeholder {
+	color: #aaaaaa;
+}
+
+.sm_admin__search img {
+	width: 16px;
+	height: 16px;
+	opacity: 0.5;
+}
+
+/* --- Users Table Styling --- */
+.ad-user-table-container {
+	flex: 1;
+	overflow-y: auto; /* Allows table scrolling if many users are added */
+}
+
+.ad-user-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.ad-user-table th {
+	text-align: left;
+	font-size: 11px;
+	font-weight: 700;
+	color: black;
+	padding: 12px 10px;
+	border-bottom: 1px solid #f0f0f0;
+	letter-spacing: 0.5px;
+	padding: 12px 10px;
+}
+
+.ad-user-table td {
+	padding: 15px 10px;
+	font-size: 13px;
+	color: #1a1a1a;
+	border-bottom: 1px solid #f9f9f9;
+	vertical-align: middle;
+}
+
+/* User Details Cell (#1 + Avatar) */
+.ad-user-id-cell {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.ad-user-avatar-small {
+	width: 32px;
+	height: 32px;
+	background-color: #e0e0e0;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+}
+
+/* Name/Username Stack */
+.ad-user-name-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.ad-username-bold {
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.ad-username-gray {
+	font-size: 11px;
+	color: #aaaaaa;
+}
+
+/* Role Badge Style */
+.ad-user-role-text {
+	font-size: 12px;
+	color: #555555;
+}
 </style>
 </head>
-
 <body class="ad-body">
+
 	<div class="ad-layout-container">
 
-		<!-- Sidebar -->
 		<aside class="ad-sidebar">
 			<div>
 				<div class="ad-logo-container">
@@ -358,7 +461,7 @@
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
 						class="ad-nav-icon"> Content Management
 					</a> <a href="${pageContext.request.contextPath}/Edit"
-						class="ad-nav-item active"> <img
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
 					</a> <a href="${pageContext.request.contextPath}/Report"
@@ -366,7 +469,7 @@
 						src="${pageContext.request.contextPath}/assets/icon/report.svg"
 						class="ad-nav-icon"> Report & Analytics
 					</a> <a href="${pageContext.request.contextPath}/Feedback"
-						class="ad-nav-item"> <img
+						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
 						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
@@ -386,12 +489,9 @@
 			</div>
 		</aside>
 
-		<!-- Main White Box -->
 		<main class="ad-main-content">
-
-
 			<header class="ad-top-header">
-				<h2 class="ad-header-title">Edit medias</h2>
+				<h2 class="ad-header-title">View Feedbacks</h2>
 
 				<!-- Only render this section if a user session exists -->
 				<%@ include file="/components/adminHeader.jsp"%>
@@ -399,131 +499,57 @@
 			</header>
 
 			<h1 class="ad-section-title">
-				Edit <span class="ad-text-orange">Medias</span>
+				<span class="ad-text-orange">Received</span> feedbacks
 			</h1>
-			<p class="ad-section-subtitle">Update media details here</p>
+			<p class="ad-section-subtitle">View all the feedback messages, here.</p>
 
-			<!-- Sort + Search -->
-			<div class="ad-controls">
-				<select class="ad-sort-dropdown">
-					<option>Sort by Date</option>
-					<option>Sort by Name</option>
-					<option>Sort by Category</option>
-				</select>
-				<div class="ad-search-wrapper">
-					<img
-						src="${pageContext.request.contextPath}/assets/icon/search.svg"
-						class="ad-search-icon" alt="Search"> <input type="text"
-						id="searchInput" class="ad-search-box"
-						placeholder="Search for medias" onkeyup="filterTable()">
+			<!-- Toolbar: Pushes search to the right -->
+			<div class="sm_admin__toolbar">
+				<div class="sm_admin__search">
+					<input type="text" placeholder="Search for feedbacks" id="searchInput"
+						onkeyup="filterTable()" /> <img src="assets/icon/search.svg"
+						alt="Search" />
 				</div>
 			</div>
 
-			<!-- Media Table -->
-			<table class="ad-table" id="mediaTable">
-				<thead>
-					<tr>
-						<th style="width: 40px">ID</th>
-						<th>Name</th>
-						<th>Category</th>
-						<th>Genre</th>
-						<th>Release Date</th>
-						<th style="width: 70px">Cover</th>
-						<th style="width: 70px">Action</th>
-					</tr>
-				</thead>
-				<tbody id="tableBody">
-
-					<c:forEach var="media" items="${mediaList}">
+			<!-- Feedback Table -->
+			<div class="ad-user-table-container">
+				<table class="ad-user-table">
+					<thead>
 						<tr>
-							<td>${media.mediaId}</td>
-							<td>${media.title}</td>
-							<td>${media.categoryId == 1 ? 'Movie' : 'Series'}</td>
-							<td>${media.genreId == 1 ? 'Action' :
-       media.genreId == 2 ? 'Comedy' :
-       media.genreId == 3 ? 'Horror' :
-       media.genreId == 4 ? 'Drama' :
-       media.genreId == 5 ? 'Sci-Fi' :
-       media.genreId == 6 ? 'Thriller' :
-       'Romance'}</td>
-							<td>${fn:substring(media.releaseDate, 0, 10)}</td>
-							<td><c:choose>
-									<c:when test="${not empty media.mediaProfile}">
-										<img class="ad-cover-thumb"
-											src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
-											alt="${media.title}" onerror="this.style.opacity='0.3'" />
-									</c:when>
-									<c:otherwise>
-										<div class="ad-cover-thumb"></div>
-									</c:otherwise>
-								</c:choose></td>
-							<td>
-								<!-- Links to /Edit?id=X so servlet loads that media for the form  -->
-								<a
-								href="${pageContext.request.contextPath}/Edit?id=${media.mediaId}"
-								class="ad-edit-btn">Edit</a>
-							</td>
+							<th>ID</th>
+							<th>NAME</th>
+							<th>EMAIL ADDRESS</th>
+							<th>MESSAGE</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-
-			<div class="ad-empty-state" id="emptyState" style="display: none;">
-				No media entries yet. Add media from Content Management.</div>
-
-			<div class="ad-pagination" id="paginationControls"></div>
-
+					</thead>
+					<tbody id="userTableBody">
+						<c:choose>
+							<c:when test="${empty feedbacks}">
+								<tr>
+									<td colspan="4"
+										style="text-align: center; padding: 30px; color: #aaa;">
+										No feedback messages found.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="f" items="${feedbacks}">
+									<tr>
+										<td>#${f.feedbackNo}</td>
+										<td><span class="ad-username-bold">${f.name}</span></td>
+										<td>${f.email}</td>
+										<td
+											style="white-space: normal; line-height: 1.4; max-width: 400px;">
+											${f.message}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
 		</main>
 	</div>
-
-	<script>
-		const rowsPerPage = 5;
-		let currentPage = 1;
-
-		window.onload = function() {
-			updateDisplay();
-		};
-
-		function updateDisplay() {
-			const rows = Array.from(document.querySelectorAll('#tableBody tr'));
-			const totalPages = Math.ceil(rows.length / rowsPerPage);
-
-			rows.forEach((row, i) => {
-				const isVisible = i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage;
-				row.style.display = isVisible ? '' : 'none';
-			});
-
-			const container = document.getElementById('paginationControls');
-			if (totalPages <= 1) { container.innerHTML = ''; return; }
-
-			let buttons = '<button onclick="changePage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '>&lt;</button>';
-			for (let i = 1; i <= totalPages; i++) {
-				buttons += '<button class="' + (i === currentPage ? 'active' : '') + '" onclick="changePage(' + i + ')">' + i + '</button>';
-			}
-			buttons += '<button onclick="changePage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '>&gt;</button>';
-			container.innerHTML = buttons;
-		}
-
-		function changePage(page) {
-			currentPage = page;
-			updateDisplay();
-		}
-
-		function filterTable() {
-			const input = document.getElementById("searchInput");
-			const filter = input.value.toLowerCase();
-			const tbody = document.getElementById("tableBody");
-			const rows = tbody.getElementsByTagName("tr");
-
-			for (let i = 0; i < rows.length; i++) {
-				if (rows[i].cells.length < 2) continue;
-				const rowText = rows[i].textContent || rows[i].innerText;
-				rows[i].style.display = rowText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
-			}
-			currentPage = 1;
-			updateDisplay();
-		}
-	</script>
 
 </body>
 </html>
