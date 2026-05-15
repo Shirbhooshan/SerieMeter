@@ -43,7 +43,7 @@ public class Media extends HttpServlet {
 			try {
 				int mediaId = Integer.parseInt(idParam);
 
-				// Fetch details from the media table
+				// Fetching details from the media table
 				// Note: Use the 'mediaDAO' instance variable, not the 'MediaDAO' class name
 				MediaModel media = mediaDAO.getMediaById(mediaId);
 
