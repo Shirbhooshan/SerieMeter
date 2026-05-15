@@ -226,10 +226,6 @@ html, body {
 
 				<a href="${pageContext.request.contextPath}/Explore" class="cta-btn">Start Exploring!</a>
 
-				<div class="sql-badge">
-					<img src="assets/icon/sql.svg" alt="SQL" class="sql-icon-svg">
-					SQL Integration
-				</div>
 			</div>
 		</div>
 

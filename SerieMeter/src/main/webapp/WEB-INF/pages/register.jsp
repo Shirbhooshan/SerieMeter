@@ -375,7 +375,7 @@ body {
 			<form action="${pageContext.request.contextPath}/Register"
 				method="POST" enctype="multipart/form-data">
 
-				<%-- Avatar Upload --%>
+				<!-- Avatar Upload -->
 				<div class="avatar-group">
 					<span class="avatar-group-label">Profile Photo</span> <label
 						class="avatar-label" for="profileImageInput">
