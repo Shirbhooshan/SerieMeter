@@ -58,6 +58,31 @@ public class Register extends HttpServlet {
 			// Get the uploaded file part
 			Part profilePart = request.getPart("user_profile");
 
+			String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+			String passwordRegex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{7,}$";
+
+			if (fullName == null || fullName.trim().isEmpty()) {
+				request.setAttribute("errorMessage", "Full name is required.");
+				doGet(request, response);
+				return;
+			}
+			if (username == null || username.trim().isEmpty()) {
+				request.setAttribute("errorMessage", "Username is required.");
+				doGet(request, response);
+				return;
+			}
+			if (email == null || !email.matches(emailRegex)) {
+				request.setAttribute("errorMessage", "Please enter a valid email address.");
+				doGet(request, response);
+				return;
+			}
+			if (password == null || !password.matches(passwordRegex)) {
+				request.setAttribute("errorMessage",
+						"Password must be at least 7 characters and include one uppercase letter, one number, and one special character.");
+				doGet(request, response);
+				return;
+			}
+
 			// Upload to root direcory
 			String uploadDir = System.getProperty("user.home") + java.io.File.separator + "seriemeter_uploads"
 					+ java.io.File.separator + "user_uploads";

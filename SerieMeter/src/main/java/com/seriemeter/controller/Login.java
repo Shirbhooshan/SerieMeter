@@ -49,6 +49,19 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
+		if (username == null || username.trim().isEmpty()) {
+			request.setAttribute("error", "Username or email is required.");
+			request.setAttribute("typedUser", username);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+			return;
+		}
+		if (password == null || password.trim().isEmpty()) {
+			request.setAttribute("error", "Password is required.");
+			request.setAttribute("typedUser", username);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+			return;
+		}
+
 		LoginService loginService = new LoginService();
 		String status = loginService.authenticate(username, password);
 

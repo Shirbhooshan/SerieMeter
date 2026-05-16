@@ -372,6 +372,13 @@ body {
 				<p>Create your profile to start building lists</p>
 			</div>
 
+			<c:if test="${not empty errorMessage}">
+				<div
+					style="background: #fff0f0; border: 1px solid #ffb3b3; border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: #cc0000;">
+					<c:out value="${errorMessage}" />
+				</div>
+			</c:if>
+
 			<form action="${pageContext.request.contextPath}/Register"
 				method="POST" enctype="multipart/form-data">
 
