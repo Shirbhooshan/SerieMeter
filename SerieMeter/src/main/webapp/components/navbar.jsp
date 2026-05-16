@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="assets/css/style.css" />
 
 <style>
+:root {
+	--accent-orange: #E8824A;
+}
 
 .sm_navbar__profile {
 	display: flex;
@@ -33,13 +36,22 @@
 	border: 2px solid #e0e0e0;
 }
 
+.sm_navbar__nav li a.sm_navbar__dashboard {
+	color: #E8824A !important;
+	font-weight: 800 !important;
+}
+
+.sm_navbar__nav li a.sm_navbar__dashboard:hover {
+	color: #d4703e !important;
+}
+
 /* media tags */
-@media (max-width: 992px) {
+@media ( max-width : 992px) {
 	.sm_navbar {
-		display: flex !important;       
+		display: flex !important;
 		flex-direction: column !important;
-		height: auto !important;       
-		position: static !important;    
+		height: auto !important;
+		position: static !important;
 		padding: 16px 24px !important;
 		gap: 16px !important;
 		align-items: stretch !important;
@@ -51,35 +63,30 @@
 		align-self: center !important;
 		margin: 0 auto !important;
 	}
-	
 	.sm_navbar__logo img {
 		max-height: 28px !important;
 		width: auto !important;
 		display: block !important;
 	}
-
 	.sm_navbar__nav {
-		display: flex !important;       
+		display: flex !important;
 		visibility: visible !important;
 		justify-content: center !important;
 		list-style: none !important;
 		gap: 20px !important;
-		overflow-x: auto !important;   
+		overflow-x: auto !important;
 		padding-bottom: 6px !important;
-		white-space: nowrap !important; 
+		white-space: nowrap !important;
 		-webkit-overflow-scrolling: touch !important;
 		width: 100% !important;
 	}
-
 	.sm_navbar__nav::-webkit-scrollbar {
 		height: 0px !important;
 		background: transparent !important;
 	}
-	
 	.sm_navbar__nav li {
 		display: inline-block !important;
 	}
-
 	.sm_navbar__right {
 		display: flex !important;
 		width: 100% !important;
@@ -87,46 +94,39 @@
 		align-items: center !important;
 		gap: 12px !important;
 	}
-	
 	.sm_navbar__right form {
 		flex: 1 !important;
 		display: block !important;
 		margin: 0 !important;
 	}
-	
 	.sm_navbar__search {
 		display: flex !important;
 		align-items: center !important;
 		width: 100% !important;
 		max-width: 100% !important;
 	}
-	
 	.sm_navbar__search input {
 		width: 100% !important;
 	}
 }
 
-@media (max-width: 576px) {
+@media ( max-width : 576px) {
 	.sm_navbar {
 		padding: 14px 16px !important;
 		gap: 12px !important;
 	}
-	
 	.sm_navbar__nav {
-		justify-content: flex-start !important; /* 
+		justify-content: flex-start !important; /*
 		gap: 16px !important;
 		font-size: 14px !important;
 	}
-
 	.sm_navbar__right {
 		gap: 8px !important;
 	}
-	
 	.sm_navbar__profile {
 		font-size: 0 !important;
 		gap: 0 !important;
 	}
-	
 	.sm_navbar__signup {
 		padding: 6px 14px !important;
 		font-size: 12px !important;
@@ -153,7 +153,7 @@
 			<c:if
 				test="${not empty sessionScope.user && sessionScope.user.role eq 'Admin'}">
 				<li><a href="${pageContext.request.contextPath}/Dashboard"
-					style="color: var(--orange); font-weight: 800;">Dashboard</a></li>
+					class="sm_navbar__dashboard"> Dashboard </a></li>
 			</c:if>
 		</ul>
 
