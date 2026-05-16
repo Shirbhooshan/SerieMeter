@@ -389,7 +389,6 @@ a {
 
 	<%@ include file="/components/navbar.jsp"%>
 
-	<%-- Build "remove this filter" URLs --%>
 	<c:set var="baseUrl" value="${pageContext.request.contextPath}/Search" />
 
 	<div class="sm_sf_body">
@@ -398,50 +397,46 @@ a {
 		<aside class="sm_sf_sidebar">
 			<div class="sm_sf_sidebar_title">Quick Search</div>
 
-			<form id="filterForm"
-				action="${pageContext.request.contextPath}/Search" method="GET">
+			<form id="filterForm" action="${baseUrl}" method="GET">
 
-				<!-- Preserve keyword query -->
-				<input type="hidden" name="query" id="hiddenQuery" value="${query}">
+				<input type="hidden" name="query" value="${query}"> <input
+					type="hidden" name="category" value="${category}"> <input
+					type="hidden" name="genre" value="${genre}">
 
-				<!-- Category -->
 				<div class="sm_sf_filter_label">Category Type</div>
-				<input type="hidden" name="category" id="hiddenCategory"
-					value="${category}">
 				<div class="sm_sf_pill_row">
-					<button type="button"
-						class="sm_sf_pill ${category == '1' ? 'active' : 'inactive'}"
-						onclick="smSfSelectCat(this, '1')">Movie</button>
-					<button type="button"
-						class="sm_sf_pill ${category == '2' ? 'active' : 'inactive'}"
-						onclick="smSfSelectCat(this, '2')">Series</button>
+					<a
+						href="${baseUrl}?query=${query}&category=${category == '1' ? '' : '1'}&genre=${genre}&yearRange=${yearRange}"
+						class="sm_sf_pill ${category == '1' ? 'active' : 'inactive'}">Movie</a>
+					<a
+						href="${baseUrl}?query=${query}&category=${category == '2' ? '' : '2'}&genre=${genre}&yearRange=${yearRange}"
+						class="sm_sf_pill ${category == '2' ? 'active' : 'inactive'}">Series</a>
 				</div>
 
-				<!-- Genre -->
 				<div class="sm_sf_filter_label">Genre</div>
-				<input type="hidden" name="genre" id="hiddenGenre" value="${genre}">
 				<div class="sm_sf_genre_grid">
-					<div class="sm_sf_genre_tag ${genre == '1'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '1')">Action</div>
-					<div class="sm_sf_genre_tag ${genre == '2'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '2')">Comedy</div>
-					<div class="sm_sf_genre_tag ${genre == '3'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '3')">Horror</div>
-					<div class="sm_sf_genre_tag ${genre == '4'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '4')">Drama</div>
-					<div class="sm_sf_genre_tag ${genre == '5'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '5')">Sci-Fi</div>
-					<div class="sm_sf_genre_tag ${genre == '6'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '6')">Thriller</div>
-					<div class="sm_sf_genre_tag ${genre == '7'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '7')">Romance</div>
-					<div class="sm_sf_genre_tag ${genre == '8'  ? 'on' : ''}"
-						onclick="smSfSelectGenre(this, '8')">Animation</div>
+					<a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '1' ? '' : '1'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '1' ? 'on' : ''}">Action</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '2' ? '' : '2'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '2' ? 'on' : ''}">Comedy</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '3' ? '' : '3'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '3' ? 'on' : ''}">Horror</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '4' ? '' : '4'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '4' ? 'on' : ''}">Drama</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '5' ? '' : '5'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '5' ? 'on' : ''}">Sci-Fi</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '6' ? '' : '6'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '6' ? 'on' : ''}">Thriller</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '7' ? '' : '7'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '7' ? 'on' : ''}">Romance</a> <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre == '8' ? '' : '8'}&yearRange=${yearRange}"
+						class="sm_sf_genre_tag ${genre == '8' ? 'on' : ''}">Animation</a>
 				</div>
 
-				<!-- Release Year -->
 				<div class="sm_sf_filter_label">Release Year</div>
-				<select name="yearRange" class="sm_sf_year_select">
+				<select name="yearRange" class="sm_sf_year_select"
+					onchange="this.form.submit()">
 					<option value="">All Years</option>
 					<option value="2020-2026"
 						${yearRange == '2020-2026' ? 'selected' : ''}>2020 – 2026</option>
@@ -451,16 +446,13 @@ a {
 						${yearRange == '2010-2014' ? 'selected' : ''}>2010 – 2014</option>
 					<option value="2000-2009"
 						${yearRange == '2000-2009' ? 'selected' : ''}>2000 – 2009</option>
-					<option value="pre2000"
-						${yearRange == 'pre2000'   ? 'selected' : ''}>Before 2000</option>
+					<option value="pre2000" ${yearRange == 'pre2000' ? 'selected' : ''}>Before
+						2000</option>
 				</select>
-
-				<button type="submit" class="sm_sf_search_btn">Apply
-					Filters</button>
 			</form>
 
 			<!-- Reset — clears everything, keeps only the page -->
-			<a href="${pageContext.request.contextPath}/Search">
+			<a href="${baseUrl}">
 				<button type="button" class="sm_sf_reset_btn">Reset Search
 					Filters</button>
 			</a>
@@ -470,7 +462,6 @@ a {
 		<!-- ── Content ── -->
 		<main class="sm_sf_content">
 
-			<%-- Heading --%>
 			<c:choose>
 				<c:when test="${not empty query}">
 					<h1 class="sm_sf_heading">
@@ -493,30 +484,20 @@ a {
 
 			<!-- ── Active filter chips ── -->
 			<div class="sm_sf_active_tags">
-
-				<!-- Keyword chip -->
 				<c:if test="${not empty query}">
-					<span class="sm_sf_tag_chip query"> <span>keyword</span> <c:out
+					<span class="sm_sf_tag_chip query"><span>keyword</span> <c:out
 							value="${query}" /> <a
-						href="${baseUrl}?category=${category}&genre=${genre}&yearRange=${yearRange}"
-						title="Remove">✕</a>
+						href="${baseUrl}?category=${category}&genre=${genre}&yearRange=${yearRange}">✕</a>
 					</span>
 				</c:if>
-
-				<!-- Category chip -->
 				<c:if test="${not empty category}">
-					<span class="sm_sf_tag_chip cat"> <span>type</span> <c:choose>
-							<c:when test="${category == '1'}">Movie</c:when>
-							<c:otherwise>Series</c:otherwise>
-						</c:choose> <a
-						href="${baseUrl}?query=${query}&genre=${genre}&yearRange=${yearRange}"
-						title="Remove">✕</a>
+					<span class="sm_sf_tag_chip cat"><span>type</span>
+						${category == '1' ? 'Movie' : 'Series'} <a
+						href="${baseUrl}?query=${query}&genre=${genre}&yearRange=${yearRange}">✕</a>
 					</span>
 				</c:if>
-
-				<!-- Genre chip -->
 				<c:if test="${not empty genre}">
-					<span class="sm_sf_tag_chip genre"> <span>genre</span> <c:choose>
+					<span class="sm_sf_tag_chip genre"><span>genre</span> <c:choose>
 							<c:when test="${genre == '1'}">Action</c:when>
 							<c:when test="${genre == '2'}">Comedy</c:when>
 							<c:when test="${genre == '3'}">Horror</c:when>
@@ -526,28 +507,19 @@ a {
 							<c:when test="${genre == '7'}">Romance</c:when>
 							<c:when test="${genre == '8'}">Animation</c:when>
 						</c:choose> <a
-						href="${baseUrl}?query=${query}&category=${category}&yearRange=${yearRange}"
-						title="Remove">✕</a>
+						href="${baseUrl}?query=${query}&category=${category}&yearRange=${yearRange}">✕</a>
 					</span>
 				</c:if>
-
-				<!-- Year chip -->
 				<c:if test="${not empty yearRange}">
-					<span class="sm_sf_tag_chip year"> <span>year</span> <c:choose>
-							<c:when test="${yearRange == 'pre2000'}">Before 2000</c:when>
-							<c:otherwise>
-								<c:out value="${yearRange}" />
-							</c:otherwise>
-						</c:choose> <a
-						href="${baseUrl}?query=${query}&category=${category}&genre=${genre}"
-						title="Remove">✕</a>
+					<span class="sm_sf_tag_chip year"><span>year</span>
+						${yearRange == 'pre2000' ? 'Before 2000' : yearRange} <a
+						href="${baseUrl}?query=${query}&category=${category}&genre=${genre}">✕</a>
 					</span>
 				</c:if>
 			</div>
 
-			<!-- Result count (only when a search was performed) -->
 			<c:if test="${results != null}">
-				<p class="sm_sf_result_count">${resultCount}result${resultCount != 1 ? 's' : ''}
+				<p class="sm_sf_result_count">${resultCount} result${resultCount != 1 ? 's' : ''}
 					found</p>
 			</c:if>
 
@@ -599,45 +571,6 @@ a {
 	</div>
 
 	<%@ include file="/components/footer.jsp"%>
-
-	<script>
-	// Track selected values
-	let selectedCategory = '${category}';
-	let selectedGenre    = '${genre}';
-
-	function smSfSelectCat(btn, val) {
-		// Toggle off if same button clicked again
-		if (selectedCategory === val) {
-			selectedCategory = '';
-			document.querySelectorAll('.sm_sf_pill').forEach(b => {
-				b.classList.remove('active');
-				b.classList.add('inactive');
-			});
-		} else {
-			selectedCategory = val;
-			document.querySelectorAll('.sm_sf_pill').forEach(b => {
-				b.classList.remove('active');
-				b.classList.add('inactive');
-			});
-			btn.classList.remove('inactive');
-			btn.classList.add('active');
-		}
-		document.getElementById('hiddenCategory').value = selectedCategory;
-	}
-
-	function smSfSelectGenre(tag, val) {
-		// Toggle off if same tag clicked again
-		if (selectedGenre === val) {
-			selectedGenre = '';
-			document.querySelectorAll('.sm_sf_genre_tag').forEach(t => t.classList.remove('on'));
-		} else {
-			selectedGenre = val;
-			document.querySelectorAll('.sm_sf_genre_tag').forEach(t => t.classList.remove('on'));
-			tag.classList.add('on');
-		}
-		document.getElementById('hiddenGenre').value = selectedGenre;
-	}
-</script>
-
+	
 </body>
 </html>
