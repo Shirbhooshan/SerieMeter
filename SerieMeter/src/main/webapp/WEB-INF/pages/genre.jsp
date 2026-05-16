@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${genreName}– SerieMeter</title>
+<title>${genreName} - SerieMeter</title>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
@@ -155,6 +155,37 @@ a {
 
 .ad-text-orange {
 	color: #e37329;
+}
+
+/* ── mediaa tag── */
+@media ( max-width : 768px) {
+	.page-header {
+		padding: 32px 24px 24px;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.page-header__title {
+		font-size: 38px;
+		letter-spacing: -1px;
+	}
+	.page-header__subtitle {
+		font-size: 14px;
+	}
+	.sm_section {
+		padding: 0 24px;
+		margin-bottom: 48px;
+	}
+	.sm_grid_5 {
+		grid-template-columns: repeat(2, 1fr);
+		/* Clean 2-column layout on mobile devices */
+		gap: 16px;
+	}
+	.sm_card_title {
+		font-size: 13px;
+	}
+	.sm_card_meta {
+		font-size: 11px;
+	}
 }
 </style>
 

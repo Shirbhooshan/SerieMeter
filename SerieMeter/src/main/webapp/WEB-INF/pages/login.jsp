@@ -221,6 +221,45 @@ body {
 .ep-go-back-btn .ep-link-text {
 	text-decoration: underline;
 }
+
+/* ── media tags ── */
+@media ( max-width : 768px) {
+	body {
+		padding: 20px;
+		height: auto;
+		min-height: 100vh;
+		overflow: auto;
+		/* Allow scrolling if keyboard layout compresses screen space */
+	}
+	.login-card {
+		padding: 35px 24px;
+		width: 100%;
+		max-width: 100%;
+		border-radius: 20px;
+	}
+	.logo-img {
+		max-width: 180px;
+	}
+	.rounded-input {
+		padding: 14px 14px 14px 44px;
+		font-size: 15px;
+	}
+	.icon-svg {
+		left: 16px;
+	}
+	.eye-icon {
+		right: 16px;
+		left: auto;
+	}
+	.footer-text {
+		position: static;
+		margin-top: 40px;
+		margin-bottom: 10px;
+	}
+	.ep-go-back-btn {
+		margin-top: 10px;
+	}
+}
 </style>
 </head>
 <body>
