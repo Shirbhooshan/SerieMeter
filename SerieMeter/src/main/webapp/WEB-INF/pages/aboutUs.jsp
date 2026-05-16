@@ -155,6 +155,79 @@ body {
 	color: #777;
 	font-style: italic;
 }
+
+/* Tablets / Laptop Screens (Under 1100px) */
+@media ( max-width : 1100px) {
+	.hero h1 {
+		font-size: 76px;
+	}
+	.story-left {
+		/* Shrink layout lane for mid-sized displays */
+		flex: 0 0 300px;
+	}
+	.story-right {
+		margin-right: 0;
+	}
+	.team-grid {
+		/* Drop team grid down to 2 columns */
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+	}
+}
+
+/* Mobile Screens (Under 768px) */
+@media ( max-width : 768px) {
+	.page-content {
+		padding: 40px 20px;
+	}
+	.hero {
+		margin-bottom: 60px;
+	}
+	.hero h1 {
+		font-size: 48px;
+		letter-spacing: -1px;
+	}
+	.hero p {
+		font-size: 16px;
+	}
+
+	/* Convert horizontal row layout to vertical stacking */
+	.story-section {
+		flex-direction: column;
+		gap: 0px;
+		margin-bottom: 60px;
+	}
+	.story-left {
+		flex: none;
+		width: 100%;
+	}
+	.orange-line {
+		margin-bottom: 24px;
+	}
+	.story-header {
+		font-size: 26px;
+		margin-bottom: 15px;
+	}
+	.story-paras {
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+
+/* Small Smart Phones (Under 480px) */
+@media ( max-width : 480px) {
+	.hero h1 {
+		font-size: 38px;
+	}
+	.team-grid {
+		/* Drop cards to 1 vertical list */
+		grid-template-columns: 1fr;
+		gap: 35px;
+	}
+	.name {
+		font-size: 22px;
+	}
+}
 </style>
 </head>
 <body>

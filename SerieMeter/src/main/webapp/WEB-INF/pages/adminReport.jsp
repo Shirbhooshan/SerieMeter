@@ -347,6 +347,102 @@
 	border-radius: 6px;
 	object-fit: cover;
 }
+
+/* ── media tags ── */
+@media ( max-width : 768px) {
+	.ad-body {
+		padding: 0;
+		height: auto;
+		min-height: 100vh;
+		overflow: auto;
+	}
+	.ad-layout-container {
+		flex-direction: column;
+		gap: 0;
+		height: auto;
+		min-height: 100vh;
+	}
+	.ad-sidebar {
+		width: 100%;
+		padding: 20px 15px 15px 15px;
+		gap: 15px;
+	}
+	.ad-sidebar>div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
+	}
+	.ad-logo-container {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.ad-logo-container img {
+		max-width: 150px;
+	}
+	.ad-nav-menu {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 100%;
+	}
+	.ad-nav-item {
+		justify-content: center;
+		padding: 10px 5px;
+		font-size: 12px;
+		text-align: center;
+	}
+	.ad-logout-container {
+		padding: 0;
+		width: 100%;
+	}
+	.ad-logout-btn {
+		justify-content: center;
+		padding: 10px;
+		font-size: 12px;
+		background-color: rgba(231, 90, 85, 0.08);
+		border: 1px solid rgba(231, 90, 85, 0.2);
+	}
+	.ad-main-content {
+		width: 100%;
+		height: auto;
+		flex: 1;
+		overflow: visible;
+		padding: 25px 20px;
+		border-radius: 24px 24px 0 0;
+	}
+	.ad-stats-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 12px;
+		margin: 20px 0;
+	}
+	.ad-stat-card {
+		border-radius: 24px;
+		padding: 15px;
+	}
+	.ad-stat-value {
+		font-size: 32px;
+	}
+	.ad-bar-chart {
+		gap: 15px;
+		padding: 20px 10px 10px 10px;
+		overflow-x: auto;
+		justify-content: flex-start;
+	}
+	.ad-bar-group {
+		min-width: 60px;
+	}
+	.ad-table-section {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		padding: 15px;
+	}
+	.ad-media-table {
+		min-width: 600px;
+	}
+}
 </style>
 </head>
 <body class="ad-body">
@@ -476,30 +572,33 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>NAME</th>
-							<th>CATEGORY</th>
-							<th>GENRE</th>
-							<th>BOOKMARKS</th>
-							<th>REVIEWS</th>
+							<th>Name</th>
+							<th>Category</th>
+							<th>Genre</th>
+							<th>Bookmarks</th>
+							<th>Reviews</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="item" items="${topMedia}">
 							<tr>
 								<td>#${item.mediaId}</td>
-								<td style="display: flex; align-items: center; gap: 12px;">
-									<c:choose>
-										<c:when test="${not empty item.mediaProfile}">
-											<img class="ad-cover-thumb"
-												src="${pageContext.request.contextPath}/getimage?name=${item.mediaProfile}&type=media"
-												alt="${item.title}"
-												onerror="this.style.opacity='0.3'; this.src='${pageContext.request.contextPath}/assets/images/placeholder.jpg';" />
-										</c:when>
-										<c:otherwise>
-											<div class="ad-cover-thumb"
-												style="background: #eee; border: 1px solid #ddd;"></div>
-										</c:otherwise>
-									</c:choose> <span>${item.title}</span>
+								<td>
+									<div style="display: flex; align-items: center; gap: 12px;">
+										<c:choose>
+											<c:when test="${not empty item.mediaProfile}">
+												<img class="ad-cover-thumb"
+													src="${pageContext.request.contextPath}/getimage?name=${item.mediaProfile}&type=media"
+													alt="${item.title}"
+													onerror="this.style.opacity='0.3'; this.src='${pageContext.request.contextPath}/assets/images/placeholder.jpg';" />
+											</c:when>
+											<c:otherwise>
+												<div class="ad-cover-thumb"
+													style="background: #eee; border: 1px solid #ddd;"></div>
+											</c:otherwise>
+										</c:choose>
+										<span>${item.title}</span>
+									</div>
 								</td>
 								<td><c:choose>
 										<c:when test="${item.categoryId == 1}">Movie</c:when>

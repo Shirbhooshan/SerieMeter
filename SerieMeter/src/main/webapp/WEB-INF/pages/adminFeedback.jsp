@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Feedback Messages</title>
+<title>Feedback Messages - Seriemeter</title>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
@@ -437,6 +437,85 @@
 	font-size: 12px;
 	color: #555555;
 }
+
+/* ── media tags ── */
+@media ( max-width : 768px) {
+	.ad-body {
+		padding: 0;
+		height: auto;
+		min-height: 100vh;
+		overflow: auto;
+	}
+	.ad-layout-container {
+		flex-direction: column;
+		gap: 0;
+		height: auto;
+		min-height: 100vh;
+	}
+	.ad-sidebar {
+		width: 100%;
+		padding: 20px 15px 15px 15px;
+		gap: 15px;
+	}
+	.ad-sidebar>div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
+	}
+
+	/* Center the SerieMeter Logo */
+	.ad-logo-container {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.ad-logo-container img {
+		max-width: 150px;
+	}
+	.ad-nav-menu {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 100%;
+	}
+	.ad-nav-item {
+		justify-content: center;
+		padding: 10px 5px;
+		font-size: 12px;
+		text-align: center;
+	}
+
+	/* Centered Logout Box */
+	.ad-logout-container {
+		padding: 0;
+		width: 100%;
+	}
+	.ad-logout-btn {
+		justify-content: center;
+		padding: 10px;
+		font-size: 12px;
+		background-color: rgba(231, 90, 85, 0.08);
+		border: 1px solid rgba(231, 90, 85, 0.2);
+	}
+
+	/* Changing the actual white container to fit properly */
+	.ad-main-content {
+		width: 100%;
+		height: auto;
+		flex: 1;
+		/* Forces the white panel to grow and stay pinned to the absolute bottom screen boundary */
+		overflow: visible;
+		padding: 25px 20px;
+		border-radius: 24px 24px 0 0;
+		/* top corners rounded, flat bottom*/
+	}
+	.ad-user-table-container {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+}
 </style>
 </head>
 <body class="ad-body">
@@ -501,14 +580,15 @@
 			<h1 class="ad-section-title">
 				<span class="ad-text-orange">Received</span> feedbacks
 			</h1>
-			<p class="ad-section-subtitle">View all the feedback messages, here.</p>
+			<p class="ad-section-subtitle">View all the feedback messages,
+				here.</p>
 
 			<!-- Toolbar: Pushes search to the right -->
 			<div class="sm_admin__toolbar">
 				<div class="sm_admin__search">
-					<input type="text" placeholder="Search for feedbacks" id="searchInput"
-						onkeyup="filterTable()" /> <img src="assets/icon/search.svg"
-						alt="Search" />
+					<input type="text" placeholder="Search for feedbacks"
+						id="searchInput" onkeyup="filterTable()" /> <img
+						src="assets/icon/search.svg" alt="Search" />
 				</div>
 			</div>
 
