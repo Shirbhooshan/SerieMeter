@@ -8,11 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import com.seriemeter.dao.UserDAO;
 import com.seriemeter.model.UserModel;
+import com.seriemeter.service.UserProfileService;
 
 /**
  * Servlet implementation class Users
@@ -43,8 +44,19 @@ public class AdminUsers extends HttpServlet {
 
 		try {
 			UserDAO dao = new UserDAO();
+
 			List<UserModel> users = dao.getAllUsers();
+
+			UserProfileService profileService = new UserProfileService();
+			List<Integer> reviewCounts = new ArrayList<>();
+
+			for (UserModel u : users) {
+				reviewCounts.add(profileService.getReviewCount(u.getUserId()));
+			}
+
 			request.setAttribute("users", users);
+			request.setAttribute("reviewCounts", reviewCounts);
+
 			request.getRequestDispatcher("/WEB-INF/pages/adminUsers.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException("Failed to load users", e);

@@ -520,7 +520,7 @@
 							src="${pageContext.request.contextPath}/assets/icon/review-report.svg">
 					</div>
 					<span class="ad-stat-label">Total Reviews</span>
-					<h2 class="ad-stat-value">${totalReviews}</h2>
+					<h2 class="ad-stat-value">${reviewCount}</h2>
 				</div>
 				<div class="ad-stat-card">
 					<div class="ad-stat-icon">
