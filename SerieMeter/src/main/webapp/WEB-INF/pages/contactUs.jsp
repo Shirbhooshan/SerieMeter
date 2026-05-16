@@ -38,7 +38,6 @@ body {
 	gap: 80px;
 }
 
-/* ── LEFT: Large Heading ── */
 .contact-left {
 	position: relative;
 }
@@ -49,7 +48,7 @@ body {
 	letter-spacing: -2px;
 	line-height: 0.9;
 	margin: 0;
-	/* Explicitly prevent line breaks */
+	/* prevent line breaks */
 	white-space: nowrap;
 }
 
@@ -68,7 +67,7 @@ body {
 
 /* ── MIDDLE: The Form ── */
 .contact-middle {
-	/* Form starts lower than the heading top line */
+	/* form starts lower than the heading top line */
 	padding-top: 130px;
 }
 
@@ -118,7 +117,7 @@ body {
 	margin-top: 10px;
 }
 
-/* ── RIGHT: Contact Info ── */
+/* Contact Info */
 .contact-right {
 	display: flex;
 	flex-direction: column;
@@ -161,6 +160,40 @@ body {
 	.contact-heading {
 		font-size: 72px;
 		white-space: normal;
+	}
+}
+
+/* media tags */
+@media ( max-width : 768px) {
+	.page-wrapper {
+		grid-template-columns: 1fr;
+		padding: 40px 24px;
+		gap: 40px;
+	}
+	.contact-heading {
+		font-size: 56px;
+		white-space: normal;
+		text-align: center;
+	}
+	.visual-bg {
+		display: none;
+	}
+	.contact-middle {
+		padding-top: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+	.contact-form {
+		max-width: 100%;
+		width: 100%;
+	}
+	.contact-right {
+		padding-top: 10px;
+		margin-right: 0;
+		align-items: center;
+		text-align: center;
 	}
 }
 </style>
