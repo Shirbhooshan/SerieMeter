@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>${media.title} | SerieMeter</title>
+<title>${media.title}| SerieMeter</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
@@ -342,6 +342,71 @@ html, body {
 	width: 100%;
 	border-radius: 12px;
 	box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+@media ( max-width : 1024px) {
+	.container {
+		flex-direction: column-reverse;
+		gap: 40px;
+		padding: 40px 24px;
+	}
+	.right-content {
+		position: static;
+		margin-top: 0;
+		width: 100%;
+		display: flex;
+		flex-direction: column-reverse;
+		/* Keeps poster styling on top of the mobile details overview */
+		align-items: center;
+		gap: 24px;
+	}
+	.rating-box {
+		margin-left: 0;
+		margin-bottom: 0;
+		width: 100%;
+		max-width: 340px;
+	}
+	.poster-img {
+		max-width: 340px;
+	}
+	.left-content {
+		width: 100%;
+	}
+	.title {
+		font-size: 48px;
+		margin-bottom: 20px;
+	}
+}
+
+@media ( max-width : 576px) {
+	html, body {
+		background-position: center top;
+	}
+	.title {
+		font-size: 36px;
+	}
+	.bookmark-btn {
+		width: 100%;
+		justify-content: center;
+		font-size: 16px;
+		padding: 14px 28px;
+	}
+	.review-card {
+		padding: 24px;
+		border-radius: 20px;
+	}
+	.existing-review-card {
+		padding: 20px;
+		border-radius: 16px;
+	}
+	.review-top-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+	.display-stars {
+		align-self: flex-start;
+	}
 }
 </style>
 </head>
