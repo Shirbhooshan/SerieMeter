@@ -29,7 +29,7 @@ body {
 	padding: 10px;
 	height: 100vh;
 	box-sizing: border-box;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .ad-layout-container {
@@ -131,7 +131,7 @@ body {
 	padding: 20px 30px;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .ad-top-header {
@@ -416,6 +416,29 @@ body {
 	font-size: 12px;
 	margin-bottom: 8px;
 }
+
+@media (max-width: 1024px) {
+    .adm-form-column { max-width: 55%; }
+    .adm-media-column { max-width: 40%; }
+}
+
+@media (max-width: 768px) {
+    .ad-sidebar { display: none; }
+    .ad-layout-container { gap: 6px; padding: 6px; }
+    .ad-main-content { padding: 16px 14px; border-radius: 10px; overflow-y: auto; }
+    .adm-content-grid { flex-direction: column; overflow-y: visible; }
+    .adm-form-column { max-width: 100%; }
+    .adm-media-column { max-width: 100%; width: 100%; }
+    .adm-form-control-genre { width: 60%; }
+    .adm-publish-button-container { justify-content: flex-start; }
+}
+
+@media (max-width: 480px) {
+    .adm-titles h1 { font-size: 26px; }
+    .adm-row-3-cols { flex-direction: column; }
+    .adm-form-control-genre { width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -483,6 +506,7 @@ body {
 					</div>
 
 					<input type="hidden" name="mediaId" value="${editMedia.mediaId}" />
+					<input type="hidden" name="existingPoster" value="${editMedia.mediaProfile}" />
 
 					<div class="adm-input-group">
 						<label>Movie Title</label> <input type="text" name="movieTitle"
@@ -549,7 +573,7 @@ body {
 								onerror="this.style.display='none'; document.getElementById('uploadPlaceholder').style.display='flex';">
 						</div>
 
-						<input type="file" id="posterFileInput" name="media_profile"
+						<input type="file" id="posterFileInput" name="posterImage"
 							accept="image/*" onchange="previewImage(this)"
 							style="display: none;">
 					</div>
