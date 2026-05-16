@@ -129,9 +129,8 @@ body {
 	background-color: #f0f0f0;
 }
 
-/* Dropdown popup — hidden until .up-popup-active is added via JS */
+/* Dropdown popup — visibility set by inline style from the servlet (popupStyle attribute) */
 .up-popup-menu {
-	display: none;
 	position: absolute;
 	top: 0;
 	left: calc(100% + 8px);
@@ -144,9 +143,18 @@ body {
 	overflow: hidden;
 }
 
-/* JS adds this class to make the popup visible */
-.up-popup-menu.up-popup-active {
-	display: block;
+/* Invisible full-screen backdrop — clicking it closes the popup via a server GET */
+.up-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 998;
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: default;
+	width: 100%;
+	height: 100%;
 }
 
 /* Each row inside the popup (Edit Profile, Logout, etc.) */
@@ -723,27 +731,59 @@ body {
 								<c:out value="${sessionUser.fullName}" />
 							</h2>
 
-							<div class="up-menu-wrapper">
+							<%-- Three-dot button submits a form to the server; the servlet
+						     sets popupStyle to display:block or display:none --%>
+						<div class="up-menu-wrapper">
 
-								<button class="up-three-dot-btn" id="upMenuToggle"
-									aria-label="More options" aria-expanded="false">&#8943;</button>
+							<form method="get"
+								action="${pageContext.request.contextPath}/User"
+								style="display:inline;">
+								<button type="submit" name="action" value="open-menu"
+									class="up-three-dot-btn"
+									aria-label="More options">&#8943;</button>
+							</form>
 
-								<div class="up-popup-menu" id="upPopupMenu" role="menu">
+							<%-- Popup visibility is driven entirely by ${popupStyle} set
+							     in UserProfile.doGet() — no JavaScript needed --%>
 
-									<a href="${pageContext.request.contextPath}/UserEdit"
-										class="up-popup-item" role="menuitem"> <img alt="Edit"
-										src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
-										Edit Profile
-									</a> <a href="${pageContext.request.contextPath}/Logout"
-										class="up-popup-item up-logout-item" role="menuitem"> <img
-										alt="Logout"
-										src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
-										Logout
-									</a>
+							<%-- Backdrop: only rendered when popup is open.
+							     Clicking anywhere outside closes the popup via server GET. --%>
+							<c:if test="${param.action == 'open-menu'}">
+								<form method="get"
+									action="${pageContext.request.contextPath}/User">
+									<button type="submit" name="action" value="close"
+										class="up-backdrop" aria-label="Close menu"></button>
+								</form>
+							</c:if>
 
-								</div>
+							<div class="up-popup-menu" id="upPopupMenu"
+								role="menu" style="${popupStyle}">
+
+								<c:choose>
+									<c:when test="${param.action == 'open-menu'}">
+										<%-- Edit Profile link --%>
+										<a href="${pageContext.request.contextPath}/UserEdit"
+											class="up-popup-item" role="menuitem">
+											<img alt="Edit"
+												src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+											Edit Profile
+										</a>
+										<%-- Logout link --%>
+										<a href="${pageContext.request.contextPath}/Logout"
+											class="up-popup-item up-logout-item" role="menuitem">
+											<img alt="Logout"
+												src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+											Logout
+										</a>
+									</c:when>
+									<c:otherwise>
+										<%-- Popup is hidden; no items rendered --%>
+									</c:otherwise>
+								</c:choose>
 
 							</div>
+
+						</div>
 						</div>
 
 						<p class="up-user-email">
@@ -954,29 +994,6 @@ body {
 	<%@ include file="/components/footer.jsp"%>
 
 	<script>
-		// Three-dot popup menu logic 
-
-		const menuToggle = document.getElementById('upMenuToggle');
-		const popupMenu  = document.getElementById('upPopupMenu');
-
-		// Toggle the popup open or closed when the button is clicked
-		menuToggle.addEventListener('click', function (event) {
-			event.stopPropagation();
-			const isOpen = popupMenu.classList.toggle('up-popup-active');
-			menuToggle.setAttribute('aria-expanded', isOpen);
-		});
-
-		// Close the popup when the user clicks anywhere else on the page
-		document.addEventListener('click', function () {
-			popupMenu.classList.remove('up-popup-active');
-			menuToggle.setAttribute('aria-expanded', 'false');
-		});
-
-		// Clicking inside the popup should not close it
-		popupMenu.addEventListener('click', function (event) {
-			event.stopPropagation();
-		});
-
 		// ── Copy-email-to-clipboard logic
 
 		const copyIcon = document.querySelector('.up-copy-icon');
