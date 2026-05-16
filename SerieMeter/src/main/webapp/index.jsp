@@ -37,13 +37,12 @@
 	}
 	.hero-sub {
 		font-size: 14px;
-		max-width: 90%; 
+		max-width: 90%;
 	}
 	.badge {
 		margin-bottom: 20px;
 		padding: 5px 14px;
 	}
-
 	.footer {
 		flex-direction: column;
 		gap: 30px;
@@ -64,13 +63,14 @@
 
 html, body {
 	height: 100%;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .page {
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #fff;
 }
 
@@ -224,7 +224,8 @@ html, body {
 					and reviews. Discover hidden gems and cinematic masterpieces
 					through a lens of true expertise.</p>
 
-				<a href="${pageContext.request.contextPath}/Explore" class="cta-btn">Start Exploring!</a>
+				<a href="${pageContext.request.contextPath}/Explore" class="cta-btn">Start
+					Exploring!</a>
 
 			</div>
 		</div>
@@ -235,9 +236,8 @@ html, body {
 			</div>
 
 			<nav class="footer-links">
-				<a href="${pageContext.request.contextPath}/About">About</a> 
-				<a href="#">Contact</a> <a href="#">Privacy</a>
-				<a href="#">Documentation</a>
+				<a href="${pageContext.request.contextPath}/About">About</a> <a
+					href="#">Contact</a> <a href="#">Privacy</a> <a href="#">Documentation</a>
 			</nav>
 
 			<div class="footer-copy">

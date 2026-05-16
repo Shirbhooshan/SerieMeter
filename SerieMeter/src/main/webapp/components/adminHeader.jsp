@@ -17,7 +17,7 @@
 				src="${pageContext.request.contextPath}/getimage?name=${loggedInUser.userName}&type=user"
 				alt="Profile"
 				style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;"
-				onerror="this.parentElement.style.display='none'">
+				onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile_picture.png'">
 		</a>
 		</label>
 	</div>
