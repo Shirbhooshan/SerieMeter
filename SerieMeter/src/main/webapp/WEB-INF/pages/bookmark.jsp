@@ -244,6 +244,20 @@ a {
 	color: var(--gray-400);
 	margin-top: 4px;
 }
+
+
+@media (max-width: 768px) {
+    .sm_bm_header { flex-direction: column; padding: 28px 24px 20px; gap: 16px; }
+    .sm_bm_header_title { font-size: 38px; }
+    .sm_bm_grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 60px; gap: 20px 14px; }
+}
+
+@media (max-width: 480px) {
+    .sm_bm_header_title { font-size: 30px; }
+    .sm_bm_header { padding: 24px 16px 16px; }
+    .sm_bm_grid { grid-template-columns: repeat(2, 1fr); padding: 0 16px 40px; gap: 14px 10px; }
+}
+
 </style>
 </head>
 <body>

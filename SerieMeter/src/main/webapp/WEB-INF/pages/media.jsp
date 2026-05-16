@@ -425,8 +425,8 @@ html, body {
 								<form action="${pageContext.request.contextPath}/Bookmark"
 									method="POST">
 									<input type="hidden" name="media_id" value="${media.mediaId}">
-									<input type="hidden" name="action" value="add"> <input
-										type="hidden" name="fromMedia" value="true" />
+									<input type="hidden" name="action" value="add"> 
+									<input type="hidden" name="fromMedia" value="true" />
 									<button type="submit" class="bookmark-btn">
 										<img
 											src="${pageContext.request.contextPath}/assets/icon/bookmark-solid-full.svg"
