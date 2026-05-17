@@ -245,19 +245,130 @@ a {
 	margin-top: 4px;
 }
 
-
-@media (max-width: 768px) {
-    .sm_bm_header { flex-direction: column; padding: 28px 24px 20px; gap: 16px; }
-    .sm_bm_header_title { font-size: 38px; }
-    .sm_bm_grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px 60px; gap: 20px 14px; }
+/* Confirmation popup overlay */
+.sm_bm_overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	align-items: center;
+	justify-content: center;
 }
 
-@media (max-width: 480px) {
-    .sm_bm_header_title { font-size: 30px; }
-    .sm_bm_header { padding: 24px 16px 16px; }
-    .sm_bm_grid { grid-template-columns: repeat(2, 1fr); padding: 0 16px 40px; gap: 14px 10px; }
+.sm_bm_backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+	border: none;
+	padding: 0;
+	margin: 0;
+	z-index: 101;
+	cursor: default;
+	width: 100%;
+	height: 100%;
 }
 
+.sm_bm_popup {
+	position: relative;
+	z-index: 102;
+	background: var(--white);
+	border-radius: 16px;
+	padding: 40px 36px 32px;
+	max-width: 380px;
+	width: 90%;
+	text-align: center;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.sm_bm_popup_icon {
+	width: 44px;
+	height: 44px;
+	opacity: 0.4;
+	margin: 0 auto 14px;
+}
+
+.sm_bm_popup_title {
+	font-size: 20px;
+	font-weight: 800;
+	color: var(--black);
+	margin-bottom: 10px;
+}
+
+.sm_bm_popup_sub {
+	font-size: 14px;
+	color: var(--gray-600);
+	line-height: 1.6;
+	margin-bottom: 28px;
+}
+
+.sm_bm_popup_btns {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+}
+
+.sm_bm_popup_yes {
+	background: #e53935;
+	color: var(--white);
+	border: none;
+	border-radius: 24px;
+	padding: 11px 28px;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background .2s;
+}
+
+.sm_bm_popup_yes:hover {
+	background: #c62828;
+}
+
+.sm_bm_popup_no {
+	background: var(--gray-100);
+	color: var(--text);
+	border: none;
+	border-radius: 24px;
+	padding: 11px 28px;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background .2s;
+}
+
+.sm_bm_popup_no:hover {
+	background: var(--gray-200);
+}
+
+@media ( max-width : 768px) {
+	.sm_bm_header {
+		flex-direction: column;
+		padding: 28px 24px 20px;
+		gap: 16px;
+	}
+	.sm_bm_header_title {
+		font-size: 38px;
+	}
+	.sm_bm_grid {
+		grid-template-columns: repeat(2, 1fr);
+		padding: 0 24px 60px;
+		gap: 20px 14px;
+	}
+}
+
+@media ( max-width : 480px) {
+	.sm_bm_header_title {
+		font-size: 30px;
+	}
+	.sm_bm_header {
+		padding: 24px 16px 16px;
+	}
+	.sm_bm_grid {
+		grid-template-columns: repeat(2, 1fr);
+		padding: 0 16px 40px;
+		gap: 14px 10px;
+	}
+}
 </style>
 </head>
 <body>
@@ -277,16 +388,12 @@ a {
 			</p>
 		</div>
 
-		<!-- Clear all button only show if there are bookmarks -->
 
+		<!-- Clear all links to confirm-clear -->
 		<c:if test="${not empty bookmarkList}">
-			<form action="${pageContext.request.contextPath}/Bookmark"
-				method="post" style="display: inline;">
-				<input type="hidden" name="action" value="clearAll" />
-				<button type="submit" class="sm_bm_clear_btn"
-					onclick="return confirm('Are you sure you want to clear all bookmarks?')">
-					Clear All</button>
-			</form>
+			<a
+				href="${pageContext.request.contextPath}/Bookmark?action=confirm-clear"
+				class="sm_bm_clear_btn">Clear All</a>
 		</c:if>
 	</div>
 
@@ -319,23 +426,18 @@ a {
 					<div class="sm_bm_card">
 
 						<div class="sm_bm_card_poster">
-							<a
-								href="${pageContext.request.contextPath}/Media?id=${media.mediaId}">
+							<a href="${pageContext.request.contextPath}/Media?id=${media.mediaId}">
 								<img
 								src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
 								alt="${media.title}" />
 							</a>
-							<form action="${pageContext.request.contextPath}/Bookmark"
-								method="post">
-								<input type="hidden" name="action" value="remove" /> <input
-									type="hidden" name="mediaId" value="${media.mediaId}" />
-								<button class="sm_bm_remove_btn" type="submit"
-									title="Remove bookmark">
-									<img
-										src="${pageContext.request.contextPath}/assets/icon/heart.svg"
-										alt="Remove" />
-								</button>
-							</form>
+							
+							<!-- Remove links to confirm-remove with the media id -->
+							<a href="${pageContext.request.contextPath}/Bookmark?action=confirm-remove&mediaId=${media.mediaId}"
+								class="sm_bm_remove_btn" title="Remove bookmark"> <img
+								src="${pageContext.request.contextPath}/assets/icon/heart.svg"
+								alt="Remove" />
+							</a>
 						</div>
 
 						<div class="sm_bm_card_info">
@@ -353,6 +455,58 @@ a {
 
 	</c:choose>
 
+	<!-- Confirmation popup which is shown or hidden by popupStyle set in Bookmark servlet -->
+	<div class="sm_bm_overlay" style="${popupStyle}">
+
+		<!-- Backdrop: clicking sends action=cancel which hides the popup -->
+		<a href="${pageContext.request.contextPath}/Bookmark?action=cancel"
+			class="sm_bm_backdrop"></a>
+
+		<div class="sm_bm_popup">
+			<img class="sm_bm_popup_icon"
+				src="${pageContext.request.contextPath}/assets/icon/bookmark_icon.svg"
+				alt="" />
+
+			<!-- Clear all popup -->
+			<c:if test="${popupType == 'clear'}">
+				<p class="sm_bm_popup_title">Clear all bookmarks?</p>
+				<p class="sm_bm_popup_sub">This will remove all your saved
+					titles. This cannot be undone.</p>
+				<div class="sm_bm_popup_btns">
+					<!-- No — cancel goes back to normal page -->
+					<a href="${pageContext.request.contextPath}/Bookmark?action=cancel"
+						class="sm_bm_popup_no">No, keep them</a>
+					<!-- Yes — posts clearAll action to doPost -->
+					<form action="${pageContext.request.contextPath}/Bookmark"
+						method="post" style="display: inline;">
+						<input type="hidden" name="action" value="clearAll" />
+						<button type="submit" class="sm_bm_popup_yes">Yes, clear
+							all</button>
+					</form>
+				</div>
+			</c:if>
+
+			<!-- Remove one bookmark popup -->
+			<c:if test="${popupType == 'remove'}">
+				<p class="sm_bm_popup_title">Remove bookmark?</p>
+				<p class="sm_bm_popup_sub">Are you sure you want to remove this
+					title from your bookmarks?</p>
+				<div class="sm_bm_popup_btns">
+					<!-- No — cancel -->
+					<a href="${pageContext.request.contextPath}/Bookmark?action=cancel"
+						class="sm_bm_popup_no">No, keep it</a>
+					<!-- Yes — posts remove with the pending media id -->
+					<form action="${pageContext.request.contextPath}/Bookmark"
+						method="post" style="display: inline;">
+						<input type="hidden" name="action" value="remove" /> <input
+							type="hidden" name="mediaId" value="${pendingMediaId}" />
+						<button type="submit" class="sm_bm_popup_yes">Yes, remove</button>
+					</form>
+				</div>
+			</c:if>
+		</div>
+
+	</div>
 
 	<!-- Footer component -->
 	<%@ include file="/components/footer.jsp"%>

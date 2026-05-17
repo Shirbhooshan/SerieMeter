@@ -40,6 +40,26 @@ public class Bookmark extends HttpServlet {
 		// Puts the list in request so bookmark.jsp can loop through it
 		request.setAttribute("bookmarkList", bookmarkList);
 
+		// Reads action from URL 
+		String action = request.getParameter("action");
+
+		if ("confirm-clear".equals(action)) {
+			// Showing the clear all confirmation popup
+			request.setAttribute("popupStyle", "display:flex");
+			request.setAttribute("popupType", "clear");
+
+		} else if ("confirm-remove".equals(action)) {
+			// Showing the remove confirmation popup for a specific media
+			request.setAttribute("popupStyle", "display:flex");
+			request.setAttribute("popupType", "remove");
+			request.setAttribute("pendingMediaId", request.getParameter("mediaId"));
+
+		} else {
+			// No popup 
+			request.setAttribute("popupStyle", "display:none");
+			request.setAttribute("popupType", "");
+		}
+
 		request.getRequestDispatcher("/WEB-INF/pages/bookmark.jsp").forward(request, response);
 	}
 
