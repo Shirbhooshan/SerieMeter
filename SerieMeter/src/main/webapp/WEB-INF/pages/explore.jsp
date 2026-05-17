@@ -451,41 +451,106 @@ img {
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
+.sm_last_viewed {
+	font-size: 13px;
+	color: var(--gray-600);
+	text-decoration: none;
+	font-weight: 500;
+	align-self: center;
+	transition: color .2s;
+}
+
+.sm_last_viewed:hover {
+	color: var(--orange);
+}
+
+.sm_last_viewed strong {
+	color: var(--text);
+	font-weight: 700;
+}
+
 /* Tablet */
-@media (max-width: 768px) {
+@media ( max-width : 768px) {
+	.sm_hero_wrap {
+		margin: 16px 16px 0;
+	}
+	.sm_hero_slide {
+		height: 180px;
+	}
+	.sm_hero_title {
+		font-size: 24px;
+	}
+	.sm_hero_btn {
+		padding: 6px 14px;
+		font-size: 12px;
+		right: 16px;
+		bottom: 16px;
+	}
 
-    .sm_hero_wrap { margin: 16px 16px 0; }
-    .sm_hero_slide { height: 180px; }
-    .sm_hero_title { font-size: 24px; }
-    .sm_hero_btn { padding: 6px 14px; font-size: 12px; right: 16px; bottom: 16px; }
+	/* Sidebar content */
+	.sm_main_layout {
+		flex-direction: column;
+		padding: 24px 16px 0;
+	}
+	.sm_sidebar {
+		width: 100%;
+	}
+	.sm_sidebar_list {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+	.sm_sidebar_sortby {
+		display: none;
+	}
 
-    /* Sidebar content */
-    .sm_main_layout { flex-direction: column; padding: 24px 16px 0; }
-    .sm_sidebar { width: 100%; }
-    .sm_sidebar_list { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-    .sm_sidebar_sortby { display: none; }
+	/* 2 column grids */
+	.sm_grid_4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.sm_grid_5 {
+		grid-template-columns: repeat(2, 1fr);
+	}
 
-    /* 2 column grids */
-    .sm_grid_4 { grid-template-columns: repeat(2, 1fr); }
-    .sm_grid_5 { grid-template-columns: repeat(2, 1fr); }
-
-    /* CTA banner stacks */
-    .sm_cta_banner { flex-direction: column; margin: 40px 16px 40px; padding: 32px 24px; gap: 20px; }
-    .sm_cta_text h2 { font-size: 22px; }
-
-    .sm_section { padding: 0 16px; }
+	/* CTA banner stacks */
+	.sm_cta_banner {
+		flex-direction: column;
+		margin: 40px 16px 40px;
+		padding: 32px 24px;
+		gap: 20px;
+	}
+	.sm_cta_text h2 {
+		font-size: 22px;
+	}
+	.sm_section {
+		padding: 0 16px;
+	}
 }
 
-@media (max-width: 480px) {
-    .sm_hero_slide { height: 160px; }
-    .sm_hero_title { font-size: 20px; }
-    .sm_hero_wrap { margin: 12px; }
-    .sm_grid_4, .sm_grid_5 { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .sm_card_title { font-size: 11px; }
-    .sm_card_meta { font-size: 10px; }
-    .sm_cta_text h2 { font-size: 20px; }
+@media ( max-width : 480px) {
+	.sm_hero_slide {
+		height: 160px;
+	}
+	.sm_hero_title {
+		font-size: 20px;
+	}
+	.sm_hero_wrap {
+		margin: 12px;
+	}
+	.sm_grid_4, .sm_grid_5 {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+	.sm_card_title {
+		font-size: 11px;
+	}
+	.sm_card_meta {
+		font-size: 10px;
+	}
+	.sm_cta_text h2 {
+		font-size: 20px;
+	}
 }
-
 </style>
 </head>
 
@@ -588,7 +653,16 @@ img {
 					<h2>Trending</h2>
 					<p>Most reviewed</p>
 				</div>
+
+				<!-- Showing the last viewed media if cookie exists -->
+				<c:if test="${not empty lastViewedId}">
+					<a
+						href="${pageContext.request.contextPath}/Media?id=${lastViewedId}"
+						class="sm_last_viewed"> Continue browsing <strong>${lastViewedTitle}</strong>
+					</a>
+				</c:if>
 			</div>
+
 			<div class="sm_section_divider"></div>
 
 

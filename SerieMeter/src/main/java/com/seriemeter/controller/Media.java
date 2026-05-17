@@ -2,6 +2,7 @@ package com.seriemeter.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -62,6 +63,18 @@ public class Media extends HttpServlet {
 						isBookmarked = new com.seriemeter.dao.BookmarkDAO().isBookmarked(user.getUserId(), mediaId);
 					}
 					request.setAttribute("isBookmarked", isBookmarked);
+
+					// Saving last viewed media to cookie so Explore page can show "Continue
+					// browsing"
+					Cookie lastViewed = new Cookie("lastViewedId", String.valueOf(mediaId));
+					Cookie lastViewedTitle = new Cookie("lastViewedTitle",
+							java.net.URLEncoder.encode(media.getTitle(), "UTF-8"));
+					lastViewed.setMaxAge(60 * 60 * 24 * 7); // 7 days
+					lastViewedTitle.setMaxAge(60 * 60 * 24 * 7);
+					lastViewed.setPath("/");
+					lastViewedTitle.setPath("/");
+					response.addCookie(lastViewed);
+					response.addCookie(lastViewedTitle);
 
 					// Forward to the JSP inside WEB-INF for security
 					request.getRequestDispatcher("/WEB-INF/pages/media.jsp").forward(request, response);
