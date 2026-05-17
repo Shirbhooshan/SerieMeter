@@ -72,4 +72,14 @@ public class UserModel {
     public void setUserProfile(String userProfile) {
         this.userProfile = userProfile;
     }
+    
+    private boolean isApproved; // maps to is_approved in DB
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
 }

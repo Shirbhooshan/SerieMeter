@@ -435,6 +435,47 @@
 	color: #555555;
 }
 
+/* --- Approval Status Styles --- */
+
+/* Green "Approved" badge shown for already-approved users */
+.ad-approved-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	background-color: #eaf7ec;
+	color: #2eab4a;
+	font-size: 11px;
+	font-weight: 700;
+	padding: 5px 12px;
+	border-radius: 12px;
+}
+
+/* Approve button shown for pending users — submits a POST form */
+.ad-approve-btn {
+	background-color: #2eab4a;
+	color: #ffffff;
+	border: none;
+	border-radius: 12px;
+	padding: 6px 14px;
+	font-size: 11px;
+	font-weight: 700;
+	font-family: 'Manrope', sans-serif;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.ad-approve-btn:hover {
+	opacity: 0.82;
+	transform: translateY(-1px);
+}
+
+/* Invisible form wrapper so the button sits flush in the table cell */
+.ad-approve-form {
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
 @media ( max-width : 768px) {
 	.ad-body {
 		padding: 0;
@@ -544,7 +585,7 @@
 					</a> <a href="${pageContext.request.contextPath}/Report"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/report.svg"
-						class="ad-nav-icon"> Report & Analytics
+						class="ad-nav-icon"> Report &amp; Analytics
 					</a> <a href="${pageContext.request.contextPath}/Feedback"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
@@ -600,13 +641,15 @@
 							<th>EMAIL ADDRESS</th>
 							<th>TOTAL REVIEW</th>
 							<th>ROLE</th>
+							<%-- New column for approval status --%>
+							<th>STATUS</th>
 						</tr>
 					</thead>
 					<tbody id="userTableBody">
 						<c:choose>
 							<c:when test="${empty users}">
 								<tr>
-									<td colspan="5"
+									<td colspan="6"
 										style="text-align: center; padding: 30px; color: #aaa;">
 										No users found.</td>
 								</tr>
@@ -625,13 +668,34 @@
 										</td>
 										<td>
 											<div class="ad-user-name-info">
-												<span class="ad-username-bold">${u.fullName}</span> <span
-													class="ad-username-gray">@${u.userName}</span>
+												<span class="ad-username-bold">${u.fullName}</span>
+												<span class="ad-username-gray">@${u.userName}</span>
 											</div>
 										</td>
 										<td>${u.email}</td>
 										<td>${reviewCounts[status.index]}</td>
 										<td class="ad-user-role-text">${u.role}</td>
+
+										<%-- Approval column:
+										     If user is already approved, show a green badge.
+										     If pending, show an Approve button that POSTs to the Users servlet. --%>
+										<td>
+											<c:choose>
+												<c:when test="${u.approved}">
+													<span class="ad-approved-badge">&#10003; Approved</span>
+												</c:when>
+												<c:otherwise>
+													<form class="ad-approve-form"
+														action="${pageContext.request.contextPath}/Users"
+														method="post">
+														<input type="hidden" name="action" value="approve">
+														<input type="hidden" name="userId" value="${u.userId}">
+														<button type="submit" class="ad-approve-btn">Approve</button>
+													</form>
+												</c:otherwise>
+											</c:choose>
+										</td>
+
 									</tr>
 								</c:forEach>
 							</c:otherwise>

@@ -54,6 +54,7 @@ public class UserDAO {
 		pst.setString(4, passwordHash);
 		pst.setString(5, "User"); // Setting default role to 'user'
 		pst.setString(6, userProfile);
+		// is_approved defaults to FALSE automatically in the DB — no need to set it here
 
 		// Execute the update
 		pst.executeUpdate();
@@ -82,10 +83,9 @@ public class UserDAO {
 					user.setEmail(rs.getString("email"));
 					user.setUserName(rs.getString("username"));
 					user.setRole(rs.getString("role"));
-
 					user.setPassword(rs.getString("password_hash")); // Important step to setting the hash'ed password
-
 					user.setUserProfile(rs.getString("user_profile"));
+					user.setApproved(rs.getBoolean("is_approved")); // map the approval status
 				}
 			}
 		}
@@ -109,13 +109,14 @@ public class UserDAO {
 				user.setUserName(rs.getString("username"));
 				user.setRole(rs.getString("role"));
 				user.setUserProfile(rs.getString("user_profile"));
+				user.setApproved(rs.getBoolean("is_approved")); // map the approval status
 				users.add(user);
 			}
 		}
 		return users;
 	}
-	
-	// Update user details WITHOUT changing password 
+
+	// Update user details WITHOUT changing password
 	public void updateUserDetails(UserModel user) throws Exception {
 	    String sql = "UPDATE users SET full_name = ?, username = ?, user_profile = ? WHERE user_id = ?";
 
@@ -132,7 +133,7 @@ public class UserDAO {
 	    }
 	}
 
-	// Update user details AND password hash 
+	// Update user details AND password hash
 	public void updateUserWithPassword(UserModel user) throws Exception {
 	    String sql = "UPDATE users SET full_name = ?, username = ?, password_hash = ?, user_profile = ? WHERE user_id = ?";
 
@@ -149,5 +150,20 @@ public class UserDAO {
 	        System.out.println("updateUserWithPassword rows affected: " + rows);
 	    }
 	}
-	
+
+	/**
+	 * Flips is_approved = TRUE for a given user.
+	 * Called by the admin when they approve a pending user from the Users page.
+	 */
+	public void approveUser(int userId) throws Exception {
+		String sql = "UPDATE users SET is_approved = TRUE WHERE user_id = ?";
+
+		try (Connection con = DBconfig.getConnection();
+			 PreparedStatement pst = con.prepareStatement(sql)) {
+
+			pst.setInt(1, userId);
+			pst.executeUpdate();
+		}
+	}
+
 }
