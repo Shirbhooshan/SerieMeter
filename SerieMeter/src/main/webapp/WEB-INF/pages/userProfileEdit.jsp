@@ -377,7 +377,7 @@
               enctype="multipart/form-data"
               class="ep-edit-form">
 
-            <%-- Error message: shown when password is wrong or new passwords don't match --%>
+            <!-- Error message: shown when password is wrong or new passwords don't match -->
             <c:if test="${not empty error}">
                 <p class="ep-msg-error" id="errorMsg"><c:out value="${error}" /></p>
             </c:if>
@@ -389,7 +389,7 @@
 
                     <div class="ep-photo-section">
                         <div class="ep-pic-wrapper">
-                            <%-- Load user's uploaded picture or fall back to default --%>
+                            <!-- Load user's uploaded picture or fall back to default -->
                             <c:choose>
                                 <c:when test="${not empty user.userProfile}">
                                     <img src="${pageContext.request.contextPath}/getimage?name=${user.userProfile}&type=user"
