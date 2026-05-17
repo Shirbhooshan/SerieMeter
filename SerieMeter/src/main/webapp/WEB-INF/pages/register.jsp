@@ -315,8 +315,6 @@ body {
 }
 
 .footer-text {
-	position: absolute;
-	bottom: 30px;
 	font-size: 11px;
 	color: #bbb;
 	letter-spacing: 1.5px;
@@ -458,6 +456,8 @@ body {
 			Go Back
 		</button>
 
+		<br> 
+		
 		<div class="footer-text">©2026 SERIEMETER</div>
 
 	</div>

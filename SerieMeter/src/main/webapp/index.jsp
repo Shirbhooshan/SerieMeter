@@ -63,8 +63,7 @@
 
 html, body {
 	height: 100%;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden;
 }
 
 .page {
@@ -237,7 +236,8 @@ html, body {
 
 			<nav class="footer-links">
 				<a href="${pageContext.request.contextPath}/About">About</a> <a
-					href="#">Contact</a> <a href="#">Privacy</a> <a href="#">Documentation</a>
+					href="${pageContext.request.contextPath}/Contact">Contact</a><a
+					href="https://github.com/Shirbhooshan/SerieMeter">Documentation</a>
 			</nav>
 
 			<div class="footer-copy">

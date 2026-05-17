@@ -217,4 +217,3 @@
 		</c:choose>
 	</div>
 </nav>
-<div class="nav-spacer"></div>
