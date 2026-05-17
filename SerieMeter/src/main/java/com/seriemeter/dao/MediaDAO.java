@@ -257,4 +257,88 @@ public class MediaDAO {
 		return list;
 	}
 
+	// search media by title 
+	// called by AdminEdit when admin types in the search box
+	public List<MediaModel> searchMedia(String query, String sort) {
+		List<MediaModel> list = new ArrayList<>();
+
+		// ORDER BY based on sort param
+		String orderBy;
+		if ("name".equals(sort)) {
+			orderBy = "m.title ASC";
+		} else if ("category".equals(sort)) {
+			orderBy = "m.category_id ASC";
+		} else {
+			orderBy = "m.media_id DESC"; // default — date added
+		}
+
+		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
+				+ "WHERE m.title LIKE ? " + "ORDER BY " + orderBy;
+
+		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+
+			pst.setString(1, "%" + query + "%");
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					MediaModel media = new MediaModel();
+					media.setMediaId(rs.getInt("media_id"));
+					media.setTitle(rs.getString("title"));
+					media.setDirector(rs.getString("director"));
+					media.setReleaseDate(rs.getString("release_date"));
+					media.setTotalTime(rs.getString("total_time"));
+					media.setDescription(rs.getString("description"));
+					media.setMediaProfile(rs.getString("media_profile"));
+					media.setCategoryId(rs.getInt("category_id"));
+					media.setGenreId(rs.getInt("genre_id"));
+					media.setGenreName(rs.getString("genre_name"));
+					list.add(media);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	// Get all media with sort applied
+	// Called by AdminEdit when sort changes but no search query
+	public List<MediaModel> getAllMediaSorted(String sort) {
+		List<MediaModel> list = new ArrayList<>();
+
+		String orderBy;
+		if ("name".equals(sort)) {
+			orderBy = "m.title ASC";
+		} else if ("category".equals(sort)) {
+			orderBy = "m.category_id ASC";
+		} else {
+			orderBy = "m.media_id DESC";
+		}
+
+		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id " + "ORDER BY "
+				+ orderBy;
+
+		try (Connection con = DBconfig.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery()) {
+
+			while (rs.next()) {
+				MediaModel media = new MediaModel();
+				media.setMediaId(rs.getInt("media_id"));
+				media.setTitle(rs.getString("title"));
+				media.setDirector(rs.getString("director"));
+				media.setReleaseDate(rs.getString("release_date"));
+				media.setTotalTime(rs.getString("total_time"));
+				media.setDescription(rs.getString("description"));
+				media.setMediaProfile(rs.getString("media_profile"));
+				media.setCategoryId(rs.getInt("category_id"));
+				media.setGenreId(rs.getInt("genre_id"));
+				media.setGenreName(rs.getString("genre_name"));
+				list.add(media);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

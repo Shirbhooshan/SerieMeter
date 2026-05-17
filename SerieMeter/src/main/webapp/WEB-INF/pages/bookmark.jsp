@@ -170,6 +170,7 @@ a {
 	overflow: hidden;
 	background: var(--gray-200);
 	margin-bottom: 12px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .sm_bm_card_poster img {
@@ -177,6 +178,8 @@ a {
 	height: 100%;
 	object-fit: cover;
 	transition: transform .3s;
+	
+
 }
 
 .sm_bm_card:hover .sm_bm_card_poster img {

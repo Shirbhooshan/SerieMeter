@@ -50,12 +50,35 @@ public class AdminEdit extends HttpServlet {
 				e.printStackTrace();
 				response.sendRedirect(request.getContextPath() + "/Edit");
 			}
-		} else {
+		}
+
+		else {
 			try {
 				MediaDAO mediaDAO = new MediaDAO();
-				List<MediaModel> mediaList = mediaDAO.getAllMedia();
+
+				// Reading search and sort params from URL
+				String query = request.getParameter("query");
+				String sort = request.getParameter("sort");
+				if (sort == null)
+					sort = "date"; // default
+
+				List<MediaModel> mediaList;
+
+				if (query != null && !query.trim().isEmpty()) {
+					// Search query presents filter by title
+					mediaList = mediaDAO.searchMedia(query, sort);
+				} else {
+					// No query loads all with sort applied
+					mediaList = mediaDAO.getAllMediaSorted(sort);
+				}
+
+				// Passing back to JSP so inputs stay filled after submit
 				request.setAttribute("mediaList", mediaList);
+				request.setAttribute("searchQuery", query);
+				request.setAttribute("currentSort", sort);
+
 				request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				request.getRequestDispatcher("/WEB-INF/pages/adminEdit.jsp").forward(request, response);
