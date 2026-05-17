@@ -574,7 +574,7 @@ body {
 				</nav>
 			</div>
 			<div class="ad-logout-container">
-				<%-- Logout button links to the servlet --%>
+				<!--  Logout button links to the servlet -->
 				<a href="${pageContext.request.contextPath}/Dashboard?action=logoutConfirm"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
@@ -607,9 +607,8 @@ body {
 				</p>
 			</c:if>
 
-			<%--
-			    Search and sort handled by the servlet (GET request).
-			--%>
+			<!-- Search and sort handled by the servlet (GET request). -->
+			    
 			<form method="GET"
 			      action="${pageContext.request.contextPath}/Dashboard"
 			      class="ad-controls"
@@ -696,34 +695,34 @@ body {
 		</main>
 	</div>
 
-	<%-- Logout confirmation modal --%>
+	<!-- Logout confirmation modal -->
 	<div id="logoutModal" class="logout-modal-overlay"
 	     style="${showLogoutModal ? 'display:flex' : 'display:none'}">
 		<div class="logout-modal">
 			<h3 class="logout-modal-title">Logout</h3>
 			<p class="logout-modal-text">Are you sure you want to log out?</p>
 			<div class="logout-modal-actions">
-				<%-- No = go back to the dashboard normally --%>
+				<!-- No = go back to the dashboard normally -->
 				<a href="${pageContext.request.contextPath}/Dashboard"
 				   class="logout-action-btn btn-no">No</a>
-				<%-- Yes = proceed to the Logout servlet which clears the session --%>
+				<!-- Yes = proceed to the Logout servlet which clears the session -->
 				<a href="${pageContext.request.contextPath}/Logout"
 				   class="logout-action-btn btn-yes">Yes</a>
 			</div>
 		</div>
 	</div>
 
-	<%-- Delete confirmation modal --%>
+	<!-- Delete confirmation modal -->
 	<div id="deleteModal" class="logout-modal-overlay"
 	     style="${showDeleteModal ? 'display:flex' : 'display:none'}">
 		<div class="logout-modal">
 			<h3 class="logout-modal-title">Delete Media</h3>
 			<p class="logout-modal-text">Are you sure you want to delete this media? This action cannot be undone.</p>
 			<div class="logout-modal-actions">
-				<%-- No = go back to the dashboard normally --%>
+				<!-- No = go back to the dashboard normally -->
 				<a href="${pageContext.request.contextPath}/Dashboard"
 				   class="logout-action-btn btn-no">No</a>
-				<%-- Yes = POST to the servlet with action=delete and the pending media ID --%>
+				<!-- Yes = POST to the servlet with action=delete and the pending media ID --> 
 				<form method="post"
 				      action="${pageContext.request.contextPath}/Dashboard"
 				      style="flex: 1; margin: 0; padding: 0;">
