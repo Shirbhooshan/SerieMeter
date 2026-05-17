@@ -64,20 +64,20 @@ public class Media extends HttpServlet {
 					}
 					request.setAttribute("isBookmarked", isBookmarked);
 
-					// Saving last viewed media to cookie so Explore page can show "Continue
-					// browsing"
+					// Save last viewed media to cookie so Explore page can show "Continue browsing"
 					Cookie lastViewed = new Cookie("lastViewedId", String.valueOf(mediaId));
-					Cookie lastViewedTitle = new Cookie("lastViewedTitle",
-							java.net.URLEncoder.encode(media.getTitle(), "UTF-8"));
+					Cookie lastViewedTitle = new Cookie("lastViewedTitle", 
+					    java.net.URLEncoder.encode(media.getTitle(), "UTF-8"));
 					lastViewed.setMaxAge(60 * 60 * 24 * 7); // 7 days
 					lastViewedTitle.setMaxAge(60 * 60 * 24 * 7);
 					lastViewed.setPath("/");
 					lastViewedTitle.setPath("/");
 					response.addCookie(lastViewed);
 					response.addCookie(lastViewedTitle);
-
+					
 					// Forward to the JSP inside WEB-INF for security
 					request.getRequestDispatcher("/WEB-INF/pages/media.jsp").forward(request, response);
+					
 				} else {
 					// Redirect to Explore if the media ID is invalid
 					response.sendRedirect(request.getContextPath() + "/Explore");
