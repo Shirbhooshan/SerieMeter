@@ -547,7 +547,7 @@ body {
 				</div>
 				<nav class="ad-nav-menu">
 										<a href="${pageContext.request.contextPath}/Dashboard"
-						class="ad-nav-item"> <img
+						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
 					</a> <a href="${pageContext.request.contextPath}/AdminContent"
@@ -555,7 +555,7 @@ body {
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
 						class="ad-nav-icon"> Content Management
 					</a> <a href="${pageContext.request.contextPath}/Edit"
-						class="ad-nav-item active"> <img
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
 					</a> <a href="${pageContext.request.contextPath}/Report"
