@@ -15,12 +15,12 @@ public class LoginService {
 	 */
 	public String authenticate(String username, String password) {
 
-		// 1. Check if provided username is empty or null
+		// Check if provided username is empty or null
 		if (username == null || username.trim().isEmpty()) {
 			return "Username is required";
 		}
 
-		// 2. Check if provided password is empty or null
+		// Check if provided password is empty or null
 		if (password == null || password.trim().isEmpty()) {
 			return "Password is required";
 		}

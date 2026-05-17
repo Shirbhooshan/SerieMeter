@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -329,7 +330,7 @@ a {
 								<div class="sm_bm_card_title">${media.title}</div>
 								<div class="sm_bm_card_genre">${media.genreName}</div>
 							</div>
-							<div class="sm_bm_card_year">${media.releaseDate}</div>
+							<div class="sm_bm_card_year">${fn:substring(media.releaseDate, 0, 4)}</div>
 						</div>
 
 					</div>

@@ -343,9 +343,10 @@
 		<aside class="ad-sidebar">
 			<div>
 				<div class="ad-logo-container">
-					<img
+					<a href="${pageContext.request.contextPath}/Explore"> <img
 						src="${pageContext.request.contextPath}/assets/images/LogoBlack.jpg"
 						alt="Logo">
+					</a>
 				</div>
 				<nav class="ad-nav-menu">
 					<a href="${pageContext.request.contextPath}/Dashboard"
@@ -360,6 +361,14 @@
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
+					</a> <a href="${pageContext.request.contextPath}/Report"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/report.svg"
+						class="ad-nav-icon"> Report & Analytics
+					</a> <a href="${pageContext.request.contextPath}/Feedback"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
+						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
@@ -367,6 +376,7 @@
 					</a>
 				</nav>
 			</div>
+
 			<div class="ad-logout-container">
 				<a href="${pageContext.request.contextPath}/Logout"
 					class="ad-logout-btn"> <img

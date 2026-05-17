@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -155,6 +155,79 @@ body {
 	color: #777;
 	font-style: italic;
 }
+
+/* Tablets / Laptop Screens (Under 1100px) */
+@media ( max-width : 1100px) {
+	.hero h1 {
+		font-size: 76px;
+	}
+	.story-left {
+		/* Shrink layout lane for mid-sized displays */
+		flex: 0 0 300px;
+	}
+	.story-right {
+		margin-right: 0;
+	}
+	.team-grid {
+		/* Drop team grid down to 2 columns */
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+	}
+}
+
+/* Mobile Screens (Under 768px) */
+@media ( max-width : 768px) {
+	.page-content {
+		padding: 40px 20px;
+	}
+	.hero {
+		margin-bottom: 60px;
+	}
+	.hero h1 {
+		font-size: 48px;
+		letter-spacing: -1px;
+	}
+	.hero p {
+		font-size: 16px;
+	}
+
+	/* Convert horizontal row layout to vertical stacking */
+	.story-section {
+		flex-direction: column;
+		gap: 0px;
+		margin-bottom: 60px;
+	}
+	.story-left {
+		flex: none;
+		width: 100%;
+	}
+	.orange-line {
+		margin-bottom: 24px;
+	}
+	.story-header {
+		font-size: 26px;
+		margin-bottom: 15px;
+	}
+	.story-paras {
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+
+/* Small Smart Phones (Under 480px) */
+@media ( max-width : 480px) {
+	.hero h1 {
+		font-size: 38px;
+	}
+	.team-grid {
+		/* Drop cards to 1 vertical list */
+		grid-template-columns: 1fr;
+		gap: 35px;
+	}
+	.name {
+		font-size: 22px;
+	}
+}
 </style>
 </head>
 <body>
@@ -204,7 +277,8 @@ body {
 			<div class="team-grid">
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/aboutUs/Shirbhooshan.png" alt="Shirbhooshan">
+						<img src="assets/images/aboutUs/Shirbhooshan.png"
+							alt="Shirbhooshan">
 					</div>
 					<div class="name">Shirbhooshan</div>
 					<div class="role">Team Lead</div>
@@ -213,7 +287,7 @@ body {
 
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/safiyah.jpg" alt="Safiyah">
+						<img src="assets/images/aboutUs/Safiyah.png" alt="Safiyah">
 					</div>
 					<div class="name">Safiyah Malik</div>
 					<div class="role">Role</div>
@@ -222,7 +296,7 @@ body {
 
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/shuvam.jpg" alt="Shuvam">
+						<img src="assets/images/aboutUs/Shuvam.jpeg" alt="Shuvam">
 					</div>
 					<div class="name">Shuvam Karki</div>
 					<div class="role">Role</div>
@@ -231,7 +305,7 @@ body {
 
 				<div class="team-box">
 					<div class="image-placeholder">
-						<img src="assets/images/team/avin.jpg" alt="Avin">
+						<img src="assets/images/aboutUs/Avin.jpeg" alt="Avin">
 					</div>
 					<div class="name">Avin Subedi</div>
 					<div class="role">Role</div>

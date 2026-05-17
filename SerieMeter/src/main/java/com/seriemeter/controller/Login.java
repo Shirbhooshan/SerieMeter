@@ -49,6 +49,19 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
+		if (username == null || username.trim().isEmpty()) {
+			request.setAttribute("error", "Username or email is required.");
+			request.setAttribute("typedUser", username);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+			return;
+		}
+		if (password == null || password.trim().isEmpty()) {
+			request.setAttribute("error", "Password is required.");
+			request.setAttribute("typedUser", username);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+			return;
+		}
+
 		LoginService loginService = new LoginService();
 		String status = loginService.authenticate(username, password);
 
@@ -57,23 +70,27 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			try {
-				// Fetch user object
 				UserModel user = userDAO.getUserByUsername(username);
-
-				// Store in session
 				session.setAttribute("user", user);
 
-				// Remember Me cookie
 				String rememberMe = request.getParameter("rememberMe");
 				if ("on".equals(rememberMe)) {
 					Cookie cookie = new Cookie("rememberMe", username);
-					cookie.setMaxAge(60 * 60 * 24 * 30); // 30 days
+					cookie.setMaxAge(60 * 60 * 24 * 30);
 					cookie.setPath("/");
-					cookie.setHttpOnly(true); // not accessible via JS
+					cookie.setHttpOnly(true);
 					response.addCookie(cookie);
+					session.setMaxInactiveInterval(60 * 60 * 24 * 30);
+				} else {
+					// Clear any old rememberMe cookie
+					Cookie clearCookie = new Cookie("rememberMe", "");
+					clearCookie.setMaxAge(0);
+					clearCookie.setPath("/");
+					response.addCookie(clearCookie);
+					// Session expires after 30 min inactivity
+					session.setMaxInactiveInterval(30 * 60);
 				}
 
-				// Role-based Redirection
 				String contextPath = request.getContextPath();
 				if (user != null && "Admin".equalsIgnoreCase(user.getRole())) {
 					response.sendRedirect(contextPath + "/Dashboard");
@@ -81,16 +98,36 @@ public class Login extends HttpServlet {
 					response.sendRedirect(contextPath + "/Explore");
 				}
 				return;
+
 			} catch (Exception e) {
 				e.printStackTrace();
+				request.setAttribute("error", "Something went wrong. Please try again.");
+				request.setAttribute("typedUser", username);
+				request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 			}
-			response.sendRedirect(request.getContextPath() + "/Explore"); // sendRedirect changes URL, client- >
-																			// server - > (3 way communication)
+
 		} else {
-			request.setAttribute("error", status);
-			request.setAttribute("typedUse", username);
-			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response); // (2 way
-																									// communication)
+			// Authentication failure
+			String errorMsg;
+			switch (status) {
+			case "Username is required":
+			case "Password is required":
+				errorMsg = status;
+				break;
+			case "User doesn't exists":
+				errorMsg = "No account found with that username or email.";
+				break;
+			case "Password is incorrect":
+				errorMsg = "Incorrect password. Please try again.";
+				break;
+			default:
+				errorMsg = "Login failed. Please try again.";
+			}
+
+			// Re-populate the username field so the user doesn't have to retype it
+			request.setAttribute("error", errorMsg);
+			request.setAttribute("typedUser", username);
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 		}
 	}
 }

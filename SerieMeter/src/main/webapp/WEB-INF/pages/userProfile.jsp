@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +23,12 @@
 	font-family: 'Manrope', sans-serif;
 }
 
+/* Prevent horizontal overflow on all screen sizes */
+html, body {
+	overflow-x: hidden;
+	max-width: 100%;
+}
+
 body {
 	font-family: 'Manrope', sans-serif;
 	background-color: #F3F3F3;
@@ -41,9 +47,11 @@ body {
 /* Top banner with background image */
 .up-top-white-bg {
 	width: 100%;
+	max-width: 100%;
 	background-image: url('assets/images/rectangle.png');
 	background-size: cover;
 	background-position: center;
+	overflow: hidden;
 }
 
 /* Profile summary row: avatar+info on the left, stats on the right */
@@ -121,24 +129,32 @@ body {
 	background-color: #f0f0f0;
 }
 
-/* Dropdown popup — hidden until .up-popup-active is added via JS */
+/* Dropdown popup — visibility set by inline style from the servlet (popupStyle attribute) */
 .up-popup-menu {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: calc(100% + 8px);
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    min-width: 160px;
-    z-index: 999;
-    overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: calc(100% + 8px);
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	min-width: 160px;
+	z-index: 999;
+	overflow: hidden;
 }
 
-/* JS adds this class to make the popup visible */
-.up-popup-menu.up-popup-active {
-	display: block;
+/* Invisible full-screen backdrop — clicking it closes the popup via a server GET */
+.up-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 998;
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: default;
+	width: 100%;
+	height: 100%;
 }
 
 /* Each row inside the popup (Edit Profile, Logout, etc.) */
@@ -167,10 +183,10 @@ body {
 
 /* Icons inside the popup rows */
 .up-popup-item img {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    object-fit: contain;
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	object-fit: contain;
 }
 
 /* Stats block on the right side of the profile summary */
@@ -284,209 +300,206 @@ body {
 	text-decoration: underline;
 }
 
-/* ── Bookmark poster grid ───────────────────────────────────────────────── */
-
+/* ── Bookmark poster grid  */
 .up-bookmarks-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 18px;
+	align-items: flex-start;
 }
 
 /* Each bookmark card: poster image + info below */
 .up-bookmark-card {
-    position: relative;
-    width: 170px;
-    flex-shrink: 0;
-    cursor: pointer;
+	position: relative;
+	width: 170px;
+	flex-shrink: 0;
+	cursor: pointer;
 }
 
 /* Poster image fills the card width with a fixed height */
 .up-bookmark-poster {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
-    background-color: #e0e0e0;
+	width: 100%;
+	height: 240px;
+	object-fit: cover;
+	border-radius: 10px;
+	display: block;
+	background-color: #e0e0e0;
 }
 
 /* Red heart bookmark icon in the top-right corner of the poster */
 .up-bookmark-heart {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 32px;
+	height: 32px;
+	background-color: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 .up-bookmark-heart img {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-    display: block;
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+	display: block;
 }
 
 /* Info row below the poster */
 .up-bookmark-info {
-    margin-top: 8px;
+	margin-top: 8px;
 }
 
 .up-bookmark-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a1a1a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	font-size: 14px;
+	font-weight: 700;
+	color: #1a1a1a;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .up-bookmark-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 2px;
 }
 
 .up-bookmark-genre {
-    font-size: 11px;
-    font-weight: 600;
-    color: #8D8D8D;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+	font-size: 11px;
+	font-weight: 600;
+	color: #8D8D8D;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 }
 
 .up-bookmark-year {
-    font-size: 12px;
-    color: #8D8D8D;
+	font-size: 12px;
+	color: #8D8D8D;
 }
 
 /* "+" add-more card */
 .up-bookmark-add {
-    width: 170px;
-    height: 240px;
-    border-radius: 10px;
-    border: 2px dashed #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-    transition: border-color 0.2s;
+	width: 170px;
+	height: 240px;
+	border-radius: 10px;
+	border: 2px dashed #e0e0e0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	text-decoration: none;
+	transition: border-color 0.2s;
 }
 
 .up-bookmark-add:hover {
-    border-color: #43A53A;
+	border-color: #43A53A;
 }
 
 .up-bookmark-add span {
-    font-size: 28px;
-    color: #ccc;
-    line-height: 1;
+	font-size: 28px;
+	color: #ccc;
+	line-height: 1;
 }
 
-/* ── Review items ──────────────────────────────────────────────────────── */
-
+/* Review items  */
 .up-review-item {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 14px;
-    background-color: #fafafa;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 14px;
+	background-color: #fafafa;
 }
 
 /* Left column: media title + date */
 .up-review-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 
 .up-review-media-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: #000000; /* Updated to black */
-    line-height: 1.25;
-    margin-bottom: 8px;
+	font-size: 26px;
+	font-weight: 700;
+	color: #000000;
+	line-height: 1.25;
+	margin-bottom: 8px;
 }
 
 .up-review-date {
-    font-size: 12px;
-    color: #000000; /* Updated to black */
-    margin-top: auto;
+	font-size: 12px;
+	color: #000000;
+	margin-top: auto;
 }
 
 /* Right column: stars + review text */
 .up-review-right {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 /* Star icons row */
 .up-review-stars {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 10px;
-    align-items: center;
-    justify-content: flex-end; /* Right aligned stars */
+	display: flex;
+	gap: 4px;
+	margin-bottom: 10px;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .up-star {
-    width: 20px;
-    height: 20px;
+	width: 20px;
+	height: 20px;
 }
-
 
 /* Review text */
 .up-review-text {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
-    text-align: right; /* Right aligned text */
+	font-size: 14px;
+	color: #333;
+	line-height: 1.6;
+	text-align: right;
 }
 
 /* Pagination row below reviews */
 .up-review-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding-top: 10px;
-    font-size: 13px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding-top: 10px;
+	font-size: 13px;
 }
 
 .up-page-nav {
-    color: #888;
-    text-decoration: none;
+	color: #888;
+	text-decoration: none;
 }
 
 .up-page-num {
-    color: #888;
-    text-decoration: none;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
+	color: #888;
+	text-decoration: none;
+	width: 26px;
+	height: 26px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
 }
 
 .up-page-num.up-page-active {
-    background-color: #f0f0f0;
-    color: #1a1a1a;
-    font-weight: 700;
+	background-color: #f0f0f0;
+	color: #1a1a1a;
+	font-weight: 700;
 }
 
-/* Footer section*/
+/* Footer section */
 .up-footer {
 	text-align: center;
 	margin-top: 40px;
@@ -517,6 +530,170 @@ body {
 .up-explore-btn:hover {
 	background-color: #006800;
 }
+
+/* Media Queries */
+
+/* Tablet / half-screen (~768px) */
+@media (max-width: 768px) {
+
+	.up-container {
+		padding: 0 14px;
+		/* Prevent any child from bleeding outside */
+		overflow: hidden;
+	}
+
+	.up-top-white-bg {
+		overflow: hidden;
+	}
+
+	/* Stack avatar+info above stats */
+	.up-profile-summary {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+		padding: 20px 16px;
+	}
+
+	/* Shrink avatar */
+	.up-avatar {
+		width: 80px;
+		height: 80px;
+	}
+
+	.up-user-name {
+		font-size: 18px;
+	}
+
+	.up-user-email {
+		font-size: 12px;
+	}
+
+	/* Stats move below profile info, left-aligned */
+	.up-stats {
+		gap: 24px;
+		text-align: left;
+		width: 100%;
+	}
+
+	.up-stat-number {
+		font-size: 34px;
+	}
+
+	.up-stat-label {
+		font-size: 10px;
+	}
+
+	/* Card padding tighter */
+	.up-card {
+		padding: 16px;
+	}
+
+	/* Card header wraps on small screens */
+	.up-card-header {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.up-card-header h3 {
+		font-size: 15px;
+	}
+
+	.up-sort-btn {
+		padding: 6px 14px;
+		font-size: 11px;
+	}
+
+	/* Bookmark cards: 2 per row on tablet */
+	.up-bookmark-card,
+	.up-bookmark-add {
+		width: calc(50% - 10px);
+	}
+
+	.up-bookmark-poster {
+		height: 200px;
+	}
+
+	/* Reviews: single column */
+	.up-review-item {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.up-review-media-title {
+		font-size: 20px;
+	}
+
+	.up-review-stars {
+		justify-content: flex-start;
+	}
+
+	.up-review-text {
+		text-align: left;
+	}
+
+	/* Footer: match desktop bottom padding */
+	.up-footer {
+		margin-top: 40px;
+		padding-bottom: 100px;
+	}
+}
+
+/* Small mobile (~480px) */
+@media (max-width: 480px) {
+
+	.up-profile-header {
+		gap: 12px;
+	}
+
+	.up-avatar {
+		width: 64px;
+		height: 64px;
+	}
+
+	.up-user-name {
+		font-size: 15px;
+	}
+
+	.up-stat-number {
+		font-size: 28px;
+	}
+
+	/* Bookmark cards: 2 per row, smaller */
+	.up-bookmark-card,
+	.up-bookmark-add {
+		width: calc(50% - 9px);
+	}
+
+	.up-bookmark-poster {
+		height: 160px;
+	}
+
+	.up-bookmark-title {
+		font-size: 12px;
+	}
+
+	.up-discover-text {
+		font-size: 15px;
+	}
+
+	.up-explore-btn {
+		padding: 10px 28px;
+		font-size: 13px;
+	}
+
+	/* Popup opens downward on very small screens */
+	.up-popup-menu {
+		left: auto;
+		right: 0;
+		top: calc(100% + 6px);
+	}
+
+	/* Footer: match desktop bottom padding */
+	.up-footer {
+		margin-top: 40px;
+		padding-bottom: 100px;
+	}
+}
 </style>
 
 <body>
@@ -532,50 +709,87 @@ body {
 
 					<c:choose>
 						<c:when test="${not empty sessionUser.userProfile}">
-							<img src="${pageContext.request.contextPath}/getimage?name=${sessionUser.userProfile}&type=user"
+							<img
+								src="${pageContext.request.contextPath}/getimage?name=${sessionUser.userProfile}&type=user"
 								alt="User Avatar" class="up-avatar">
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/assets/images/userProfile.jpg"
+							<img
+								src="${pageContext.request.contextPath}/assets/images/userProfile.jpg"
 								alt="User Avatar" class="up-avatar">
 						</c:otherwise>
 					</c:choose>
 
 					<div class="up-user-details">
 
-						<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+						<div
+							style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
 
 							<%-- Display the logged-in user's full name prefixed with @ --%>
 							<h2 class="up-user-name">
-								@<c:out value="${sessionUser.fullName}" />
+								@
+								<c:out value="${sessionUser.fullName}" />
 							</h2>
 
-							<div class="up-menu-wrapper">
+							<%-- Three-dot button submits a form to the server; the servlet
+						     sets popupStyle to display:block or display:none --%>
+						<div class="up-menu-wrapper">
 
-								<button class="up-three-dot-btn" id="upMenuToggle"
-									aria-label="More options" aria-expanded="false">&#8943;</button>
+							<form method="get"
+								action="${pageContext.request.contextPath}/User"
+								style="display:inline;">
+								<button type="submit" name="action" value="open-menu"
+									class="up-three-dot-btn"
+									aria-label="More options">&#8943;</button>
+							</form>
 
-								<div class="up-popup-menu" id="upPopupMenu" role="menu">
+							<%-- Popup visibility is driven entirely by ${popupStyle} set
+							     in UserProfile.doGet() — no JavaScript needed --%>
 
-									<a href="${pageContext.request.contextPath}/UserProfileEdit" class="up-popup-item" role="menuitem">
-										<img alt="Edit" src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
-										Edit Profile
-									</a>
+							<%-- Backdrop: only rendered when popup is open.
+							     Clicking anywhere outside closes the popup via server GET. --%>
+							<c:if test="${param.action == 'open-menu'}">
+								<form method="get"
+									action="${pageContext.request.contextPath}/User">
+									<button type="submit" name="action" value="close"
+										class="up-backdrop" aria-label="Close menu"></button>
+								</form>
+							</c:if>
 
-									<a href="${pageContext.request.contextPath}/Logout"
-										class="up-popup-item up-logout-item" role="menuitem">
-										<img alt="Logout" src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
-										Logout
-									</a>
+							<div class="up-popup-menu" id="upPopupMenu"
+								role="menu" style="${popupStyle}">
 
-								</div>
+								<c:choose>
+									<c:when test="${param.action == 'open-menu'}">
+										<%-- Edit Profile link --%>
+										<a href="${pageContext.request.contextPath}/UserEdit"
+											class="up-popup-item" role="menuitem">
+											<img alt="Edit"
+												src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+											Edit Profile
+										</a>
+										<%-- Logout link --%>
+										<a href="${pageContext.request.contextPath}/Logout"
+											class="up-popup-item up-logout-item" role="menuitem">
+											<img alt="Logout"
+												src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+											Logout
+										</a>
+									</c:when>
+									<c:otherwise>
+										<%-- Popup is hidden; no items rendered --%>
+									</c:otherwise>
+								</c:choose>
 
 							</div>
+
+						</div>
 						</div>
 
 						<p class="up-user-email">
 							<c:out value="${sessionUser.email}" />
-							<img src="${pageContext.request.contextPath}/assets/icon/copy.svg"
+							<img
+								src="${pageContext.request.contextPath}/assets/icon/copy.svg"
 								alt="Copy email" class="up-copy-icon">
 						</p>
 
@@ -585,12 +799,12 @@ body {
 
 				<div class="up-stats">
 					<div class="up-stat-item">
-						<span class="up-stat-number">${bookmarkCount}</span>
-						<span class="up-stat-label">BOOKMARKS</span>
+						<span class="up-stat-number">${bookmarkCount}</span> <span
+							class="up-stat-label">BOOKMARKS</span>
 					</div>
 					<div class="up-stat-item">
-						<span class="up-stat-number">${reviewCount}</span>
-						<span class="up-stat-label">REVIEWS</span>
+						<span class="up-stat-number">${reviewCount}</span> <span
+							class="up-stat-label">REVIEWS</span>
 					</div>
 				</div>
 
@@ -607,9 +821,11 @@ body {
 					<h3>Bookmarks</h3>
 					<%-- Sort buttons: highlight whichever order is currently active --%>
 					<div class="up-sort-options">
-						<a href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
+						<a
+							href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
 							class="up-sort-btn ${bookmarkSort == 'oldest' ? 'up-active' : ''}">Oldest</a>
-						<a href="${pageContext.request.contextPath}/User?bookmarkSort=newest&reviewSort=${reviewSort}"
+						<a
+							href="${pageContext.request.contextPath}/User?bookmarkSort=newest&reviewSort=${reviewSort}"
 							class="up-sort-btn ${bookmarkSort == 'newest' ? 'up-active' : ''}">Newest</a>
 					</div>
 				</div>
@@ -618,7 +834,8 @@ body {
 					<c:when test="${empty userBookmarks}">
 						<div class="up-card-body">
 							<p class="up-empty-message">
-								<a href="${pageContext.request.contextPath}/Explore">Nothing bookmarked yet!</a>
+								<a href="${pageContext.request.contextPath}/Explore">Nothing
+									bookmarked yet!</a>
 							</p>
 						</div>
 					</c:when>
@@ -643,7 +860,8 @@ body {
 									</c:choose>
 
 									<div class="up-bookmark-heart">
-										<img alt="heart" src="${pageContext.request.contextPath}/assets/icon/heart.svg">
+										<img alt="heart"
+											src="${pageContext.request.contextPath}/assets/icon/heart.svg">
 									</div>
 
 									<div class="up-bookmark-info">
@@ -651,12 +869,12 @@ body {
 											<c:out value="${media.title}" />
 										</div>
 										<div class="up-bookmark-meta">
-											<span class="up-bookmark-genre">
-												<c:out value="${media.genreName}" />
+											<span class="up-bookmark-genre"> <c:out
+													value="${media.genreName}" />
 											</span>
 											<%-- Extract 4-digit year from release_date string --%>
-											<span class="up-bookmark-year">
-												<c:if test="${not empty media.releaseDate}">
+											<span class="up-bookmark-year"> <c:if
+													test="${not empty media.releaseDate}">
 													<c:out value="${fn:substring(media.releaseDate, 0, 4)}" />
 												</c:if>
 											</span>
@@ -667,8 +885,7 @@ body {
 							</c:forEach>
 
 							<a href="${pageContext.request.contextPath}/Explore"
-								class="up-bookmark-add" title="Discover more">
-								<span>+</span>
+								class="up-bookmark-add" title="Discover more"> <span>+</span>
 							</a>
 						</div>
 					</c:otherwise>
@@ -680,9 +897,11 @@ body {
 					<h3>Reviews</h3>
 					<%-- Sort buttons: highlight whichever order is currently active --%>
 					<div class="up-sort-options">
-						<a href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
+						<a
+							href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
 							class="up-sort-btn ${reviewSort == 'oldest' ? 'up-active' : ''}">Oldest</a>
-						<a href="${pageContext.request.contextPath}/User?reviewSort=newest&bookmarkSort=${bookmarkSort}"
+						<a
+							href="${pageContext.request.contextPath}/User?reviewSort=newest&bookmarkSort=${bookmarkSort}"
 							class="up-sort-btn ${reviewSort == 'newest' ? 'up-active' : ''}">Newest</a>
 					</div>
 				</div>
@@ -691,7 +910,8 @@ body {
 					<c:when test="${empty userReviews}">
 						<div class="up-card-body">
 							<p class="up-empty-message">
-								<a href="${pageContext.request.contextPath}/Explore">Nothing reviewed yet!</a>
+								<a href="${pageContext.request.contextPath}/Explore">Nothing
+									reviewed yet!</a>
 							</p>
 						</div>
 					</c:when>
@@ -701,13 +921,15 @@ body {
 							<div class="up-review-item">
 
 								<div class="up-review-left">
-									<span class="up-review-media-title">
-										<c:out value="${review.mediaTitle}" />
+									<span class="up-review-media-title"> <c:out
+											value="${review.mediaTitle}" />
 									</span>
 
 									<p class="up-review-date">
-										<c:set var="diffMs"   value="${now.time - review.createdAt.time}" />
-										<c:set var="diffDays" value="${diffMs / (1000 * 60 * 60 * 24)}" />
+										<c:set var="diffMs"
+											value="${now.time - review.createdAt.time}" />
+										<c:set var="diffDays"
+											value="${diffMs / (1000 * 60 * 60 * 24)}" />
 										<c:choose>
 											<c:when test="${diffDays < 1}">Today</c:when>
 											<c:when test="${diffDays < 2}">Yesterday</c:when>
@@ -725,11 +947,13 @@ body {
 										<c:forEach begin="1" end="5" var="i">
 											<c:choose>
 												<c:when test="${i <= fullStars}">
-													<img src="${pageContext.request.contextPath}/assets/icon/star-userp.svg"
+													<img
+														src="${pageContext.request.contextPath}/assets/icon/star-userp.svg"
 														alt="filled star" class="up-star filled">
 												</c:when>
 												<c:otherwise>
-													<img src="${pageContext.request.contextPath}/assets/icon/fadedstar-userp.svg"
+													<img
+														src="${pageContext.request.contextPath}/assets/icon/fadedstar-userp.svg"
 														alt="empty star" class="up-star empty">
 												</c:otherwise>
 											</c:choose>
@@ -746,9 +970,9 @@ body {
 						</c:forEach>
 
 						<div class="up-review-pagination">
-							<a href="#" class="up-page-nav">&lt;</a>
-							<a href="#" class="up-page-num up-page-active">1</a>
-							<a href="#" class="up-page-nav">&gt;</a>
+							<a href="#" class="up-page-nav">&lt;</a> <a href="#"
+								class="up-page-num up-page-active">1</a> <a href="#"
+								class="up-page-nav">&gt;</a>
 						</div>
 
 					</c:otherwise>
@@ -764,37 +988,13 @@ body {
 		</p>
 		<button class="up-explore-btn"
 			onclick="location.href='${pageContext.request.contextPath}/Explore'">
-			Explore now
-		</button>
+			Explore now</button>
 	</footer>
 
 	<%@ include file="/components/footer.jsp"%>
 
 	<script>
-		// ── Three-dot popup menu logic ─────────────────────────────────────────
-
-		const menuToggle = document.getElementById('upMenuToggle');
-		const popupMenu  = document.getElementById('upPopupMenu');
-
-		// Toggle the popup open or closed when the button is clicked
-		menuToggle.addEventListener('click', function (event) {
-			event.stopPropagation();
-			const isOpen = popupMenu.classList.toggle('up-popup-active');
-			menuToggle.setAttribute('aria-expanded', isOpen);
-		});
-
-		// Close the popup when the user clicks anywhere else on the page
-		document.addEventListener('click', function () {
-			popupMenu.classList.remove('up-popup-active');
-			menuToggle.setAttribute('aria-expanded', 'false');
-		});
-
-		// Clicking inside the popup should not close it
-		popupMenu.addEventListener('click', function (event) {
-			event.stopPropagation();
-		});
-
-		// ── Copy-email-to-clipboard logic ──────────────────────────────────────
+		// ── Copy-email-to-clipboard logic
 
 		const copyIcon = document.querySelector('.up-copy-icon');
 

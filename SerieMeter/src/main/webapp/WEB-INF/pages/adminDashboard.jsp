@@ -357,7 +357,6 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.7);
-	display: none;
 	justify-content: center;
 	align-items: center;
 	z-index: 10000;
@@ -400,6 +399,7 @@ body {
 	font-size: 14px;
 	text-decoration: none;
 	transition: background 0.2s;
+	text-align: center;
 }
 
 .btn-no {
@@ -532,7 +532,6 @@ body {
         padding: 6px 10px;
     }
 }
-
 </style>
 </head>
 <body>
@@ -547,8 +546,8 @@ body {
 						alt="Logo">
 				</div>
 				<nav class="ad-nav-menu">
-					<a href="${pageContext.request.contextPath}/Dashboard"
-						class="ad-nav-item active"> <img
+										<a href="${pageContext.request.contextPath}/Dashboard"
+						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
 					</a> <a href="${pageContext.request.contextPath}/AdminContent"
@@ -556,9 +555,17 @@ body {
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
 						class="ad-nav-icon"> Content Management
 					</a> <a href="${pageContext.request.contextPath}/Edit"
-						class="ad-nav-item"> <img
+						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
+					</a> <a href="${pageContext.request.contextPath}/Report"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/report.svg"
+						class="ad-nav-icon"> Report & Analytics
+					</a> <a href="${pageContext.request.contextPath}/Feedback"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
+						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
@@ -567,7 +574,8 @@ body {
 				</nav>
 			</div>
 			<div class="ad-logout-container">
-				<a href="#" onclick="showLogoutModal(); return false;"
+				<%-- Logout button links to the servlet --%>
+				<a href="${pageContext.request.contextPath}/Dashboard?action=logoutConfirm"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
 					class="ad-nav-icon"> Logout
@@ -606,14 +614,13 @@ body {
 			      action="${pageContext.request.contextPath}/Dashboard"
 			      class="ad-controls"
 			      id="filterForm">
-			
-					<select name="sort" class="ad-sort-dropdown"
-					        onchange="document.getElementById('filterForm').submit()">
-					
-					    <option value="" ${empty sortValue ? 'selected' : ''}>Sort by Date</option>
-					    <option value="newest" ${sortValue == 'newest' ? 'selected' : ''}>Newest First</option>
-					    <option value="oldest" ${sortValue == 'oldest' ? 'selected' : ''}>Oldest First</option>
-					</select>
+
+				<select name="sort" class="ad-sort-dropdown"
+				        onchange="document.getElementById('filterForm').submit()">
+				    <option value="" ${empty sortValue ? 'selected' : ''}>Sort by Date</option>
+				    <option value="newest" ${sortValue == 'newest' ? 'selected' : ''}>Newest First</option>
+				    <option value="oldest" ${sortValue == 'oldest' ? 'selected' : ''}>Oldest First</option>
+				</select>
 
 				<div class="ad-search-wrapper">
 					<img
@@ -657,17 +664,13 @@ body {
 									<td>${fn:substring(media.releaseDate, 0, 10)}</td>
 									<td>-</td>
 									<td>
-										<form class="ad-delete-form"
-											action="${pageContext.request.contextPath}/Dashboard"
-											method="post">
-											<input type="hidden" name="action" value="delete"> <input
-												type="hidden" name="mediaId" value="${media.mediaId}">
-											<button type="submit" class="ad-delete-btn">
-												<img
-													src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
-													class="ad-delete-icon">
-											</button>
-										</form>
+				
+										<a href="${pageContext.request.contextPath}/Dashboard?action=deleteConfirm&mediaId=${media.mediaId}"
+										   class="ad-delete-btn">
+											<img
+												src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
+												class="ad-delete-icon">
+										</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -693,35 +696,47 @@ body {
 		</main>
 	</div>
 
-	<div id="logoutModal" class="logout-modal-overlay">
+	<%-- Logout confirmation modal --%>
+	<div id="logoutModal" class="logout-modal-overlay"
+	     style="${showLogoutModal ? 'display:flex' : 'display:none'}">
 		<div class="logout-modal">
 			<h3 class="logout-modal-title">Logout</h3>
 			<p class="logout-modal-text">Are you sure you want to log out?</p>
 			<div class="logout-modal-actions">
-				<button class="logout-action-btn btn-no" onclick="hideLogoutModal()">No</button>
-				<a href="${pageContext.request.contextPath}/Logout" class="logout-action-btn btn-yes">Yes</a>
+				<%-- No = go back to the dashboard normally --%>
+				<a href="${pageContext.request.contextPath}/Dashboard"
+				   class="logout-action-btn btn-no">No</a>
+				<%-- Yes = proceed to the Logout servlet which clears the session --%>
+				<a href="${pageContext.request.contextPath}/Logout"
+				   class="logout-action-btn btn-yes">Yes</a>
+			</div>
+		</div>
+	</div>
+
+	<%-- Delete confirmation modal --%>
+	<div id="deleteModal" class="logout-modal-overlay"
+	     style="${showDeleteModal ? 'display:flex' : 'display:none'}">
+		<div class="logout-modal">
+			<h3 class="logout-modal-title">Delete Media</h3>
+			<p class="logout-modal-text">Are you sure you want to delete this media? This action cannot be undone.</p>
+			<div class="logout-modal-actions">
+				<%-- No = go back to the dashboard normally --%>
+				<a href="${pageContext.request.contextPath}/Dashboard"
+				   class="logout-action-btn btn-no">No</a>
+				<%-- Yes = POST to the servlet with action=delete and the pending media ID --%>
+				<form method="post"
+				      action="${pageContext.request.contextPath}/Dashboard"
+				      style="flex: 1; margin: 0; padding: 0;">
+					<input type="hidden" name="action" value="delete">
+					<input type="hidden" name="mediaId" value="${pendingDeleteId}">
+					<button type="submit" class="logout-action-btn btn-yes"
+					        style="width: 100%; border: none; cursor: pointer;">Yes</button>
+				</form>
 			</div>
 		</div>
 	</div>
 
 	<script>
-	// ---------- Logout Modal Logic ----------
-	function showLogoutModal() {
-		document.getElementById('logoutModal').style.display = 'flex';
-	}
-
-	function hideLogoutModal() {
-		document.getElementById('logoutModal').style.display = 'none';
-	}
-
-	// Close modal if user clicks outside the modal content
-	window.onclick = function(event) {
-		const modal = document.getElementById('logoutModal');
-		if (event.target == modal) {
-			hideLogoutModal();
-		}
-	}
-
 	// ---------- Auto-hide messages after 5 seconds ----------
 	document.addEventListener("DOMContentLoaded", function() {
 		const successMsg = document.getElementById("successMsg");

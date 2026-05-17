@@ -161,6 +161,39 @@ a {
 .ad-text-orange {
 	color: #e37329;
 }
+
+/* -- Media Tags -- */
+@media ( max-width : 1024px) {
+	.page-header {
+		padding: 32px 24px 24px;
+	}
+	.page-header__title {
+		font-size: 38px;
+		letter-spacing: -1px;
+	}
+	.sm_section {
+		padding: 0 24px;
+		margin-bottom: 48px;
+	}
+	.sm_grid_5 {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px;
+	}
+}
+
+@media ( max-width : 576px) {
+	.sm_grid_5 {
+		grid-template-columns: repeat(2, 1fr);
+		/* 2 columns for comfortable thumbnail spacing on smaller screens */
+		gap: 12px;
+	}
+	.sm_card_title {
+		font-size: 13px;
+	}
+	.sm_card_meta {
+		font-size: 11px;
+	}
+}
 </style>
 
 </head>

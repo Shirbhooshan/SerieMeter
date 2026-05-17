@@ -15,6 +15,18 @@ import com.seriemeter.model.MediaModel;
 public class SearchFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private String clean(String s) {
+		return s != null ? s.trim() : "";
+	}
+
+	private int toInt(String s) {
+		try {
+			return Integer.parseInt(s);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -29,16 +41,30 @@ public class SearchFilter extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// Get the 'query' variable from the navbar input name="query"
-		String query = request.getParameter("query");
+
+		String query = clean(request.getParameter("query"));
+		String catStr = clean(request.getParameter("category"));
+		String genreStr = clean(request.getParameter("genre"));
+		String yearRange = clean(request.getParameter("yearRange"));
+		String sortBy = clean(request.getParameter("sortBy"));
+		if (sortBy.isEmpty())
+			sortBy = "newest";
+
+		int categoryId = toInt(catStr);
+		int genreId = toInt(genreStr);
 
 		MediaDAO mediaDAO = new MediaDAO();
-		List<MediaModel> searchResults;
+		List<MediaModel> results = mediaDAO.searchMedia(query, categoryId, genreId, yearRange, sortBy);
 
+		request.setAttribute("results", results);
+		request.setAttribute("resultCount", results.size());
+		request.setAttribute("query", query);
+		request.setAttribute("category", catStr);
+		request.setAttribute("genre", genreStr);
+		request.setAttribute("yearRange", yearRange);
+		request.setAttribute("sortBy", sortBy);
 
-		// Redirect/Forward to your search results page
-		request.getRequestDispatcher("WEB-INF/pages/searchFilter.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/searchFilter.jsp").forward(request, response);
 	}
 
 	/**

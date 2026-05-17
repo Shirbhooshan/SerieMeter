@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Users</title>
+<title>Users - Seriemeter</title>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
@@ -88,7 +88,7 @@
 	transition: filter 0.2s ease;
 }
 
-/* Turns the icon black when the navigation item is active */
+/* turns the icon black when the navigation item is active */
 .ad-nav-item.active .ad-nav-icon {
 	filter: brightness(0) saturate(100%);
 }
@@ -210,7 +210,6 @@
 	align-items: center;
 }
 
-/* Position the search icon on the right */
 .ad-search-icon {
 	position: absolute;
 	right: 15px;
@@ -224,7 +223,7 @@
 .ad-search-box {
 	border: 1px solid #dcdcdc;
 	border-radius: 17px;
-	padding: 9px 32px 9px 15px; /* Padding Right: 32px (Room for icon!) */
+	padding: 9px 32px 9px 15px;
 	font-size: 12px;
 	outline: none;
 	width: 220px;
@@ -243,7 +242,7 @@
 .ad-table {
 	width: 100%;
 	border-collapse: collapse;
-	table-layout: fixed; /* Ensures consistency */
+	table-layout: fixed; /* for consistency */
 }
 
 .ad-table th, .ad-table td {
@@ -329,8 +328,6 @@
 	font-family: 'Manrope', sans-serif;
 	color: var(--text);
 	cursor: pointer;
-	background-image:
-		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23888' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right 14px center;
 }
@@ -437,6 +434,86 @@
 	font-size: 12px;
 	color: #555555;
 }
+
+@media ( max-width : 768px) {
+	.ad-body {
+		padding: 0;
+		height: auto;
+		min-height: 100vh;
+		overflow: auto;
+	}
+	.ad-layout-container {
+		flex-direction: column;
+		gap: 0;
+		height: auto;
+		min-height: 100vh;
+	}
+	.ad-sidebar {
+		width: 100%;
+		padding: 20px 15px 15px 15px;
+		gap: 15px;
+	}
+	.ad-sidebar>div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
+	}
+	.ad-logo-container {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.ad-logo-container img {
+		max-width: 150px;
+	}
+	.ad-nav-menu {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 100%;
+	}
+	.ad-nav-item {
+		justify-content: center;
+		padding: 10px 5px;
+		font-size: 12px;
+		text-align: center;
+	}
+	.ad-logout-container {
+		padding: 0;
+		width: 100%;
+	}
+	.ad-logout-btn {
+		justify-content: center;
+		padding: 10px;
+		font-size: 12px;
+		background-color: rgba(231, 90, 85, 0.08);
+		border: 1px solid rgba(231, 90, 85, 0.2);
+	}
+	.ad-main-content {
+		width: 100%;
+		height: auto;
+		flex: 1;
+		overflow: visible;
+		padding: 25px 20px;
+		border-radius: 24px 24px 0 0;
+	}
+	.sm_admin__toolbar {
+		justify-content: center;
+		width: 100%;
+	}
+	.sm_admin__search {
+		width: 100%;
+	}
+	.ad-user-table-container {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	.ad-user-table {
+		min-width: 650px;
+	}
+}
 </style>
 </head>
 <body class="ad-body">
@@ -464,6 +541,14 @@
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
 						class="ad-nav-icon"> Edit
+					</a> <a href="${pageContext.request.contextPath}/Report"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/report.svg"
+						class="ad-nav-icon"> Report & Analytics
+					</a> <a href="${pageContext.request.contextPath}/Feedback"
+						class="ad-nav-item"> <img
+						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
+						class="ad-nav-icon"> Feedbacks
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
@@ -527,7 +612,7 @@
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="u" items="${users}">
+								<c:forEach var="u" items="${users}" varStatus="status">
 									<tr>
 										<td>
 											<div class="ad-user-id-cell">
@@ -545,7 +630,7 @@
 											</div>
 										</td>
 										<td>${u.email}</td>
-										<td>—</td>
+										<td>${reviewCounts[status.index]}</td>
 										<td class="ad-user-role-text">${u.role}</td>
 									</tr>
 								</c:forEach>
