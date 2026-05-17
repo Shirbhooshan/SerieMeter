@@ -416,8 +416,6 @@ body {
 }
 
 /* Media Queries  */
-
-/* Tablet / half-screen (~768px) */
 @media (max-width: 768px) {
 
 	body {
@@ -682,7 +680,7 @@ body {
 			<form action="${pageContext.request.contextPath}/AdminContent"
 				method="POST" enctype="multipart/form-data" class="adm-content-grid">
 
-				<!-- ═══ LEFT: Form Column ═══ -->
+				<!-- LEFT: Form Column -->
 				<div class="adm-form-column">
 					<div class="adm-titles">
 						<h1>
@@ -732,7 +730,7 @@ body {
 					</div>
 				</div>
 
-				<!-- ═══ RIGHT: Media Column ═══ -->
+				<!-- RIGHT: Media Column -->
 				<div class="adm-media-column">
 
 					<!-- Tablet-only: Director + Category moved here -->

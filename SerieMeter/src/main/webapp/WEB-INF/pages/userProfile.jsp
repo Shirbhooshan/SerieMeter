@@ -725,65 +725,58 @@ body {
 						<div
 							style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
 
-							<%-- Display the logged-in user's full name prefixed with @ --%>
 							<h2 class="up-user-name">
 								@
 								<c:out value="${sessionUser.fullName}" />
 							</h2>
 
-							<%-- Three-dot button submits a form to the server; the servlet
-						     sets popupStyle to display:block or display:none --%>
-						<div class="up-menu-wrapper">
+							<!-- Clicking this button does a GET to the server; the servlet responds
+							     by setting popupStyle to display:block or display:none — no JS involved -->
+							<div class="up-menu-wrapper">
 
-							<form method="get"
-								action="${pageContext.request.contextPath}/User"
-								style="display:inline;">
-								<button type="submit" name="action" value="open-menu"
-									class="up-three-dot-btn"
-									aria-label="More options">&#8943;</button>
-							</form>
-
-							<%-- Popup visibility is driven entirely by ${popupStyle} set
-							     in UserProfile.doGet() — no JavaScript needed --%>
-
-							<%-- Backdrop: only rendered when popup is open.
-							     Clicking anywhere outside closes the popup via server GET. --%>
-							<c:if test="${param.action == 'open-menu'}">
 								<form method="get"
-									action="${pageContext.request.contextPath}/User">
-									<button type="submit" name="action" value="close"
-										class="up-backdrop" aria-label="Close menu"></button>
+									action="${pageContext.request.contextPath}/User"
+									style="display:inline;">
+									<button type="submit" name="action" value="open-menu"
+										class="up-three-dot-btn"
+										aria-label="More options">&#8943;</button>
 								</form>
-							</c:if>
 
-							<div class="up-popup-menu" id="upPopupMenu"
-								role="menu" style="${popupStyle}">
+								<!-- This invisible backdrop only appears when the menu is open.
+								     Clicking anywhere outside the popup sends a close action back to the server. -->
+								<c:if test="${param.action == 'open-menu'}">
+									<form method="get"
+										action="${pageContext.request.contextPath}/User">
+										<button type="submit" name="action" value="close"
+											class="up-backdrop" aria-label="Close menu"></button>
+									</form>
+								</c:if>
 
-								<c:choose>
-									<c:when test="${param.action == 'open-menu'}">
-										<%-- Edit Profile link --%>
-										<a href="${pageContext.request.contextPath}/UserEdit"
-											class="up-popup-item" role="menuitem">
-											<img alt="Edit"
-												src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
-											Edit Profile
-										</a>
-										<%-- Logout link --%>
-										<a href="${pageContext.request.contextPath}/Logout"
-											class="up-popup-item up-logout-item" role="menuitem">
-											<img alt="Logout"
-												src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
-											Logout
-										</a>
-									</c:when>
-									<c:otherwise>
-										<%-- Popup is hidden; no items rendered --%>
-									</c:otherwise>
-								</c:choose>
+								<div class="up-popup-menu" id="upPopupMenu"
+									role="menu" style="${popupStyle}">
+
+									<c:choose>
+										<c:when test="${param.action == 'open-menu'}">
+											<a href="${pageContext.request.contextPath}/UserEdit"
+												class="up-popup-item" role="menuitem">
+												<img alt="Edit"
+													src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+												Edit Profile
+											</a>
+											<a href="${pageContext.request.contextPath}/Logout"
+												class="up-popup-item up-logout-item" role="menuitem">
+												<img alt="Logout"
+													src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+												Logout
+											</a>
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose>
+
+								</div>
 
 							</div>
-
-						</div>
 						</div>
 
 						<p class="up-user-email">
@@ -819,7 +812,7 @@ body {
 			<div class="up-card up-bookmarks-card">
 				<div class="up-card-header">
 					<h3>Bookmarks</h3>
-					<%-- Sort buttons: highlight whichever order is currently active --%>
+					<!-- The active class is applied conditionally so the selected sort order stays highlighted -->
 					<div class="up-sort-options">
 						<a
 							href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
@@ -840,7 +833,6 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<%-- Poster grid of bookmarked media --%>
 						<div class="up-bookmarks-grid">
 							<c:forEach var="media" items="${userBookmarks}">
 								<div class="up-bookmark-card"
@@ -872,7 +864,7 @@ body {
 											<span class="up-bookmark-genre"> <c:out
 													value="${media.genreName}" />
 											</span>
-											<%-- Extract 4-digit year from release_date string --%>
+											<!-- releaseDate is a full date string, so we slice just the first 4 characters to get the year -->
 											<span class="up-bookmark-year"> <c:if
 													test="${not empty media.releaseDate}">
 													<c:out value="${fn:substring(media.releaseDate, 0, 4)}" />
@@ -895,7 +887,7 @@ body {
 			<div class="up-card up-reviews-card">
 				<div class="up-card-header">
 					<h3>Reviews</h3>
-					<%-- Sort buttons: highlight whichever order is currently active --%>
+					<!-- Same active-class trick as the bookmarks sort above -->
 					<div class="up-sort-options">
 						<a
 							href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
@@ -916,7 +908,6 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<%-- Loop through each review --%>
 						<c:forEach var="review" items="${userReviews}">
 							<div class="up-review-item">
 

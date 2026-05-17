@@ -48,14 +48,12 @@ body {
 	padding: 40px 16px 60px;
 }
 
-/* Centered logo block above the card */
 .rg-logo-section {
 	text-align: center;
 	margin-bottom: 25px;
 	width: 100%;
 }
 
-/* Responsive logo image capped at 220px */
 .rg-logo-img {
 	width: 100%;
 	max-width: 220px;
@@ -63,7 +61,6 @@ body {
 	margin-bottom: 10px;
 }
 
-/* Subtle uppercase tagline under the logo */
 .rg-tagline {
 	font-size: 12px;
 	text-transform: uppercase;
@@ -90,7 +87,6 @@ body {
 	margin-bottom: 25px;
 }
 
-/* Card primary heading */
 .rg-card-header h2 {
 	color: white;
 	font-size: 20px;
@@ -104,7 +100,6 @@ body {
 	font-size: 12px;
 }
 
-/* Column layout for the avatar upload section */
 .rg-avatar-group {
 	margin-bottom: 22px;
 	display: flex;
@@ -123,7 +118,6 @@ body {
 	letter-spacing: 0.5px;
 }
 
-/* Clickable label wrapper that sizes and positions the avatar and badge */
 .rg-avatar-label {
 	cursor: pointer;
 	display: inline-block;
@@ -133,7 +127,6 @@ body {
 	align-self: center;
 }
 
-/* Circular container for the avatar image or placeholder icon */
 .rg-avatar-circle {
 	width: 90px;
 	height: 90px;
@@ -182,7 +175,6 @@ body {
 	align-self: center;
 }
 
-/* Hidden native file input — triggered via the avatar label click */
 #profileImageInput {
 	display: none;
 }
@@ -204,7 +196,6 @@ body {
 	padding-left: 10px;
 }
 
-/* Relative wrapper so icons can be absolutely positioned inside inputs */
 .rg-input-wrapper {
 	position: relative;
 	display: flex;
@@ -222,7 +213,6 @@ body {
 	opacity: 0.45;
 }
 
-/* Eye icon floats to the right edge of the password input */
 .rg-eye-icon {
 	left: auto;
 	right: 18px;
@@ -286,7 +276,6 @@ body {
 	transform: translateY(0px);
 }
 
-/* Small terms disclaimer below the submit button */
 .rg-terms-text {
 	font-size: 11px;
 	color: #666;
@@ -300,7 +289,6 @@ body {
 	text-decoration: none;
 }
 
-/* "Already have an account?" prompt */
 .rg-signup-text {
 	font-size: 13px;
 	color: #666;
@@ -321,7 +309,6 @@ body {
 	text-decoration: underline;
 }
 
-/* Text link styled as a subtle back navigation */
 .rg-back-link {
 	color: #333;
 	font-size: 14px;
@@ -339,7 +326,6 @@ body {
 	opacity: 0.7;
 }
 
-/* Copyright line pinned to the bottom of the viewport */
 .rg-footer-text {
 	position: static;
 	font-size: 11px;
@@ -359,8 +345,6 @@ body {
 }
 
 /* ── Media Queries */
-
-/* Tablet / half-screen: tighten spacing and shrink card padding */
 @media (max-width: 768px) {
 
 	/* Allow page body to scroll at smaller heights */
@@ -368,8 +352,6 @@ body {
 		overflow: auto;
 		height: auto;
 	}
-
-	/* Reduce top/bottom padding on the scroll wrapper */
 	.rg-page-scroll {
 		padding: 28px 14px 80px;
 		justify-content: flex-start;
@@ -380,7 +362,6 @@ body {
 		margin-bottom: 18px;
 	}
 
-	/* Slightly smaller logo */
 	.rg-logo-img {
 		max-width: 170px;
 	}
@@ -393,7 +374,6 @@ body {
 		max-width: 360px;
 	}
 
-	/* Slightly smaller card heading */
 	.rg-card-header h2 {
 		font-size: 18px;
 	}
@@ -422,14 +402,11 @@ body {
 		width: 76px;
 		height: 76px;
 	}
-
-	/* Scale avatar icon proportionally */
 	.rg-avatar-circle .rg-user-icon {
 		width: 74px;
 		height: 74px;
 	}
 
-	/* Detach footer from viewport so it doesn't overlap the card */
 	.rg-footer-text {
 		position: static;
 		margin-top: 18px;
@@ -480,7 +457,6 @@ body {
 		font-size: 13px;
 	}
 
-	/* Shift icon left to match reduced input padding */
 	.rg-icon-svg {
 		left: 13px;
 		width: 14px;
@@ -511,8 +487,6 @@ body {
 		width: 62px;
 		height: 62px;
 	}
-
-	/* Shrink the green badge proportionally */
 	.rg-avatar-badge {
 		width: 22px;
 		height: 22px;
@@ -552,7 +526,6 @@ body {
 
 		<div class="rg-register-card">
 
-			<%-- Card heading and subtext --%>
 			<div class="rg-card-header">
 				<h2>Begin your journey</h2>
 				<p>Create your profile to start building lists</p>
@@ -561,7 +534,7 @@ body {
 			<form action="${pageContext.request.contextPath}/Register"
 				method="POST" enctype="multipart/form-data">
 
-				<%-- Avatar upload with circular preview --%>
+				<!-- Let the user pick a profile photo before filling out anything else -->
 				<div class="rg-avatar-group">
 					<span class="rg-avatar-group-label">Profile Photo</span>
 					<label class="rg-avatar-label" for="profileImageInput">
@@ -575,7 +548,6 @@ body {
 						accept="image/*" onchange="previewAvatar(this)">
 				</div>
 
-				<%-- Full Name field --%>
 				<div class="rg-input-group">
 					<label>Full Name</label>
 					<div class="rg-input-wrapper">
@@ -585,7 +557,6 @@ body {
 					</div>
 				</div>
 
-				<%-- Email address field --%>
 				<div class="rg-input-group">
 					<label>Email Address</label>
 					<div class="rg-input-wrapper">
@@ -595,7 +566,6 @@ body {
 					</div>
 				</div>
 
-				<%-- Username field --%>
 				<div class="rg-input-group">
 					<label>Username</label>
 					<div class="rg-input-wrapper">
@@ -605,7 +575,7 @@ body {
 					</div>
 				</div>
 
-				<%-- Password field with toggle visibility button --%>
+				<!-- The eye icon on the right lets users reveal what they're typing -->
 				<div class="rg-input-group">
 					<label>Password</label>
 					<div class="rg-input-wrapper">
@@ -618,18 +588,16 @@ body {
 					</div>
 				</div>
 
-				<%-- Submit button --%>
 				<button type="submit" class="rg-submit-btn">
 					Create Account
 					<img src="assets/icon/right-arrow-white.svg" alt="" style="width: 16px;">
 				</button>
 
-				<%-- Terms agreement note --%>
 				<p class="rg-terms-text">
 					By creating an account, you agree to our <a href="#">Terms</a>.
 				</p>
 
-				<%-- Sign-in redirect for existing users --%>
+				<!-- Send existing users straight to the login page instead of creating a duplicate account -->
 				<p class="rg-signup-text">
 					Already have an account?
 					<a href="${pageContext.request.contextPath}/Login" class="rg-signup-link">Sign in</a>
@@ -638,14 +606,14 @@ body {
 			</form>
 		</div>
 
-		<%-- Go back button below the card --%>
+		<!-- Go back button below the card -->
 		<button type="button" class="rg-go-back-btn" onclick="history.back()"
 			style="background: none; border: none; color: #535353; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: opacity 0.2s ease;">
 			<img src="assets/icon/left-arrow.svg" alt="" style="width: 14px;">
 			Go Back
 		</button>
 
-		<%-- Copyright footer --%>
+		<!-- Copyright footer -->
 		<div class="rg-footer-text">©2026 SERIEMETER</div>
 
 	</div>
