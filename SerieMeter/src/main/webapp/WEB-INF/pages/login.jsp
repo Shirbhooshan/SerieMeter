@@ -13,8 +13,11 @@
 	rel="stylesheet">
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/login.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/login.css"/>
+	
+<script src="${pageContext.request.contextPath}/javascript/login.js"></script>
+
 </head>
 <body>
 
@@ -86,19 +89,5 @@
 
 	<div class="footer-text">©2026 SERIEMETER</div>
 
-	<script>
-		function togglePassword() {
-			var passwordField = document.getElementById("passInput");
-			var eyeIcon = document.getElementById("eyeIcon");
-
-			if (passwordField.type === "password") {
-				passwordField.type = "text";
-				eyeIcon.src = "assets/icon/eye-black.svg";
-			} else {
-				passwordField.type = "password";
-				eyeIcon.src = "assets/icon/eye.svg";
-			}
-		}
-	</script>
 </body>
 </html>

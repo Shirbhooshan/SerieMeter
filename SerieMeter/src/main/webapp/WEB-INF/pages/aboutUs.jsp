@@ -13,7 +13,9 @@
 	rel="stylesheet">
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/aboutUs.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/aboutUs.css" />
+
 </head>
 <body>
 
@@ -60,42 +62,53 @@
 			</div>
 
 			<div class="team-grid">
-				<div class="team-box">
-					<div class="image-placeholder">
-						<img src="assets/images/aboutUs/Shirbhooshan.png"
-							alt="Shirbhooshan">
-					</div>
-					<div class="name">Shirbhooshan</div>
-					<div class="role">Team Lead</div>
-					<div class="description">"Description of work done"</div>
-				</div>
+				<a
+					href="https://www.linkedin.com/in/shirbhooshan-razopadhyay-40a509302/"
+					style="color: inherit; text-decoration: none; cursor: pointer;">
 
-				<div class="team-box">
-					<div class="image-placeholder">
-						<img src="assets/images/aboutUs/Safiyah.png" alt="Safiyah">
+					<div class="team-box">
+						<div class="image-placeholder">
+							<img src="assets/images/aboutUs/Shirbhooshan.png"
+								alt="Shirbhooshan">
+						</div>
+						<div class="name">Shirbhooshan</div>
+						<div class="role">Team Lead</div>
+						<div class="description">"Description of work done"</div>
 					</div>
-					<div class="name">Safiyah Malik</div>
-					<div class="role">Role</div>
-					<div class="description">"Description of work done"</div>
-				</div>
-
-				<div class="team-box">
-					<div class="image-placeholder">
-						<img src="assets/images/aboutUs/Shuvam.jpeg" alt="Shuvam">
+				</a> <a
+					href="https://www.linkedin.com/in/safiyah-malik-5785b340b/"
+					style="color: inherit; text-decoration: none; cursor: pointer;">
+					<div class="team-box">
+						<div class="image-placeholder">
+							<img src="assets/images/aboutUs/Safiyah.jpeg" alt="Safiyah">
+						</div>
+						<div class="name">Safiyah Malik</div>
+						<div class="role">Role</div>
+						<div class="description">"Description of work done"</div>
 					</div>
-					<div class="name">Shuvam Karki</div>
-					<div class="role">Role</div>
-					<div class="description">"Description of work done"</div>
-				</div>
-
-				<div class="team-box">
-					<div class="image-placeholder">
-						<img src="assets/images/aboutUs/Avin.jpeg" alt="Avin">
+				</a> <a
+					href="https://www.linkedin.com/in/shuvam-karki-72b293322/"
+					style="color: inherit; text-decoration: none; cursor: pointer;">
+					<div class="team-box">
+						<div class="image-placeholder">
+							<img src="assets/images/aboutUs/Shuvam.jpeg" alt="Shuvam">
+						</div>
+						<div class="name">Shuvam Karki</div>
+						<div class="role">Role</div>
+						<div class="description">"Description of work done"</div>
 					</div>
-					<div class="name">Avin Subedi</div>
-					<div class="role">Role</div>
-					<div class="description">"Description of work done"</div>
-				</div>
+				</a> <a
+					href="https://www.linkedin.com/in/avin-subedi-a0053020a/"
+					style="color: inherit; text-decoration: none; cursor: pointer;">
+					<div class="team-box">
+						<div class="image-placeholder">
+							<img src="assets/images/aboutUs/Avin.jpeg" alt="Avin">
+						</div>
+						<div class="name">Avin Subedi</div>
+						<div class="role">Role</div>
+						<div class="description">"Description of work done"</div>
+					</div>
+				</a>
 			</div>
 		</div>
 

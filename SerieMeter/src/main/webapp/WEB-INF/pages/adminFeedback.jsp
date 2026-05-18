@@ -12,7 +12,9 @@
 	rel="stylesheet">
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/adminFeedback.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminFeedback.css">
+
+<script src="${pageContext.request.contextPath}/javascript/adminFeedback.js"></script>
 </head>
 <body class="ad-body">
 
@@ -133,40 +135,6 @@
 			</div>
 		</main>
 	</div>
-
-	<script>
-	document.addEventListener("DOMContentLoaded", function() {
-	    const rows = document.querySelectorAll("#userTableBody tr");
-	    const loadMoreBtn = document.getElementById("loadMoreBtn");
-	    const rowsToShow = 1;
-	    let currentCount = rowsToShow;
-
-	    // Initially hide rows beyond the first batch
-	    rows.forEach((row, i) => {
-	        if (i >= rowsToShow) row.style.display = "none";
-	    });
-
-	    // Hide button if total rows are less than the initial batch
-	    if (rows.length <= rowsToShow) loadMoreBtn.style.display = "none";
-
-	    loadMoreBtn.addEventListener("click", function() {
-	        let nextBatch = currentCount + rowsToShow;
-	        
-	        rows.forEach((row, i) => {
-	            if (i >= currentCount && i < nextBatch) {
-	                row.style.display = ""; // Reveal row
-	            }
-	        });
-
-	        currentCount = nextBatch;
-
-	        // Hide button if we reached the end of the data
-	        if (currentCount >= rows.length) {
-	            loadMoreBtn.style.display = "none";
-	        }
-	    });
-	});
-	</script>
 
 </body>
 </html>

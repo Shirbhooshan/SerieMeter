@@ -14,8 +14,8 @@
 	rel="stylesheet">
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/media.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/media.css"/>
 </head>
 <body>
 
