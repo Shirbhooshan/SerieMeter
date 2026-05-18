@@ -326,25 +326,26 @@ body {
 	margin-top: 20px;
 	border: 1px solid #dcdcdc;
 	border-radius: 17px;
-	padding: 9px 20px;         
+	padding: 9px 20px;
 	font-size: 12px;
-	font-weight: 600;         
+	font-weight: 600;
 	font-family: 'Manrope', sans-serif;
 	outline: none;
-	width: 160px;              
+	width: 160px;
 	background: white;
 	color: #1a1a1a;
-	cursor: pointer;           
+	cursor: pointer;
 	text-align: center;
 	display: inline-block;
-	transition: all 0.2s ease; 
+	transition: all 0.2s ease;
 }
 
 /* Green interactive hover state */
 .ad-btn-matched:hover {
 	background-color: #4ebc57;
 	color: #FFFFFF;
-	border-color: #4ebc57; /* Smoothly blends the border into the green background */
+	border-color: #4ebc57;
+	/* Smoothly blends the border into the green background */
 }
 
 /* Optional active state when clicked */
@@ -426,113 +427,102 @@ body {
 /* -- Media Queries -- */
 
 /* Tablets and below (992px) */
-@media (max-width: 992px) {
-    .ad-sidebar {
-        width: 200px;
-    }
-    .ad-logo-container {
-        padding-bottom: 30px;
-    }
-    .ad-logo-container img {
-        max-width: 150px;
-    }
-    .ad-main-content {
-        padding: 15px 20px;
-    }
-    .ad-section-title {
-        font-size: 22px;
-    }
+@media ( max-width : 992px) {
+	.ad-sidebar {
+		width: 200px;
+	}
+	.ad-logo-container {
+		padding-bottom: 30px;
+	}
+	.ad-logo-container img {
+		max-width: 150px;
+	}
+	.ad-main-content {
+		padding: 15px 20px;
+	}
+	.ad-section-title {
+		font-size: 22px;
+	}
 }
 
 /* Mobile Devices (768px) */
-@media (max-width: 768px) {
-    body {
-        height: auto;
-        overflow: visible; /* Allow scrolling on mobile */
-    }
+@media ( max-width : 768px) {
+	body {
+		height: auto;
+		overflow: visible; /* Allow scrolling on mobile */
+	}
+	.ad-layout-container {
+		flex-direction: column; /* Stack sidebar on top */
+		height: auto;
+	}
+	.ad-sidebar {
+		width: 100%;
+		padding: 10px;
+		justify-content: flex-start;
+	}
+	.ad-logo-container {
+		padding-bottom: 15px;
+		text-align: center;
+	}
+	.ad-nav-menu {
+		flex-direction: row; /* Horizontal nav for mobile */
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px;
+	}
+	.ad-nav-item {
+		padding: 8px 12px;
+		font-size: 12px;
+	}
+	.ad-logout-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 10px;
+	}
+	.ad-main-content {
+		margin-top: 10px;
+		border-radius: 12px;
+		padding: 15px;
+		overflow-x: auto; /* Allow table to scroll horizontally */
+	}
+	.ad-top-header {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+	.ad-profile-section {
+		width: 100%;
+		justify-content: space-between;
+	}
+	.ad-controls {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.ad-search-box {
+		width: 100%;
+	}
 
-    .ad-layout-container {
-        flex-direction: column; /* Stack sidebar on top */
-        height: auto;
-    }
-
-    .ad-sidebar {
-        width: 100%;
-        padding: 10px;
-        justify-content: flex-start;
-    }
-
-    .ad-logo-container {
-        padding-bottom: 15px;
-        text-align: center;
-    }
-
-    .ad-nav-menu {
-        flex-direction: row; /* Horizontal nav for mobile */
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .ad-nav-item {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-
-    .ad-logout-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-    }
-
-    .ad-main-content {
-        margin-top: 10px;
-        border-radius: 12px;
-        padding: 15px;
-        overflow-x: auto; /* Allow table to scroll horizontally */
-    }
-
-    .ad-top-header {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
-
-    .ad-profile-section {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .ad-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .ad-search-box {
-        width: 100%;
-    }
-
-    /* Table responsivness: Allow scroll */
-    .ad-table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+	/* Table responsivness: Allow scroll */
+	.ad-table {
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
 }
 
 /* Extra Small Devices (480px) */
-@media (max-width: 480px) {
-    .ad-section-title {
-        font-size: 20px;
-    }
-    .ad-nav-menu {
-        gap: 5px;
-    }
-    .ad-nav-item {
-        font-size: 11px;
-        padding: 6px 10px;
-    }
+@media ( max-width : 480px) {
+	.ad-section-title {
+		font-size: 20px;
+	}
+	.ad-nav-menu {
+		gap: 5px;
+	}
+	.ad-nav-item {
+		font-size: 11px;
+		padding: 6px 10px;
+	}
 }
 </style>
 </head>
@@ -549,7 +539,7 @@ body {
 					</a>
 				</div>
 				<nav class="ad-nav-menu">
-										<a href="${pageContext.request.contextPath}/Dashboard"
+					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
@@ -578,7 +568,8 @@ body {
 			</div>
 			<div class="ad-logout-container">
 				<!--  Logout button links to the servlet -->
-				<a href="${pageContext.request.contextPath}/Dashboard?action=logoutConfirm"
+				<a
+					href="${pageContext.request.contextPath}/Dashboard?action=logoutConfirm"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
 					class="ad-nav-icon"> Logout
@@ -611,28 +602,27 @@ body {
 			</c:if>
 
 			<!-- Search and sort handled by the servlet (GET request). -->
-			    
+
 			<form method="GET"
-			      action="${pageContext.request.contextPath}/Dashboard"
-			      class="ad-controls"
-			      id="filterForm">
+				action="${pageContext.request.contextPath}/Dashboard"
+				class="ad-controls" id="filterForm">
 
 				<select name="sort" class="ad-sort-dropdown"
-				        onchange="document.getElementById('filterForm').submit()">
-				    <option value="" ${empty sortValue ? 'selected' : ''}>Sort by Date</option>
-				    <option value="newest" ${sortValue == 'newest' ? 'selected' : ''}>Newest First</option>
-				    <option value="oldest" ${sortValue == 'oldest' ? 'selected' : ''}>Oldest First</option>
+					onchange="document.getElementById('filterForm').submit()">
+					<option value="" ${empty sortValue ? 'selected' : ''}>Sort
+						by Date</option>
+					<option value="newest" ${sortValue == 'newest' ? 'selected' : ''}>Newest
+						First</option>
+					<option value="oldest" ${sortValue == 'oldest' ? 'selected' : ''}>Oldest
+						First</option>
 				</select>
 
 				<div class="ad-search-wrapper">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search-ad-icon.svg"
-						class="ad-search-icon" alt="Search">
-					<input type="text"
-						   name="search"
-						   class="ad-search-box"
-						   placeholder="Search for medias"
-						   value="${searchValue}">
+						class="ad-search-icon" alt="Search"> <input type="text"
+						name="search" class="ad-search-box"
+						placeholder="Search for medias" value="${searchValue}">
 				</div>
 
 			</form>
@@ -664,25 +654,22 @@ body {
                          media.genreId == 5 ? 'Sci-Fi' :
                          media.genreId == 6 ? 'Thriller' : 'Romance'}</td>
 									<td>${fn:substring(media.releaseDate, 0, 10)}</td>
-									<td>									<c:choose>
-																				<c:when test="${media.avgRating > 0}">
+									<td><c:choose>
+											<c:when test="${media.avgRating > 0}">
 									            ★ <fmt:formatNumber value="${media.avgRating}"
-																						maxFractionDigits="1" />/10
+													maxFractionDigits="1" />/10
 									        </c:when>
-																				<c:otherwise>
-																					<span style="color: #bbb; font-style: italic;">Not
-																						rated</span>
-																				</c:otherwise>
-																			</c:choose></td>
-									<td>
-				
-										<a href="${pageContext.request.contextPath}/Dashboard?action=deleteConfirm&mediaId=${media.mediaId}"
-										   class="ad-delete-btn">
-											<img
-												src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
-												class="ad-delete-icon">
-										</a>
-									</td>
+											<c:otherwise>
+												<span style="color: #bbb; font-style: italic;">Not
+													rated</span>
+											</c:otherwise>
+										</c:choose></td>
+									<td><a
+										href="${pageContext.request.contextPath}/Dashboard?action=deleteConfirm&mediaId=${media.mediaId}"
+										class="ad-delete-btn"> <img
+											src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
+											class="ad-delete-icon">
+									</a></td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -696,50 +683,52 @@ body {
 					</c:choose>
 				</tbody>
 			</table>
-			
+
 			<!-- Load more button -->
-				<div style="text-align: center; padding: 15px;">
-	    			<button class="ad-btn-matched" id="loadMoreBtn">Load More Medias</button>
-				</div>
+			<div style="text-align: center; padding: 15px;">
+				<button class="ad-btn-matched" id="loadMoreBtn">Load More
+					Medias</button>
+			</div>
 
 		</main>
 	</div>
 
 	<!-- Logout confirmation modal -->
 	<div id="logoutModal" class="logout-modal-overlay"
-	     style="${showLogoutModal ? 'display:flex' : 'display:none'}">
+		style="${showLogoutModal ? 'display:flex' : 'display:none'}">
 		<div class="logout-modal">
 			<h3 class="logout-modal-title">Logout</h3>
 			<p class="logout-modal-text">Are you sure you want to log out?</p>
 			<div class="logout-modal-actions">
 				<!-- No = go back to the dashboard normally -->
 				<a href="${pageContext.request.contextPath}/Dashboard"
-				   class="logout-action-btn btn-no">No</a>
+					class="logout-action-btn btn-no">No</a>
 				<!-- Yes = proceed to the Logout servlet which clears the session -->
 				<a href="${pageContext.request.contextPath}/Logout"
-				   class="logout-action-btn btn-yes">Yes</a>
+					class="logout-action-btn btn-yes">Yes</a>
 			</div>
 		</div>
 	</div>
 
 	<!-- Delete confirmation modal -->
 	<div id="deleteModal" class="logout-modal-overlay"
-	     style="${showDeleteModal ? 'display:flex' : 'display:none'}">
+		style="${showDeleteModal ? 'display:flex' : 'display:none'}">
 		<div class="logout-modal">
 			<h3 class="logout-modal-title">Delete Media</h3>
-			<p class="logout-modal-text">Are you sure you want to delete this media? This action cannot be undone.</p>
+			<p class="logout-modal-text">Are you sure you want to delete this
+				media? This action cannot be undone.</p>
 			<div class="logout-modal-actions">
 				<!-- No = go back to the dashboard normally -->
 				<a href="${pageContext.request.contextPath}/Dashboard"
-				   class="logout-action-btn btn-no">No</a>
-				<!-- Yes = POST to the servlet with action=delete and the pending media ID --> 
+					class="logout-action-btn btn-no">No</a>
+				<!-- Yes = POST to the servlet with action=delete and the pending media ID -->
 				<form method="post"
-				      action="${pageContext.request.contextPath}/Dashboard"
-				      style="flex: 1; margin: 0; padding: 0;">
-					<input type="hidden" name="action" value="delete">
-					<input type="hidden" name="mediaId" value="${pendingDeleteId}">
+					action="${pageContext.request.contextPath}/Dashboard"
+					style="flex: 1; margin: 0; padding: 0;">
+					<input type="hidden" name="action" value="delete"> <input
+						type="hidden" name="mediaId" value="${pendingDeleteId}">
 					<button type="submit" class="logout-action-btn btn-yes"
-					        style="width: 100%; border: none; cursor: pointer;">Yes</button>
+						style="width: 100%; border: none; cursor: pointer;">Yes</button>
 				</form>
 			</div>
 		</div>
@@ -770,7 +759,7 @@ body {
 		}
 	});
 	</script>
-	
+
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 	    const rows = document.querySelectorAll("#userTableBody tr");

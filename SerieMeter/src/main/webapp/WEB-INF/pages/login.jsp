@@ -321,13 +321,11 @@ body {
 		</form>
 	</div>
 
-	<div class="footer-text">©2026 SERIEMETER</div>
-
 	<button type="button" class="ep-go-back-btn" onclick="history.back()">
 		<img src="assets/icon/left-arrow.svg" alt="" style="width: 14px;">
 		Go Back
 	</button>
-	
+
 	<br>
 
 	<div class="footer-text">©2026 SERIEMETER</div>
