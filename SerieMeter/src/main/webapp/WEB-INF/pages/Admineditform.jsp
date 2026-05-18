@@ -17,7 +17,7 @@
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/admineditform.css">
+	href="${pageContext.request.contextPath}/css/admineditform.css">
 
 </head>
 <body>

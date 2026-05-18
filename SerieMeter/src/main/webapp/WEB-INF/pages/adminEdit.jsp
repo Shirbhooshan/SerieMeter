@@ -16,7 +16,7 @@
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/adminedit.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminedit.css">
 
 </head>
 

@@ -15,7 +15,7 @@
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/explore.css">
+	href="${pageContext.request.contextPath}/css/explore.css">
 
 </head>
 

@@ -15,7 +15,7 @@
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 	
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bookmark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bookmark.css">
 </head>
 <body>
 
