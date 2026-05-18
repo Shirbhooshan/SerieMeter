@@ -70,7 +70,18 @@ public class AdminUsers extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action = request.getParameter("action");
+		if ("approve".equals(action)) {
+		    int userId = Integer.parseInt(request.getParameter("userId"));
+		    UserDAO userDAO = new UserDAO();
+		    try {
+				userDAO.approveUser(userId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		response.sendRedirect(request.getContextPath() + "/Users");
 	}
 
 }

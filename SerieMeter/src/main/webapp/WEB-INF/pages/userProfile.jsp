@@ -729,18 +729,17 @@ body {
 								@
 								<c:out value="${sessionUser.fullName}" />
 							</h2>
-
-							<!-- Clicking this button does a GET to the server; the servlet responds
-							     by setting popupStyle to display:block or display:none — no JS involved -->
-							<div class="up-menu-wrapper">
-
-								<form method="get"
-									action="${pageContext.request.contextPath}/User"
-									style="display:inline;">
-									<button type="submit" name="action" value="open-menu"
-										class="up-three-dot-btn"
-										aria-label="More options">&#8943;</button>
-								</form>
+							
+							<!-- Three-dot button submits a form to the server; the servlet
+						     sets popupStyle to display:block or display:none -->
+						<div class="up-menu-wrapper">							
+							<form method="get"
+								action="${pageContext.request.contextPath}/User"
+								style="display:inline;">
+								<button type="submit" name="action" value="open-menu"
+									class="up-three-dot-btn"
+									aria-label="More options">&#8943;</button>
+							</form>
 
 								<!-- This invisible backdrop only appears when the menu is open.
 								     Clicking anywhere outside the popup sends a close action back to the server. -->
@@ -752,6 +751,9 @@ body {
 									</form>
 								</c:if>
 
+								<!-- Popup visibility is driven entirely by ${popupStyle} set
+															     in UserProfile.doGet() — no JavaScript needed -->
+								
 								<div class="up-popup-menu" id="upPopupMenu"
 									role="menu" style="${popupStyle}">
 
@@ -774,9 +776,44 @@ body {
 										</c:otherwise>
 									</c:choose>
 
-								</div>
+							<!-- Backdrop: only rendered when popup is open.
+							     Clicking anywhere outside closes the popup via server GET. -->
+							<c:if test="${param.action == 'open-menu'}">
+								<form method="get"
+									action="${pageContext.request.contextPath}/User">
+									<button type="submit" name="action" value="close"
+										class="up-backdrop" aria-label="Close menu"></button>
+								</form>
+							</c:if>
+
+							<div class="up-popup-menu" id="upPopupMenu"
+								role="menu" style="${popupStyle}">
+
+								<c:choose>
+									<c:when test="${param.action == 'open-menu'}">
+										<!-- Edit Profile link -->
+										<a href="${pageContext.request.contextPath}/UserEdit"
+											class="up-popup-item" role="menuitem">
+											<img alt="Edit"
+												src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+											Edit Profile
+										</a>
+										<!-- Logout link -->
+										<a href="${pageContext.request.contextPath}/Logout"
+											class="up-popup-item up-logout-item" role="menuitem">
+											<img alt="Logout"
+												src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+											Logout
+										</a>
+									</c:when>
+									<c:otherwise>
+										<!-- Popup is hidden; no items rendered -->
+									</c:otherwise>
+								</c:choose>
 
 							</div>
+
+						</div>
 						</div>
 
 						<p class="up-user-email">

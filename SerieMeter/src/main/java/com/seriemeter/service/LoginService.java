@@ -47,6 +47,12 @@ public class LoginService {
 				return "Password is incorrect";
 			}
 
+			// Admins bypass the approval check — they can always log in
+			// Regular users must be approved before they can access the system
+			if (!"Admin".equalsIgnoreCase(user.getRole()) && !user.isApproved()) {
+				return "Account pending approval";
+			}
+
 			// If all checks pass, return Success
 			return "Success";
 

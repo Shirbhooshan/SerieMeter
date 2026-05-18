@@ -90,8 +90,9 @@ public class Register extends HttpServlet {
 			// Call service to register
 			service.registerNewUser(fullName, username, email, password, profilePart, uploadDir);
 
-			// Success! Redirect to login
-			response.sendRedirect(request.getContextPath() + "/Login");
+			// Success — forward back to register.jsp so the pending approval popup renders
+			request.setAttribute("pendingApproval", true);
+			request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();

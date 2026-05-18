@@ -203,7 +203,7 @@ body {
 	background: transparent;
 }
 
-/* ----- Controls (search & sort) ----- */
+/* --- Controls (search & sort) --- */
 .ad-controls {
 	display: flex;
 	justify-content: flex-end;
@@ -292,34 +292,6 @@ body {
 	height: 22px;
 }
 
-.ad-pagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 12px;
-	padding-top: 15px;
-	font-size: 12px;
-	background: white;
-}
-
-.ad-page-num {
-	color: #888888;
-	text-decoration: none;
-	background: white;
-}
-
-.ad-page-num.active {
-	color: #1a1a1a;
-	background-color: #f0f0f0;
-	width: 24px;
-	height: 24px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 50%;
-	font-weight: 700;
-}
-
 .ad-msg-success {
 	color: green;
 	font-size: 12px;
@@ -350,6 +322,35 @@ body {
 	padding: 0;
 }
 
+.ad-btn-matched {
+	margin-top: 20px;
+	border: 1px solid #dcdcdc;
+	border-radius: 17px;
+	padding: 9px 20px;         
+	font-size: 12px;
+	font-weight: 600;         
+	font-family: 'Manrope', sans-serif;
+	outline: none;
+	width: 160px;              
+	background: white;
+	color: #1a1a1a;
+	cursor: pointer;           
+	text-align: center;
+	display: inline-block;
+	transition: all 0.2s ease; 
+}
+
+/* Green interactive hover state */
+.ad-btn-matched:hover {
+	background-color: #4ebc57;
+	color: #FFFFFF;
+	border-color: #4ebc57; /* Smoothly blends the border into the green background */
+}
+
+/* Optional active state when clicked */
+.ad-btn-matched:active {
+	transform: scale(0.98);
+}
 /* ----- Logout Modal Design ----- */
 .logout-modal-overlay {
 	position: fixed;
@@ -358,7 +359,6 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.7);
-	display: none;
 	justify-content: center;
 	align-items: center;
 	z-index: 10000;
@@ -401,6 +401,7 @@ body {
 	font-size: 14px;
 	text-decoration: none;
 	transition: background 0.2s;
+	text-align: center;
 }
 
 .btn-no {
@@ -421,6 +422,118 @@ body {
 .btn-yes:hover {
 	background-color: #d64a45;
 }
+
+/* -- Media Queries -- */
+
+/* Tablets and below (992px) */
+@media (max-width: 992px) {
+    .ad-sidebar {
+        width: 200px;
+    }
+    .ad-logo-container {
+        padding-bottom: 30px;
+    }
+    .ad-logo-container img {
+        max-width: 150px;
+    }
+    .ad-main-content {
+        padding: 15px 20px;
+    }
+    .ad-section-title {
+        font-size: 22px;
+    }
+}
+
+/* Mobile Devices (768px) */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        overflow: visible; /* Allow scrolling on mobile */
+    }
+
+    .ad-layout-container {
+        flex-direction: column; /* Stack sidebar on top */
+        height: auto;
+    }
+
+    .ad-sidebar {
+        width: 100%;
+        padding: 10px;
+        justify-content: flex-start;
+    }
+
+    .ad-logo-container {
+        padding-bottom: 15px;
+        text-align: center;
+    }
+
+    .ad-nav-menu {
+        flex-direction: row; /* Horizontal nav for mobile */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .ad-nav-item {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .ad-logout-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .ad-main-content {
+        margin-top: 10px;
+        border-radius: 12px;
+        padding: 15px;
+        overflow-x: auto; /* Allow table to scroll horizontally */
+    }
+
+    .ad-top-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .ad-profile-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .ad-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ad-search-box {
+        width: 100%;
+    }
+
+    /* Table responsivness: Allow scroll */
+    .ad-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Extra Small Devices (480px) */
+@media (max-width: 480px) {
+    .ad-section-title {
+        font-size: 20px;
+    }
+    .ad-nav-menu {
+        gap: 5px;
+    }
+    .ad-nav-item {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
 </style>
 </head>
 <body>
@@ -436,7 +549,7 @@ body {
 					</a>
 				</div>
 				<nav class="ad-nav-menu">
-					<a href="${pageContext.request.contextPath}/Dashboard"
+										<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
 						class="ad-nav-icon"> Dashboard
@@ -464,7 +577,8 @@ body {
 				</nav>
 			</div>
 			<div class="ad-logout-container">
-				<a href="#" onclick="showLogoutModal(); return false;"
+				<!--  Logout button links to the servlet -->
+				<a href="${pageContext.request.contextPath}/Dashboard?action=logoutConfirm"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
 					class="ad-nav-icon"> Logout
@@ -496,21 +610,32 @@ body {
 				</p>
 			</c:if>
 
-			<div class="ad-controls">
-				<select id="sortDropdown" class="ad-sort-dropdown"
-					onchange="sortTable()">
-					<option value="default">Sort by Date</option>
-					<option value="newest">Newest First</option>
-					<option value="oldest">Oldest First</option>
+			<!-- Search and sort handled by the servlet (GET request). -->
+			    
+			<form method="GET"
+			      action="${pageContext.request.contextPath}/Dashboard"
+			      class="ad-controls"
+			      id="filterForm">
+
+				<select name="sort" class="ad-sort-dropdown"
+				        onchange="document.getElementById('filterForm').submit()">
+				    <option value="" ${empty sortValue ? 'selected' : ''}>Sort by Date</option>
+				    <option value="newest" ${sortValue == 'newest' ? 'selected' : ''}>Newest First</option>
+				    <option value="oldest" ${sortValue == 'oldest' ? 'selected' : ''}>Oldest First</option>
 				</select>
+
 				<div class="ad-search-wrapper">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search-ad-icon.svg"
-						class="ad-search-icon" alt="Search"> <input type="text"
-						id="searchInput" class="ad-search-box"
-						placeholder="Search for medias" onkeyup="filterTable()">
+						class="ad-search-icon" alt="Search">
+					<input type="text"
+						   name="search"
+						   class="ad-search-box"
+						   placeholder="Search for medias"
+						   value="${searchValue}">
 				</div>
-			</div>
+
+			</form>
 
 			<table class="ad-table">
 				<thead>
@@ -539,28 +664,24 @@ body {
                          media.genreId == 5 ? 'Sci-Fi' :
                          media.genreId == 6 ? 'Thriller' : 'Romance'}</td>
 									<td>${fn:substring(media.releaseDate, 0, 10)}</td>
-									<td><c:choose>
-											<c:when test="${media.avgRating > 0}">
-            ★ <fmt:formatNumber value="${media.avgRating}"
-													maxFractionDigits="1" />/10
-        </c:when>
-											<c:otherwise>
-												<span style="color: #bbb; font-style: italic;">Not
-													rated</span>
-											</c:otherwise>
-										</c:choose></td>
+									<td>									<c:choose>
+																				<c:when test="${media.avgRating > 0}">
+									            ★ <fmt:formatNumber value="${media.avgRating}"
+																						maxFractionDigits="1" />/10
+									        </c:when>
+																				<c:otherwise>
+																					<span style="color: #bbb; font-style: italic;">Not
+																						rated</span>
+																				</c:otherwise>
+																			</c:choose></td>
 									<td>
-										<form class="ad-delete-form"
-											action="${pageContext.request.contextPath}/Dashboard"
-											method="post">
-											<input type="hidden" name="action" value="delete"> <input
-												type="hidden" name="mediaId" value="${media.mediaId}">
-											<button type="submit" class="ad-delete-btn">
-												<img
-													src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
-													class="ad-delete-icon">
-											</button>
-										</form>
+				
+										<a href="${pageContext.request.contextPath}/Dashboard?action=deleteConfirm&mediaId=${media.mediaId}"
+										   class="ad-delete-btn">
+											<img
+												src="${pageContext.request.contextPath}/assets/icon/trash-ad-icon.svg"
+												class="ad-delete-icon">
+										</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -575,47 +696,56 @@ body {
 					</c:choose>
 				</tbody>
 			</table>
-
-			<div class="ad-pagination">
-				<a href="#" class="ad-page-num">&lt;</a> <a href="#"
-					class="ad-page-num active">1</a> <a href="#" class="ad-page-num">2</a>
-				<a href="#" class="ad-page-num">3</a> <a href="#"
-					class="ad-page-num">&gt;</a>
-			</div>
+			
+			<!-- Load more button -->
+				<div style="text-align: center; padding: 15px;">
+	    			<button class="ad-btn-matched" id="loadMoreBtn">Load More Medias</button>
+				</div>
 
 		</main>
 	</div>
 
-	<div id="logoutModal" class="logout-modal-overlay">
+	<!-- Logout confirmation modal -->
+	<div id="logoutModal" class="logout-modal-overlay"
+	     style="${showLogoutModal ? 'display:flex' : 'display:none'}">
 		<div class="logout-modal">
 			<h3 class="logout-modal-title">Logout</h3>
 			<p class="logout-modal-text">Are you sure you want to log out?</p>
 			<div class="logout-modal-actions">
-				<button class="logout-action-btn btn-no" onclick="hideLogoutModal()">No</button>
+				<!-- No = go back to the dashboard normally -->
+				<a href="${pageContext.request.contextPath}/Dashboard"
+				   class="logout-action-btn btn-no">No</a>
+				<!-- Yes = proceed to the Logout servlet which clears the session -->
 				<a href="${pageContext.request.contextPath}/Logout"
-					class="logout-action-btn btn-yes">Yes</a>
+				   class="logout-action-btn btn-yes">Yes</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete confirmation modal -->
+	<div id="deleteModal" class="logout-modal-overlay"
+	     style="${showDeleteModal ? 'display:flex' : 'display:none'}">
+		<div class="logout-modal">
+			<h3 class="logout-modal-title">Delete Media</h3>
+			<p class="logout-modal-text">Are you sure you want to delete this media? This action cannot be undone.</p>
+			<div class="logout-modal-actions">
+				<!-- No = go back to the dashboard normally -->
+				<a href="${pageContext.request.contextPath}/Dashboard"
+				   class="logout-action-btn btn-no">No</a>
+				<!-- Yes = POST to the servlet with action=delete and the pending media ID --> 
+				<form method="post"
+				      action="${pageContext.request.contextPath}/Dashboard"
+				      style="flex: 1; margin: 0; padding: 0;">
+					<input type="hidden" name="action" value="delete">
+					<input type="hidden" name="mediaId" value="${pendingDeleteId}">
+					<button type="submit" class="logout-action-btn btn-yes"
+					        style="width: 100%; border: none; cursor: pointer;">Yes</button>
+				</form>
 			</div>
 		</div>
 	</div>
 
 	<script>
-	// ---------- Logout Modal Logic ----------
-	function showLogoutModal() {
-		document.getElementById('logoutModal').style.display = 'flex';
-	}
-
-	function hideLogoutModal() {
-		document.getElementById('logoutModal').style.display = 'none';
-	}
-
-	// Close modal if user clicks outside the modal content
-	window.onclick = function(event) {
-		const modal = document.getElementById('logoutModal');
-		if (event.target == modal) {
-			hideLogoutModal();
-		}
-	}
-
 	// ---------- Auto-hide messages after 5 seconds ----------
 	document.addEventListener("DOMContentLoaded", function() {
 		const successMsg = document.getElementById("successMsg");
@@ -639,55 +769,41 @@ body {
 			}, 5000);
 		}
 	});
+	</script>
+	
+	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    const rows = document.querySelectorAll("#userTableBody tr");
+	    const loadMoreBtn = document.getElementById("loadMoreBtn");
+	    const rowsToShow = 5;
+	    let currentCount = rowsToShow;
 
-	// ---------- Search / Filter ----------
-	function filterTable() {
-		const input = document.getElementById("searchInput");
-		const filter = input.value.toLowerCase();
-		const tbody = document.getElementById("userTableBody");
-		const rows = tbody.getElementsByTagName("tr");
+	    // Initially hide rows beyond the first batch
+	    rows.forEach((row, i) => {
+	        if (i >= rowsToShow) row.style.display = "none";
+	    });
 
-		for (let i = 0; i < rows.length; i++) {
-			// Skip rows that are not actual data rows (e.g., "No media found" has only 1 cell)
-			if (rows[i].cells.length < 2) continue;
-			const rowText = rows[i].textContent || rows[i].innerText;
-			rows[i].style.display = rowText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
-		}
-	}
+	    // Hide button if total rows are less than the initial batch
+	    if (rows.length <= rowsToShow) loadMoreBtn.style.display = "none";
 
-	// ---------- Sort by Release Date (client-side) ----------
-	function sortTable() {
-		const sortValue = document.getElementById("sortDropdown").value;
-		
-		// If default "Sort by Date" is selected, do nothing
-		if (sortValue === "default") return;
-		
-		const tbody = document.getElementById("userTableBody");
-		const rows = Array.from(tbody.getElementsByTagName("tr"));
+	    loadMoreBtn.addEventListener("click", function() {
+	        let nextBatch = currentCount + rowsToShow;
+	        
+	        rows.forEach((row, i) => {
+	            if (i >= currentCount && i < nextBatch) {
+	                row.style.display = ""; // Reveal row
+	            }
+	        });
 
-		// Filter out the "no media found" row if present (has colspan)
-		const dataRows = rows.filter(row => row.cells.length >= 2);
+	        currentCount = nextBatch;
 
-		// Sort based on the date column (index 4 = Added Date)
-		dataRows.sort((rowA, rowB) => {
-			const dateA = rowA.cells[4].textContent.trim();
-			const dateB = rowB.cells[4].textContent.trim();
-			if (sortValue === "newest") {
-				return dateB.localeCompare(dateA); // newer first
-			} else {
-				return dateA.localeCompare(dateB); // older first
-			}
-		});
-
-		// Re-append sorted rows
-		for (let row of dataRows) {
-			tbody.appendChild(row);
-		}
-
-		// Re-apply current search filter (so hidden rows remain hidden)
-		filterTable();
-	}
-</script>
+	        // Hide button if we reached the end of the data
+	        if (currentCount >= rows.length) {
+	            loadMoreBtn.style.display = "none";
+	        }
+	    });
+	});
+	</script>
 
 </body>
 </html>

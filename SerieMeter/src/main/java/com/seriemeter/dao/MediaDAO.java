@@ -150,21 +150,23 @@ public class MediaDAO {
 		}
 	}
 
-	// Delete media by ID
-	private static final String DELETE_MEDIA_SQL = "DELETE FROM media WHERE media_id = ?";
+	// Soft delete
+	private static final String DELETE_MEDIA_SQL = "UPDATE media SET is_deleted = 1 WHERE media_id = ?";
 
 	public boolean deleteMedia(int mediaId) {
-		boolean rowDeleted = false;
-		try (Connection conn = DBconfig.getConnection();
-				PreparedStatement ps = conn.prepareStatement(DELETE_MEDIA_SQL)) {
+	    boolean rowUpdated = false;
+	    try (Connection conn = DBconfig.getConnection();
+	            PreparedStatement ps = conn.prepareStatement(DELETE_MEDIA_SQL)) {
 
-			ps.setInt(1, mediaId);
-			rowDeleted = ps.executeUpdate() > 0;
+	        ps.setInt(1, mediaId);
+	        rowUpdated = ps.executeUpdate() > 0;
+	        System.out.println("MediaDAO deleteMedia: rows affected = " + rowUpdated + " for mediaId = " + mediaId);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rowDeleted;
+	    } catch (SQLException e) {
+	        System.out.println("MediaDAO deleteMedia ERROR: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    return rowUpdated;
 	}
 
 	// Returns only movies (category_id = 1), joined with genre name
@@ -254,6 +256,59 @@ public class MediaDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	
+	// Overloaded method for search filter and sort order
+	
+	public List<MediaModel> getAllMedia(String search, String sort) {
+
+	    List<MediaModel> mediaList = new ArrayList<>();
+
+	    // Build query with optional search filter and sort order
+	    String order;
+	    if ("newest".equals(sort)) {
+	        order = "ORDER BY release_date DESC";
+	    } else if ("oldest".equals(sort)) {
+	        order = "ORDER BY release_date ASC";
+	    } else {
+	        order = "ORDER BY media_id ASC"; // default: natural DB order
+	    }
+
+	    String sql = "SELECT * FROM media WHERE is_deleted = 0 "
+	               + "AND (title LIKE ? OR director LIKE ?) "
+	               + order;
+
+	    try (Connection con = DBconfig.getConnection();
+	         PreparedStatement pst = con.prepareStatement(sql)) {
+
+	        // Wrap search term with wildcards for LIKE matching
+	        String term = "%" + (search != null ? search : "") + "%";
+	        pst.setString(1, term);
+	        pst.setString(2, term);
+
+	        try (ResultSet rs = pst.executeQuery()) {
+	            while (rs.next()) {
+	                MediaModel media = new MediaModel();
+	                media.setMediaId(rs.getInt("media_id"));
+	                media.setTitle(rs.getString("title"));
+	                media.setDirector(rs.getString("director"));
+	                media.setReleaseDate(rs.getString("release_date"));
+	                media.setTotalTime(rs.getString("total_time"));
+	                media.setDescription(rs.getString("description"));
+	                media.setMediaProfile(rs.getString("media_profile"));
+	                media.setCategoryId(rs.getInt("category_id"));
+	                media.setGenreId(rs.getInt("genre_id"));
+	                media.setDeleted(rs.getBoolean("is_deleted"));
+	                mediaList.add(media);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return mediaList;
 	}
 
 	public List<MediaModel> searchMedia(String query, int categoryId, int genreId, String yearRange, String sortBy) {

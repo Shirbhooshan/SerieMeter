@@ -107,7 +107,7 @@ public class Login extends HttpServlet {
 			}
 
 		} else {
-			// Authentication failure
+			// Authentication failure — map all status strings to user-friendly messages
 			String errorMsg;
 			switch (status) {
 			case "Username is required":
@@ -119,6 +119,10 @@ public class Login extends HttpServlet {
 				break;
 			case "Password is incorrect":
 				errorMsg = "Incorrect password. Please try again.";
+				break;
+			case "Account pending approval":
+				// Show a popup message on the login page — no redirect needed
+				errorMsg = "Your account is pending admin approval. Please wait.";
 				break;
 			default:
 				errorMsg = "Login failed. Please try again.";

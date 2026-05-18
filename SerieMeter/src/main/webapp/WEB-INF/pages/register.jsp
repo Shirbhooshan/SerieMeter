@@ -493,6 +493,59 @@ body {
 		font-size: 15px;
 	}
 }
+
+/* --- Pending Approval Popup --- */
+.approval-popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.approval-popup {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 35px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.approval-popup h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.approval-popup p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.approval-popup .explore-btn {
+    display: inline-block;
+    background-color: #2eab4a;
+    color: #ffffff;
+    padding: 12px 32px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.approval-popup .explore-btn:hover {
+    opacity: 0.82;
+    transform: translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -642,6 +695,18 @@ body {
 			}
 		}
 	</script>
+
+<!-- Approval popup: shown only after a successful registration. -->
+
+<c:if test="${pendingApproval == true}">
+    <div class="approval-popup-overlay">
+        <div class="approval-popup">
+            <h2>Thank you for registering!</h2>
+            <p>Your account is pending admin approval. You will be able to log in once an admin has approved your account. In the meantime, feel free to browse our media.</p>
+            <a href="${pageContext.request.contextPath}/Explore" class="explore-btn">Keep browsing medias</a>
+        </div>
+    </div>
+</c:if>
 
 </body>
 </html>

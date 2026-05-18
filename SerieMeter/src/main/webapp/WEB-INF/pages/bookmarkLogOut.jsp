@@ -171,6 +171,84 @@
         opacity: 0.82;
         transform: translateY(-2px);
     }
+
+    /* ----- Necessary Media Queries ----- */
+
+    /* For Tablets and smaller laptops */
+    @media (max-width: 992px) {
+        .bm-page-container {
+            margin: 50px auto;
+        }
+        .bm-left-side h1 {
+            font-size: 48px;
+        }
+        .bm-main-layout {
+            gap: 40px;
+        }
+        .bm-right-card {
+            width: 340px;
+            padding: 40px 30px;
+        }
+    }
+
+    /* For Mobile Devices */
+    @media (max-width: 768px) {
+        .bm-page-container {
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .bm-main-layout {
+            flex-direction: column; /* Stack left text and right card */
+            text-align: center;
+            gap: 50px;
+        }
+
+        .bm-left-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bm-left-side h1 {
+            font-size: 38px;
+        }
+
+        .bm-left-side .bm-subtitle {
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .bm-btn-row {
+            flex-direction: column; /* Stack buttons vertically on small mobile if needed */
+            width: 100%;
+            gap: 12px;
+        }
+
+        .bm-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .bm-feature-note {
+            align-items: center;
+        }
+
+        .bm-right-card {
+            width: 100%; /* Card takes full width on mobile */
+            max-width: 400px;
+        }
+    }
+
+    /* Small Mobile Phones */
+    @media (max-width: 480px) {
+        .bm-left-side h1 {
+            font-size: 32px;
+        }
+        .bm-card-title {
+            font-size: 22px;
+        }
+    }
     </style>
 
 </head>
@@ -182,17 +260,14 @@
 <div class="bm-body">
     <div class="bm-page-container">
 
-        <!-- Main Two-Column Layout -->
         <div class="bm-main-layout">
 
-            <!-- Left: Hero Text + Buttons + Feature Note -->
             <div class="bm-left-side">
 
                 <h1>Your Personal<br><span class="bm-green-text">Archive</span></h1>
 
                 <p class="bm-subtitle">Keep track of every cinematic journey. Sign in to access your curated bookmarks across all your devices.</p>
 
-                <!-- Login and Sign up buttons -->
                 <div class="bm-btn-row">
                         <a href="${pageContext.request.contextPath}/Login" class="bm-btn bm-btn-black">
                             <img src="${pageContext.request.contextPath}/assets/icon/login_white_icon.svg" alt="login logo" style="width: 18px; height: 18px;">
@@ -202,7 +277,6 @@
                     <a href="${pageContext.request.contextPath}/Register" class="bm-btn bm-btn-green">Sign up</a>
                 </div>
 
-                <!-- Cloud Sync note -->
                 <div class="bm-feature-note">
                     <img src="${pageContext.request.contextPath}/assets/icon/cloud_icon.svg" alt="Cloud Sync" style="width: 26px; height: 26px; margin-bottom: 4px;">
                     <span class="bm-note-title">Cloud Sync</span>
@@ -211,10 +285,8 @@
 
             </div>
 
-            <!-- Right: Empty Library Card -->
             <div class="bm-right-card">
 
-                <!-- Black circle with bookmark icon -->
                 <div class="bm-card-icon-circle">
                     <img src="${pageContext.request.contextPath}/assets/icon/bookmark_icon.svg" alt="Bookmark">
                 </div>

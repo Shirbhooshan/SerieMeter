@@ -24,4 +24,10 @@ public class MediaService {
     public boolean deleteMedia(int mediaId) {
         return mediaDAO.deleteMedia(mediaId);
     }
+    
+    // Overloaded method for search filter and sort order
+    
+    public List<MediaModel> getAllMedia(String search, String sort) {
+        return mediaDAO.getAllMedia(search, sort);
+    }
 }
