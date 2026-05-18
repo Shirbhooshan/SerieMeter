@@ -10,13 +10,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
+
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
+	
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/adminDashboard.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/adminDashboard.css">
 
 </head>
 <body>

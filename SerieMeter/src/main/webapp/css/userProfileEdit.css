@@ -285,7 +285,7 @@
 
     /* --- Responsive: media queries --- */
 
-    /* Tablets and Small Laptops (1024px and below) */
+    /* Tablets and Small Laptop (1024px and below) */
     @media (max-width: 1024px) {
         .ep-edit-form {
             max-width: 900px;

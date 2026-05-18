@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/userProfileEdit.css">
 
 </head>
+
 <body>
 
     <%@ include file="/components/navbar.jsp"%>
