@@ -2,7 +2,6 @@ package com.seriemeter.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +15,7 @@ import com.seriemeter.dao.ReviewDAO;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.model.ReviewModel;
 import com.seriemeter.model.UserModel;
+import com.seriemeter.utils.CookieUtil;
 
 /**
  * Servlet implementation class Media for tracking movies and series.
@@ -64,20 +64,19 @@ public class Media extends HttpServlet {
 					}
 					request.setAttribute("isBookmarked", isBookmarked);
 
-					// Save last viewed media to cookie so Explore page can show "Continue browsing"
-					Cookie lastViewed = new Cookie("lastViewedId", String.valueOf(mediaId));
-					Cookie lastViewedTitle = new Cookie("lastViewedTitle", 
-					    java.net.URLEncoder.encode(media.getTitle(), "UTF-8"));
-					lastViewed.setMaxAge(60 * 60 * 24 * 7); // 7 days
-					lastViewedTitle.setMaxAge(60 * 60 * 24 * 7);
-					lastViewed.setPath("/");
-					lastViewedTitle.setPath("/");
-					response.addCookie(lastViewed);
-					response.addCookie(lastViewedTitle);
-					
+					// Saving last viewed media to cookie only if user is logged in
+					HttpSession session1 = request.getSession(false);
+					if (session1 != null && session1.getAttribute("user") != null) {
+						CookieUtil.addCookie(response, "lastViewedId", String.valueOf(mediaId), 30 * 60); // 30 minutes,
+																											// 1800
+																											// seconds
+						CookieUtil.addCookie(response, "lastViewedTitle",
+								java.net.URLEncoder.encode(media.getTitle(), "UTF-8"), 30 * 60);
+					}
+
 					// Forward to the JSP inside WEB-INF for security
 					request.getRequestDispatcher("/WEB-INF/pages/media.jsp").forward(request, response);
-					
+
 				} else {
 					// Redirect to Explore if the media ID is invalid
 					response.sendRedirect(request.getContextPath() + "/Explore");
