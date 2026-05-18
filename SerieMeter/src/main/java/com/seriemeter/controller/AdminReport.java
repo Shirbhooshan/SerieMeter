@@ -8,10 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.seriemeter.dao.ReportDAO;
-import com.seriemeter.dao.UserDAO;
 import com.seriemeter.model.UserModel;
 
 /**

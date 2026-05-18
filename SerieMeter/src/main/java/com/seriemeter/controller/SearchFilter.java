@@ -54,7 +54,7 @@ public class SearchFilter extends HttpServlet {
 		int genreId = toInt(genreStr);
 
 		MediaDAO mediaDAO = new MediaDAO();
-		List<MediaModel> results = mediaDAO.searchMedia(query, categoryId, genreId, yearRange, sortBy);
+		List<MediaModel> results = mediaDAO.searchMediaDashboard(query, categoryId, genreId, yearRange, sortBy);
 
 		request.setAttribute("results", results);
 		request.setAttribute("resultCount", results.size());
