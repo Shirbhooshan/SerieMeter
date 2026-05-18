@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
-
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <style>
 .er-error-body {
 	font-family: 'Manrope', sans-serif;
@@ -143,69 +144,61 @@
 /* ----- Necessary Media Queries ----- */
 
 /* For Tablets and Small Desktops (1100px) */
-@media (max-width: 1100px) {
-    .er-error-container {
-        gap: 80px; /* Reduce the massive gap */
-        padding: 0 40px;
-    }
-    .er-error-number {
-        font-size: 250px; /* Shrink the error number */
-    }
+@media ( max-width : 1100px) {
+	.er-error-container {
+		gap: 80px; /* Reduce the massive gap */
+		padding: 0 40px;
+	}
+	.er-error-number {
+		font-size: 250px; /* Shrink the error number */
+	}
 }
 
 /* For Mobile Devices (768px) */
-@media (max-width: 768px) {
-    .er-error-container {
-        flex-direction: column; /* Stack vertically */
-        gap: 40px;
-        text-align: center;
-        padding-bottom: 50px;
-    }
-
-    .er-left-side {
-        margin-top: 50px;
-    }
-
-    .er-error-code {
-        margin-left: 0; /* Center the label */
-    }
-
-    .er-error-number {
-        font-size: 180px; /* Drastically scale down for mobile screens */
-        letter-spacing: -8px;
-    }
-
-    .er-right-side {
-        margin-right: 0; /* Clear the desktop offset */
-        max-width: 90%;
-    }
-
-    .er-title {
-        font-size: 32px;
-    }
-
-    .er-description {
-        font-size: 16px;
-        text-align: center; /* Better readability on mobile */
-    }
-
-    .er-buttons-group {
-        justify-content: center;
-        flex-direction: column; /* Stack buttons on very narrow screens */
-        gap: 15px;
-    }
-    
-    .er-btn {
-        width: 100%; /* Full width buttons for mobile touch targets */
-        padding: 14px 20px;
-    }
+@media ( max-width : 768px) {
+	.er-error-container {
+		flex-direction: column; /* Stack vertically */
+		gap: 40px;
+		text-align: center;
+		padding-bottom: 50px;
+	}
+	.er-left-side {
+		margin-top: 50px;
+	}
+	.er-error-code {
+		margin-left: 0; /* Center the label */
+	}
+	.er-error-number {
+		font-size: 180px; /* Drastically scale down for mobile screens */
+		letter-spacing: -8px;
+	}
+	.er-right-side {
+		margin-right: 0; /* Clear the desktop offset */
+		max-width: 90%;
+	}
+	.er-title {
+		font-size: 32px;
+	}
+	.er-description {
+		font-size: 16px;
+		text-align: center; /* Better readability on mobile */
+	}
+	.er-buttons-group {
+		justify-content: center;
+		flex-direction: column; /* Stack buttons on very narrow screens */
+		gap: 15px;
+	}
+	.er-btn {
+		width: 100%; /* Full width buttons for mobile touch targets */
+		padding: 14px 20px;
+	}
 }
 
 /* Extra small screens (400px) */
-@media (max-width: 400px) {
-    .er-error-number {
-        font-size: 120px;
-    }
+@media ( max-width : 400px) {
+	.er-error-number {
+		font-size: 120px;
+	}
 }
 </style>
 </head>
@@ -226,37 +219,37 @@
 			<div class="er-right-side">
 
 				<c:choose>
-				
+
 					<c:when test="${errorCode == 404}">
 						<h1 class="er-title">Scene Not Found.</h1>
-						<p class="er-description">This chapter of your cinematic journey
-							doesn't exist. The script has reached an unexpected end.</p>
+						<p class="er-description">This chapter of your cinematic
+							journey doesn't exist. The script has reached an unexpected end.</p>
 					</c:when>
-					
+
 					<c:when test="${errorCode == 500}">
 						<h1 class="er-title">Something Went Wrong.</h1>
-						<p class="er-description">The projector has stopped working on our
-							end. Our team is looking into it — please try again shortly.</p>
+						<p class="er-description">The projector has stopped working on
+							our end. Our team is looking into it — please try again shortly.</p>
 					</c:when>
-					
+
 					<c:when test="${errorCode == 403}">
 						<h1 class="er-title">Access Denied.</h1>
-						<p class="er-description">You don't have permission to view this
-							page. Please log in or return to the homepage.</p>
+						<p class="er-description">You don't have permission to view
+							this page. Please log in or return to the homepage.</p>
 					</c:when>
-					
+
 					<c:otherwise>
 						<h1 class="er-title">Unexpected Error.</h1>
-						<p class="er-description">Something went wrong on our end. Please
-							return home and try again.</p>
+						<p class="er-description">Something went wrong on our end.
+							Please return home and try again.</p>
 					</c:otherwise>
-					
+
 				</c:choose>
 
 				<div class="er-buttons-group">
 					<a href="${pageContext.request.contextPath}/Home"
-						class="er-btn er-btn-green">Return home</a>
-					<a href="${pageContext.request.contextPath}/Explore"
+						class="er-btn er-btn-green">Return home</a> <a
+						href="${pageContext.request.contextPath}/Explore"
 						class="er-btn er-btn-outline">Search library</a>
 				</div>
 

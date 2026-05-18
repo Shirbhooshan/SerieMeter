@@ -12,7 +12,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet" />
-
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <style>
 *, *::before, *::after {
 	box-sizing: border-box;
@@ -519,7 +520,7 @@ a {
 			</div>
 
 			<c:if test="${results != null}">
-				<p class="sm_sf_result_count">${resultCount} result${resultCount != 1 ? 's' : ''}
+				<p class="sm_sf_result_count">${resultCount}result${resultCount != 1 ? 's' : ''}
 					found</p>
 			</c:if>
 
@@ -571,6 +572,6 @@ a {
 	</div>
 
 	<%@ include file="/components/footer.jsp"%>
-	
+
 </body>
 </html>

@@ -8,10 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${sessionUser.userName} - Profile</title>
+<title>${sessionUser.userName}- Profile</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 </head>
 
 <style>
@@ -534,14 +536,12 @@ body {
 /* Media Queries */
 
 /* Tablet / half-screen (~768px) */
-@media (max-width: 768px) {
-
+@media ( max-width : 768px) {
 	.up-container {
 		padding: 0 14px;
 		/* Prevent any child from bleeding outside */
 		overflow: hidden;
 	}
-
 	.up-top-white-bg {
 		overflow: hidden;
 	}
@@ -559,11 +559,9 @@ body {
 		width: 80px;
 		height: 80px;
 	}
-
 	.up-user-name {
 		font-size: 18px;
 	}
-
 	.up-user-email {
 		font-size: 12px;
 	}
@@ -574,11 +572,9 @@ body {
 		text-align: left;
 		width: 100%;
 	}
-
 	.up-stat-number {
 		font-size: 34px;
 	}
-
 	.up-stat-label {
 		font-size: 10px;
 	}
@@ -593,22 +589,18 @@ body {
 		flex-wrap: wrap;
 		gap: 10px;
 	}
-
 	.up-card-header h3 {
 		font-size: 15px;
 	}
-
 	.up-sort-btn {
 		padding: 6px 14px;
 		font-size: 11px;
 	}
 
 	/* Bookmark cards: 2 per row on tablet */
-	.up-bookmark-card,
-	.up-bookmark-add {
+	.up-bookmark-card, .up-bookmark-add {
 		width: calc(50% - 10px);
 	}
-
 	.up-bookmark-poster {
 		height: 200px;
 	}
@@ -618,15 +610,12 @@ body {
 		grid-template-columns: 1fr;
 		gap: 12px;
 	}
-
 	.up-review-media-title {
 		font-size: 20px;
 	}
-
 	.up-review-stars {
 		justify-content: flex-start;
 	}
-
 	.up-review-text {
 		text-align: left;
 	}
@@ -639,43 +628,34 @@ body {
 }
 
 /* Small mobile (~480px) */
-@media (max-width: 480px) {
-
+@media ( max-width : 480px) {
 	.up-profile-header {
 		gap: 12px;
 	}
-
 	.up-avatar {
 		width: 64px;
 		height: 64px;
 	}
-
 	.up-user-name {
 		font-size: 15px;
 	}
-
 	.up-stat-number {
 		font-size: 28px;
 	}
 
 	/* Bookmark cards: 2 per row, smaller */
-	.up-bookmark-card,
-	.up-bookmark-add {
+	.up-bookmark-card, .up-bookmark-add {
 		width: calc(50% - 9px);
 	}
-
 	.up-bookmark-poster {
 		height: 160px;
 	}
-
 	.up-bookmark-title {
 		font-size: 12px;
 	}
-
 	.up-discover-text {
 		font-size: 15px;
 	}
-
 	.up-explore-btn {
 		padding: 10px 28px;
 		font-size: 13px;
@@ -736,10 +716,9 @@ body {
 
 								<form method="get"
 									action="${pageContext.request.contextPath}/User"
-									style="display:inline;">
+									style="display: inline;">
 									<button type="submit" name="action" value="open-menu"
-										class="up-three-dot-btn"
-										aria-label="More options">&#8943;</button>
+										class="up-three-dot-btn" aria-label="More options">&#8943;</button>
 								</form>
 
 								<!-- This invisible backdrop only appears when the menu is open.
@@ -752,21 +731,20 @@ body {
 									</form>
 								</c:if>
 
-								<div class="up-popup-menu" id="upPopupMenu"
-									role="menu" style="${popupStyle}">
+								<div class="up-popup-menu" id="upPopupMenu" role="menu"
+									style="${popupStyle}">
 
 									<c:choose>
 										<c:when test="${param.action == 'open-menu'}">
 											<a href="${pageContext.request.contextPath}/UserEdit"
-												class="up-popup-item" role="menuitem">
-												<img alt="Edit"
-													src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+												class="up-popup-item" role="menuitem"> <img alt="Edit"
+												src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
 												Edit Profile
 											</a>
 											<a href="${pageContext.request.contextPath}/Logout"
-												class="up-popup-item up-logout-item" role="menuitem">
-												<img alt="Logout"
-													src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+												class="up-popup-item up-logout-item" role="menuitem"> <img
+												alt="Logout"
+												src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
 												Logout
 											</a>
 										</c:when>

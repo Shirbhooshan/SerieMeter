@@ -7,12 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${genreName} - SerieMeter</title>
+<title>${genreName}- SerieMeter</title>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
-
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <style>
 *, *::before, *::after {
 	box-sizing: border-box;

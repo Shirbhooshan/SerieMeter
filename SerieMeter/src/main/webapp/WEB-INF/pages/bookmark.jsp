@@ -12,7 +12,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet" />
-
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <style>
 /* Base */
 *, *::before, *::after {
@@ -179,8 +180,6 @@ a {
 	height: 100%;
 	object-fit: cover;
 	transition: transform .3s;
-	
-
 }
 
 .sm_bm_card:hover .sm_bm_card_poster img {
@@ -430,14 +429,16 @@ a {
 					<div class="sm_bm_card">
 
 						<div class="sm_bm_card_poster">
-							<a href="${pageContext.request.contextPath}/Media?id=${media.mediaId}">
+							<a
+								href="${pageContext.request.contextPath}/Media?id=${media.mediaId}">
 								<img
 								src="${pageContext.request.contextPath}/getimage?name=${media.mediaProfile}&type=media"
 								alt="${media.title}" />
 							</a>
-							
+
 							<!-- Remove links to confirm-remove with the media id -->
-							<a href="${pageContext.request.contextPath}/Bookmark?action=confirm-remove&mediaId=${media.mediaId}"
+							<a
+								href="${pageContext.request.contextPath}/Bookmark?action=confirm-remove&mediaId=${media.mediaId}"
 								class="sm_bm_remove_btn" title="Remove bookmark"> <img
 								src="${pageContext.request.contextPath}/assets/icon/heart.svg"
 								alt="Remove" />

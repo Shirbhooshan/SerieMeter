@@ -9,8 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register | SerieMeter</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+	rel="stylesheet">
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <style>
 
 /* Global reset: remove default spacing and enforce border-box sizing */
@@ -345,8 +348,7 @@ body {
 }
 
 /* ── Media Queries */
-@media (max-width: 768px) {
-
+@media ( max-width : 768px) {
 	/* Allow page body to scroll at smaller heights */
 	body {
 		overflow: auto;
@@ -361,7 +363,6 @@ body {
 	.rg-logo-section {
 		margin-bottom: 18px;
 	}
-
 	.rg-logo-img {
 		max-width: 170px;
 	}
@@ -373,7 +374,6 @@ body {
 		width: 95%;
 		max-width: 360px;
 	}
-
 	.rg-card-header h2 {
 		font-size: 18px;
 	}
@@ -397,8 +397,7 @@ body {
 	}
 
 	/* Shrink avatar circle */
-	.rg-avatar-label,
-	.rg-avatar-circle {
+	.rg-avatar-label, .rg-avatar-circle {
 		width: 76px;
 		height: 76px;
 	}
@@ -406,7 +405,6 @@ body {
 		width: 74px;
 		height: 74px;
 	}
-
 	.rg-footer-text {
 		position: static;
 		margin-top: 18px;
@@ -416,8 +414,7 @@ body {
 }
 
 /* Mobile: further compress all elements for narrow screens */
-@media (max-width: 480px) {
-
+@media ( max-width : 480px) {
 	/* Minimal horizontal padding */
 	.rg-page-scroll {
 		padding: 20px 10px 70px;
@@ -456,7 +453,6 @@ body {
 		padding: 11px 11px 11px 40px;
 		font-size: 13px;
 	}
-
 	.rg-icon-svg {
 		left: 13px;
 		width: 14px;
@@ -470,14 +466,12 @@ body {
 	}
 
 	/* Smaller disclaimer text */
-	.rg-terms-text,
-	.rg-signup-text {
+	.rg-terms-text, .rg-signup-text {
 		font-size: 11px;
 	}
 
 	/* Smaller avatar on mobile */
-	.rg-avatar-label,
-	.rg-avatar-circle {
+	.rg-avatar-label, .rg-avatar-circle {
 		width: 64px;
 		height: 64px;
 	}
@@ -496,55 +490,57 @@ body {
 
 /* --- Pending Approval Popup --- */
 .approval-popup-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
 }
 
 .approval-popup {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 40px 35px;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	background: #ffffff;
+	border-radius: 20px;
+	padding: 40px 35px;
+	max-width: 420px;
+	width: 90%;
+	text-align: center;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .approval-popup h2 {
-    font-size: 22px;
-    font-weight: 800;
-    color: #1a1a1a;
-    margin-bottom: 12px;
+	font-size: 22px;
+	font-weight: 800;
+	color: #1a1a1a;
+	margin-bottom: 12px;
 }
 
 .approval-popup p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 28px;
+	font-size: 14px;
+	color: #666;
+	line-height: 1.6;
+	margin-bottom: 28px;
 }
 
 .approval-popup .explore-btn {
-    display: inline-block;
-    background-color: #2eab4a;
-    color: #ffffff;
-    padding: 12px 32px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    transition: opacity 0.2s ease, transform 0.15s ease;
+	display: inline-block;
+	background-color: #2eab4a;
+	color: #ffffff;
+	padding: 12px 32px;
+	border-radius: 25px;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 14px;
+	transition: opacity 0.2s ease, transform 0.15s ease;
 }
 
 .approval-popup .explore-btn:hover {
-    opacity: 0.82;
-    transform: translateY(-2px);
+	opacity: 0.82;
+	transform: translateY(-2px);
 }
 </style>
 </head>
@@ -557,8 +553,10 @@ body {
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					var circle = document.querySelector('.rg-avatar-circle');
-					circle.innerHTML = '<img src="' + e.target.result + '" '
-						+ 'style="width:100%; height:100%; object-fit:cover; border-radius:50%;">';
+					circle.innerHTML = '<img src="'
+							+ e.target.result
+							+ '" '
+							+ 'style="width:100%; height:100%; object-fit:cover; border-radius:50%;">';
 				};
 				reader.readAsDataURL(input.files[0]);
 			}
@@ -570,8 +568,8 @@ body {
 		<!-- Centered logo and tagline above the card -->
 		<div class="rg-logo-section">
 			<div>
-				<a href="${pageContext.request.contextPath}/Explore">
-					<img src="assets/images/Logo.jpg" alt="SerieMeter" class="rg-logo-img">
+				<a href="${pageContext.request.contextPath}/Explore"> <img
+					src="assets/images/Logo.jpg" alt="SerieMeter" class="rg-logo-img">
 				</a>
 			</div>
 			<p class="rg-tagline">Your Digital Archive</p>
@@ -596,15 +594,14 @@ body {
 
 				<!-- Let the user pick a profile photo before filling out anything else -->
 				<div class="rg-avatar-group">
-					<span class="rg-avatar-group-label">Profile Photo</span>
-					<label class="rg-avatar-label" for="profileImageInput">
+					<span class="rg-avatar-group-label">Profile Photo</span> <label
+						class="rg-avatar-label" for="profileImageInput">
 						<div class="rg-avatar-circle">
 							<img src="assets/icon/user.svg" alt="avatar" class="rg-user-icon">
 						</div>
 						<div class="rg-avatar-badge">+</div>
-					</label>
-					<span class="rg-avatar-hint">Click to upload (mandatory)</span>
-					<input type="file" id="profileImageInput" name="user_profile"
+					</label> <span class="rg-avatar-hint">Click to upload (mandatory)</span> <input
+						type="file" id="profileImageInput" name="user_profile"
 						accept="image/*" onchange="previewAvatar(this)">
 				</div>
 
@@ -643,14 +640,14 @@ body {
 						<input type="password" name="password" id="passInput"
 							class="rg-rounded-input" placeholder="••••••••" required>
 						<img src="assets/icon/eye.svg" alt="Show"
-							class="rg-icon-svg rg-eye-icon"
-							onclick="togglePassword()" id="eyeIcon">
+							class="rg-icon-svg rg-eye-icon" onclick="togglePassword()"
+							id="eyeIcon">
 					</div>
 				</div>
 
 				<button type="submit" class="rg-submit-btn">
-					Create Account
-					<img src="assets/icon/right-arrow-white.svg" alt="" style="width: 16px;">
+					Create Account <img src="assets/icon/right-arrow-white.svg" alt=""
+						style="width: 16px;">
 				</button>
 
 				<p class="rg-terms-text">
@@ -659,8 +656,9 @@ body {
 
 				<!-- Send existing users straight to the login page instead of creating a duplicate account -->
 				<p class="rg-signup-text">
-					Already have an account?
-					<a href="${pageContext.request.contextPath}/Login" class="rg-signup-link">Sign in</a>
+					Already have an account? <a
+						href="${pageContext.request.contextPath}/Login"
+						class="rg-signup-link">Sign in</a>
 				</p>
 
 			</form>
@@ -673,8 +671,8 @@ body {
 			Go Back
 		</button>
 
-		<br> 
-		
+		<br>
+
 		<!-- Copyright footer -->
 		<div class="rg-footer-text">©2026 SERIEMETER</div>
 
@@ -696,17 +694,20 @@ body {
 		}
 	</script>
 
-<!-- Approval popup: shown only after a successful registration. -->
+	<!-- Approval popup: shown only after a successful registration. -->
 
-<c:if test="${pendingApproval == true}">
-    <div class="approval-popup-overlay">
-        <div class="approval-popup">
-            <h2>Thank you for registering!</h2>
-            <p>Your account is pending admin approval. You will be able to log in once an admin has approved your account. In the meantime, feel free to browse our media.</p>
-            <a href="${pageContext.request.contextPath}/Explore" class="explore-btn">Keep browsing medias</a>
-        </div>
-    </div>
-</c:if>
+	<c:if test="${pendingApproval == true}">
+		<div class="approval-popup-overlay">
+			<div class="approval-popup">
+				<h2>Thank you for registering!</h2>
+				<p>Your account is pending admin approval. You will be able to
+					log in once an admin has approved your account. In the meantime,
+					feel free to browse our media.</p>
+				<a href="${pageContext.request.contextPath}/Explore"
+					class="explore-btn">Keep browsing medias</a>
+			</div>
+		</div>
+	</c:if>
 
 </body>
 </html>

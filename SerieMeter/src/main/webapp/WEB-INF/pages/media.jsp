@@ -8,10 +8,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>${media.title}| SerieMeter</title>
+<title>${media.title}|SerieMeter</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
+<link rel="icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <style>
 html, body {
 	margin: 0;
@@ -490,8 +492,8 @@ html, body {
 								<form action="${pageContext.request.contextPath}/Bookmark"
 									method="POST">
 									<input type="hidden" name="media_id" value="${media.mediaId}">
-									<input type="hidden" name="action" value="add"> 
-									<input type="hidden" name="fromMedia" value="true" />
+									<input type="hidden" name="action" value="add"> <input
+										type="hidden" name="fromMedia" value="true" />
 									<button type="submit" class="bookmark-btn">
 										<img
 											src="${pageContext.request.contextPath}/assets/icon/bookmark-solid-full.svg"
