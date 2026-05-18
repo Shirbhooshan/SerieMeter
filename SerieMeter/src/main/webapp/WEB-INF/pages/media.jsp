@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>${media.title} | SerieMeter</title>
+<title>${media.title}| SerieMeter</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
@@ -477,7 +477,8 @@ html, body {
 								<form action="${pageContext.request.contextPath}/Bookmark"
 									method="POST">
 									<input type="hidden" name="media_id" value="${media.mediaId}">
-									<input type="hidden" name="action" value="remove">
+									<input type="hidden" name="action" value="remove"> <input
+										type="hidden" name="fromMedia" value="true" />
 									<button type="submit" class="bookmark-btn remove-state">
 										<img
 											src="${pageContext.request.contextPath}/assets/icon/bookmark-solid-full.svg"
@@ -489,7 +490,8 @@ html, body {
 								<form action="${pageContext.request.contextPath}/Bookmark"
 									method="POST">
 									<input type="hidden" name="media_id" value="${media.mediaId}">
-									<input type="hidden" name="action" value="add">
+									<input type="hidden" name="action" value="add"> 
+									<input type="hidden" name="fromMedia" value="true" />
 									<button type="submit" class="bookmark-btn">
 										<img
 											src="${pageContext.request.contextPath}/assets/icon/bookmark-solid-full.svg"
@@ -645,6 +647,26 @@ html, body {
 				alt="${media.title}" class="poster-img">
 		</div>
 	</div>
+	<div id="bm_popup"
+		style="display: none; position: fixed; bottom: 30px; right: 30px; background: #1a1a1a; color: white; padding: 14px 24px; border-radius: 10px; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; z-index: 999;">
+	</div>
+
+	<script>
+		var bmParam = "${param.bookmark}";
+		if (bmParam === "added") {
+			document.getElementById("bm_popup").innerText = "Added to Bookmarks";
+			document.getElementById("bm_popup").style.display = "block";
+			setTimeout(function() {
+				document.getElementById("bm_popup").style.display = "none";
+			}, 3000);
+		} else if (bmParam === "removed") {
+			document.getElementById("bm_popup").innerText = "Removed from Bookmarks";
+			document.getElementById("bm_popup").style.display = "block";
+			setTimeout(function() {
+				document.getElementById("bm_popup").style.display = "none";
+			}, 3000);
+		}
+	</script>
 
 	<%@ include file="/components/footer.jsp"%>
 

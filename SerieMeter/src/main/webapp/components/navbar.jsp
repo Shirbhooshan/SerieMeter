@@ -23,7 +23,7 @@
 	align-items: center;
 	gap: 8px;
 	text-decoration: none;
-	color: #1a1a1a;
+	color: #121212;
 	font-size: 13px;
 	font-weight: 600;
 }
@@ -133,6 +133,47 @@
 		white-space: nowrap !important;
 	}
 }
+
+:root {
+	--nav-bg: #121212;
+	--nav-gradient: linear-gradient(180deg, #1e1e1e 0%, #000000 100%);
+	--accent-green: #38a346;
+	--text-white: #ffffff;
+	--text-gray: #b0b0b0;
+}
+
+.sm_navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--nav-gradient);
+	padding: 0 5%;
+	height: 65px;
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	/* Very subtle bottom edge */
+}
+
+/* Logo wrapper */
+.sm_navbar__logo {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	gap: 10px;
+}
+
+/* Logo image */
+.sm_navbar__logo img {
+	height: 32px;
+	width: auto;
+	display: block;
+	mix-blend-mode: screen;
+}
 </style>
 </head>
 
@@ -165,13 +206,15 @@
 						placeholder="Search for movies and series…" value="${param.query}" />
 				</div>
 			</form>
+			
 
 			<a href="${pageContext.request.contextPath}/Randomize"
 				class="sm_navbar__bookmark_btn" title="Surprise me!"
 				style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;">
 				<img src="assets/icon/random-nav.svg" alt="Randomize"
 				class="sm_navbar__bookmark_icon" style="width: 20px; height: 20px;"">
-			</a> <a href="${pageContext.request.contextPath}/Bookmark"
+			</a> 
+			<a href="${pageContext.request.contextPath}/Bookmark"
 				class="sm_navbar__bookmark_btn"> <img
 				src="assets/icon/bookmarkss.svg" alt="Bookmarks"
 				class="sm_navbar__bookmark_icon" />
@@ -196,5 +239,22 @@
 		</div>
 	</nav>
 
+			<c:choose>
+				<c:when test="${not empty sessionScope.user}">
+					<a href="${pageContext.request.contextPath}/UserProfile"
+						class="sm_navbar__profile"> <img
+						src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
+						alt="Profile" class="sm_navbar__profile_pic"
+						onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
+					</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${pageContext.request.contextPath}/Login"
+						class="sm_navbar__signup">Sign In</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</nav>
+	
 </body>
 </html>

@@ -23,7 +23,7 @@
 	padding: 10px;
 	height: 100vh;
 	box-sizing: border-box;
-	overflow: hidden;
+	overflow: auto;
 }
 
 * {
@@ -130,7 +130,7 @@
 	padding: 20px 30px;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+	overflow: auto;
 }
 
 /* Top header */
@@ -333,6 +333,59 @@
 	border-radius: 50%;
 	font-weight: 700;
 }
+
+@media ( max-width : 1024px) {
+	.ad-sidebar {
+		width: 200px;
+	}
+	.ad-table th, .ad-table td {
+		font-size: 11px;
+		padding: 6px 4px;
+	}
+}
+
+@media ( max-width : 768px) {
+	.ad-body {
+		padding: 6px;
+	}
+	.ad-layout-container {
+		gap: 6px;
+	}
+	.ad-sidebar {
+		display: none;
+	}
+	.ad-main-content {
+		padding: 14px 12px;
+		border-radius: 10px;
+	}
+	.ad-top-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+	.ad-controls {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.ad-search-box {
+		width: 100%;
+	}
+	.ad-main-content {
+		overflow-x: auto;
+	}
+	.ad-table {
+		min-width: 560px;
+	}
+}
+
+@media ( max-width : 480px) {
+	.ad-section-title {
+		font-size: 22px;
+	}
+	.ad-section-subtitle {
+		font-size: 12px;
+	}
+}
 </style>
 </head>
 
@@ -403,21 +456,29 @@
 			</h1>
 			<p class="ad-section-subtitle">Update media details here</p>
 
-			<!-- Sort + Search -->
-			<div class="ad-controls">
-				<select class="ad-sort-dropdown">
-					<option>Sort by Date</option>
-					<option>Sort by Name</option>
-					<option>Sort by Category</option>
+			<!-- Sort & Search GET form so servlet handles the logic here -->
+			<form action="${pageContext.request.contextPath}/Edit" method="get"
+				class="ad-controls">
+				<select class="ad-sort-dropdown" name="sort"
+					onchange="this.form.submit()">
+					<option value="date" ${currentSort == 'date'     ? 'selected' : ''}>Sort
+						by Date</option>
+					<option value="name" ${currentSort == 'name'     ? 'selected' : ''}>Sort
+						by Name</option>
+					<option value="category"
+						${currentSort == 'category' ? 'selected' : ''}>Sort by
+						Category</option>
 				</select>
+				
+				
 				<div class="ad-search-wrapper">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search.svg"
 						class="ad-search-icon" alt="Search"> <input type="text"
-						id="searchInput" class="ad-search-box"
-						placeholder="Search for medias" onkeyup="filterTable()">
+						name="query" class="ad-search-box" placeholder="Search for medias"
+						value="${not empty searchQuery ? searchQuery : ''}">
 				</div>
-			</div>
+			</form>
 
 			<!-- Media Table -->
 			<table class="ad-table" id="mediaTable">

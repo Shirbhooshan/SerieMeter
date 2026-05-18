@@ -136,8 +136,11 @@ img {
 	font-size: 13px;
 }
 
+/* Star icon in hero meta */
 .sm_hero_meta .sm_star {
-	color: #f4c542;
+	width: 14px;
+	height: 14px;
+	display: inline-block;
 }
 
 .sm_hero_meta .sm_dot {
@@ -303,6 +306,7 @@ img {
 	overflow: hidden;
 	background: var(--gray-200);
 	margin-bottom: 10px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .sm_card_poster img {
@@ -333,9 +337,11 @@ img {
 	color: var(--gray-400);
 }
 
+/* Star icon in card meta */
 .sm_card_meta .sm_star {
-	color: #f4c542;
-	font-size: 11px;
+	width: 12px;
+	height: 12px;
+	display: inline-block;
 }
 
 .sm_genre_tag {
@@ -427,10 +433,21 @@ img {
 	cursor: pointer;
 	white-space: nowrap;
 	transition: background .2s;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .sm_btn_start:hover {
 	background: rgba(255, 255, 255, 0.4);
+}
+
+/* Star icon inside CTA button */
+.sm_btn_start .sm_btn_star {
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	filter: brightness(0) invert(1);
 }
 
 /* Movies and Series full sections */
@@ -447,8 +464,106 @@ img {
 	font-size: 28px;
 }
 
-.sm_card_poster {
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+/* Continue browsing link */
+.sm_last_viewed {
+	font-size: 13px;
+	color: var(--gray-600);
+	text-decoration: none;
+	font-weight: 500;
+	align-self: center;
+	transition: color .2s;
+}
+
+.sm_last_viewed:hover {
+	color: var(--orange);
+}
+
+.sm_last_viewed strong {
+	color: var(--text);
+	font-weight: 700;
+}
+
+/* Tablet */
+@media ( max-width : 768px) {
+	.sm_hero_wrap {
+		margin: 16px 16px 0;
+	}
+	.sm_hero_slide {
+		height: 180px;
+	}
+	.sm_hero_title {
+		font-size: 24px;
+	}
+	.sm_hero_btn {
+		padding: 6px 14px;
+		font-size: 12px;
+		right: 16px;
+		bottom: 16px;
+	}
+
+	/* Sidebar stacks above content */
+	.sm_main_layout {
+		flex-direction: column;
+		padding: 24px 16px 0;
+	}
+	.sm_sidebar {
+		width: 100%;
+	}
+	.sm_sidebar_list {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+	.sm_sidebar_sortby {
+		display: none;
+	}
+
+	/* 2 column grids */
+	.sm_grid_4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.sm_grid_5 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* CTA banner stacks */
+	.sm_cta_banner {
+		flex-direction: column;
+		margin: 40px 16px 40px;
+		padding: 32px 24px;
+		gap: 20px;
+	}
+	.sm_cta_text h2 {
+		font-size: 22px;
+	}
+	.sm_section {
+		padding: 0 16px;
+	}
+}
+
+@media ( max-width : 480px) {
+	.sm_hero_slide {
+		height: 160px;
+	}
+	.sm_hero_title {
+		font-size: 20px;
+	}
+	.sm_hero_wrap {
+		margin: 12px;
+	}
+	.sm_grid_4, .sm_grid_5 {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+	.sm_card_title {
+		font-size: 11px;
+	}
+	.sm_card_meta {
+		font-size: 10px;
+	}
+	.sm_cta_text h2 {
+		font-size: 20px;
+	}
 }
 </style>
 </head>
@@ -473,12 +588,12 @@ img {
 				</div>
 				<h1 class="sm_hero_title">Discover your next favourite</h1>
 				<div class="sm_hero_meta">
-					<span class="sm_star">★</span> <span>Top rated movies and
+					<img
+						src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+						alt="star" class="sm_star" /> <span>Top rated movies and
 						series</span>
 				</div>
 			</div>
-			<a href="${pageContext.request.contextPath}/SearchFilter"
-				class="sm_hero_btn">Explore Now</a>
 		</div>
 
 		<div class="sm_hero_slide">
@@ -493,12 +608,13 @@ img {
 				</div>
 				<h1 class="sm_hero_title">Rate what you watch</h1>
 				<div class="sm_hero_meta">
-					<span class="sm_star">★</span> <span>Share your opinion with
-						the community</span>
+					<img
+						src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+						alt="star" class="sm_star" /> <span>Share your opinion
+						with the community</span>
 				</div>
 			</div>
-			<a href="${pageContext.request.contextPath}/SearchFilter"
-				class="sm_hero_btn">Explore Now</a>
+
 		</div>
 
 		<div class="sm_hero_slide">
@@ -513,12 +629,13 @@ img {
 				</div>
 				<h1 class="sm_hero_title">Build your watchlist</h1>
 				<div class="sm_hero_meta">
-					<span class="sm_star">★</span> <span>Save titles you want to
-						watch</span>
+					<img
+						src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+						alt="star" class="sm_star" /> <span>Save titles you want
+						to watch</span>
 				</div>
 			</div>
-			<a href="${pageContext.request.contextPath}/Explore"
-				class="sm_hero_btn"> Explore Now </a>
+
 		</div>
 
 	</div>
@@ -528,6 +645,7 @@ img {
 		<span class="active" onclick="goToSlide(0)"></span> <span
 			onclick="goToSlide(1)"></span> <span onclick="goToSlide(2)"></span>
 	</div>
+
 
 	<div class="sm_main_layout">
 
@@ -552,10 +670,19 @@ img {
 					<h2>Trending</h2>
 					<p>Most reviewed</p>
 				</div>
+
+				<!-- Showing the last viewed media if cookie exists -->
+				<c:if test="${not empty lastViewedId}">
+					<a
+						href="${pageContext.request.contextPath}/Media?id=${lastViewedId}"
+						class="sm_last_viewed"> Continue browsing <strong>${lastViewedTitle}</strong>
+					</a>
+				</c:if>
 			</div>
+
 			<div class="sm_section_divider"></div>
 
-
+			<!-- trendingList comes from Explore servlet the top 8 most reviewed -->
 			<div class="sm_grid_4">
 				<c:choose>
 					<c:when test="${empty trendingList}">
@@ -574,7 +701,9 @@ img {
 									</div>
 									<div class="sm_card_title">${media.title}</div>
 									<div class="sm_card_meta">
-										<span class="sm_star">★</span> <span class="sm_genre_tag">${media.genreName}</span>
+										<img
+											src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+											alt="star" class="sm_star" /> <span class="sm_genre_tag">${media.genreName}</span>
 									</div>
 								</a>
 							</c:if>
@@ -595,13 +724,16 @@ img {
 				important films.</p>
 		</div>
 		<div class="sm_cta_action">
-			<button class="sm_btn_start">Start reviewing..</button>
+			<button class="sm_btn_start">
+				<img
+					src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+					alt="star" class="sm_btn_star" /> Start reviewing
+			</button>
 		</div>
 	</div>
 
 
-	<!-- movieList comes from Explore servlet (category_id = 1)  -->
-
+	<!-- movieList comes from Explore servlet where category_id = 1 -->
 	<div class="sm_section">
 		<div class="sm_section_header">
 			<div class="sm_section_header_left">
@@ -628,7 +760,9 @@ img {
 							</div>
 							<div class="sm_card_title">${media.title}</div>
 							<div class="sm_card_meta">
-								<span class="sm_star">★</span> <span class="sm_genre_tag">${media.genreName}</span>
+								<img
+									src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+									alt="star" class="sm_star" /> <span class="sm_genre_tag">${media.genreName}</span>
 							</div>
 						</a>
 					</c:forEach>
@@ -638,8 +772,7 @@ img {
 	</div>
 
 
-	<!-- seriesList comes from Explore servlet (category_id = 2)  -->
-
+	<!-- seriesList comes from Explore servlet where category_id = 2 -->
 	<div class="sm_section">
 		<div class="sm_section_header">
 			<div class="sm_section_header_left">
@@ -666,7 +799,9 @@ img {
 							</div>
 							<div class="sm_card_title">${media.title}</div>
 							<div class="sm_card_meta">
-								<span class="sm_star">★</span> <span class="sm_genre_tag">${media.genreName}</span>
+								<img
+									src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
+									alt="star" class="sm_star" /> <span class="sm_genre_tag">${media.genreName}</span>
 							</div>
 						</a>
 					</c:forEach>
