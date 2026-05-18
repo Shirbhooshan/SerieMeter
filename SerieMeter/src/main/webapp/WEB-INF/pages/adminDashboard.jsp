@@ -425,66 +425,79 @@ body {
 }
 
 /* -- Media Queries -- */
-
-/* Tablets and below (992px) */
-@media ( max-width : 992px) {
-	.ad-sidebar {
-		width: 200px;
+@media ( max-width : 768px) {
+	body {
+		padding: 0;
+		height: auto;
+		min-height: 100vh;
+		overflow: auto;
 	}
+	.ad-layout-container {
+		flex-direction: column;
+		gap: 0;
+		height: auto;
+		min-height: 100vh;
+	}
+	.ad-sidebar {
+		width: 100%;
+		padding: 20px 15px 15px 15px;
+		gap: 15px;
+	}
+	.ad-sidebar>div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
+	}
+
+	/* Center the SerieMeter Logo */
 	.ad-logo-container {
-		padding-bottom: 30px;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
 	}
 	.ad-logo-container img {
 		max-width: 150px;
 	}
-	.ad-main-content {
-		padding: 15px 20px;
-	}
-	.ad-section-title {
-		font-size: 22px;
-	}
-}
-
-/* Mobile Devices (768px) */
-@media ( max-width : 768px) {
-	body {
-		height: auto;
-		overflow: visible; /* Allow scrolling on mobile */
-	}
-	.ad-layout-container {
-		flex-direction: column; /* Stack sidebar on top */
-		height: auto;
-	}
-	.ad-sidebar {
-		width: 100%;
-		padding: 10px;
-		justify-content: flex-start;
-	}
-	.ad-logo-container {
-		padding-bottom: 15px;
-		text-align: center;
-	}
 	.ad-nav-menu {
-		flex-direction: row; /* Horizontal nav for mobile */
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 10px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 100%;
 	}
 	.ad-nav-item {
-		padding: 8px 12px;
-		font-size: 12px;
-	}
-	.ad-logout-container {
-		display: flex;
 		justify-content: center;
-		margin-top: 10px;
+		padding: 10px 5px;
+		font-size: 12px;
+		text-align: center;
 	}
+
+	/* Centered Logout Box */
+	.ad-logout-container {
+		padding: 0;
+		width: 100%;
+	}
+	.ad-logout-btn {
+		justify-content: center;
+		padding: 10px;
+		font-size: 12px;
+		background-color: rgba(231, 90, 85, 0.08);
+		border: 1px solid rgba(231, 90, 85, 0.2);
+	}
+
+	/* Uniform white panel matching desktop viewports */
 	.ad-main-content {
-		margin-top: 10px;
-		border-radius: 12px;
-		padding: 15px;
-		overflow-x: auto; /* Allow table to scroll horizontally */
+		width: 100%;
+		height: auto;
+		flex: 1;
+		overflow: visible;
+		padding: 25px 20px;
+		border-radius: 24px 24px 0 0;
+		/* Rounded top corners, flat bottom layout */
 	}
+
+	/* Core data presentation controls */
 	.ad-top-header {
 		flex-direction: column;
 		gap: 15px;
@@ -502,26 +515,12 @@ body {
 		width: 100%;
 	}
 
-	/* Table responsivness: Allow scroll */
+	/* Table responsiveness context override */
 	.ad-table {
 		display: block;
 		width: 100%;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
-	}
-}
-
-/* Extra Small Devices (480px) */
-@media ( max-width : 480px) {
-	.ad-section-title {
-		font-size: 20px;
-	}
-	.ad-nav-menu {
-		gap: 5px;
-	}
-	.ad-nav-item {
-		font-size: 11px;
-		padding: 6px 10px;
 	}
 }
 </style>

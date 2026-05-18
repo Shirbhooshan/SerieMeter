@@ -418,56 +418,67 @@ body {
 /* Media Queries  */
 @media ( max-width : 768px) {
 	body {
-		overflow: auto;
+		padding: 0;
 		height: auto;
+		min-height: 100vh;
+		overflow: auto;
 	}
 	.ad-layout-container {
 		flex-direction: column;
+		gap: 0;
 		height: auto;
+		min-height: 100vh;
 	}
 
-	/* Sidebar becomes a compact top bar */
+	/* Sidebar turns into the matched 2-column grid system */
 	.ad-sidebar {
 		width: 100%;
-		flex-direction: row;
-		align-items: center;
+		padding: 20px 15px 15px 15px;
+		gap: 15px;
+		display: flex;
+		flex-direction: column;
 		justify-content: space-between;
-		padding: 10px 12px;
-		flex-wrap: wrap;
-		gap: 8px;
+	}
+	.ad-sidebar>div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
 	}
 	.ad-logo-container {
 		padding: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
 	}
 	.ad-logo-container img {
-		max-width: 120px;
+		max-width: 150px;
 	}
-
-	/* Nav items in a horizontal scrollable row */
 	.ad-nav-menu {
-		flex-direction: row;
-		flex-wrap: wrap;
-		gap: 6px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 100%;
 	}
 	.ad-nav-item {
-		padding: 8px 10px;
+		justify-content: center;
+		padding: 10px 5px;
 		font-size: 12px;
-		gap: 6px;
-	}
-
-	/* Hide nav label text, show only icons on very compressed sidebar */
-	.ad-nav-item span {
-		display: none;
+		text-align: center;
 	}
 	.ad-logout-container {
 		padding: 0;
+		width: 100%;
 	}
 	.ad-logout-btn {
-		padding: 8px 10px;
+		justify-content: center;
+		padding: 10px;
 		font-size: 12px;
+		background-color: rgba(231, 90, 85, 0.08);
+		border: 1px solid rgba(231, 90, 85, 0.2);
 	}
 
-	/* Main content: allow scroll, reduce padding */
+	/* --- Main White Container (KEPT EXACTLY AS IS) --- */
 	.ad-main-content {
 		overflow: auto;
 		padding: 16px 18px;
@@ -545,14 +556,6 @@ body {
 
 /* Small mobile (~480px) */
 @media ( max-width : 480px) {
-	/* Show nav labels again at smallest size */
-	.ad-nav-menu {
-		gap: 4px;
-	}
-	.ad-nav-item span {
-		display: inline;
-	}
-
 	/* Stack form and media column vertically on small mobile */
 	.adm-content-grid {
 		flex-direction: column;

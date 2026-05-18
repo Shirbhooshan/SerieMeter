@@ -334,6 +334,9 @@
 	font-weight: 700;
 }
 
+/* -- Media Queries -- */
+
+/* Tablets and below (1024px) */
 @media ( max-width : 1024px) {
 	.ad-sidebar {
 		width: 200px;
@@ -344,19 +347,77 @@
 	}
 }
 
+/* Mobile Devices (768px) */
 @media ( max-width : 768px) {
 	.ad-body {
-		padding: 6px;
+		padding: 0;
+		height: auto;
+		min-height: 100vh;
+		overflow: auto;
 	}
 	.ad-layout-container {
-		gap: 6px;
+		flex-direction: column;
+		gap: 0;
+		height: auto;
+		min-height: 100vh;
 	}
+
+	/* Update sidebar from display:none to matched grid menu layout */
 	.ad-sidebar {
-		display: none;
+		width: 100%;
+		padding: 20px 15px 15px 15px;
+		gap: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
+	.ad-sidebar>div {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
+	}
+	.ad-logo-container {
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.ad-logo-container img {
+		max-width: 150px;
+	}
+	.ad-nav-menu {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 8px;
+		width: 100%;
+	}
+	.ad-nav-item {
+		justify-content: center;
+		padding: 10px 5px;
+		font-size: 12px;
+		text-align: center;
+	}
+	.ad-logout-container {
+		padding: 0;
+		width: 100%;
+	}
+	.ad-logout-btn {
+		justify-content: center;
+		padding: 10px;
+		font-size: 12px;
+		background-color: rgba(231, 90, 85, 0.08);
+		border: 1px solid rgba(231, 90, 85, 0.2);
+	}
+
+	/* --- Main White Container (KEPT EXACTLY AS IS) --- */
 	.ad-main-content {
+		width: 100%;
+		height: auto;
+		flex: 1;
 		padding: 14px 12px;
 		border-radius: 10px;
+		overflow-x: auto;
 	}
 	.ad-top-header {
 		flex-direction: column;
@@ -370,14 +431,12 @@
 	.ad-search-box {
 		width: 100%;
 	}
-	.ad-main-content {
-		overflow-x: auto;
-	}
 	.ad-table {
 		min-width: 560px;
 	}
 }
 
+/* Extra Small Devices (480px) */
 @media ( max-width : 480px) {
 	.ad-section-title {
 		font-size: 22px;
@@ -385,6 +444,37 @@
 	.ad-section-subtitle {
 		font-size: 12px;
 	}
+}
+
+.ad-btn-matched {
+	margin-top: 20px;
+	border: 1px solid #dcdcdc;
+	border-radius: 17px;
+	padding: 9px 20px;
+	font-size: 12px;
+	font-weight: 600;
+	font-family: 'Manrope', sans-serif;
+	outline: none;
+	width: 160px;
+	background: white;
+	color: #1a1a1a;
+	cursor: pointer;
+	text-align: center;
+	display: inline-block;
+	transition: all 0.2s ease;
+}
+
+/* Green interactive hover state */
+.ad-btn-matched:hover {
+	background-color: #4ebc57;
+	color: #FFFFFF;
+	border-color: #4ebc57;
+	/* Smoothly blends the border into the green background */
+}
+
+/* Optional active state when clicked */
+.ad-btn-matched:active {
+	transform: scale(0.98);
 }
 </style>
 </head>
@@ -469,8 +559,8 @@
 						${currentSort == 'category' ? 'selected' : ''}>Sort by
 						Category</option>
 				</select>
-				
-				
+
+
 				<div class="ad-search-wrapper">
 					<img
 						src="${pageContext.request.contextPath}/assets/icon/search.svg"
@@ -529,61 +619,52 @@
 				</tbody>
 			</table>
 
+			<!-- Load more button -->
+			<div style="text-align: center; padding: 15px;">
+				<button class="ad-btn-matched" id="loadMoreBtn">Load More
+					Medias</button>
+			</div>
+
 			<div class="ad-empty-state" id="emptyState" style="display: none;">
 				No media entries yet. Add media from Content Management.</div>
 
-			<div class="ad-pagination" id="paginationControls"></div>
+
 
 		</main>
 	</div>
 
 	<script>
-		const rowsPerPage = 5;
-		let currentPage = 1;
+	document.addEventListener("DOMContentLoaded", function() {
+	    const rows = document.querySelectorAll("#tableBody tr");
+	    const loadMoreBtn = document.getElementById("loadMoreBtn");
+	    const rowsToShow = 5;
+	    let currentCount = rowsToShow;
 
-		window.onload = function() {
-			updateDisplay();
-		};
+	    // Initially hide rows beyond the first batch
+	    rows.forEach((row, i) => {
+	        if (i >= rowsToShow) row.style.display = "none";
+	    });
 
-		function updateDisplay() {
-			const rows = Array.from(document.querySelectorAll('#tableBody tr'));
-			const totalPages = Math.ceil(rows.length / rowsPerPage);
+	    // Hide button if total rows are less than the initial batch
+	    if (rows.length <= rowsToShow) loadMoreBtn.style.display = "none";
 
-			rows.forEach((row, i) => {
-				const isVisible = i >= (currentPage - 1) * rowsPerPage && i < currentPage * rowsPerPage;
-				row.style.display = isVisible ? '' : 'none';
-			});
+	    loadMoreBtn.addEventListener("click", function() {
+	        let nextBatch = currentCount + rowsToShow;
+	        
+	        rows.forEach((row, i) => {
+	            if (i >= currentCount && i < nextBatch) {
+	                row.style.display = ""; // Reveal row
+	            }
+	        });
 
-			const container = document.getElementById('paginationControls');
-			if (totalPages <= 1) { container.innerHTML = ''; return; }
+	        currentCount = nextBatch;
 
-			let buttons = '<button onclick="changePage(' + (currentPage - 1) + ')" ' + (currentPage === 1 ? 'disabled' : '') + '>&lt;</button>';
-			for (let i = 1; i <= totalPages; i++) {
-				buttons += '<button class="' + (i === currentPage ? 'active' : '') + '" onclick="changePage(' + i + ')">' + i + '</button>';
-			}
-			buttons += '<button onclick="changePage(' + (currentPage + 1) + ')" ' + (currentPage === totalPages ? 'disabled' : '') + '>&gt;</button>';
-			container.innerHTML = buttons;
-		}
-
-		function changePage(page) {
-			currentPage = page;
-			updateDisplay();
-		}
-
-		function filterTable() {
-			const input = document.getElementById("searchInput");
-			const filter = input.value.toLowerCase();
-			const tbody = document.getElementById("tableBody");
-			const rows = tbody.getElementsByTagName("tr");
-
-			for (let i = 0; i < rows.length; i++) {
-				if (rows[i].cells.length < 2) continue;
-				const rowText = rows[i].textContent || rows[i].innerText;
-				rows[i].style.display = rowText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
-			}
-			currentPage = 1;
-			updateDisplay();
-		}
+	        // Hide button if we reached the end of the data
+	        if (currentCount >= rows.length) {
+	            loadMoreBtn.style.display = "none";
+	        }
+	    });
+	});
 	</script>
 
 </body>
