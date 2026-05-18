@@ -274,7 +274,7 @@
 
 	<%@ include file="/components/footer.jsp"%>
 
-	<script src="${pageContext.request.contextPath}/assets/javascript/explore.js">
+	<script src="${pageContext.request.contextPath}/javascript/explore.js">
 		
 	</script>
 
