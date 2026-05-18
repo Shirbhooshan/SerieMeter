@@ -1,0 +1,527 @@
+@charset "UTF-8";
+/* Global reset: remove default spacing and enforce border-box sizing */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Manrope', sans-serif;
+}
+
+/* Full-viewport body with fixed background image */
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-image: url('assets/images/registerBackground.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	overflow: hidden;
+}
+
+/* Scrollable overlay layer so content scrolls while background stays fixed */
+.rg-page-scroll {
+	width: 100%;
+	height: 100vh;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 40px 16px 60px;
+}
+
+.rg-logo-section {
+	text-align: center;
+	margin-bottom: 25px;
+	width: 100%;
+}
+
+.rg-logo-img {
+	width: 100%;
+	max-width: 220px;
+	height: auto;
+	margin-bottom: 10px;
+}
+
+.rg-tagline {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #555;
+	font-weight: 600;
+}
+
+/* Dark rounded card that wraps the registration form */
+.rg-register-card {
+	background: #28282B;
+	padding: 45px 40px;
+	border-radius: 24px;
+	box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+	width: 90%;
+	max-width: 380px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+/* Left-aligned heading and subtext at the top of the card */
+.rg-card-header {
+	text-align: left;
+	margin-bottom: 25px;
+}
+
+.rg-card-header h2 {
+	color: white;
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 4px;
+}
+
+/* Card subtext */
+.rg-card-header p {
+	color: #999;
+	font-size: 12px;
+}
+
+.rg-avatar-group {
+	margin-bottom: 22px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+/* Small uppercase label above the avatar circle */
+.rg-avatar-group-label {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #ccc;
+	padding-left: 10px;
+	letter-spacing: 0.5px;
+}
+
+.rg-avatar-label {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	width: 90px;
+	height: 90px;
+	align-self: center;
+}
+
+.rg-avatar-circle {
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	background-color: #3a3a3a;
+	border: 3px solid #4a4a4a;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+/* Default placeholder icon — inverted to appear white on the dark circle */
+.rg-avatar-circle .rg-user-icon {
+	width: 88px;
+	height: 88px;
+	filter: brightness(0) invert(1);
+	opacity: 0.55;
+	margin-bottom: -10px;
+	flex-shrink: 0;
+}
+
+/* Green "+" badge anchored to the bottom-right of the avatar */
+.rg-avatar-badge {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 26px;
+	height: 26px;
+	background: #008a00;
+	border-radius: 50%;
+	border: 2px solid #28282B;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	font-weight: 300;
+	color: white;
+	line-height: 1;
+}
+
+/* Small helper text below the avatar */
+.rg-avatar-hint {
+	font-size: 10px;
+	color: #666;
+	align-self: center;
+}
+
+#profileImageInput {
+	display: none;
+}
+
+/* Labeled input field wrapper with bottom spacing */
+.rg-input-group {
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+/* Uppercase micro-label above each input */
+.rg-input-group label {
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 8px;
+	color: #ccc;
+	padding-left: 10px;
+}
+
+.rg-input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+/* Absolute left icon inside each input field */
+.rg-icon-svg {
+	position: absolute;
+	left: 18px;
+	width: 16px;
+	height: 16px;
+	pointer-events: none;
+	filter: brightness(0);
+	opacity: 0.45;
+}
+
+.rg-eye-icon {
+	left: auto;
+	right: 18px;
+	cursor: pointer;
+	pointer-events: all;
+}
+
+/* Pill-shaped text input with left padding reserved for the icon */
+.rg-rounded-input {
+	width: 100%;
+	padding: 14px 14px 14px 48px;
+	border-radius: 50px;
+	border: 1px solid #3a3a3a;
+	background: #fafafa;
+	font-size: 14px;
+	outline: none;
+	color: #1a1a1a;
+	transition: all 0.3s ease;
+}
+
+/* Muted placeholder color */
+.rg-rounded-input::placeholder {
+	color: #aaa;
+}
+
+/* Green focus ring on active input */
+.rg-rounded-input:focus {
+	border-color: #008a00;
+	background: #fff;
+	box-shadow: 0 0 0 4px rgba(0, 138, 0, 0.12);
+}
+
+/* Full-width green pill submit button */
+.rg-submit-btn {
+	width: 100%;
+	padding: 14px;
+	margin-top: 25px;
+	border-radius: 50px;
+	border: none;
+	background-color: #008a00;
+	color: white;
+	font-weight: 700;
+	font-size: 16px;
+	font-family: 'Manrope', sans-serif;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	transition: transform 0.2s, background 0.2s;
+}
+
+/* Slight lift on hover */
+.rg-submit-btn:hover {
+	background-color: #007000;
+	transform: translateY(-1px);
+}
+
+/* Reset lift on click */
+.rg-submit-btn:active {
+	transform: translateY(0px);
+}
+
+.rg-terms-text {
+	font-size: 11px;
+	color: #666;
+	margin-top: 20px;
+	text-align: center;
+}
+
+/* Green link inside the terms text */
+.rg-terms-text a {
+	color: #34A853;
+	text-decoration: none;
+}
+
+.rg-signup-text {
+	font-size: 13px;
+	color: #666;
+	margin-top: 15px;
+	text-align: center;
+}
+
+/* Green bold sign-in link */
+.rg-signup-link {
+	color: #34A853;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+/* Underline on hover */
+.rg-signup-link:hover {
+	color: #2e9649;
+	text-decoration: underline;
+}
+
+.rg-back-link {
+	color: #333;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 10px;
+	transition: opacity 0.2s;
+}
+
+/* Fade on hover */
+.rg-back-link:hover {
+	opacity: 0.7;
+}
+
+.rg-footer-text {
+	position: static;
+	font-size: 11px;
+	color: #bbb;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+}
+
+/* Go-back button fades on hover */
+.rg-go-back-btn:hover {
+	opacity: 0.75;
+}
+
+/* Underline for the text portion of the go-back button */
+.rg-go-back-btn .rg-link-text {
+	text-decoration: underline;
+}
+
+/* ── Media Queries */
+@media ( max-width : 768px) {
+	/* Allow page body to scroll at smaller heights */
+	body {
+		overflow: auto;
+		height: auto;
+	}
+	.rg-page-scroll {
+		padding: 28px 14px 80px;
+		justify-content: flex-start;
+	}
+
+	/* Less breathing room below logo */
+	.rg-logo-section {
+		margin-bottom: 18px;
+	}
+	.rg-logo-img {
+		max-width: 170px;
+	}
+
+	/* Tighter card padding and softer border-radius */
+	.rg-register-card {
+		padding: 32px 26px;
+		border-radius: 18px;
+		width: 95%;
+		max-width: 360px;
+	}
+	.rg-card-header h2 {
+		font-size: 18px;
+	}
+
+	/* Reduce gap between input fields */
+	.rg-input-group {
+		margin-bottom: 16px;
+	}
+
+	/* Tighter input padding and smaller font */
+	.rg-rounded-input {
+		padding: 12px 12px 12px 44px;
+		font-size: 13px;
+	}
+
+	/* Slimmer submit button */
+	.rg-submit-btn {
+		padding: 12px;
+		font-size: 15px;
+		margin-top: 20px;
+	}
+
+	/* Shrink avatar circle */
+	.rg-avatar-label, .rg-avatar-circle {
+		width: 76px;
+		height: 76px;
+	}
+	.rg-avatar-circle .rg-user-icon {
+		width: 74px;
+		height: 74px;
+	}
+	.rg-footer-text {
+		position: static;
+		margin-top: 18px;
+		display: block;
+		text-align: center;
+	}
+}
+
+/* Mobile: further compress all elements for narrow screens */
+@media ( max-width : 480px) {
+	/* Minimal horizontal padding */
+	.rg-page-scroll {
+		padding: 20px 10px 70px;
+	}
+
+	/* Compact logo */
+	.rg-logo-img {
+		max-width: 140px;
+	}
+
+	/* Tighter tagline letter-spacing */
+	.rg-tagline {
+		font-size: 10px;
+		letter-spacing: 1.5px;
+	}
+
+	/* Full-width card with minimal padding */
+	.rg-register-card {
+		padding: 26px 18px;
+		border-radius: 14px;
+		width: 100%;
+	}
+
+	/* Smaller heading on narrow screens */
+	.rg-card-header h2 {
+		font-size: 16px;
+	}
+
+	/* Smaller subtext */
+	.rg-card-header p {
+		font-size: 11px;
+	}
+
+	/* Compact input field */
+	.rg-rounded-input {
+		padding: 11px 11px 11px 40px;
+		font-size: 13px;
+	}
+	.rg-icon-svg {
+		left: 13px;
+		width: 14px;
+		height: 14px;
+	}
+
+	/* Slim submit button */
+	.rg-submit-btn {
+		font-size: 14px;
+		padding: 11px;
+	}
+
+	/* Smaller disclaimer text */
+	.rg-terms-text, .rg-signup-text {
+		font-size: 11px;
+	}
+
+	/* Smaller avatar on mobile */
+	.rg-avatar-label, .rg-avatar-circle {
+		width: 64px;
+		height: 64px;
+	}
+
+	/* Scale icon inside avatar */
+	.rg-avatar-circle .rg-user-icon {
+		width: 62px;
+		height: 62px;
+	}
+	.rg-avatar-badge {
+		width: 22px;
+		height: 22px;
+		font-size: 15px;
+	}
+}
+
+/* --- Pending Approval Popup --- */
+.approval-popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999;
+}
+
+.approval-popup {
+	background: #ffffff;
+	border-radius: 20px;
+	padding: 40px 35px;
+	max-width: 420px;
+	width: 90%;
+	text-align: center;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.approval-popup h2 {
+	font-size: 22px;
+	font-weight: 800;
+	color: #1a1a1a;
+	margin-bottom: 12px;
+}
+
+.approval-popup p {
+	font-size: 14px;
+	color: #666;
+	line-height: 1.6;
+	margin-bottom: 28px;
+}
+
+.approval-popup .explore-btn {
+	display: inline-block;
+	background-color: #2eab4a;
+	color: #ffffff;
+	padding: 12px 32px;
+	border-radius: 25px;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 14px;
+	transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.approval-popup .explore-btn:hover {
+	opacity: 0.82;
+	transform: translateY(-2px);
+}
