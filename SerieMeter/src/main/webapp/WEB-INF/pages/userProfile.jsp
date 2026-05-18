@@ -1072,10 +1072,10 @@ body {
 		document.addEventListener('DOMContentLoaded', function () {
 
 			// Bookmarks: target only [data-bookmark-item] cards so the "+" tile is never hidden
-			initLoadMore('#bookmarksGrid [data-bookmark-item]', 'bookmarkLoadMoreBtn', 5);
+			initLoadMore('#bookmarksGrid [data-bookmark-item]', 'bookmarkLoadMoreBtn', 6);
 
 			// Reviews: target only [data-review-item] rows so pagination is never touched
-			initLoadMore('#reviewsList [data-review-item]', 'reviewLoadMoreBtn', 5);
+			initLoadMore('#reviewsList [data-review-item]', 'reviewLoadMoreBtn', 4);
 
 		});
 	</script>
