@@ -55,7 +55,7 @@ public class MediaDAO {
 
 		List<MediaModel> mediaList = new ArrayList<>();
 
-		String sql = "SELECT * FROM media ORDER BY media_id ASC";
+		String sql = "SELECT * FROM media WHERE is_deleted = 0 ORDER BY media_id ASC";
 
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
@@ -89,7 +89,7 @@ public class MediaDAO {
 
 		MediaModel media = null;
 
-		String sql = "SELECT * FROM media WHERE media_id = ?";
+		String sql = "SELECT * FROM media WHERE media_id = ? AND is_deleted = 0";
 
 		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
@@ -154,19 +154,19 @@ public class MediaDAO {
 	private static final String DELETE_MEDIA_SQL = "UPDATE media SET is_deleted = 1 WHERE media_id = ?";
 
 	public boolean deleteMedia(int mediaId) {
-	    boolean rowUpdated = false;
-	    try (Connection conn = DBconfig.getConnection();
-	            PreparedStatement ps = conn.prepareStatement(DELETE_MEDIA_SQL)) {
+		boolean rowUpdated = false;
+		try (Connection conn = DBconfig.getConnection();
+				PreparedStatement ps = conn.prepareStatement(DELETE_MEDIA_SQL)) {
 
-	        ps.setInt(1, mediaId);
-	        rowUpdated = ps.executeUpdate() > 0;
-	        System.out.println("MediaDAO deleteMedia: rows affected = " + rowUpdated + " for mediaId = " + mediaId);
+			ps.setInt(1, mediaId);
+			rowUpdated = ps.executeUpdate() > 0;
+			System.out.println("MediaDAO deleteMedia: rows affected = " + rowUpdated + " for mediaId = " + mediaId);
 
-	    } catch (SQLException e) {
-	        System.out.println("MediaDAO deleteMedia ERROR: " + e.getMessage());
-	        e.printStackTrace();
-	    }
-	    return rowUpdated;
+		} catch (SQLException e) {
+			System.out.println("MediaDAO deleteMedia ERROR: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return rowUpdated;
 	}
 
 	// Returns only movies (category_id = 1), joined with genre name
@@ -174,7 +174,7 @@ public class MediaDAO {
 	public List<MediaModel> getMovies() {
 		List<MediaModel> list = new ArrayList<>();
 		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
-				+ "WHERE m.category_id = 1 " + "ORDER BY m.media_id DESC";
+				+ "WHERE m.category_id = 1 AND m.is_deleted = 0 " + "ORDER BY m.media_id DESC";
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
 				ResultSet rs = pst.executeQuery()) {
@@ -202,7 +202,7 @@ public class MediaDAO {
 	public List<MediaModel> getSeries() {
 		List<MediaModel> list = new ArrayList<>();
 		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
-				+ "WHERE m.category_id = 2 " + "ORDER BY m.media_id DESC";
+				+ "WHERE m.category_id = 2 AND m.is_deleted = 0 " + "ORDER BY m.media_id DESC";
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
 				ResultSet rs = pst.executeQuery()) {
@@ -234,7 +234,8 @@ public class MediaDAO {
 		List<MediaModel> list = new ArrayList<>();
 		String sql = "SELECT m.*, g.genre_name, COUNT(r.review_id) AS review_count " + "FROM media m "
 				+ "JOIN genre g ON m.genre_id = g.genre_id " + "LEFT JOIN review r ON m.media_id = r.media_id "
-				+ "GROUP BY m.media_id, g.genre_name " + "ORDER BY review_count DESC " + "LIMIT 8";
+				+ "WHERE m.is_deleted = 0 " + "GROUP BY m.media_id, g.genre_name " + "ORDER BY review_count DESC "
+				+ "LIMIT 8";
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
 				ResultSet rs = pst.executeQuery()) {
@@ -257,61 +258,58 @@ public class MediaDAO {
 		}
 		return list;
 	}
-	
-	
+
 	// Overloaded method for search filter and sort order
-	
+
 	public List<MediaModel> getAllMedia(String search, String sort) {
 
-	    List<MediaModel> mediaList = new ArrayList<>();
+		List<MediaModel> mediaList = new ArrayList<>();
 
-	    // Build query with optional search filter and sort order
-	    String order;
-	    if ("newest".equals(sort)) {
-	        order = "ORDER BY release_date DESC";
-	    } else if ("oldest".equals(sort)) {
-	        order = "ORDER BY release_date ASC";
-	    } else {
-	        order = "ORDER BY media_id ASC"; // default: natural DB order
-	    }
+		// Build query with optional search filter and sort order
+		String order;
+		if ("newest".equals(sort)) {
+			order = "ORDER BY release_date DESC";
+		} else if ("oldest".equals(sort)) {
+			order = "ORDER BY release_date ASC";
+		} else {
+			order = "ORDER BY media_id ASC"; // default: natural DB order
+		}
 
-	    String sql = "SELECT * FROM media WHERE is_deleted = 0 "
-	               + "AND (title LIKE ? OR director LIKE ?) "
-	               + order;
+		String sql = "SELECT * FROM media WHERE is_deleted = 0 " + "AND (title LIKE ? OR director LIKE ?) " + order;
 
-	    try (Connection con = DBconfig.getConnection();
-	         PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
-	        // Wrap search term with wildcards for LIKE matching
-	        String term = "%" + (search != null ? search : "") + "%";
-	        pst.setString(1, term);
-	        pst.setString(2, term);
+			// Wrap search term with wildcards for LIKE matching
+			String term = "%" + (search != null ? search : "") + "%";
+			pst.setString(1, term);
+			pst.setString(2, term);
 
-	        try (ResultSet rs = pst.executeQuery()) {
-	            while (rs.next()) {
-	                MediaModel media = new MediaModel();
-	                media.setMediaId(rs.getInt("media_id"));
-	                media.setTitle(rs.getString("title"));
-	                media.setDirector(rs.getString("director"));
-	                media.setReleaseDate(rs.getString("release_date"));
-	                media.setTotalTime(rs.getString("total_time"));
-	                media.setDescription(rs.getString("description"));
-	                media.setMediaProfile(rs.getString("media_profile"));
-	                media.setCategoryId(rs.getInt("category_id"));
-	                media.setGenreId(rs.getInt("genre_id"));
-	                media.setDeleted(rs.getBoolean("is_deleted"));
-	                mediaList.add(media);
-	            }
-	        }
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					MediaModel media = new MediaModel();
+					media.setMediaId(rs.getInt("media_id"));
+					media.setTitle(rs.getString("title"));
+					media.setDirector(rs.getString("director"));
+					media.setReleaseDate(rs.getString("release_date"));
+					media.setTotalTime(rs.getString("total_time"));
+					media.setDescription(rs.getString("description"));
+					media.setMediaProfile(rs.getString("media_profile"));
+					media.setCategoryId(rs.getInt("category_id"));
+					media.setGenreId(rs.getInt("genre_id"));
+					media.setDeleted(rs.getBoolean("is_deleted"));
+					mediaList.add(media);
+				}
+			}
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    return mediaList;
+		return mediaList;
 	}
 
-	public List<MediaModel> searchMediaDashboard(String query, int categoryId, int genreId, String yearRange, String sortBy) {
+	public List<MediaModel> searchMediaDashboard(String query, int categoryId, int genreId, String yearRange,
+			String sortBy) {
 
 		List<MediaModel> results = new ArrayList<>();
 		StringBuilder where = new StringBuilder("WHERE 1=1 ");
@@ -414,8 +412,7 @@ public class MediaDAO {
 	public List<MediaModel> getMediaByGenre(String genreName) {
 		List<MediaModel> list = new ArrayList<>();
 		String sql = "SELECT m.*, g.genre_name FROM media m " + "JOIN genre g ON m.genre_id = g.genre_id "
-				+ "WHERE g.genre_name = ?";
-
+				+ "WHERE g.genre_name = ? AND m.is_deleted = 0";
 		try (Connection c = DBconfig.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 
 			ps.setString(1, genreName);
@@ -439,8 +436,8 @@ public class MediaDAO {
 	public int getRandomMediaId() {
 		int randomId = 0;
 
-		String query = "SELECT media_id FROM media ORDER BY RAND() LIMIT 1";
-
+		String query = "SELECT media_id FROM media WHERE is_deleted = 0 ORDER BY RAND() LIMIT 1";
+		
 		try (Connection conn = DBconfig.getConnection();
 				PreparedStatement ps = conn.prepareStatement(query);
 				ResultSet rs = ps.executeQuery()) {
@@ -461,9 +458,9 @@ public class MediaDAO {
 	public List<MediaModel> getAllMediaWithAvgRating() {
 		List<MediaModel> mediaList = new ArrayList<>();
 
-		String sql = "SELECT m.*, " + "       COALESCE(AVG(r.rating) * 2, 0) AS avg_rating " + "FROM media m "
-				+ "LEFT JOIN review r ON m.media_id = r.media_id " + "GROUP BY m.media_id " + "ORDER BY m.media_id ASC";
-
+		String sql = "SELECT m.*, COALESCE(AVG(r.rating) * 2, 0) AS avg_rating " + "FROM media m "
+				+ "LEFT JOIN review r ON m.media_id = r.media_id " + "WHERE m.is_deleted = 0 "
+				+ "GROUP BY m.media_id ORDER BY m.media_id ASC";
 		try (Connection con = DBconfig.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
 				ResultSet rs = pst.executeQuery()) {
@@ -490,7 +487,7 @@ public class MediaDAO {
 		return mediaList;
 	}
 
-	// search media by title 
+	// search media by title
 	// called by AdminEdit when admin types in the search box
 	public List<MediaModel> searchMediaEdit(String query, String sort) {
 		List<MediaModel> list = new ArrayList<>();
