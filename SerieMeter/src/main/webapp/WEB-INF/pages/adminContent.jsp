@@ -146,7 +146,7 @@ body {
 	margin: 0;
 }
 
-/* --- Profile section (matches dashboard exactly) --- */
+/* --- Profile section --- */
 .ad-profile-section {
 	display: flex;
 	align-items: center;
@@ -409,6 +409,219 @@ body {
 .ad-text-orange {
 	color: #e37329;
 }
+
+/* Desktop: hide the responsive-only top row in media column */
+.adm-media-top-row {
+	display: none;
+}
+
+/* Media Queries  */
+@media (max-width: 768px) {
+
+	body {
+		overflow: auto;
+		height: auto;
+	}
+
+	.ad-layout-container {
+		flex-direction: column;
+		height: auto;
+	}
+
+	/* Sidebar becomes a compact top bar */
+	.ad-sidebar {
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 12px;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.ad-logo-container {
+		padding: 0;
+	}
+
+	.ad-logo-container img {
+		max-width: 120px;
+	}
+
+	/* Nav items in a horizontal scrollable row */
+	.ad-nav-menu {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+
+	.ad-nav-item {
+		padding: 8px 10px;
+		font-size: 12px;
+		gap: 6px;
+	}
+
+	/* Hide nav label text, show only icons on very compressed sidebar */
+	.ad-nav-item span {
+		display: none;
+	}
+
+	.ad-logout-container {
+		padding: 0;
+	}
+
+	.ad-logout-btn {
+		padding: 8px 10px;
+		font-size: 12px;
+	}
+
+	/* Main content: allow scroll, reduce padding */
+	.ad-main-content {
+		overflow: auto;
+		padding: 16px 18px;
+		border-radius: 12px;
+	}
+
+	/* Keep form and media side by side on tablet */
+	.adm-content-grid {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 20px;
+		align-items: flex-start;
+	}
+
+	.adm-form-column {
+		flex: 1 1 55%;
+		max-width: none;
+	}
+
+	.adm-titles h1 {
+		font-size: 26px;
+	}
+
+	.adm-titles .adm-subtitle {
+		font-size: 14px;
+	}
+
+	/* Hide Director and Category from left form column on tablet */
+	.adm-input-group--director {
+		display: none;
+	}
+
+	.adm-input-group--category {
+		display: none;
+	}
+
+	/* Media column: right side, full flex column */
+	.adm-media-column {
+		flex: 1 1 38%;
+		max-width: none;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	/* Show Director + Category row at top of media column */
+	.adm-media-top-row {
+		display: flex;
+		gap: 10px;
+	}
+
+	.adm-media-top-row .adm-input-group {
+		flex: 1;
+		margin-bottom: 0;
+	}
+
+	.adm-media-header {
+		width: 100%;
+	}
+
+	.adm-poster-preview {
+		height: 260px;
+	}
+
+	/* Genre + publish button side by side */
+	.adm-genre-group {
+		margin-top: 0;
+	}
+
+	.adm-form-control-genre {
+		width: 100%;
+	}
+
+	/* 3-col row: Release Date and Total Time stack vertically (Category hidden) */
+	.adm-row-3-cols {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.adm-synopsis-box {
+		min-height: 160px;
+	}
+}
+
+/* Small mobile (~480px) */
+@media (max-width: 480px) {
+
+	/* Show nav labels again at smallest size */
+	.ad-nav-menu {
+		gap: 4px;
+	}
+
+	.ad-nav-item span {
+		display: inline;
+	}
+
+	/* Stack form and media column vertically on small mobile */
+	.adm-content-grid {
+		flex-direction: column;
+	}
+
+	/* Restore Director and Category in left form column on small mobile */
+	.adm-input-group--director {
+		display: block;
+	}
+
+	.adm-input-group--category {
+		display: block;
+	}
+
+	/* Hide the media-top-row on small mobile since fields are back in form */
+	.adm-media-top-row {
+		display: none;
+	}
+
+	.adm-titles h1 {
+		font-size: 22px;
+	}
+
+	.adm-media-column {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.adm-poster-preview {
+		height: 220px;
+	}
+
+	.adm-genre-group {
+		width: 100%;
+	}
+
+	.adm-publish-button-container {
+		justify-content: stretch;
+	}
+
+	.adm-publish-btn {
+		width: 100%;
+		text-align: center;
+	}
+
+	/* Restore 3-col row layout on small mobile */
+	.adm-row-3-cols {
+		flex-direction: row;
+		gap: 15px;
+	}
+}
 </style>
 </head>
 <body>
@@ -427,15 +640,15 @@ body {
 					<a href="${pageContext.request.contextPath}/Dashboard"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/dashboard-ad-icon.svg"
-						class="ad-nav-icon"> Dashboard
+						class="ad-nav-icon"> <span>Dashboard</span>
 					</a> <a href="${pageContext.request.contextPath}/AdminContent"
 						class="ad-nav-item active"> <img
 						src="${pageContext.request.contextPath}/assets/icon/contentManagement-icon.svg"
-						class="ad-nav-icon"> Content Management
+						class="ad-nav-icon"> <span>Content Management</span>
 					</a> <a href="${pageContext.request.contextPath}/Edit"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/edit.svg"
-						class="ad-nav-icon"> Edit
+						class="ad-nav-icon"> <span>Edit</span>
 					</a> <a href="${pageContext.request.contextPath}/Report"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/report.svg"
@@ -444,10 +657,11 @@ body {
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/feedback.svg"
 						class="ad-nav-icon"> Feedbacks
+						class="ad-nav-icon"> <span>Report & Analytics</span>
 					</a> <a href="${pageContext.request.contextPath}/Users"
 						class="ad-nav-item"> <img
 						src="${pageContext.request.contextPath}/assets/icon/users-ad-icon.svg"
-						class="ad-nav-icon"> Users
+						class="ad-nav-icon"> <span>Users</span>
 					</a>
 				</nav>
 			</div>
@@ -456,7 +670,7 @@ body {
 				<a href="${pageContext.request.contextPath}/Logout"
 					class="ad-logout-btn"> <img
 					src="${pageContext.request.contextPath}/assets/icon/logout-ad-icon.svg"
-					class="ad-nav-icon"> Logout
+					class="ad-nav-icon"> <span>Logout</span>
 				</a>
 			</div>
 		</aside>
@@ -471,6 +685,7 @@ body {
 			<form action="${pageContext.request.contextPath}/AdminContent"
 				method="POST" enctype="multipart/form-data" class="adm-content-grid">
 
+				<!-- LEFT: Form Column -->
 				<div class="adm-form-column">
 					<div class="adm-titles">
 						<h1>
@@ -481,31 +696,35 @@ body {
 					</div>
 
 					<div class="adm-input-group">
-						<label>Movie Title</label> <input type="text" name="title"
-							class="adm-form-control" required>
+						<label>Movie Title</label>
+						<input type="text" name="title" class="adm-form-control" required>
 					</div>
 
-					<div class="adm-input-group">
-						<label>Director's Name</label> <input type="text"
-							name="directorName" class="adm-form-control" required>
+					<!-- Hidden on tablet (768px); shown in media column instead -->
+					<div class="adm-input-group adm-input-group--director">
+						<label>Director's Name</label>
+						<input type="text" name="directorName" class="adm-form-control">
 					</div>
 
 					<div class="adm-row-3-cols">
 						<div class="adm-input-group">
-							<label>Release Date</label> <input type="date"
-								name="release_date" class="adm-form-control" required>
+							<label>Release Date</label>
+							<input type="date" name="release_date" class="adm-form-control" required>
 						</div>
-						<div class="adm-input-group">
-							<label>Category</label> <select name="category_id"
-								class="adm-form-control-category" required>
+
+						<!-- Hidden on tablet (768px); shown in media column instead -->
+						<div class="adm-input-group adm-input-group--category">
+							<label>Category</label>
+							<select name="category_id" class="adm-form-control-category">
 								<option value="" disabled selected></option>
 								<option value="1">Movie</option>
 								<option value="2">Series</option>
 							</select>
 						</div>
+
 						<div class="adm-input-group">
-							<label>Total Time</label> <input type="text" name="total_time"
-								class="adm-form-control" required>
+							<label>Total Time</label>
+							<input type="text" name="total_time" class="adm-form-control" required>
 						</div>
 					</div>
 
@@ -516,7 +735,25 @@ body {
 					</div>
 				</div>
 
+				<!-- RIGHT: Media Column -->
 				<div class="adm-media-column">
+
+					<!-- Tablet-only: Director + Category moved here -->
+					<div class="adm-media-top-row">
+						<div class="adm-input-group">
+							<label>Director's Name</label>
+							<input type="text" name="directorName" class="adm-form-control">
+						</div>
+						<div class="adm-input-group">
+							<label>Category</label>
+							<select name="category_id" class="adm-form-control-category">
+								<option value="" disabled selected></option>
+								<option value="1">Movie</option>
+								<option value="2">Series</option>
+							</select>
+						</div>
+					</div>
+
 					<div class="adm-media-header">
 						<h4>Visual identity</h4>
 						<p>
@@ -538,8 +775,8 @@ body {
 					</div>
 
 					<div class="adm-input-group adm-genre-group">
-						<label>Genre</label> <select name="genre_id"
-							class="adm-form-control-genre" required>
+						<label>Genre</label>
+						<select name="genre_id" class="adm-form-control-genre" required>
 							<option value=""></option>
 							<option value="1">Action</option>
 							<option value="2">Comedy</option>
@@ -548,9 +785,6 @@ body {
 							<option value="5">Sci-Fi</option>
 							<option value="6">Thriller</option>
 							<option value="7">Romance</option>
-							<option value="8">Animation</option>
-							<option value="9">Documentary</option>
-							<option value="10">Crime</option>
 						</select>
 					</div>
 

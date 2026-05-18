@@ -90,7 +90,21 @@ public class UserProfile extends HttpServlet {
         // FIX: provide current time so the JSP can compute relative review dates
         request.setAttribute("now", new Date());
 
-        // 6. Forward to the view
+        // 6. Determine whether the popup menu should be visible.
+        //    The three-dot form submits ?action=open-menu to open it.
+        //    The backdrop form submits ?action=close to hide it.
+        //    Edit-profile and logout are plain <a> links inside the popup.
+        //    Any other value (or no value) keeps the popup hidden.
+        String action = request.getParameter("action");
+        String popupStyle;
+        if ("open-menu".equals(action)) {
+            popupStyle = "display:block";
+        } else {
+            popupStyle = "display:none";
+        }
+        request.setAttribute("popupStyle", popupStyle);
+
+        // 7. Forward to the view
         request.getRequestDispatcher("/WEB-INF/pages/userProfile.jsp")
                .forward(request, response);
     }

@@ -46,7 +46,7 @@ public class AdminContent extends HttpServlet {
 		try {
 			// Collect form data — names must match JSP exactly
 			String title = request.getParameter("title");
-			String director = request.getParameter("director");
+			String director = request.getParameter("directorName");
 			String releaseDate = request.getParameter("release_date");
 			String totalTime = request.getParameter("total_time");
 			String description = request.getParameter("description");

@@ -23,6 +23,12 @@
 	font-family: 'Manrope', sans-serif;
 }
 
+/* Prevent horizontal overflow on all screen sizes */
+html, body {
+	overflow-x: hidden;
+	max-width: 100%;
+}
+
 body {
 	font-family: 'Manrope', sans-serif;
 	background-color: #F3F3F3;
@@ -41,9 +47,11 @@ body {
 /* Top banner with background image */
 .up-top-white-bg {
 	width: 100%;
+	max-width: 100%;
 	background-image: url('assets/images/rectangle.png');
 	background-size: cover;
 	background-position: center;
+	overflow: hidden;
 }
 
 /* Profile summary row: avatar+info on the left, stats on the right */
@@ -121,9 +129,8 @@ body {
 	background-color: #f0f0f0;
 }
 
-/* Dropdown popup — hidden until .up-popup-active is added via JS */
+/* Dropdown popup — visibility set by inline style from the servlet (popupStyle attribute) */
 .up-popup-menu {
-	display: none;
 	position: absolute;
 	top: 0;
 	left: calc(100% + 8px);
@@ -136,9 +143,18 @@ body {
 	overflow: hidden;
 }
 
-/* JS adds this class to make the popup visible */
-.up-popup-menu.up-popup-active {
-	display: block;
+/* Invisible full-screen backdrop — clicking it closes the popup via a server GET */
+.up-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 998;
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	cursor: default;
+	width: 100%;
+	height: 100%;
 }
 
 /* Each row inside the popup (Edit Profile, Logout, etc.) */
@@ -284,7 +300,7 @@ body {
 	text-decoration: underline;
 }
 
-/* ── Bookmark poster grid ───────────────────────────────────────────────── */
+/* ── Bookmark poster grid  */
 .up-bookmarks-grid {
 	display: flex;
 	flex-wrap: wrap;
@@ -390,7 +406,7 @@ body {
 	line-height: 1;
 }
 
-/* ── Review items ──────────────────────────────────────────────────────── */
+/* Review items  */
 .up-review-item {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -412,14 +428,14 @@ body {
 .up-review-media-title {
 	font-size: 26px;
 	font-weight: 700;
-	color: #000000; /* Updated to black */
+	color: #000000;
 	line-height: 1.25;
 	margin-bottom: 8px;
 }
 
 .up-review-date {
 	font-size: 12px;
-	color: #000000; /* Updated to black */
+	color: #000000;
 	margin-top: auto;
 }
 
@@ -435,7 +451,7 @@ body {
 	gap: 4px;
 	margin-bottom: 10px;
 	align-items: center;
-	justify-content: flex-end; /* Right aligned stars */
+	justify-content: flex-end;
 }
 
 .up-star {
@@ -448,7 +464,7 @@ body {
 	font-size: 14px;
 	color: #333;
 	line-height: 1.6;
-	text-align: right; /* Right aligned text */
+	text-align: right;
 }
 
 /* Pagination row below reviews */
@@ -483,7 +499,7 @@ body {
 	font-weight: 700;
 }
 
-/* Footer section*/
+/* Footer section */
 .up-footer {
 	text-align: center;
 	margin-top: 40px;
@@ -513,6 +529,170 @@ body {
 
 .up-explore-btn:hover {
 	background-color: #006800;
+}
+
+/* Media Queries */
+
+/* Tablet / half-screen (~768px) */
+@media (max-width: 768px) {
+
+	.up-container {
+		padding: 0 14px;
+		/* Prevent any child from bleeding outside */
+		overflow: hidden;
+	}
+
+	.up-top-white-bg {
+		overflow: hidden;
+	}
+
+	/* Stack avatar+info above stats */
+	.up-profile-summary {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 20px;
+		padding: 20px 16px;
+	}
+
+	/* Shrink avatar */
+	.up-avatar {
+		width: 80px;
+		height: 80px;
+	}
+
+	.up-user-name {
+		font-size: 18px;
+	}
+
+	.up-user-email {
+		font-size: 12px;
+	}
+
+	/* Stats move below profile info, left-aligned */
+	.up-stats {
+		gap: 24px;
+		text-align: left;
+		width: 100%;
+	}
+
+	.up-stat-number {
+		font-size: 34px;
+	}
+
+	.up-stat-label {
+		font-size: 10px;
+	}
+
+	/* Card padding tighter */
+	.up-card {
+		padding: 16px;
+	}
+
+	/* Card header wraps on small screens */
+	.up-card-header {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.up-card-header h3 {
+		font-size: 15px;
+	}
+
+	.up-sort-btn {
+		padding: 6px 14px;
+		font-size: 11px;
+	}
+
+	/* Bookmark cards: 2 per row on tablet */
+	.up-bookmark-card,
+	.up-bookmark-add {
+		width: calc(50% - 10px);
+	}
+
+	.up-bookmark-poster {
+		height: 200px;
+	}
+
+	/* Reviews: single column */
+	.up-review-item {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.up-review-media-title {
+		font-size: 20px;
+	}
+
+	.up-review-stars {
+		justify-content: flex-start;
+	}
+
+	.up-review-text {
+		text-align: left;
+	}
+
+	/* Footer: match desktop bottom padding */
+	.up-footer {
+		margin-top: 40px;
+		padding-bottom: 100px;
+	}
+}
+
+/* Small mobile (~480px) */
+@media (max-width: 480px) {
+
+	.up-profile-header {
+		gap: 12px;
+	}
+
+	.up-avatar {
+		width: 64px;
+		height: 64px;
+	}
+
+	.up-user-name {
+		font-size: 15px;
+	}
+
+	.up-stat-number {
+		font-size: 28px;
+	}
+
+	/* Bookmark cards: 2 per row, smaller */
+	.up-bookmark-card,
+	.up-bookmark-add {
+		width: calc(50% - 9px);
+	}
+
+	.up-bookmark-poster {
+		height: 160px;
+	}
+
+	.up-bookmark-title {
+		font-size: 12px;
+	}
+
+	.up-discover-text {
+		font-size: 15px;
+	}
+
+	.up-explore-btn {
+		padding: 10px 28px;
+		font-size: 13px;
+	}
+
+	/* Popup opens downward on very small screens */
+	.up-popup-menu {
+		left: auto;
+		right: 0;
+		top: calc(100% + 6px);
+	}
+
+	/* Footer: match desktop bottom padding */
+	.up-footer {
+		margin-top: 40px;
+		padding-bottom: 100px;
+	}
 }
 </style>
 
@@ -545,29 +725,54 @@ body {
 						<div
 							style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
 
-							<%-- Display the logged-in user's full name prefixed with @ --%>
 							<h2 class="up-user-name">
 								@
 								<c:out value="${sessionUser.fullName}" />
 							</h2>
 
+							<!-- Clicking this button does a GET to the server; the servlet responds
+							     by setting popupStyle to display:block or display:none — no JS involved -->
 							<div class="up-menu-wrapper">
 
-								<button class="up-three-dot-btn" id="upMenuToggle"
-									aria-label="More options" aria-expanded="false">&#8943;</button>
+								<form method="get"
+									action="${pageContext.request.contextPath}/User"
+									style="display:inline;">
+									<button type="submit" name="action" value="open-menu"
+										class="up-three-dot-btn"
+										aria-label="More options">&#8943;</button>
+								</form>
 
-								<div class="up-popup-menu" id="upPopupMenu" role="menu">
+								<!-- This invisible backdrop only appears when the menu is open.
+								     Clicking anywhere outside the popup sends a close action back to the server. -->
+								<c:if test="${param.action == 'open-menu'}">
+									<form method="get"
+										action="${pageContext.request.contextPath}/User">
+										<button type="submit" name="action" value="close"
+											class="up-backdrop" aria-label="Close menu"></button>
+									</form>
+								</c:if>
 
-									<a href="${pageContext.request.contextPath}/UserEdit"
-										class="up-popup-item" role="menuitem"> <img alt="Edit"
-										src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
-										Edit Profile
-									</a> <a href="${pageContext.request.contextPath}/Logout"
-										class="up-popup-item up-logout-item" role="menuitem"> <img
-										alt="Logout"
-										src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
-										Logout
-									</a>
+								<div class="up-popup-menu" id="upPopupMenu"
+									role="menu" style="${popupStyle}">
+
+									<c:choose>
+										<c:when test="${param.action == 'open-menu'}">
+											<a href="${pageContext.request.contextPath}/UserEdit"
+												class="up-popup-item" role="menuitem">
+												<img alt="Edit"
+													src="${pageContext.request.contextPath}/assets/icon/edit-up-profile.svg">
+												Edit Profile
+											</a>
+											<a href="${pageContext.request.contextPath}/Logout"
+												class="up-popup-item up-logout-item" role="menuitem">
+												<img alt="Logout"
+													src="${pageContext.request.contextPath}/assets/icon/logout-up-icon.svg">
+												Logout
+											</a>
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose>
 
 								</div>
 
@@ -607,7 +812,7 @@ body {
 			<div class="up-card up-bookmarks-card">
 				<div class="up-card-header">
 					<h3>Bookmarks</h3>
-					<%-- Sort buttons: highlight whichever order is currently active --%>
+					<!-- The active class is applied conditionally so the selected sort order stays highlighted -->
 					<div class="up-sort-options">
 						<a
 							href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
@@ -628,7 +833,6 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<%-- Poster grid of bookmarked media --%>
 						<div class="up-bookmarks-grid">
 							<c:forEach var="media" items="${userBookmarks}">
 								<div class="up-bookmark-card"
@@ -660,7 +864,7 @@ body {
 											<span class="up-bookmark-genre"> <c:out
 													value="${media.genreName}" />
 											</span>
-											<%-- Extract 4-digit year from release_date string --%>
+											<!-- releaseDate is a full date string, so we slice just the first 4 characters to get the year -->
 											<span class="up-bookmark-year"> <c:if
 													test="${not empty media.releaseDate}">
 													<c:out value="${fn:substring(media.releaseDate, 0, 4)}" />
@@ -683,7 +887,7 @@ body {
 			<div class="up-card up-reviews-card">
 				<div class="up-card-header">
 					<h3>Reviews</h3>
-					<%-- Sort buttons: highlight whichever order is currently active --%>
+					<!-- Same active-class trick as the bookmarks sort above -->
 					<div class="up-sort-options">
 						<a
 							href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
@@ -704,7 +908,6 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<%-- Loop through each review --%>
 						<c:forEach var="review" items="${userReviews}">
 							<div class="up-review-item">
 
@@ -782,30 +985,7 @@ body {
 	<%@ include file="/components/footer.jsp"%>
 
 	<script>
-		// ── Three-dot popup menu logic ─────────────────────────────────────────
-
-		const menuToggle = document.getElementById('upMenuToggle');
-		const popupMenu  = document.getElementById('upPopupMenu');
-
-		// Toggle the popup open or closed when the button is clicked
-		menuToggle.addEventListener('click', function (event) {
-			event.stopPropagation();
-			const isOpen = popupMenu.classList.toggle('up-popup-active');
-			menuToggle.setAttribute('aria-expanded', isOpen);
-		});
-
-		// Close the popup when the user clicks anywhere else on the page
-		document.addEventListener('click', function () {
-			popupMenu.classList.remove('up-popup-active');
-			menuToggle.setAttribute('aria-expanded', 'false');
-		});
-
-		// Clicking inside the popup should not close it
-		popupMenu.addEventListener('click', function (event) {
-			event.stopPropagation();
-		});
-
-		// ── Copy-email-to-clipboard logic ──────────────────────────────────────
+		// ── Copy-email-to-clipboard logic
 
 		const copyIcon = document.querySelector('.up-copy-icon');
 
