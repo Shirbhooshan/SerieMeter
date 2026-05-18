@@ -1,0 +1,395 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100vh;
+	background-image:
+		url('${pageContext.request.contextPath}/assets/images/Title Screen.jpg');
+	background-size: cover;
+	background-position: top right;
+	background-attachment: scroll;
+	background-color: #fff;
+	overflow-x: hidden;
+	font-family: 'Manrope', sans-serif;
+}
+
+.container {
+	display: flex;
+	gap: 80px;
+	align-items: flex-start;
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 80px 20px 60px 20px;
+}
+
+.left-content {
+	flex: 2;
+}
+
+.right-content {
+	flex: 1.2;
+	position: sticky;
+	top: 100px;
+	margin-top: 120px;
+}
+
+.meta {
+	color: #888;
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+
+.genre-tag {
+	display: inline-block;
+	background: #f0f0f0;
+	color: #555;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding: 4px 12px;
+	border-radius: 20px;
+	margin-bottom: 14px;
+}
+
+.title {
+	font-size: 72px;
+	font-weight: 800;
+	line-height: 1;
+	margin-bottom: 30px;
+}
+
+.bookmark-btn {
+	background-color: #449d5d;
+	color: white;
+	border: none;
+	padding: 16px 36px;
+	border-radius: 50px;
+	font-weight: 700;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+.bookmark-btn.remove-state {
+	background-color: #e53935;
+}
+
+.btn-icon {
+	width: 22px;
+	height: 22px;
+	filter: brightness(0) invert(1);
+}
+
+.rating-box {
+	background: rgba(18, 18, 18, 0.85);
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+	color: white;
+	padding: 24px 45px;
+	border-radius: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 340px;
+	margin-left: auto;
+	margin-bottom: 60px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+	border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rating-label {
+	text-transform: uppercase;
+	font-size: 11px;
+	letter-spacing: 2px;
+	opacity: 0.8;
+	font-weight: 700;
+}
+
+.rating-score {
+	font-size: 18px;
+	font-weight: 800;
+	color: #f9a825;
+}
+
+.section-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 40px 0 20px;
+}
+
+.orange-line {
+	width: 30px;
+	height: 1.5px;
+	background-color: #ff7a50;
+}
+
+.section-header h3 {
+	font-size: 18px;
+	font-weight: 700;
+	color: #1a1a1a;
+}
+
+.synopsis-text {
+	font-size: 14px;
+	line-height: 1.8;
+	color: #666;
+	margin-bottom: 30px;
+}
+
+.director-label {
+	font-size: 12px;
+	color: #999;
+	margin-bottom: 5px;
+}
+
+.director-name {
+	font-size: 18px;
+	color: #333;
+	font-weight: 500;
+}
+
+.separator {
+	width: 100%;
+	height: 1px;
+	background-color: #eee;
+	margin: 30px 0;
+}
+
+/* --- Write Review Card --- */
+.review-card {
+	background: #fff;
+	border-radius: 30px;
+	padding: 40px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+	border: 1px solid #f0f0f0;
+	border-left: 6px solid #4ebc57; /* green accent */
+	overflow: hidden;
+}
+
+.review-card h4 {
+	font-size: 15px;
+	font-weight: 700;
+	color: #444;
+	margin-bottom: 20px;
+}
+
+/* --- Interactive Star Rating (input) --- */
+.star-rating {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	gap: 6px;
+	margin-bottom: 25px;
+}
+
+.star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+}
+
+.star-rating label img {
+	width: 100%;
+	filter: grayscale(100%) opacity(0.25);
+	transition: filter 0.15s ease;
+}
+
+.star-rating label:hover img, .star-rating label:hover ~ label img,
+	.star-rating input:checked ~ label img {
+	filter: grayscale(0%) opacity(1);
+}
+
+.review-label {
+	display: block;
+	font-size: 11px;
+	font-weight: 800;
+	color: #1a1a1a;
+	margin-bottom: 8px;
+}
+
+.review-textarea {
+	width: 100%;
+	display: block;
+	height: 160px;
+	background-color: #f5f5f5;
+	border: none;
+	border-radius: 20px;
+	padding: 20px;
+	outline: none;
+	resize: none;
+	box-sizing: border-box;
+	font-family: 'Manrope', sans-serif;
+	font-size: 14px;
+}
+
+.post-btn-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.post-btn {
+	background-color: #52ba5a;
+	color: white;
+	border: none;
+	padding: 15px 40px;
+	border-radius: 50px;
+	font-weight: 700;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+/* --- Existing Review Cards --- */
+.existing-review-card {
+	background: #fff;
+	border-radius: 20px;
+	padding: 28px 30px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+	border: 1px solid #f0f0f0;
+	margin-bottom: 20px;
+	position: relative;
+	overflow: hidden;
+}
+
+.review-top-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.reviewer-info {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.reviewer-avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background-color: #e0e0e0;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.reviewer-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.reviewer-meta {
+	display: flex;
+	flex-direction: column;
+}
+
+.reviewer-name {
+	font-size: 14px;
+	font-weight: 700;
+	color: #1a1a1a;
+}
+
+.reviewer-date {
+	font-size: 12px;
+	color: #aaa;
+	margin-top: 2px;
+}
+
+/* Display stars (static, showing rating) */
+.display-stars {
+	display: flex;
+	gap: 3px;
+}
+
+.display-stars img {
+	width: 20px;
+	height: 20px;
+}
+
+.review-body {
+	font-size: 14px;
+	line-height: 1.7;
+	color: #444;
+	margin: 0;
+}
+
+.poster-img {
+	width: 100%;
+	border-radius: 12px;
+	box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+@media ( max-width : 1024px) {
+	.container {
+		flex-direction: column-reverse;
+		gap: 40px;
+		padding: 40px 24px;
+	}
+	.right-content {
+		position: static;
+		margin-top: 0;
+		width: 100%;
+		display: flex;
+		flex-direction: column-reverse;
+		/* Keeps poster styling on top of the mobile details overview */
+		align-items: center;
+		gap: 24px;
+	}
+	.rating-box {
+		margin-left: 0;
+		margin-bottom: 0;
+		width: 100%;
+		max-width: 340px;
+	}
+	.poster-img {
+		max-width: 340px;
+	}
+	.left-content {
+		width: 100%;
+	}
+	.title {
+		font-size: 48px;
+		margin-bottom: 20px;
+	}
+}
+
+@media ( max-width : 576px) {
+	html, body {
+		background-position: center top;
+	}
+	.title {
+		font-size: 36px;
+	}
+	.bookmark-btn {
+		width: 100%;
+		justify-content: center;
+		font-size: 16px;
+		padding: 14px 28px;
+	}
+	.review-card {
+		padding: 24px;
+		border-radius: 20px;
+	}
+	.existing-review-card {
+		padding: 20px;
+		border-radius: 16px;
+	}
+	.review-top-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+	.display-stars {
+		align-self: flex-start;
+	}
+}
