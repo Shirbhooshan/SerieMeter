@@ -1,0 +1,356 @@
+    /* -- Base Reset -- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Manrope', sans-serif;
+        background-color: #ffffff;
+        color: #28282B;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* --- Page Wrapper: flexible centering to avoid scrolling --- */
+    .ep-page-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        padding: 10px 24px;
+    }
+
+    /* --- Form wrapper stretches to near full width --- */
+    .ep-edit-form {
+        width: 100%;
+        max-width: 1000px; /* Slightly narrower to match tighter vertical proportions */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Error message shown above the card */
+    .ep-msg-error {
+        color: #ff4d4d;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 8px;
+        transition: opacity 0.5s ease;
+    }
+
+    /* --- Outer dark card: stretches edge to edge, holds both panels --- */
+    .ep-main-card {
+        background-color: #28282B;
+        border-radius: 24px;
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        padding: 8px 0 8px 8px; 
+        gap: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* LEFT PANEL — Edit Profile
+       Floats inside the dark card thanks to the card's padding. */
+    .ep-left-panel {
+        background-color: #F6F6F6;
+        width: 46%;
+        flex-shrink: 0;
+        padding: 24px 32px;
+        border-radius: 18px; 
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12); 
+    }
+
+    /* "Edit Profile" heading */
+    .ep-left-panel h2 {
+        color: #D56E3F;
+        font-size: 24px;   
+        font-weight: 720;  
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    /* Profile photo section: centred column */
+    .ep-photo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    /* Green-bordered circle wrapper */
+    .ep-pic-wrapper {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        border: 1.5px solid #2EAB29;
+        padding: 3px;
+        margin-bottom: 10px;
+    }
+
+    /* Profile picture inside the circle */
+    .ep-profile-pic {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /* "Change Photo" pill button */
+    .ep-change-photo-btn {
+        background-color: #EBEBEB;
+        border: 1px solid #D6D6D6;
+        color: #919191;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 11px; 
+        font-weight: 600;
+        font-family: 'Manrope', sans-serif;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    .ep-change-photo-btn:hover {
+        opacity: 0.82;
+        transform: translateY(-2px);
+    }
+
+    /* Input groups (label + field) */
+    .ep-input-group {
+        margin-bottom: 12px;
+    }
+
+    .ep-input-group label {
+        display: block;
+        font-size: 11px; 
+        font-weight: 700;
+        color: #28282B;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 6px;
+    }
+
+    /* Wrapper gives us the anchor for the left icon */
+    .ep-field-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Icon sitting inside the left edge of the field */
+    .ep-field-icon {
+        position: absolute;
+        left: 14px;
+        width: 16px;
+        height: 16px;
+        pointer-events: none;
+        filter: brightness(0);
+		opacity: 0.45;
+		margin-bottom: 6px;
+    }
+
+    /* Text inputs on the left panel */
+    .ep-left-panel input[type="text"] {
+        width: 100%;
+        background-color: #EBEBEB;
+        border: none;
+        border-radius: 28px;
+        padding: 10px 16px 10px 38px; 
+        color: #28282B;
+        font-size: 13px;
+        font-family: 'Manrope', sans-serif;
+        box-shadow: inset 0px 2px 4px rgba(135, 135, 135, 0.25);
+        outline: none;
+        margin-bottom: 8px;
+    }
+
+    .ep-left-panel input[type="text"]::placeholder {
+        color: #808080;
+    }
+
+    /* RIGHT PANEL — Password and Security */
+    .ep-right-panel {
+        flex: 1;
+        padding: 24px 38px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* "Password and Security" heading */
+    .ep-right-panel h2 {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 720;
+        line-height: 1.2;
+        margin-bottom: 38px; 
+    }
+
+    /* Labels in the right panel */
+    .ep-right-panel label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: #BEBEBE;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 10px; 
+    }
+
+    /* Password input fields */
+    .ep-right-panel input[type="password"],
+    .ep-right-panel input[type="text"] {
+        width: 100%;
+        background-color: #EDEDED;
+        border: none;
+        border-radius: 28px;
+        padding: 10px 36px 10px 20px; 
+        color: #28282B;
+        font-size: 13px;
+        font-family: 'Manrope', sans-serif;
+        outline: none;
+        margin-bottom: 8px;
+    }
+
+    /* Eye icon on the right edge of password fields */
+    .ep-eye-icon {
+        position: absolute;
+        right: 14px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        margin-bottom: 8px;
+    }
+
+    .ep-eye-icon:hover {
+        opacity: 1;
+    }
+
+    /* ACTION AREA — Save / Go Back */
+    .ep-action-area {
+        margin-top: 26px; 
+        margin-bottom: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; 
+    }
+
+    /* Green "Save Changes" button */
+    .ep-save-btn {
+        background-color: #33A540;
+        color: #ffffff;
+        border: none;
+        border-radius: 28px;
+        padding: 10px 38px; 
+        font-size: 14px;
+        font-weight: 700;
+        font-family: 'Manrope', sans-serif;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    .ep-save-btn:hover {
+        opacity: 0.82;
+        transform: translateY(-2px);
+    }
+
+    /* "Go Back" button */
+    .ep-go-back-btn {
+        background: none;
+        border: none;
+        color: #535353;
+        font-size: 13px; 
+        font-weight: 600;
+        font-family: 'Manrope', sans-serif;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: opacity 0.2s ease;
+    }
+
+    .ep-go-back-btn:hover {
+        opacity: 0.75;
+    }
+
+    .ep-go-back-btn .ep-link-text {
+        text-decoration: underline;
+    }
+
+    /* --- Responsive: media queries --- */
+
+    /* Tablets and Small Laptop (1024px and below) */
+    @media (max-width: 1024px) {
+        .ep-edit-form {
+            max-width: 900px;
+        }
+        .ep-left-panel, .ep-right-panel {
+            padding: 24px;
+        }
+    }
+
+    /* Mobile Devices (860px and below) */
+    @media (max-width: 860px) {
+        body {
+            height: auto;
+            overflow-y: visible; /* Allows vertical scroll if content exceeds screen height */
+        }
+
+        .ep-page-wrapper {
+            padding: 20px 15px;
+            align-items: flex-start; /* Ensure content starts at top to allow scrolling */
+        }
+
+        .ep-main-card {
+            flex-direction: column;
+            padding: 12px; /* Uniform padding when stacked */
+            gap: 12px;
+        }
+
+        .ep-left-panel, .ep-right-panel {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .ep-right-panel h2, .ep-left-panel h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .ep-action-area {
+            margin-top: 20px;
+            gap: 15px;
+        }
+    }
+
+    /* Extra Small Devices (480px and below) */
+    @media (max-width: 480px) {
+        .ep-main-card {
+            border-radius: 16px;
+        }
+        
+        .ep-left-panel, .ep-right-panel {
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .ep-left-panel h2, .ep-right-panel h2 {
+            font-size: 20px;
+        }
+
+        .ep-pic-wrapper {
+            width: 75px;
+            height: 75px;
+        }
+
+        .ep-save-btn {
+            width: 100%; /* Better touch target on small screens */
+            padding: 12px;
+        }
+    }
