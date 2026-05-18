@@ -653,13 +653,20 @@ img {
 			<h3 class="sm_sidebar_title">Genres</h3>
 			<p class="sm_sidebar_sortby">Sort by</p>
 			<ul class="sm_sidebar_list">
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Action">Action</a></li>
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Comedy">Comedy</a></li>
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Thriller">Thriller</a></li>
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Sci-Fi">Sci-Fi</a></li>
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Romance">Romance</a></li>
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Horror">Horror</a></li>
-				<li><a href="${pageContext.request.contextPath}/Genre?name=Drama">Drama</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Action">Action</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Comedy">Comedy</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Thriller">Thriller</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Sci-Fi">Sci-Fi</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Romance">Romance</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Horror">Horror</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/Genre?name=Drama">Drama</a></li>
 			</ul>
 		</aside>
 
@@ -725,9 +732,10 @@ img {
 		</div>
 		<div class="sm_cta_action">
 			<button class="sm_btn_start">
-				<img
+				<a href="${pageContext.request.contextPath}/Randomize"> <img
 					src="${pageContext.request.contextPath}/assets/icon/star-full.svg"
 					alt="star" class="sm_btn_star" /> Start reviewing
+				</a>
 			</button>
 		</div>
 	</div>
@@ -739,7 +747,8 @@ img {
 			<div class="sm_section_header_left">
 				<h2>Movies</h2>
 			</div>
-			<a href="${pageContext.request.contextPath}/Movies" class="sm_see_more">See more..</a>
+			<a href="${pageContext.request.contextPath}/Movies"
+				class="sm_see_more">See more..</a>
 		</div>
 		<div class="sm_section_divider"></div>
 
@@ -778,7 +787,8 @@ img {
 			<div class="sm_section_header_left">
 				<h2>Series</h2>
 			</div>
-			<a href="${pageContext.request.contextPath}/Series" class="sm_see_more">See more..</a>
+			<a href="${pageContext.request.contextPath}/Series"
+				class="sm_see_more">See more..</a>
 		</div>
 		<div class="sm_section_divider"></div>
 

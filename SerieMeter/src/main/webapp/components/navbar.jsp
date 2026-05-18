@@ -33,7 +33,6 @@
 	height: 32px;
 	border-radius: 50%;
 	object-fit: cover;
-	border: 2px solid #e0e0e0;
 }
 
 .sm_navbar__nav li a.sm_navbar__dashboard {
@@ -116,7 +115,7 @@
 		gap: 12px !important;
 	}
 	.sm_navbar__nav {
-		justify-content: flex-start !important; /*
+		justify-content: flex-start !important; 
 		gap: 16px !important;
 		font-size: 14px !important;
 	}
@@ -229,23 +228,6 @@
 						alt="Profile" class="sm_navbar__profile_pic"
 						onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile_picture.png">
 						${sessionScope.user.userName}
-					</a>
-				</c:when>
-				<c:otherwise>
-					<a href="${pageContext.request.contextPath}/Register"
-						class="sm_navbar__signup">Sign In</a>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</nav>
-
-			<c:choose>
-				<c:when test="${not empty sessionScope.user}">
-					<a href="${pageContext.request.contextPath}/UserProfile"
-						class="sm_navbar__profile"> <img
-						src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
-						alt="Profile" class="sm_navbar__profile_pic"
-						onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile.png'">
 					</a>
 				</c:when>
 				<c:otherwise>
