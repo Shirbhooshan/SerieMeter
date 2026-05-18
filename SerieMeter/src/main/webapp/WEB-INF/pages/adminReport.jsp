@@ -443,6 +443,37 @@
 		min-width: 600px;
 	}
 }
+
+.ad-btn-matched {
+	margin-top: 20px;
+	border: 1px solid #dcdcdc;
+	border-radius: 17px;
+	padding: 9px 20px;
+	font-size: 12px;
+	font-weight: 600;
+	font-family: 'Manrope', sans-serif;
+	outline: none;
+	width: 160px;
+	background: white;
+	color: #1a1a1a;
+	cursor: pointer;
+	text-align: center;
+	display: inline-block;
+	transition: all 0.2s ease;
+}
+
+/* Green interactive hover state */
+.ad-btn-matched:hover {
+	background-color: #4ebc57;
+	color: #FFFFFF;
+	border-color: #4ebc57;
+	/* Smoothly blends the border into the green background */
+}
+
+/* Optional active state when clicked */
+.ad-btn-matched:active {
+	transform: scale(0.98);
+}
 </style>
 </head>
 <body class="ad-body">
@@ -520,7 +551,7 @@
 							src="${pageContext.request.contextPath}/assets/icon/review-report.svg">
 					</div>
 					<span class="ad-stat-label">Total Reviews</span>
-					<h2 class="ad-stat-value">${reviewCount}</h2>
+					<h2 class="ad-stat-value">${totalReviews}</h2>
 				</div>
 				<div class="ad-stat-card">
 					<div class="ad-stat-icon">
@@ -611,8 +642,50 @@
 						</c:forEach>
 					</tbody>
 				</table>
+
+				<!-- Load more button -->
+				<div style="text-align: center; padding: 15px;">
+					<button class="ad-btn-matched" id="loadMoreBtn">Load More
+						Medias</button>
+				</div>
+
 			</section>
 		</main>
 	</div>
+
+	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    const rows = document.querySelectorAll(".ad-media-table tbody tr");
+	    const loadMoreBtn = document.getElementById("loadMoreBtn");
+	    const rowsToShow = 3;
+	    let currentCount = rowsToShow;
+
+	    // Initially hide rows beyond the first batch
+	    rows.forEach((row, i) => {
+	        if (i >= rowsToShow) row.style.display = "none";
+	    });
+
+	    // Hide button if total rows are less than the initial batch
+	    if (rows.length <= rowsToShow) loadMoreBtn.style.display = "none";
+
+	    loadMoreBtn.addEventListener("click", function() {
+	        let nextBatch = currentCount + rowsToShow;
+	        
+	        rows.forEach((row, i) => {
+	            if (i >= currentCount && i < nextBatch) {
+	                row.style.display = ""; // Reveal row
+	            }
+	        });
+
+	        currentCount = nextBatch;
+
+	        // Hide button if we reached the end of the data
+	        if (currentCount >= rows.length) {
+	            loadMoreBtn.style.display = "none";
+	        }
+	    });
+	});
+	</script>
+
 </body>
 </html>

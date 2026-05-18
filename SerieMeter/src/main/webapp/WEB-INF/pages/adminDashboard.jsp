@@ -764,7 +764,7 @@ body {
 	document.addEventListener("DOMContentLoaded", function() {
 	    const rows = document.querySelectorAll("#userTableBody tr");
 	    const loadMoreBtn = document.getElementById("loadMoreBtn");
-	    const rowsToShow = 5;
+	    const rowsToShow = 10;
 	    let currentCount = rowsToShow;
 
 	    // Initially hide rows beyond the first batch
