@@ -26,7 +26,7 @@
 
 	<div class="sm_hero_wrap">
 
-		<%-- Static slides using images from assets --%>
+		<!-- Static slides using images from assets -->
 		<div class="sm_hero_slide active">
 			<img class="sm_hero_slide_bg"
 				src="${pageContext.request.contextPath}/assets/images/tintin.jpg"

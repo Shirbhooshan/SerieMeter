@@ -187,7 +187,7 @@
 		<li><a href="${pageContext.request.contextPath}/Series">Series</a></li>
 		<li><a href="${pageContext.request.contextPath}/About">About
 				Us</a></li>
-		<%-- Show Dashboard link only for logged-in admins --%>
+		<!-- Show Dashboard link only for logged-in admins -->
 		<c:if
 			test="${not empty sessionScope.user && sessionScope.user.role eq 'Admin'}">
 			<li><a href="${pageContext.request.contextPath}/Dashboard"

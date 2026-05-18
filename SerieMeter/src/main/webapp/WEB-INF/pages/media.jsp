@@ -21,7 +21,7 @@
 
 	<%@ include file="/components/navbar.jsp"%>
 
-	<%-- Calculate average rating from reviews list --%>
+	<!-- Calculate average rating from reviews list --s>
 	<c:set var="totalRating" value="0" />
 	<c:set var="reviewCount" value="${fn:length(reviews)}" />
 	<c:forEach var="r" items="${reviews}">
@@ -30,7 +30,7 @@
 	<c:set var="avgRating"
 		value="${reviewCount > 0 ? (totalRating / reviewCount) * 2 : 0.0}" />
 
-	<%-- Genre name mapping from genre_id --%>
+	<!-- Genre name mapping from genre_id -->
 	<c:set var="genreName" value="General" />
 	<c:if test="${media.genreId == 1}">
 		<c:set var="genreName" value="Action" />
@@ -57,7 +57,7 @@
 	<div class="container">
 		<div class="left-content">
 
-			<%-- Genre tag + date meta --%>
+			<!-- Genre tag + date meta -->
 			<span class="genre-tag"> <c:choose>
 					<c:when test="${media.genreId == 1}">Action</c:when>
 					<c:when test="${media.genreId == 2}">Comedy</c:when>
@@ -140,7 +140,7 @@
 				<h3>Reviews</h3>
 			</div>
 
-			<%-- Write Review Card --%>
+			<!-- Write Review Card -->
 			<div class="review-card">
 				<h4>Add your review</h4>
 				<c:choose>

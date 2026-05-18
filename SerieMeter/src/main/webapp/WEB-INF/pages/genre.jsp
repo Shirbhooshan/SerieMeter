@@ -27,7 +27,7 @@
 			<p class="page-header__label">Genre Collection</p>
 			<h1 class="page-header__title">
 				<c:set var="name" value="${genreName}" />
-				<%-- Logic to style the last 3-4 letters orange for that cinematic look --%>
+				<!-- Logic to style the last 3-4 letters orange for that cinematic look -->
 				<c:choose>
 					<c:when test="${fn:length(name) > 4}">
 						${fn:substring(name, 0, fn:length(name)-4)}<span

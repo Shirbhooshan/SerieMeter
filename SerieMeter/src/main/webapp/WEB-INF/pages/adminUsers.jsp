@@ -101,7 +101,7 @@
 							<th>EMAIL ADDRESS</th>
 							<th>TOTAL REVIEW</th>
 							<th>ROLE</th>
-							<%-- New column for approval status --%>
+							<!-- New column for approval status -->
 							<th>STATUS</th>
 						</tr>
 					</thead>
