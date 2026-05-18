@@ -191,8 +191,6 @@ body {
 }
 
 .footer-text {
-	position: absolute;
-	bottom: 30px;
 	font-size: 11px;
 	color: #bbb;
 	letter-spacing: 1.5px;
@@ -329,6 +327,8 @@ body {
 		<img src="assets/icon/left-arrow.svg" alt="" style="width: 14px;">
 		Go Back
 	</button>
+	
+	<br>
 
 	<div class="footer-text">©2026 SERIEMETER</div>
 
