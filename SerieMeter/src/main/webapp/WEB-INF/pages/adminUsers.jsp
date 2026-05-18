@@ -13,9 +13,10 @@
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/adminUsers.css"/>
-	
-<script src="${pageContext.request.contextPath}/javascript/adminUsers.js"></script>
+	href="${pageContext.request.contextPath}/css/adminUsers.css" />
+
+<script
+	src="${pageContext.request.contextPath}/javascript/adminUsers.js"></script>
 </head>
 <body class="ad-body">
 
@@ -84,11 +85,14 @@
 
 			<!-- Toolbar: Pushes search to the right -->
 			<div class="sm_admin__toolbar">
-				<div class="sm_admin__search">
-					<input type="text" placeholder="Search for users" id="searchInput"
-						onkeyup="filterTable()" /> <img src="assets/icon/search.svg"
-						alt="Search" />
-				</div>
+				<form action="${pageContext.request.contextPath}/Users" method="GET"
+					style="display: flex; align-items: center;">
+					<div class="sm_admin__search">
+						<input type="text" name="search" placeholder="Search for users"
+							value="${searchValue}" /> <img src="assets/icon/search.svg"
+							alt="Search" />
+					</div>
+				</form>
 			</div>
 
 			<!-- Users Table -->

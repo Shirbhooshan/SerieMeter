@@ -54,7 +54,8 @@ public class UserDAO {
 		pst.setString(4, passwordHash);
 		pst.setString(5, "User"); // Setting default role to 'user'
 		pst.setString(6, userProfile);
-		// is_approved defaults to FALSE automatically in the DB — no need to set it here
+		// is_approved defaults to FALSE automatically in the DB — no need to set it
+		// here
 
 		// Execute the update
 		pst.executeUpdate();
@@ -118,52 +119,79 @@ public class UserDAO {
 
 	// Update user details WITHOUT changing password
 	public void updateUserDetails(UserModel user) throws Exception {
-	    String sql = "UPDATE users SET full_name = ?, username = ?, user_profile = ? WHERE user_id = ?";
+		String sql = "UPDATE users SET full_name = ?, username = ?, user_profile = ? WHERE user_id = ?";
 
-	    try (Connection con = DBconfig.getConnection();
-	         PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
-	        pst.setString(1, user.getFullName());
-	        pst.setString(2, user.getUserName());
-	        pst.setString(3, user.getUserProfile());
-	        pst.setInt(4, user.getUserId());
+			pst.setString(1, user.getFullName());
+			pst.setString(2, user.getUserName());
+			pst.setString(3, user.getUserProfile());
+			pst.setInt(4, user.getUserId());
 
-	        int rows = pst.executeUpdate();
-	        System.out.println("updateUserDetails rows affected: " + rows);
-	    }
+			int rows = pst.executeUpdate();
+			System.out.println("updateUserDetails rows affected: " + rows);
+		}
 	}
 
 	// Update user details AND password hash
 	public void updateUserWithPassword(UserModel user) throws Exception {
-	    String sql = "UPDATE users SET full_name = ?, username = ?, password_hash = ?, user_profile = ? WHERE user_id = ?";
+		String sql = "UPDATE users SET full_name = ?, username = ?, password_hash = ?, user_profile = ? WHERE user_id = ?";
 
-	    try (Connection con = DBconfig.getConnection();
-	         PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
-	        pst.setString(1, user.getFullName());
-	        pst.setString(2, user.getUserName());
-	        pst.setString(3, user.getPassword());
-	        pst.setString(4, user.getUserProfile());
-	        pst.setInt(5, user.getUserId());
+			pst.setString(1, user.getFullName());
+			pst.setString(2, user.getUserName());
+			pst.setString(3, user.getPassword());
+			pst.setString(4, user.getUserProfile());
+			pst.setInt(5, user.getUserId());
 
-	        int rows = pst.executeUpdate();
-	        System.out.println("updateUserWithPassword rows affected: " + rows);
-	    }
+			int rows = pst.executeUpdate();
+			System.out.println("updateUserWithPassword rows affected: " + rows);
+		}
 	}
 
 	/**
-	 * Flips is_approved = TRUE for a given user.
-	 * Called by the admin when they approve a pending user from the Users page.
+	 * Flips is_approved = TRUE for a given user. Called by the admin when they
+	 * approve a pending user from the Users page.
 	 */
 	public void approveUser(int userId) throws Exception {
 		String sql = "UPDATE users SET is_approved = TRUE WHERE user_id = ?";
 
-		try (Connection con = DBconfig.getConnection();
-			 PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = DBconfig.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
 			pst.setInt(1, userId);
 			pst.executeUpdate();
 		}
+	}
+
+	public List<UserModel> getUsersBySearch(String query) throws Exception {
+		List<UserModel> users = new ArrayList<>();
+		String like = "%" + (query != null ? query.trim().toLowerCase() : "") + "%";
+
+		String sql = "SELECT * FROM users " + "WHERE LOWER(full_name) LIKE ? " + "   OR LOWER(username)  LIKE ? "
+				+ "   OR LOWER(email)     LIKE ?";
+
+		try (Connection conn = DBconfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(1, like);
+			ps.setString(2, like);
+			ps.setString(3, like);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					UserModel user = new UserModel();
+					user.setUserId(rs.getInt("user_id"));
+					user.setFullName(rs.getString("full_name"));
+					user.setEmail(rs.getString("email"));
+					user.setUserName(rs.getString("username"));
+					user.setRole(rs.getString("role"));
+					user.setUserProfile(rs.getString("user_profile"));
+					user.setApproved(rs.getBoolean("is_approved"));
+					users.add(user);
+				}
+			}
+		}
+		return users;
 	}
 
 }

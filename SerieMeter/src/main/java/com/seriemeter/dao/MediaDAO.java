@@ -570,5 +570,55 @@ public class MediaDAO {
 		}
 		return list;
 	}
+	
+	public List<MediaModel> getAllMediaWithAvgRating(String search, String sort) {
+	    List<MediaModel> mediaList = new ArrayList<>();
+
+	    String orderBy;
+	    if ("newest".equals(sort)) {
+	        orderBy = "ORDER BY m.release_date DESC";
+	    } else if ("oldest".equals(sort)) {
+	        orderBy = "ORDER BY m.release_date ASC";
+	    } else {
+	        orderBy = "ORDER BY m.media_id ASC";
+	    }
+
+	    String like = "%" + (search != null ? search.trim().toLowerCase() : "") + "%";
+
+	    String sql = "SELECT m.*, COALESCE(AVG(r.rating) * 2, 0) AS avg_rating "
+	               + "FROM media m "
+	               + "LEFT JOIN review r ON m.media_id = r.media_id "
+	               + "WHERE m.is_deleted = 0 "
+	               + "AND (LOWER(m.title) LIKE ? OR LOWER(m.director) LIKE ?) "
+	               + "GROUP BY m.media_id "
+	               + orderBy;
+
+	    try (Connection con = DBconfig.getConnection();
+	         PreparedStatement pst = con.prepareStatement(sql)) {
+
+	        pst.setString(1, like);
+	        pst.setString(2, like);
+
+	        try (ResultSet rs = pst.executeQuery()) {
+	            while (rs.next()) {
+	                MediaModel media = new MediaModel();
+	                media.setMediaId(rs.getInt("media_id"));
+	                media.setTitle(rs.getString("title"));
+	                media.setDirector(rs.getString("director"));
+	                media.setReleaseDate(rs.getString("release_date"));
+	                media.setTotalTime(rs.getString("total_time"));
+	                media.setDescription(rs.getString("description"));
+	                media.setMediaProfile(rs.getString("media_profile"));
+	                media.setCategoryId(rs.getInt("category_id"));
+	                media.setGenreId(rs.getInt("genre_id"));
+	                media.setAvgRating(rs.getDouble("avg_rating"));
+	                mediaList.add(media);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return mediaList;
+	}
 
 }

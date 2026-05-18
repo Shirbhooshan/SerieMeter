@@ -60,7 +60,7 @@ public class AdminDashboard extends HttpServlet {
         
         // Calling function from DAO and not service, because we have the avgrating function in DAO only.
         MediaDAO mediaDAO = new MediaDAO();
-		List<MediaModel> mediaList = mediaDAO.getAllMediaWithAvgRating();
+        List<MediaModel> mediaList = mediaDAO.getAllMediaWithAvgRating(search, sort);
 		
         request.setAttribute("mediaList", mediaList);
 

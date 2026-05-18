@@ -133,7 +133,6 @@
 	.nav-spacer {
 		display: none !important;
 	}
-
 	.nav-links {
 		position: static !important;
 		transform: none !important;
@@ -145,7 +144,6 @@
 		white-space: nowrap !important;
 		-webkit-overflow-scrolling: touch !important;
 	}
-
 	.nav-links::-webkit-scrollbar {
 		height: 0px !important;
 		background: transparent !important;
@@ -204,7 +202,6 @@
 					src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
 					alt="Profile" class="sm_navbar__profile_pic"
 					onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile_picture.png'">
-					${sessionScope.user.userName}
 				</a>
 			</c:when>
 			<c:otherwise>
