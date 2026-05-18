@@ -973,14 +973,14 @@ body {
 		</section>
 	</main>
 
-	<footer class="up-footer up-container">
+	<div class="up-footer up-container">
 		<p class="up-discover-text">
 			Discover more to<br>bookmark &amp; review
 		</p>
 		<button class="up-explore-btn"
 			onclick="location.href='${pageContext.request.contextPath}/Explore'">
 			Explore now</button>
-	</footer>
+	</div>
 
 	<%@ include file="/components/footer.jsp"%>
 
