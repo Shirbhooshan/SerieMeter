@@ -9,14 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${editMedia.title}- Edit Media</title>
+<title>${editMedia.title}-Edit Media</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet">
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admineditform.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/admineditform.css">
 
 </head>
 <body>
@@ -188,21 +189,10 @@
 		</main>
 	</div>
 
-	<script>
-		function previewImage(input) {
-			const preview = document.getElementById('posterImage');
-			const placeholder = document.getElementById('uploadPlaceholder');
-
-			if (input.files && input.files[0]) {
-				const reader = new FileReader();
-				reader.onload = function(e) {
-					preview.src = e.target.result;
-					preview.style.display = 'block';
-					placeholder.style.display = 'none';
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
+	<script
+		src="${pageContext.request.contextPath}/assets/javascript/admineditform.js">
+		
 	</script>
+
 </body>
 </html>
