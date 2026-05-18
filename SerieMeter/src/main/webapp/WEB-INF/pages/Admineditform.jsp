@@ -190,7 +190,7 @@
 	</div>
 
 	<script
-		src="${pageContext.request.contextPath}/assets/javascript/admineditform.js">
+		src="${pageContext.request.contextPath}/javascript/admineditform.js">
 		
 	</script>
 

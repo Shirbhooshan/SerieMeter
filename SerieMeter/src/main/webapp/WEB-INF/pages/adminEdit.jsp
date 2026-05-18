@@ -174,7 +174,7 @@
 		</main>
 	</div>
 
-	<script src="${pageContext.request.contextPath}/assets/javascript/pagination.js">
+	<script src="${pageContext.request.contextPath}/javascript/pagination.js">
 		
 	</script>
 	
