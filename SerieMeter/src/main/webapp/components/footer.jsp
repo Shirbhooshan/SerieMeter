@@ -11,7 +11,7 @@
 	href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
 	rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 
 <style>

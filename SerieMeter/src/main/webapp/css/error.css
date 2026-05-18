@@ -1,0 +1,186 @@
+.er-error-body {
+	font-family: 'Manrope', sans-serif;
+	background-color: #ffffff;
+	color: #111111;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+}
+
+/* --- Main Content Layout --- */
+.er-main-layout {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.er-error-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* Widened the max-width to bring content closer to the sides */
+	max-width: 1400px;
+	width: 100%;
+	gap: 200px;
+}
+
+/* --- Left Side Styles --- */
+.er-left-side {
+	display: flex;
+	flex-direction: column;
+	margin-top: 110px;
+	/* Shifting slightly down to create that vertical offset look */
+}
+
+.er-error-code {
+	color: #888888;
+	font-size: 15px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+	margin-left: 50px;
+}
+
+.er-error-number {
+	font-size: 350px;
+	font-weight: 500;
+	line-height: 0.75; /* Keeps the text block tight vertically */
+	letter-spacing: -18px;
+	color: #0a0a0a;
+	margin-top: 25px;
+}
+
+/* --- Right Side Styles --- */
+.er-right-side {
+	max-width: 440px; /* Controls the line breaks of the paragraph */
+	margin-right: 75px;
+}
+
+.er-title {
+	font-size: 46px;
+	font-weight: 700;
+	margin-bottom: 12px;
+	letter-spacing: -1px;
+}
+
+.er-description {
+	color: #888888;
+	font-size: 18px;
+	line-height: 1.6;
+	margin-bottom: 35px;
+	font-weight: 400;
+	text-align: justify;
+}
+
+/* --- Button Styles --- */
+.er-buttons-group {
+	display: flex;
+	gap: 26px;
+}
+
+.er-btn {
+	text-decoration: none;
+	padding: 16px 38px;
+	border-radius: 30px;
+	font-size: 16px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.er-btn-green {
+	background-color: #34a853;
+	color: #ffffff;
+	border: 1px solid #34a853;
+}
+
+.er-btn-green:hover {
+	background-color: #2b8b45;
+	border-color: #2b8b45;
+	opacity: 0.82;
+	transform: translateY(-2px);
+}
+
+.er-btn-outline {
+	background-color: #f7f7f7; /* Added subtle grey color inside */
+	color: #555555;
+	border: 1px solid #dcdcdc;
+}
+
+.er-btn-outline:hover {
+	background-color: #e5e5e5; /* New slightly darker grey hover effect */
+	color: #111111;
+	opacity: 0.82;
+	transform: translateY(-2px);
+}
+
+/* --- Footer Styles --- */
+.er-footer {
+	text-align: center;
+	padding: 30px 20px;
+	color: #b0b0b0;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+
+/* ----- Necessary Media Queries ----- */
+
+/* For Tablets and Small Desktops (1100px) */
+@media ( max-width : 1100px) {
+	.er-error-container {
+		gap: 80px; /* Reduce the massive gap */
+		padding: 0 40px;
+	}
+	.er-error-number {
+		font-size: 250px; /* Shrink the error number */
+	}
+}
+
+/* For Mobile Devices (768px) */
+@media ( max-width : 768px) {
+	.er-error-container {
+		flex-direction: column; /* Stack vertically */
+		gap: 40px;
+		text-align: center;
+		padding-bottom: 50px;
+	}
+	.er-left-side {
+		margin-top: 50px;
+	}
+	.er-error-code {
+		margin-left: 0; /* Center the label */
+	}
+	.er-error-number {
+		font-size: 180px; /* Drastically scale down for mobile screens */
+		letter-spacing: -8px;
+	}
+	.er-right-side {
+		margin-right: 0; /* Clear the desktop offset */
+		max-width: 90%;
+	}
+	.er-title {
+		font-size: 32px;
+	}
+	.er-description {
+		font-size: 16px;
+		text-align: center; /* Better readability on mobile */
+	}
+	.er-buttons-group {
+		justify-content: center;
+		flex-direction: column; /* Stack buttons on very narrow screens */
+		gap: 15px;
+	}
+	.er-btn {
+		width: 100%; /* Full width buttons for mobile touch targets */
+		padding: 14px 20px;
+	}
+}
+
+/* Extra small screens (400px) */
+@media ( max-width : 400px) {
+	.er-error-number {
+		font-size: 120px;
+	}
+}
