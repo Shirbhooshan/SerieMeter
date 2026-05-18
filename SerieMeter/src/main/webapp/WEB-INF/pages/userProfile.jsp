@@ -104,7 +104,6 @@ body {
 	width: 24px;
 }
 
-/* Three-dot menu: wrapper gives the popup its positioning anchor */
 .up-menu-wrapper {
 	position: relative;
 	display: inline-block;
@@ -128,8 +127,6 @@ body {
 .up-three-dot-btn:hover {
 	background-color: #f0f0f0;
 }
-
-/* Dropdown popup — visibility set by inline style from the servlet (popupStyle attribute) */
 .up-popup-menu {
 	position: absolute;
 	top: 0;
@@ -326,7 +323,6 @@ body {
 	background-color: #e0e0e0;
 }
 
-/* Red heart bookmark icon in the top-right corner of the poster */
 .up-bookmark-heart {
 	position: absolute;
 	top: 10px;
@@ -382,7 +378,6 @@ body {
 	color: #8D8D8D;
 }
 
-/* "+" add-more card */
 .up-bookmark-add {
 	width: 170px;
 	height: 240px;
@@ -467,36 +462,36 @@ body {
 	text-align: right;
 }
 
-/* Pagination row below reviews */
-.up-review-pagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	padding-top: 10px;
+/* ── Load More button (shared between bookmarks & reviews) */
+.ad-btn-matched {
+	padding: 10px 28px;
+	border-radius: 20px;
+	border: 1px solid #43A53A;
+	background-color: #D9F1D7;
+	color: #43A53A;
 	font-size: 13px;
-}
-
-.up-page-nav {
-	color: #888;
-	text-decoration: none;
-}
-
-.up-page-num {
-	color: #888;
-	text-decoration: none;
-	width: 26px;
-	height: 26px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 50%;
-}
-
-.up-page-num.up-page-active {
-	background-color: #f0f0f0;
-	color: #1a1a1a;
+	font-family: 'Manrope', sans-serif;
 	font-weight: 700;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Green interactive hover state */
+.ad-btn-matched:hover {
+	background-color: #4ebc57;
+	color: #FFFFFF;
+	border-color: #4ebc57;
+}
+
+/* Optional active state when clicked */
+.ad-btn-matched:active {
+	transform: scale(0.98);
+}
+
+/* Wrapper that centres the Load More button */
+.up-load-more-wrap {
+	text-align: center;
+	padding: 18px 0 4px;
 }
 
 /* Footer section */
@@ -538,7 +533,6 @@ body {
 
 	.up-container {
 		padding: 0 14px;
-		/* Prevent any child from bleeding outside */
 		overflow: hidden;
 	}
 
@@ -631,7 +625,6 @@ body {
 		text-align: left;
 	}
 
-	/* Footer: match desktop bottom padding */
 	.up-footer {
 		margin-top: 40px;
 		padding-bottom: 100px;
@@ -688,7 +681,6 @@ body {
 		top: calc(100% + 6px);
 	}
 
-	/* Footer: match desktop bottom padding */
 	.up-footer {
 		margin-top: 40px;
 		padding-bottom: 100px;
@@ -730,8 +722,6 @@ body {
 								<c:out value="${sessionUser.fullName}" />
 							</h2>
 
-							<!-- Clicking this button does a GET to the server; the servlet responds
-							     by setting popupStyle to display:block or display:none — no JS involved -->
 							<div class="up-menu-wrapper">
 
 								<form method="get"
@@ -742,8 +732,6 @@ body {
 										aria-label="More options">&#8943;</button>
 								</form>
 
-								<!-- This invisible backdrop only appears when the menu is open.
-								     Clicking anywhere outside the popup sends a close action back to the server. -->
 								<c:if test="${param.action == 'open-menu'}">
 									<form method="get"
 										action="${pageContext.request.contextPath}/User">
@@ -809,10 +797,12 @@ body {
 	<main class="up-container">
 		<section class="up-content-cards">
 
+			<!-- ═══════════════════════════════════════════
+			     BOOKMARKS CARD
+			════════════════════════════════════════════ -->
 			<div class="up-card up-bookmarks-card">
 				<div class="up-card-header">
 					<h3>Bookmarks</h3>
-					<!-- The active class is applied conditionally so the selected sort order stays highlighted -->
 					<div class="up-sort-options">
 						<a
 							href="${pageContext.request.contextPath}/User?bookmarkSort=oldest&reviewSort=${reviewSort}"
@@ -833,9 +823,15 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="up-bookmarks-grid">
+						<!--
+							Each bookmark card is wrapped in a <div data-bookmark-item>.
+							JavaScript targets this attribute, not the card's own class,
+							so the "+" add-more tile is never hidden by the Load More logic.
+						-->
+						<div class="up-bookmarks-grid" id="bookmarksGrid">
 							<c:forEach var="media" items="${userBookmarks}">
-								<div class="up-bookmark-card"
+								<div data-bookmark-item
+									class="up-bookmark-card"
 									onclick="location.href='${pageContext.request.contextPath}/Media?id=${media.mediaId}'">
 
 									<c:choose>
@@ -861,12 +857,11 @@ body {
 											<c:out value="${media.title}" />
 										</div>
 										<div class="up-bookmark-meta">
-											<span class="up-bookmark-genre"> <c:out
-													value="${media.genreName}" />
+											<span class="up-bookmark-genre">
+												<c:out value="${media.genreName}" />
 											</span>
-											<!-- releaseDate is a full date string, so we slice just the first 4 characters to get the year -->
-											<span class="up-bookmark-year"> <c:if
-													test="${not empty media.releaseDate}">
+											<span class="up-bookmark-year">
+												<c:if test="${not empty media.releaseDate}">
 													<c:out value="${fn:substring(media.releaseDate, 0, 4)}" />
 												</c:if>
 											</span>
@@ -876,18 +871,28 @@ body {
 								</div>
 							</c:forEach>
 
+							<!-- "+" tile — placed after all bookmark items; never hidden -->
 							<a href="${pageContext.request.contextPath}/Explore"
-								class="up-bookmark-add" title="Discover more"> <span>+</span>
+								class="up-bookmark-add" title="Discover more">
+								<span>+</span>
 							</a>
 						</div>
+
+						<!-- Load More button — hidden by JS if ≤ 5 bookmarks exist -->
+						<div class="up-load-more-wrap">
+							<button class="ad-btn-matched" id="bookmarkLoadMoreBtn">
+								Load More Medias
+							</button>
+						</div>
+
 					</c:otherwise>
 				</c:choose>
 			</div>
 
+			<!-- REVIEWS CARD-->
 			<div class="up-card up-reviews-card">
 				<div class="up-card-header">
 					<h3>Reviews</h3>
-					<!-- Same active-class trick as the bookmarks sort above -->
 					<div class="up-sort-options">
 						<a
 							href="${pageContext.request.contextPath}/User?reviewSort=oldest&bookmarkSort=${bookmarkSort}"
@@ -908,62 +913,69 @@ body {
 						</div>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="review" items="${userReviews}">
-							<div class="up-review-item">
+						<!--
+							Each review row carries data-review-item so JS can find them
+							without touching the pagination row.
+						-->
+						<div id="reviewsList">
+							<c:forEach var="review" items="${userReviews}">
+								<div data-review-item class="up-review-item">
 
-								<div class="up-review-left">
-									<span class="up-review-media-title"> <c:out
-											value="${review.mediaTitle}" />
-									</span>
+									<div class="up-review-left">
+										<span class="up-review-media-title">
+											<c:out value="${review.mediaTitle}" />
+										</span>
 
-									<p class="up-review-date">
-										<c:set var="diffMs"
-											value="${now.time - review.createdAt.time}" />
-										<c:set var="diffDays"
-											value="${diffMs / (1000 * 60 * 60 * 24)}" />
-										<c:choose>
-											<c:when test="${diffDays < 1}">Today</c:when>
-											<c:when test="${diffDays < 2}">Yesterday</c:when>
-											<c:otherwise>
-												<fmt:formatNumber value="${diffDays}" maxFractionDigits="0" /> days ago
-											</c:otherwise>
-										</c:choose>
-									</p>
-								</div>
-
-								<div class="up-review-right">
-
-									<div class="up-review-stars">
-										<c:set var="fullStars" value="${review.rating}" />
-										<c:forEach begin="1" end="5" var="i">
+										<p class="up-review-date">
+											<c:set var="diffMs"
+												value="${now.time - review.createdAt.time}" />
+											<c:set var="diffDays"
+												value="${diffMs / (1000 * 60 * 60 * 24)}" />
 											<c:choose>
-												<c:when test="${i <= fullStars}">
-													<img
-														src="${pageContext.request.contextPath}/assets/icon/star-userp.svg"
-														alt="filled star" class="up-star filled">
-												</c:when>
+												<c:when test="${diffDays < 1}">Today</c:when>
+												<c:when test="${diffDays < 2}">Yesterday</c:when>
 												<c:otherwise>
-													<img
-														src="${pageContext.request.contextPath}/assets/icon/fadedstar-userp.svg"
-														alt="empty star" class="up-star empty">
+													<fmt:formatNumber value="${diffDays}" maxFractionDigits="0" /> days ago
 												</c:otherwise>
 											</c:choose>
-										</c:forEach>
+										</p>
 									</div>
 
-									<p class="up-review-text">
-										<c:out value="${review.reviewText}" />
-									</p>
+									<div class="up-review-right">
+
+										<div class="up-review-stars">
+											<c:set var="fullStars" value="${review.rating}" />
+											<c:forEach begin="1" end="5" var="i">
+												<c:choose>
+													<c:when test="${i <= fullStars}">
+														<img
+															src="${pageContext.request.contextPath}/assets/icon/star-userp.svg"
+															alt="filled star" class="up-star filled">
+													</c:when>
+													<c:otherwise>
+														<img
+															src="${pageContext.request.contextPath}/assets/icon/fadedstar-userp.svg"
+															alt="empty star" class="up-star empty">
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</div>
+
+										<p class="up-review-text">
+											<c:out value="${review.reviewText}" />
+										</p>
+
+									</div>
 
 								</div>
+							</c:forEach>
+						</div>
 
-							</div>
-						</c:forEach>
-
-						<div class="up-review-pagination">
-							<a href="#" class="up-page-nav">&lt;</a> <a href="#"
-								class="up-page-num up-page-active">1</a> <a href="#"
-								class="up-page-nav">&gt;</a>
+						<!-- Load More button — hidden by JS if ≤ 5 reviews exist -->
+						<div class="up-load-more-wrap">
+							<button class="ad-btn-matched" id="reviewLoadMoreBtn">
+								Load More Reviews
+							</button>
 						</div>
 
 					</c:otherwise>
@@ -979,24 +991,22 @@ body {
 		</p>
 		<button class="up-explore-btn"
 			onclick="location.href='${pageContext.request.contextPath}/Explore'">
-			Explore now</button>
+			Explore now
+		</button>
 	</footer>
 
 	<%@ include file="/components/footer.jsp"%>
 
 	<script>
-		// ── Copy-email-to-clipboard logic
+		// ── Copy-email-to-clipboard logic ────────────────────────────────────────
 
 		const copyIcon = document.querySelector('.up-copy-icon');
 
 		copyIcon.addEventListener('click', function () {
-
-			// Read the email text from the paragraph's first text node
 			const email = document.querySelector('.up-user-email').childNodes[0].textContent.trim();
 
 			navigator.clipboard.writeText(email)
 				.then(function () {
-					// Swap to checkmark for 2 seconds as visual confirmation
 					copyIcon.src   = '${pageContext.request.contextPath}/assets/icon/check.svg';
 					copyIcon.title = 'Copied!';
 
@@ -1008,6 +1018,65 @@ body {
 				.catch(function () {
 					alert('Failed to copy email. Please copy it manually.');
 				});
+		});
+
+
+		// ── Generic "Load More" initialiser ─────────────────────────────────────
+		/**
+		 * Sets up batch-reveal logic for a list of elements.
+		 *
+		 * @param {string} itemSelector   - querySelector string that targets each item element
+		 * @param {string} btnId          - id of the Load More button
+		 * @param {number} batchSize      - how many items to show per batch (default 5)
+		 */
+		function initLoadMore(itemSelector, btnId, batchSize) {
+			batchSize = batchSize || 5;
+
+			var items  = document.querySelectorAll(itemSelector);
+			var btn    = document.getElementById(btnId);
+
+			// Guard: nothing to paginate or button not rendered (empty-state branch)
+			if (!btn || items.length === 0) return;
+
+			var currentCount = batchSize;
+
+			// Hide everything beyond the first batch right away
+			items.forEach(function (item, i) {
+				if (i >= batchSize) item.style.display = 'none';
+			});
+
+			// If everything already fits, hide the button entirely
+			if (items.length <= batchSize) {
+				btn.style.display = 'none';
+				return;
+			}
+
+			btn.addEventListener('click', function () {
+				var nextBatch = currentCount + batchSize;
+
+				items.forEach(function (item, i) {
+					if (i >= currentCount && i < nextBatch) {
+						item.style.display = ''; // Reveal row / card
+					}
+				});
+
+				currentCount = nextBatch;
+
+				// Hide the button once all items are visible
+				if (currentCount >= items.length) {
+					btn.style.display = 'none';
+				}
+			});
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+
+			// Bookmarks: target only [data-bookmark-item] cards so the "+" tile is never hidden
+			initLoadMore('#bookmarksGrid [data-bookmark-item]', 'bookmarkLoadMoreBtn', 5);
+
+			// Reviews: target only [data-review-item] rows so pagination is never touched
+			initLoadMore('#reviewsList [data-review-item]', 'reviewLoadMoreBtn', 5);
+
 		});
 	</script>
 
