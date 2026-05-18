@@ -1,5 +1,6 @@
 package com.seriemeter.controller;
 
+import com.seriemeter.dao.MediaDAO;
 import com.seriemeter.model.MediaModel;
 import com.seriemeter.model.UserModel;
 import com.seriemeter.service.MediaService;
@@ -29,13 +30,6 @@ public class AdminDashboard extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Auth check commented out — will be handled by AdminFilter later
-        /*
-         * HttpSession session = request.getSession(false); if (session == null ||
-         * session.getAttribute("user") == null) {
-         * response.sendRedirect(request.getContextPath() + "/Login"); return; }
-         */
-
         // Still pass user to JSP if session exists — safe to keep, doesn't enforce auth
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("user") != null) {
@@ -63,8 +57,11 @@ public class AdminDashboard extends HttpServlet {
         // Pass back to JSP so the form fields retain their values after submit
         request.setAttribute("searchValue", search);
         request.setAttribute("sortValue", sort);
-
-        List<MediaModel> mediaList = mediaService.getAllMedia(search, sort);
+        
+        // Calling function from DAO and not service, because we have the avgrating function in DAO only.
+        MediaDAO mediaDAO = new MediaDAO();
+		List<MediaModel> mediaList = mediaDAO.getAllMediaWithAvgRating();
+		
         request.setAttribute("mediaList", mediaList);
 
         request.getRequestDispatcher("/WEB-INF/pages/adminDashboard.jsp").forward(request, response);

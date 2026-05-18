@@ -656,9 +656,9 @@ body {
 									<td>${fn:substring(media.releaseDate, 0, 10)}</td>
 									<td><c:choose>
 											<c:when test="${media.avgRating > 0}">
-									            ★ <fmt:formatNumber value="${media.avgRating}"
+            ★ <fmt:formatNumber value="${media.avgRating}"
 													maxFractionDigits="1" />/10
-									        </c:when>
+        </c:when>
 											<c:otherwise>
 												<span style="color: #bbb; font-style: italic;">Not
 													rated</span>

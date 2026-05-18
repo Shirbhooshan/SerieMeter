@@ -66,7 +66,7 @@ public class AdminEdit extends HttpServlet {
 
 				if (query != null && !query.trim().isEmpty()) {
 					// Search query presents filter by title
-					mediaList = mediaDAO.searchMedia(query, sort);
+					mediaList = mediaDAO.searchMediaEdit(query, sort);
 				} else {
 					// No query loads all with sort applied
 					mediaList = mediaDAO.getAllMediaSorted(sort);
