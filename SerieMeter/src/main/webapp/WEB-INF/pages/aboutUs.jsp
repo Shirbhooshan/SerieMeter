@@ -73,7 +73,6 @@
 						</div>
 						<div class="name">Shirbhooshan</div>
 						<div class="role">Team Lead</div>
-						<div class="description">"Description of work done"</div>
 					</div>
 				</a> <a
 					href="https://www.linkedin.com/in/safiyah-malik-5785b340b/"
@@ -83,8 +82,7 @@
 							<img src="assets/images/aboutUs/Safiyah.jpeg" alt="Safiyah">
 						</div>
 						<div class="name">Safiyah Malik</div>
-						<div class="role">Role</div>
-						<div class="description">"Description of work done"</div>
+						<div class="role">Full-Stack Developer & Business System Analyst</div>
 					</div>
 				</a> <a
 					href="https://www.linkedin.com/in/shuvam-karki-72b293322/"
@@ -94,8 +92,7 @@
 							<img src="assets/images/aboutUs/Shuvam.jpeg" alt="Shuvam">
 						</div>
 						<div class="name">Shuvam Karki</div>
-						<div class="role">Role</div>
-						<div class="description">"Description of work done"</div>
+						<div class="role">Full-Stack Developer & Technical Lead</div>
 					</div>
 				</a> <a
 					href="https://www.linkedin.com/in/avin-subedi-a0053020a/"
@@ -105,8 +102,7 @@
 							<img src="assets/images/aboutUs/Avin.jpeg" alt="Avin">
 						</div>
 						<div class="name">Avin Subedi</div>
-						<div class="role">Role</div>
-						<div class="description">"Description of work done"</div>
+						<div class="role">Full-Stack Developer & Testing Lead</div>
 					</div>
 				</a>
 			</div>

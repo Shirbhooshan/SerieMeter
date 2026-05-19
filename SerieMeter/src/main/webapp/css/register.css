@@ -14,7 +14,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-image: url('assets/images/registerBackground.jpg');
+	background-image: url('../assets/images/registerBackground.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
