@@ -14,7 +14,7 @@
 <link rel="icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/assets/ico/favicon.ico">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/contactUs.css">
+	href="${pageContext.request.contextPath}/css/contactUs.css">
 </head>
 <body>
 
