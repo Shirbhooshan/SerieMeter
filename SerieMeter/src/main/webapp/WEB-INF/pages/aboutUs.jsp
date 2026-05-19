@@ -68,7 +68,7 @@
 
 					<div class="team-box">
 						<div class="image-placeholder">
-							<img src="assets/images/aboutUs/Shirbhooshan.png"
+							<img src="assets/images/aboutUs/Shirbhooshan.jpeg"
 								alt="Shirbhooshan">
 						</div>
 						<div class="name">Shirbhooshan</div>
