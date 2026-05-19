@@ -2,7 +2,6 @@ package com.seriemeter.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -72,24 +71,6 @@ public class Login extends HttpServlet {
 			try {
 				UserModel user = userDAO.getUserByUsername(username);
 				session.setAttribute("user", user);
-
-				String rememberMe = request.getParameter("rememberMe");
-				if ("on".equals(rememberMe)) {
-					Cookie cookie = new Cookie("rememberMe", username);
-					cookie.setMaxAge(60 * 60 * 24 * 30);
-					cookie.setPath("/");
-					cookie.setHttpOnly(true);
-					response.addCookie(cookie);
-					session.setMaxInactiveInterval(60 * 60 * 24 * 30);
-				} else {
-					// Clear any old rememberMe cookie
-					Cookie clearCookie = new Cookie("rememberMe", "");
-					clearCookie.setMaxAge(0);
-					clearCookie.setPath("/");
-					response.addCookie(clearCookie);
-					// Session expires after 30 min inactivity
-					session.setMaxInactiveInterval(30 * 60);
-				}
 
 				String contextPath = request.getContextPath();
 				if (user != null && "Admin".equalsIgnoreCase(user.getRole())) {

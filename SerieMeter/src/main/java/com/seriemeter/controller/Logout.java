@@ -25,14 +25,8 @@ public class Logout extends HttpServlet {
         // Invalidate the session
         SessionUtil.invalidateSession(request);
 
-        // Cookie clearing
-        Cookie cookie = new Cookie("rememberMe", "");
-        cookie.setMaxAge(0);      // tells browser to delete it immediately
-        cookie.setPath("/");      // matching the path when cookie was created
-        response.addCookie(cookie);
-
         // Redirect to login
-        response.sendRedirect(request.getContextPath() + "/Login");
+        response.sendRedirect(request.getContextPath() + "/Explore");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
