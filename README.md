@@ -237,14 +237,6 @@ This path is resolved automatically at runtime via `System.getProperty("user.hom
 
 ---
 
-## Database Schema
-
-```
-users ──< review >── media ──< watchlist >── users
-                      |
-                   category
-                      |
-                    genre
 ```
 
 Ratings are stored on a 1 to 5 scale and displayed throughout the application scaled to 10 by multiplying by 2.
