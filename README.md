@@ -1,9 +1,10 @@
-# <p align="center">
-  <img src="SerieMeter/src/main/webapp/assets/images/favicon.png" alt="Project Logo" width="300">
-  SerieMeter
+<p align="center">
+  <img src="SerieMeter/src/main/webapp/assets/images/favicon.png" alt="Project Logo" width="80">
 </p>
 
-A full-stack web application for discovering, rating, and reviewing movies and television series. Built with Java Servlets, JSP, and MySQL, deployed on Apache Tomcat.
+<h1 align="center">SerieMeter</h1>
+
+<p align="center">A full-stack web application for discovering, rating, and reviewing movies and television series. Built with Java Servlets, JSP, and MySQL, deployed on Apache Tomcat.</p>
 
 ---
 
