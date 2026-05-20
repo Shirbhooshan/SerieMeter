@@ -22,11 +22,11 @@
 	<%@ include file="/components/navbar.jsp"%>
 
 	<div class="page-header">
-		<div class="page-header__left">
-			<h1 class="page-header__title">
+		<div class="page-headerleft">
+			<h1 class="page-headertitle">
 				Mo<span class="ad-text-orange">vies</span>
 			</h1>
-			<p class="page-header__subtitle">
+			<p class="page-headersubtitle">
 				A curated collection of all movies.<br>
 			</p>
 		</div>

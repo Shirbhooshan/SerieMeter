@@ -100,7 +100,7 @@
 }
 
 /* Profile pill — mirrors navbar.jsp */
-.sm_navbar__profile {
+.sm_navbarprofile {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -110,7 +110,7 @@
 	font-weight: 600;
 }
 
-.sm_navbar__profile_pic {
+.sm_navbarprofile_pic {
 	width: 32px;
 	height: 32px;
 	border-radius: 50%;
@@ -167,7 +167,7 @@
 	.nav-links a {
 		font-size: 14px !important;
 	}
-	.sm_navbar__profile {
+	.sm_navbarprofile {
 		font-size: 0 !important;
 		gap: 0 !important;
 	}
@@ -198,9 +198,9 @@
 			<c:when test="${not empty sessionScope.user}">
 				<!-- Logged in: show profile pill -->
 				<a href="${pageContext.request.contextPath}/User"
-					class="sm_navbar__profile"> <img
+					class="sm_navbarprofile"> <img
 					src="${pageContext.request.contextPath}/getimage?name=${sessionScope.user.userName}&type=user"
-					alt="Profile" class="sm_navbar__profile_pic"
+					alt="Profile" class="sm_navbarprofile_pic"
 					onerror="this.src='${pageContext.request.contextPath}/assets/images/default_profile_picture.png'">
 				</a>
 			</c:when>

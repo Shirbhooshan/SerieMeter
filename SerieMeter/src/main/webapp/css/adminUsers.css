@@ -295,7 +295,7 @@
 	font-weight: 700;
 }
 
-.sm_admin__toolbar {
+.sm_admintoolbar {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -303,7 +303,7 @@
 	margin-bottom: 24px;
 }
 
-.sm_admin__sort_select {
+.sm_adminsort_select {
 	appearance: none;
 	-webkit-appearance: none;
 	background: var(--white);
@@ -318,11 +318,11 @@
 	background-position: right 14px center;
 }
 
-.sm_admin__sort_select:focus {
+.sm_adminsort_select:focus {
 	outline: none;
 }
 
-.sm_admin__search {
+.sm_adminsearch {
 	display: flex;
 	align-items: center;
 	border: 1px solid #dcdcdc;
@@ -333,7 +333,7 @@
 	background: #ffffff;
 }
 
-.sm_admin__search input {
+.sm_adminsearch input {
 	background: transparent;
 	border: none;
 	outline: none;
@@ -343,11 +343,11 @@
 	width: 100%;
 }
 
-.sm_admin__search input::placeholder {
+.sm_adminsearch input::placeholder {
 	color: #aaaaaa;
 }
 
-.sm_admin__search img {
+.sm_adminsearch img {
 	width: 16px;
 	height: 16px;
 	opacity: 0.5;
@@ -526,11 +526,11 @@
 		padding: 25px 20px;
 		border-radius: 24px 24px 0 0;
 	}
-	.sm_admin__toolbar {
+	.sm_admintoolbar {
 		justify-content: center;
 		width: 100%;
 	}
-	.sm_admin__search {
+	.sm_adminsearch {
 		width: 100%;
 	}
 	.ad-user-table-container {

@@ -84,10 +84,10 @@
 				here.</p>
 
 			<!-- Toolbar: Pushes search to the right -->
-			<div class="sm_admin__toolbar">
+			<div class="sm_admintoolbar">
 				<form action="${pageContext.request.contextPath}/Users" method="GET"
 					style="display: flex; align-items: center;">
-					<div class="sm_admin__search">
+					<div class="sm_adminsearch">
 						<input type="text" name="search" placeholder="Search for users"
 							value="${searchValue}" /> <img src="assets/icon/search.svg"
 							alt="Search" />

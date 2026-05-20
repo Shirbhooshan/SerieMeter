@@ -82,8 +82,8 @@
 				here.</p>
 
 			<!-- Toolbar: Pushes search to the right -->
-			<div class="sm_admin__toolbar">
-				<div class="sm_admin__search">
+			<div class="sm_admintoolbar">
+				<div class="sm_adminsearch">
 					<input type="text" placeholder="Search for feedbacks"
 						id="searchInput" onkeyup="filterTable()" /> <img
 						src="assets/icon/search.svg" alt="Search" />

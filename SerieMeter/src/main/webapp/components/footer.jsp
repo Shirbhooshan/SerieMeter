@@ -34,30 +34,30 @@
 		margin: 0 !important;
 		padding: 0 !important;
 	}
-	.sm_footer__brand {
+	.sm_footerbrand {
 		max-width: 450px !important;
 		display: flex !important;
 		flex-direction: column !important;
 		align-items: center !important;
 	}
-	.sm_footer__logo {
+	.sm_footerlogo {
 		margin-bottom: 16px !important;
 	}
-	.sm_footer__col {
+	.sm_footercol {
 		width: 100% !important;
 		max-width: 280px !important;
 		margin: 0 !important;
 	}
-	.sm_footer__col ul {
+	.sm_footercol ul {
 		list-style: none !important;
 		padding: 0 !important;
 		margin: 0 !important;
 	}
-	.sm_footer__col li {
+	.sm_footercol li {
 		margin-bottom: 14px !important;
 	}
 
-	.sm_footer__bottom {
+	.sm_footerbottom {
 		display: flex !important;
 		flex-direction: column !important;
 		gap: 8px !important;
@@ -74,16 +74,16 @@
 	footer {
 		padding: 40px 16px 24px !important;
 	}
-	.sm_footer__brand p {
+	.sm_footerbrand p {
 		font-size: 13px !important;
 		line-height: 1.6 !important;
 		color: #aaaaaa !important;
 	}
-	.sm_footer__col h4 {
+	.sm_footercol h4 {
 		font-size: 14px !important;
 		margin-bottom: 12px !important;
 	}
-	.sm_footer__bottom {
+	.sm_footerbottom {
 		font-size: 11px !important;
 		color: #666666 !important;
 	}
@@ -95,15 +95,15 @@
 	<!-- Footer -->
 	<footer>
 		<div class="sm_footer">
-			<div class="sm_footer__brand">
-				<div class="sm_footer__logo">
+			<div class="sm_footerbrand">
+				<div class="sm_footerlogo">
 					<img src="assets/images/LogoBlack.jpg" alt="SerieMeter" />
 				</div>
 				<p>Elevating cinematic conversation through expert ratings and
 					curated insights. Your premium guide to the silver screen.</p>
 			</div>
 
-			<div class="sm_footer__col">
+			<div class="sm_footercol">
 				<h4>Explore</h4>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/Movies">Movies</a></li>
@@ -115,7 +115,7 @@
 				</ul>
 			</div>
 
-			<div class="sm_footer__col">
+			<div class="sm_footercol">
 				<h4>Dev</h4>
 				<ul>
 					<li><a href="https://github.com/Shirbhooshan/SerieMeter">Documentation</a></li>
@@ -123,7 +123,7 @@
 			</div>
 		</div>
 
-		<div class="sm_footer__bottom">
+		<div class="sm_footerbottom">
 			<span>© 2026 SerieMeter. All rights Reserved.</span> <span>ENGLISH
 				(US)</span>
 		</div>

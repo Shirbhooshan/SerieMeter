@@ -23,9 +23,9 @@
 	<%@ include file="/components/navbar.jsp"%>
 
 	<div class="page-header">
-		<div class="page-header__left">
-			<p class="page-header__label">Genre Collection</p>
-			<h1 class="page-header__title">
+		<div class="page-headerleft">
+			<p class="page-headerlabel">Genre Collection</p>
+			<h1 class="page-headertitle">
 				<c:set var="name" value="${genreName}" />
 				<!-- Logic to style the last 3-4 letters orange for that cinematic look -->
 				<c:choose>
@@ -38,7 +38,7 @@
 					</c:otherwise>
 				</c:choose>
 			</h1>
-			<p class="page-header__subtitle">
+			<p class="page-headersubtitle">
 				A curated collection of all ${genreName} titles.<br>
 			</p>
 		</div>
