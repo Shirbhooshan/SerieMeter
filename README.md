@@ -1,4 +1,7 @@
-# SerieMeter
+# <p align="center">
+  <img src="SerieMeter/src/main/webapp/assets/images/favicon.png" alt="Project Logo" width="300">
+  SerieMeter
+</p>
 
 A full-stack web application for discovering, rating, and reviewing movies and television series. Built with Java Servlets, JSP, and MySQL, deployed on Apache Tomcat.
 
