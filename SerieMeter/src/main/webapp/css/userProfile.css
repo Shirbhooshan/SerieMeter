@@ -19,16 +19,12 @@ body {
 	color: #333;
 	min-height: 100vh;
 }
-
-/* Full-width layout wrapper with horizontal padding */
 .up-container {
 	width: 100%;
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 0 20px;
 }
-
-/* Top banner with background image */
 .up-top-white-bg {
 	width: 100%;
 	max-width: 100%;
@@ -37,8 +33,6 @@ body {
 	background-position: center;
 	overflow: hidden;
 }
-
-/* Profile summary row: avatar+info on the left, stats on the right */
 .up-profile-summary {
 	display: flex;
 	justify-content: space-between;
@@ -48,7 +42,6 @@ body {
 	margin-bottom: 25px;
 }
 
-/* Left cluster: circular avatar + text details */
 .up-profile-header {
 	display: flex;
 	align-items: center;
@@ -87,8 +80,6 @@ body {
 	height: 24px;
 	width: 24px;
 }
-
-/* Three-dot menu: wrapper gives the popup its positioning anchor */
 .up-menu-wrapper {
 	position: relative;
 	display: inline-block;
@@ -112,8 +103,6 @@ body {
 .up-three-dot-btn:hover {
 	background-color: #f0f0f0;
 }
-
-/* Dropdown popup — visibility set by inline style from the servlet (popupStyle attribute) */
 .up-popup-menu {
 	position: absolute;
 	top: 0;
@@ -126,8 +115,6 @@ body {
 	z-index: 999;
 	overflow: hidden;
 }
-
-/* Invisible full-screen backdrop — clicking it closes the popup via a server GET */
 .up-backdrop {
 	position: fixed;
 	inset: 0;
@@ -164,16 +151,12 @@ body {
 .up-popup-item.up-logout-item {
 	color: #E05454;
 }
-
-/* Icons inside the popup rows */
 .up-popup-item img {
 	width: 16px;
 	height: 16px;
 	flex-shrink: 0;
 	object-fit: contain;
 }
-
-/* Stats block on the right side of the profile summary */
 .up-stats {
 	display: flex;
 	gap: 40px;
@@ -207,8 +190,6 @@ body {
 	flex-direction: column;
 	gap: 20px;
 }
-
-/* Individual card container */
 .up-card {
 	background-color: #fff;
 	padding: 25px;
@@ -217,8 +198,6 @@ body {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 	min-height: 200px;
 }
-
-/* Card title on the left, sort buttons on the right */
 .up-card-header {
 	display: flex;
 	justify-content: space-between;
@@ -259,16 +238,12 @@ body {
 	color: #43A53A;
 	border-color: #B1E6B0;
 }
-
-/* Card body centres the empty-state message */
 .up-card-body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 120px;
 }
-
-/* Empty state text shown when no items exist */
 .up-empty-message {
 	font-size: 16px;
 	text-align: center;
@@ -299,8 +274,6 @@ body {
 	flex-shrink: 0;
 	cursor: pointer;
 }
-
-/* Poster image fills the card width with a fixed height */
 .up-bookmark-poster {
 	width: 100%;
 	height: 240px;
@@ -309,8 +282,6 @@ body {
 	display: block;
 	background-color: #e0e0e0;
 }
-
-/* Red heart bookmark icon in the top-right corner of the poster */
 .up-bookmark-heart {
 	position: absolute;
 	top: 10px;
@@ -401,8 +372,6 @@ body {
 	margin-bottom: 14px;
 	background-color: #fafafa;
 }
-
-/* Left column: media title + date */
 .up-review-left {
 	display: flex;
 	flex-direction: column;
@@ -422,8 +391,6 @@ body {
 	color: #000000;
 	margin-top: auto;
 }
-
-/* Right column: stars + review text */
 .up-review-right {
 	display: flex;
 	flex-direction: column;
@@ -450,8 +417,6 @@ body {
 	line-height: 1.6;
 	text-align: right;
 }
-
-/* Pagination row below reviews */
 .up-review-pagination {
 	display: flex;
 	justify-content: center;
@@ -516,8 +481,6 @@ body {
 }
 
 /* Media Queries */
-
-/* Tablet / half-screen (~768px) */
 @media ( max-width : 768px) {
 	.up-container {
 		padding: 0 14px;
@@ -535,8 +498,6 @@ body {
 		gap: 20px;
 		padding: 20px 16px;
 	}
-
-	/* Shrink avatar */
 	.up-avatar {
 		width: 80px;
 		height: 80px;
@@ -547,8 +508,6 @@ body {
 	.up-user-email {
 		font-size: 12px;
 	}
-
-	/* Stats move below profile info, left-aligned */
 	.up-stats {
 		gap: 24px;
 		text-align: left;
@@ -578,8 +537,6 @@ body {
 		padding: 6px 14px;
 		font-size: 11px;
 	}
-
-	/* Bookmark cards: 2 per row on tablet */
 	.up-bookmark-card, .up-bookmark-add {
 		width: calc(50% - 10px);
 	}
@@ -624,8 +581,6 @@ body {
 	.up-stat-number {
 		font-size: 28px;
 	}
-
-	/* Bookmark cards: 2 per row, smaller */
 	.up-bookmark-card, .up-bookmark-add {
 		width: calc(50% - 9px);
 	}
@@ -649,8 +604,6 @@ body {
 		right: 0;
 		top: calc(100% + 6px);
 	}
-
-	/* Footer: match desktop bottom padding */
 	.up-footer {
 		margin-top: 40px;
 		padding-bottom: 100px;

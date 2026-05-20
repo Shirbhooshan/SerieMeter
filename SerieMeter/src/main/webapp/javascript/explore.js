@@ -1,4 +1,3 @@
-
 var slides = document.querySelectorAll('.sm_hero_slide');
 var dots = document.querySelectorAll('#heroDots span');
 var current = 0;

@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 // Toggle password field between hidden and visible
 // Also swaps the eye icon between eye.svg (hidden) and eye-black.svg (visible)
 function epTogglePass(inputId, iconId) {

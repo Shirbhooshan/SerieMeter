@@ -134,8 +134,6 @@ body {
 	margin-bottom: -10px;
 	flex-shrink: 0;
 }
-
-/* Green "+" badge anchored to the bottom-right of the avatar */
 .rg-avatar-badge {
 	position: absolute;
 	bottom: 0;
@@ -170,8 +168,6 @@ body {
 	text-align: left;
 	margin-bottom: 20px;
 }
-
-/* Uppercase micro-label above each input */
 .rg-input-group label {
 	display: block;
 	font-size: 11px;
@@ -206,7 +202,6 @@ body {
 	pointer-events: all;
 }
 
-/* Pill-shaped text input with left padding reserved for the icon */
 .rg-rounded-input {
 	width: 100%;
 	padding: 14px 14px 14px 48px;
@@ -224,14 +219,12 @@ body {
 	color: #aaa;
 }
 
-/* Green focus ring on active input */
 .rg-rounded-input:focus {
 	border-color: #008a00;
 	background: #fff;
 	box-shadow: 0 0 0 4px rgba(0, 138, 0, 0.12);
 }
 
-/* Full-width green pill submit button */
 .rg-submit-btn {
 	width: 100%;
 	padding: 14px;
@@ -324,8 +317,6 @@ body {
 .rg-go-back-btn:hover {
 	opacity: 0.75;
 }
-
-/* Underline for the text portion of the go-back button */
 .rg-go-back-btn .rg-link-text {
 	text-decoration: underline;
 }
@@ -341,16 +332,12 @@ body {
 		padding: 28px 14px 80px;
 		justify-content: flex-start;
 	}
-
-	/* Less breathing room below logo */
 	.rg-logo-section {
 		margin-bottom: 18px;
 	}
 	.rg-logo-img {
 		max-width: 170px;
 	}
-
-	/* Tighter card padding and softer border-radius */
 	.rg-register-card {
 		padding: 32px 26px;
 		border-radius: 18px;
@@ -360,13 +347,9 @@ body {
 	.rg-card-header h2 {
 		font-size: 18px;
 	}
-
-	/* Reduce gap between input fields */
 	.rg-input-group {
 		margin-bottom: 16px;
 	}
-
-	/* Tighter input padding and smaller font */
 	.rg-rounded-input {
 		padding: 12px 12px 12px 44px;
 		font-size: 13px;
@@ -420,8 +403,6 @@ body {
 		border-radius: 14px;
 		width: 100%;
 	}
-
-	/* Smaller heading on narrow screens */
 	.rg-card-header h2 {
 		font-size: 16px;
 	}
@@ -441,25 +422,17 @@ body {
 		width: 14px;
 		height: 14px;
 	}
-
-	/* Slim submit button */
 	.rg-submit-btn {
 		font-size: 14px;
 		padding: 11px;
 	}
-
-	/* Smaller disclaimer text */
 	.rg-terms-text, .rg-signup-text {
 		font-size: 11px;
 	}
-
-	/* Smaller avatar on mobile */
 	.rg-avatar-label, .rg-avatar-circle {
 		width: 64px;
 		height: 64px;
 	}
-
-	/* Scale icon inside avatar */
 	.rg-avatar-circle .rg-user-icon {
 		width: 62px;
 		height: 62px;

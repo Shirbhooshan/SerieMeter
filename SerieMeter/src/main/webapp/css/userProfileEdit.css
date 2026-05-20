@@ -13,8 +13,6 @@
         flex-direction: column;
         min-height: 100vh;
     }
-
-    /* --- Page Wrapper: flexible centering to avoid scrolling --- */
     .ep-page-wrapper {
         flex: 1;
         display: flex;
@@ -22,8 +20,6 @@
         align-items: center; 
         padding: 10px 24px;
     }
-
-    /* --- Form wrapper stretches to near full width --- */
     .ep-edit-form {
         width: 100%;
         max-width: 1000px; /* Slightly narrower to match tighter vertical proportions */
@@ -41,8 +37,6 @@
         margin-bottom: 8px;
         transition: opacity 0.5s ease;
     }
-
-    /* --- Outer dark card: stretches edge to edge, holds both panels --- */
     .ep-main-card {
         background-color: #28282B;
         border-radius: 24px;
@@ -53,9 +47,6 @@
         gap: 0;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
-
-    /* LEFT PANEL — Edit Profile
-       Floats inside the dark card thanks to the card's padding. */
     .ep-left-panel {
         background-color: #F6F6F6;
         width: 46%;
@@ -101,8 +92,6 @@
         border-radius: 50%;
         object-fit: cover;
     }
-
-    /* "Change Photo" pill button */
     .ep-change-photo-btn {
         background-color: #EBEBEB;
         border: 1px solid #D6D6D6;
@@ -135,15 +124,11 @@
         letter-spacing: 0.6px;
         margin-bottom: 6px;
     }
-
-    /* Wrapper gives us the anchor for the left icon */
     .ep-field-wrapper {
         position: relative;
         display: flex;
         align-items: center;
     }
-
-    /* Icon sitting inside the left edge of the field */
     .ep-field-icon {
         position: absolute;
         left: 14px;
@@ -173,8 +158,6 @@
     .ep-left-panel input[type="text"]::placeholder {
         color: #808080;
     }
-
-    /* RIGHT PANEL — Password and Security */
     .ep-right-panel {
         flex: 1;
         padding: 24px 38px;
@@ -284,8 +267,6 @@
     }
 
     /* --- Responsive: media queries --- */
-
-    /* Tablets and Small Laptop (1024px and below) */
     @media (max-width: 1024px) {
         .ep-edit-form {
             max-width: 900px;

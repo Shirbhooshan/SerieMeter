@@ -1,6 +1,3 @@
-/**
- * 
- */
 document.addEventListener("DOMContentLoaded", function() {
     const rows = document.querySelectorAll("#userTableBody tr");
     const loadMoreBtn = document.getElementById("loadMoreBtn");

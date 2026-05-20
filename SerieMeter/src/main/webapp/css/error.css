@@ -125,8 +125,6 @@
 	text-transform: uppercase;
 }
 
-/* ----- Necessary Media Queries ----- */
-
 /* For Tablets and Small Desktops (1100px) */
 @media ( max-width : 1100px) {
 	.er-error-container {
